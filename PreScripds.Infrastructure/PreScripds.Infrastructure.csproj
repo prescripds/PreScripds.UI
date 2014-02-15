@@ -39,8 +39,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\EncryptionService.cs" />
+    <Compile Include="Security\IEncryptionService.cs" />
+    <Compile Include="Security\ISecuritySettings.cs" />
+    <Compile Include="Security\SecuritySettings.cs" />
+    <Compile Include="Services\ChannelFactoryManager.cs" />
+    <Compile Include="Services\DynamicResponse\DataContractSerializer.cs" />
+    <Compile Include="Services\DynamicResponse\DynamicFormatter.cs" />
+    <Compile Include="Services\DynamicResponse\DynamicResponseTypeAttribute.cs" />
+    <Compile Include="Services\DynamicResponse\ServiceHostFactory2Ex.cs" />
+    <Compile Include="Services\DynamicResponse\Util.cs" />
+    <Compile Include="Services\DynamicResponse\WebHttpBehavior2Ex.cs" />
+    <Compile Include="Services\DynamicResponse\WebServiceHost2Ex.cs" />
+    <Compile Include="Services\ServiceFactory.cs" />
+    <Compile Include="Services\ServiceProxyBase.cs" />
+    <Compile Include="Services\WcfServiceInvoker.cs" />
+    <Compile Include="Utilities\AutomapperExtensions.cs" />
+    <Compile Include="Utilities\CacheService.cs" />
+    <Compile Include="Utilities\CacheSettings.cs" />
+    <Compile Include="Utilities\Constants.cs" />
+    <Compile Include="Utilities\DateTimeExtension.cs" />
+    <Compile Include="Utilities\DbContextExtensions.cs" />
+    <Compile Include="Utilities\DictionaryExtensions.cs" />
+    <Compile Include="Utilities\EncryptionExtensions.cs" />
+    <Compile Include="Utilities\EnumerableExtensions.cs" />
+    <Compile Include="Utilities\FileServiceProvider.cs" />
+    <Compile Include="Utilities\ICacheProvider.cs" />
+    <Compile Include="Utilities\ImageExtensions.cs" />
+    <Compile Include="Utilities\IQueryableExtensions.cs" />
+    <Compile Include="Utilities\MemoryCacheProvider.cs" />
+    <Compile Include="Utilities\NullCacheProvider.cs" />
+    <Compile Include="Utilities\ObjectExtensions.cs" />
+    <Compile Include="Utilities\Serialization.cs" />
+    <Compile Include="Utilities\StringExtensions.cs" />
+    <Compile Include="Utilities\TypeExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
