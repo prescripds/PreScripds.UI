@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Caching;
 using System.Linq;
-using USL.ClubD.Utilities;
 
 namespace PreScripds.Infrastructure
 {

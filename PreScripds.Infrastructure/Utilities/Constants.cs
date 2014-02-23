@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
-using iTextSharp.text;
-using iTextSharp.text.html;
-using iTextSharp.text.html.simpleparser;
-using iTextSharp.text.pdf;
+
 
 namespace PreScripds.Infrastructure
 {
@@ -87,11 +84,7 @@ namespace PreScripds.Infrastructure
         }
         public static class ReportFont
         {
-            public static Font TitleFont = FontFactory.GetFont("Arial, Helvetica, sans-serif", 12, iTextSharp.text.Font.BOLD);
-            public static Font SubTitleFont = FontFactory.GetFont("Arial, Helvetica, sans-serif", 8, iTextSharp.text.Font.BOLD);
-            public static Font BoldTableFont = FontFactory.GetFont("Arial, Helvetica, sans-serif", 12, iTextSharp.text.Font.BOLD);
-            public static Font EndingMessageFont = FontFactory.GetFont("Arial, Helvetica, sans-serif", 8, iTextSharp.text.Font.BOLD,new BaseColor(255,250,240));
-            public static Font BodyFont = FontFactory.GetFont("Arial, Helvetica, sans-serif",8, iTextSharp.text.Font.NORMAL);
+            
 
         }
         public static T GetConfigValue<T>(string configKey)
