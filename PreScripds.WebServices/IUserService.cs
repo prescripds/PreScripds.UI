@@ -14,7 +14,7 @@ namespace PreScripds.WebServices
     public interface IUserService
     {
         [OperationContract]
-        List<Department> GetUsers();
+        List<User> GetUsers();
 
         // TODO: Add your service operations here
     }

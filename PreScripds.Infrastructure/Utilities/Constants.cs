@@ -23,7 +23,7 @@ namespace PreScripds.Infrastructure
         public const string UserPubs = "UserPubs";
         public static class CacheKeys
         {
-            public static string USER_ROLES = "UserRoles";
+            public static string DEPARTMENTS = "Departments";
             public static string REGION = "Region";
             public static string CITY = "City";
             public static string LOCALE = "Locale";

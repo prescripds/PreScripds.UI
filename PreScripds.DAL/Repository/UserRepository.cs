@@ -9,7 +9,7 @@ using PreScripds.Infrastructure.Repositories;
 
 namespace PreScripds.DAL.Repository
 {
-    public class UserRepository : RepositoryBase<Department, PreScripdsDb>, IUserRepository
+    public class UserRepository : RepositoryBase<User, PreScripdsDb>, IUserRepository
     {
         private readonly PreScripdsDb _dbContext;
         public UserRepository(PreScripdsDb context)
@@ -22,9 +22,9 @@ namespace PreScripds.DAL.Repository
         {
             _dbContext = new PreScripdsDb();
         }
-        public List<Department> GetUsers()
+        public List<User> GetUsers()
         {
-            var userLst = _dbContext.departments.ToList();
+            var userLst = _dbContext.users.ToList();
             return userLst;
         }
     }

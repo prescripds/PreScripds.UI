@@ -21,7 +21,7 @@ namespace PreScripds.WebServices
         {
             _userRepository = new UserRepository(Context);
         }
-        public List<Department> GetUsers()
+        public List<User> GetUsers()
         {
             var users = _userRepository.GetUsers();
             return users;
