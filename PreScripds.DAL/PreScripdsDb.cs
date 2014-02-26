@@ -4,33 +4,31 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.Entity;
 using PreScripds.DAL.Mapping;
 using PreScripds.Domain;
 
 namespace PreScripds.DAL
 {
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class PreScripdsDb : DbContext
     {
-        static PreScripdsDb()
-        {
-            Database.SetInitializer<PreScripdsDb>(null);
-        }
         public PreScripdsDb()
             : base("Name=PreScripdsDb")
         {
-            Configuration.LazyLoadingEnabled = false;
-            Configuration.ProxyCreationEnabled = false;
+            //Configuration.LazyLoadingEnabled = false;
+            //Configuration.ProxyCreationEnabled = false;
         }
 
         public DbSet<Department> departments { get; set; }
-        public DbSet<Role> roles { get; set; }
-        public DbSet<User> users { get; set; }
+        //public DbSet<Role> roles { get; set; }
+        //public DbSet<User> users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new DepartmentMap());
-            modelBuilder.Configurations.Add(new UserMap());
-            modelBuilder.Configurations.Add(new RoleMap());
+            //modelBuilder.Configurations.Add(new UserMap());
+            //modelBuilder.Configurations.Add(new RoleMap());
             //modelBuilder.Configurations.Add(new organizationMap());
             //modelBuilder.Configurations.Add(new organization_departmentMap());
             //modelBuilder.Configurations.Add(new organization_department_masterMap());

@@ -8,8 +8,8 @@ using PreScripds.Infrastructure.Repositories;
 
 namespace PreScripds.DAL.Interface
 {
-    public interface IUserRepository : IRepository<User>
+    public interface IUserRepository : IRepository<Department>
     {
-        List<User> GetUsers();
+        List<Department> GetUsers();
     }
 }

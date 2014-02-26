@@ -19,7 +19,7 @@ namespace PreScripds.Test
         [TestMethod]
         public void TestMethod1()
         {
-            var users = _dbContext.users;
+            
         }
     }
 }
