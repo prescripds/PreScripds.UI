@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PreScripds.DAL.Interface;
+using PreScripds.DAL.Repository;
 using PreScripds.Infrastructure.Services;
 
 namespace PreScripds.Test
@@ -8,18 +10,18 @@ namespace PreScripds.Test
     public class UnitTest1
     {
         private WcfServiceInvoker _wcfService;
-        private PreScripds.DAL.PreScripdsDb _dbContext;
+        private IUserRepository userRepository;
         [TestInitialize]
         public void TestSetup()
         {
-            _dbContext = new PreScripds.DAL.PreScripdsDb();
+            userRepository = new UserRepository();
             _wcfService = new WcfServiceInvoker();
         }
 
         [TestMethod]
         public void TestMethod1()
         {
-            
+            var departments = userRepository.GetUsers();
         }
     }
 }
