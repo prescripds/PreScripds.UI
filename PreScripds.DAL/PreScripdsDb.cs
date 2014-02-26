@@ -18,6 +18,8 @@ namespace PreScripds.DAL
         public PreScripdsDb()
             : base("Name=PreScripdsDb")
         {
+            Configuration.LazyLoadingEnabled = false;
+            Configuration.ProxyCreationEnabled = false;
         }
 
         public DbSet<Department> departments { get; set; }
