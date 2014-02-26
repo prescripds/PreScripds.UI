@@ -39,12 +39,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PreScripds.DAL">
       <HintPath>..\PreScripds.DAL\bin\Debug\PreScripds.DAL.dll</HintPath>
     </Reference>
     <Reference Include="PreScripds.Domain">
       <HintPath>..\PreScripds.Domain\bin\Debug\PreScripds.Domain.dll</HintPath>
+    </Reference>
+    <Reference Include="PreScripds.Infrastructure">
+      <HintPath>..\PreScripds.Infrastructure\bin\Debug\PreScripds.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />

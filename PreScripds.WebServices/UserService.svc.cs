@@ -17,10 +17,9 @@ namespace PreScripds.WebServices
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        public UserService()
-            : base(new PreScripdsDb())
+        public UserService(PreScripdsDb Context)
         {
-            _userRepository = new UserRepository((PreScripdsDb)Context);
+            _userRepository = new UserRepository(Context);
         }
         public List<User> GetUsers()
         {
