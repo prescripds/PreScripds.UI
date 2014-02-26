@@ -6,14 +6,29 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreScripds.UI", "PreScripds.UI\PreScripds.UI.csproj", "{FA1B0ED8-286D-49EF-8BA1-DF6902CFF863}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreScripds.DAL", "PreScripds.DAL\PreScripds.DAL.csproj", "{E1AFFE17-4001-4469-972B-20634B25FA0E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7B0DC49D-CD96-4933-BFAF-F4931D5E9B35} = {7B0DC49D-CD96-4933-BFAF-F4931D5E9B35}
+		{0AE51DEB-AC9A-4A7A-8775-C3D72D0D9D15} = {0AE51DEB-AC9A-4A7A-8775-C3D72D0D9D15}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreScripds.BL", "PreScripds.BL\PreScripds.BL.csproj", "{DB01D3CF-0BF5-487B-ADC8-F2BDC0F4BBA0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E1AFFE17-4001-4469-972B-20634B25FA0E} = {E1AFFE17-4001-4469-972B-20634B25FA0E}
+		{7B0DC49D-CD96-4933-BFAF-F4931D5E9B35} = {7B0DC49D-CD96-4933-BFAF-F4931D5E9B35}
+		{0AE51DEB-AC9A-4A7A-8775-C3D72D0D9D15} = {0AE51DEB-AC9A-4A7A-8775-C3D72D0D9D15}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreScripds.Domain", "PreScripds.Domain\PreScripds.Domain.csproj", "{0AE51DEB-AC9A-4A7A-8775-C3D72D0D9D15}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreScripds.Infrastructure", "PreScripds.Infrastructure\PreScripds.Infrastructure.csproj", "{7B0DC49D-CD96-4933-BFAF-F4931D5E9B35}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreScripds.WebServices", "PreScripds.WebServices\PreScripds.WebServices.csproj", "{21B22699-E7EE-48AF-B749-28DEB76BEBDE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7B0DC49D-CD96-4933-BFAF-F4931D5E9B35} = {7B0DC49D-CD96-4933-BFAF-F4931D5E9B35}
+		{DB01D3CF-0BF5-487B-ADC8-F2BDC0F4BBA0} = {DB01D3CF-0BF5-487B-ADC8-F2BDC0F4BBA0}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreScripds.Test", "PreScripds.Test\PreScripds.Test.csproj", "{062FDEB9-E60B-4F43-B103-BC16539BEE31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +60,10 @@ Global
 		{21B22699-E7EE-48AF-B749-28DEB76BEBDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21B22699-E7EE-48AF-B749-28DEB76BEBDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21B22699-E7EE-48AF-B749-28DEB76BEBDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{062FDEB9-E60B-4F43-B103-BC16539BEE31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{062FDEB9-E60B-4F43-B103-BC16539BEE31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{062FDEB9-E60B-4F43-B103-BC16539BEE31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{062FDEB9-E60B-4F43-B103-BC16539BEE31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,14 +11,15 @@ namespace PreScripds.DAL.Repository
 {
     public class UserRepository : RepositoryBase<User, PreScripdsDb>, IUserRepository
     {
+        private readonly PreScripdsDb _dbContext;
         public UserRepository(PreScripdsDb context)
             : base(context)
         {
-
+            _dbContext = context;
         }
         public List<User> GetUsers()
         {
-            var userLst = ContextRep.users.ToList();
+            var userLst = _dbContext.users.ToList();
             return userLst;
         }
     }
