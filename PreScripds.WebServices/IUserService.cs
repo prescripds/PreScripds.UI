@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using PreScripds.Domain;
 
 namespace PreScripds.WebServices
 {
@@ -13,7 +14,7 @@ namespace PreScripds.WebServices
     public interface IUserService
     {
         [OperationContract]
-        public string GetData(int value);
+        List<User> GetUsers();
 
         // TODO: Add your service operations here
     }

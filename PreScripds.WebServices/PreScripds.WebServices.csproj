@@ -40,6 +40,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PreScripds.DAL">
+      <HintPath>..\PreScripds.DAL\bin\Debug\PreScripds.DAL.dll</HintPath>
+    </Reference>
+    <Reference Include="PreScripds.Domain">
+      <HintPath>..\PreScripds.Domain\bin\Debug\PreScripds.Domain.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
