@@ -25,7 +25,7 @@ namespace PreScripds.Test
         [TestMethod]
         public void TestMethod1()
         {
-            var users = userRepository.GetUsers();
+            //var users = userRepository.GetUsers();
             var userLst = _wcfService.InvokeService<IUserService, List<User>>((svc => svc.GetUsers()));
         }
 
