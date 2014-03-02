@@ -29,6 +29,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreScripds.WebServices", "P
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreScripds.Test", "PreScripds.Test\PreScripds.Test.csproj", "{062FDEB9-E60B-4F43-B103-BC16539BEE31}"
+	ProjectSection(ProjectDependencies) = postProject
+		{21B22699-E7EE-48AF-B749-28DEB76BEBDE} = {21B22699-E7EE-48AF-B749-28DEB76BEBDE}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

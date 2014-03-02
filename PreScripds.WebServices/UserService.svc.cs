@@ -18,6 +18,10 @@ namespace PreScripds.WebServices
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
     public class UserService : IUserService
     {
+        /// <summary>
+        /// BL interface will be called here. 
+        /// Or BL methods will be exposed here.
+        /// </summary>
         private readonly IUserRepository _userRepository;
         public UserService(PreScripdsDb Context)
         {
