@@ -11,5 +11,6 @@ namespace PreScripds.DAL.Interface
     public interface IUserRepository : IRepository<User>
     {
         List<User> GetUsers();
+        User AddUser(User user);
     }
 }

@@ -27,5 +27,12 @@ namespace PreScripds.DAL.Repository
             var userLst = _dbContext.users.ToList();
             return userLst;
         }
+
+        public User AddUser(User user)
+        {
+            _dbContext.users.Add(user);
+            _dbContext.SaveChanges();
+            return user;
+        }
     }
 }
