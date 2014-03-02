@@ -23,6 +23,7 @@ namespace PreScripds.WebServices
         {
             _userRepository = new UserRepository(Context);
         }
+        //NOTE: Needed for service to run.
         public UserService()
         {
 

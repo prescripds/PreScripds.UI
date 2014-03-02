@@ -4,6 +4,8 @@ using PreScripds.DAL.Interface;
 using PreScripds.DAL.Repository;
 using PreScripds.Domain;
 using PreScripds.Infrastructure.Services;
+using System.Runtime.Serialization;
+using PreScripds.WebServices;
 
 namespace PreScripds.Test
 {
@@ -23,6 +25,7 @@ namespace PreScripds.Test
         public void TestMethod1()
         {
             var users = userRepository.GetUsers();
+            var userLst = _wcfService.InvokeService<IUserService, User>((svc => svc.GetUsers()));
         }
 
         [TestMethod]
@@ -45,7 +48,8 @@ namespace PreScripds.Test
                 roleid = 1,
                 salt_key = "Pass",
                 updated_date = DateTime.Now,
-                username = "shreyasbs86",email="shreyasbs86@gmail.com"
+                username = "shreyasbs86",
+                email = "shreyasbs86@gmail.com"
             };
             var userFromDb = userRepository.AddUser(user);
         }
