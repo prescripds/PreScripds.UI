@@ -31,6 +31,19 @@ namespace PreScripds.DAL.Repository
         }
 
         #endregion
+        #region Role Cache
+        public ICollection<Role> GetRoles()
+        {
+            var roles = CacheService.Get<ICollection<Role>>(Constants.CacheKeys.ROLE);
+            if (roles == null)
+            {
+                var newRoles = ContextRep.roles.ToList();
+                CacheService.Set(Constants.CacheKeys.ROLE, newRoles);
+                return newRoles;
+            }
+            return roles;
+        }
 
+        #endregion
     }
 }

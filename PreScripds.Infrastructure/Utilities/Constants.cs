@@ -24,7 +24,7 @@ namespace PreScripds.Infrastructure
         public static class CacheKeys
         {
             public static string DEPARTMENTS = "Departments";
-            public static string REGION = "Region";
+            public static string ROLE = "Role";
             public static string CITY = "City";
             public static string LOCALE = "Locale";
             public static string CODE_VALUE = "CodeValue";

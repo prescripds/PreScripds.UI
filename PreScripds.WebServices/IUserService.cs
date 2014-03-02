@@ -14,6 +14,7 @@ namespace PreScripds.WebServices
     public interface IUserService
     {
         [OperationContract]
+        [WebGet(UriTemplate = "/Users", ResponseFormat = WebMessageFormat.Json)]
         List<User> GetUsers();
 
         // TODO: Add your service operations here
