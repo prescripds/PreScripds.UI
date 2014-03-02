@@ -6,6 +6,7 @@ using PreScripds.Domain;
 using PreScripds.Infrastructure.Services;
 using System.Runtime.Serialization;
 using PreScripds.WebServices;
+using System.Collections.Generic;
 
 namespace PreScripds.Test
 {
@@ -25,7 +26,7 @@ namespace PreScripds.Test
         public void TestMethod1()
         {
             var users = userRepository.GetUsers();
-            var userLst = _wcfService.InvokeService<IUserService, User>((svc => svc.GetUsers()));
+            var userLst = _wcfService.InvokeService<IUserService, List<User>>((svc => svc.GetUsers()));
         }
 
         [TestMethod]
