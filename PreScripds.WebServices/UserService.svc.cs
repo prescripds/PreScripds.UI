@@ -6,10 +6,11 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using PreScripds.Domain;
-using PreScripds.DAL;
-using PreScripds.DAL.Interface;
-using PreScripds.DAL.Repository;
 using System.ServiceModel.Activation;
+using PreScripds.BL.Interface;
+using PreScripds.BL;
+using PreScripds.DAL;
+using System.Data.Entity;
 
 namespace PreScripds.WebServices
 {
@@ -22,20 +23,27 @@ namespace PreScripds.WebServices
         /// BL interface will be called here. 
         /// Or BL methods will be exposed here.
         /// </summary>
-        private readonly IUserRepository _userRepository;
-        public UserService(PreScripdsDb Context)
+        private readonly IMasterBl _userBl;
+        private PreScripdsDb _context;
+        public UserService(PreScripdsDb context)
         {
-            _userRepository = new UserRepository(Context);
+            _userBl = new MasterBl(context);
         }
-        //NOTE: Needed for service to run.
         public UserService()
         {
-
+            _context = new PreScripdsDb();
+            _userBl = new MasterBl(_context);
         }
         public List<User> GetUsers()
         {
-            var users = _userRepository.GetUsers();
-            return users;
+            //var users = _userBl.GetDepartments();
+            return new List<User>();
+        }
+
+        public List<Department> GetDepartments()
+        {
+            var departments = _userBl.GetDepartments().ToList();
+            return departments;
         }
     }
 }

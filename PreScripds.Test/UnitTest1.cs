@@ -1,12 +1,11 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PreScripds.DAL.Interface;
-using PreScripds.DAL.Repository;
 using PreScripds.Domain;
 using PreScripds.Infrastructure.Services;
 using System.Runtime.Serialization;
 using PreScripds.WebServices;
 using System.Collections.Generic;
+using PreScripds.DAL;
 
 namespace PreScripds.Test
 {
@@ -14,19 +13,21 @@ namespace PreScripds.Test
     public class UnitTest1
     {
         private WcfServiceInvoker _wcfService;
-        private IUserRepository userRepository;
+        private PreScripdsDb _context;
+
         [TestInitialize]
         public void TestSetup()
         {
-            userRepository = new UserRepository();
             _wcfService = new WcfServiceInvoker();
+            _context = new PreScripdsDb();
         }
 
         [TestMethod]
         public void TestMethod1()
         {
             //var users = userRepository.GetUsers();
-            var userLst = _wcfService.InvokeService<IUserService, List<User>>((svc => svc.GetUsers()));
+
+            var userLst = _wcfService.InvokeService<IUserService, List<Department>>((svc => svc.GetDepartments()));
         }
 
         [TestMethod]
@@ -52,7 +53,7 @@ namespace PreScripds.Test
                 username = "shreyasbs86",
                 email = "shreyasbs86@gmail.com"
             };
-            var userFromDb = userRepository.AddUser(user);
+            // var userFromDb = userRepository.AddUser(user);
         }
     }
 }

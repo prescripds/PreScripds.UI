@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreScripds.UI", "PreScripds.UI\PreScripds.UI.csproj", "{FA1B0ED8-286D-49EF-8BA1-DF6902CFF863}"
+	ProjectSection(ProjectDependencies) = postProject
+		{21B22699-E7EE-48AF-B749-28DEB76BEBDE} = {21B22699-E7EE-48AF-B749-28DEB76BEBDE}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreScripds.DAL", "PreScripds.DAL\PreScripds.DAL.csproj", "{E1AFFE17-4001-4469-972B-20634B25FA0E}"
 	ProjectSection(ProjectDependencies) = postProject

@@ -17,11 +17,6 @@ namespace PreScripds.DAL.Repository
         {
             _dbContext = context;
         }
-        public UserRepository()
-            : base(new PreScripdsDb())
-        {
-            _dbContext = new PreScripdsDb();
-        }
         public List<User> GetUsers()
         {
             var userLst = _dbContext.users.ToList();

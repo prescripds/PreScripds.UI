@@ -16,7 +16,8 @@ namespace PreScripds.WebServices
         [OperationContract]
         [WebGet(UriTemplate = "/Users", ResponseFormat = WebMessageFormat.Xml)]
         List<User> GetUsers();
-
+        [OperationContract]
+        List<Department> GetDepartments();
         // TODO: Add your service operations here
     }
 }

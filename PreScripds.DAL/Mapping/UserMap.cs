@@ -74,9 +74,9 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.salt_key).HasColumnName("salt_key");
 
             // Relationships
-            //this.HasRequired(t => t.department)
-            //    .WithMany(t => t.users)
-            //    .HasForeignKey(d => d.department_id);
+            this.HasRequired(t => t.department)
+                .WithMany(t => t.users)
+                .HasForeignKey(d => d.department_id);
             this.HasRequired(t => t.role)
                 .WithMany(t => t.users)
                 .HasForeignKey(d => d.roleid);

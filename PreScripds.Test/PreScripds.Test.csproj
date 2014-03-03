@@ -53,7 +53,11 @@
       <Private>True</Private>
       <HintPath>..\packages\MySql.Web.6.8.3\lib\net45\MySql.Web.dll</HintPath>
     </Reference>
-    <Reference Include="PreScripds.DAL">
+    <Reference Include="PreScripds.BL">
+      <HintPath>..\PreScripds.BL\bin\Debug\PreScripds.BL.dll</HintPath>
+    </Reference>
+    <Reference Include="PreScripds.DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\PreScripds.DAL\bin\Debug\PreScripds.DAL.dll</HintPath>
     </Reference>
     <Reference Include="PreScripds.Domain">
