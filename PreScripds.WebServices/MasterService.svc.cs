@@ -15,20 +15,20 @@ namespace PreScripds.WebServices
     // NOTE: In order to launch WCF Test Client for testing this service, please select MasterService.svc or MasterService.svc.cs at the Solution Explorer and start debugging.
     public class MasterService : IMasterService
     {
-        private readonly IMasterBl _userBl;
+        private readonly IMasterBl _masterBl;
         private PreScripdsDb _context;
         public MasterService(PreScripdsDb context)
         {
-            _userBl = new MasterBl(context);
+            _masterBl = new MasterBl(context);
         }
         public MasterService()
         {
             _context = new PreScripdsDb();
-            _userBl = new MasterBl(_context);
+            _masterBl = new MasterBl(_context);
         }
         public List<Department> GetDepartments()
         {
-            var departments = _userBl.GetDepartments().ToList();
+            var departments = _masterBl.GetDepartments().ToList();
             return departments;
         }
     }

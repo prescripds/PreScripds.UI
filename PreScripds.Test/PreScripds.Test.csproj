@@ -137,21 +137,6 @@
     <WCFMetadataStorage Include="Service References\UserServiceReference\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UserServiceReference\UserService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\UserServiceReference\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\UserServiceReference\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\UserServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Service References\MasterServiceReference\MasterService.disco" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +147,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\MasterServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UserServiceReference\UserService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UserServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UserServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UserServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
