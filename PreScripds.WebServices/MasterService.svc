@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="PreScripds.WebServices.MasterService" CodeBehind="MasterService.svc.cs" %>

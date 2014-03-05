@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PreScripds.Test.ServiceReference1 {
+namespace PreScripds.Test.UserServiceReference {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IUserService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UserServiceReference.IUserService")]
     public interface IUserService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUsers", ReplyAction="http://tempuri.org/IUserService/GetUsersResponse")]
@@ -23,12 +23,12 @@ namespace PreScripds.Test.ServiceReference1 {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IUserServiceChannel : PreScripds.Test.ServiceReference1.IUserService, System.ServiceModel.IClientChannel {
+    public interface IUserServiceChannel : PreScripds.Test.UserServiceReference.IUserService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class UserServiceClient : System.ServiceModel.ClientBase<PreScripds.Test.ServiceReference1.IUserService>, PreScripds.Test.ServiceReference1.IUserService {
+    public partial class UserServiceClient : System.ServiceModel.ClientBase<PreScripds.Test.UserServiceReference.IUserService>, PreScripds.Test.UserServiceReference.IUserService {
         
         public UserServiceClient() {
         }

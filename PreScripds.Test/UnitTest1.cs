@@ -27,7 +27,7 @@ namespace PreScripds.Test
         {
             //var users = userRepository.GetUsers();
 
-            var userLst = _wcfService.InvokeService<IUserService, List<Department>>((svc => svc.GetDepartments()));
+            var userLst = _wcfService.InvokeService<IMasterService, List<Department>>((svc => svc.GetDepartments()));
         }
 
         [TestMethod]

@@ -23,27 +23,21 @@ namespace PreScripds.WebServices
         /// BL interface will be called here. 
         /// Or BL methods will be exposed here.
         /// </summary>
-        private readonly IMasterBl _userBl;
+        private readonly IUserBl _userBl;
         private PreScripdsDb _context;
         public UserService(PreScripdsDb context)
         {
-            _userBl = new MasterBl(context);
+            _userBl = new UserBl(context);
         }
         public UserService()
         {
             _context = new PreScripdsDb();
-            _userBl = new MasterBl(_context);
+            _userBl = new UserBl(_context);
         }
         public List<User> GetUsers()
         {
             //var users = _userBl.GetDepartments();
             return new List<User>();
-        }
-
-        public List<Department> GetDepartments()
-        {
-            var departments = _userBl.GetDepartments().ToList();
-            return departments;
         }
     }
 }
