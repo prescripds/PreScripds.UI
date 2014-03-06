@@ -235,6 +235,7 @@
     <Content Include="Images\upload.png" />
     <Content Include="Images\user.png" />
     <Content Include="Images\views.png" />
+    <Content Include="Images\waves.gif" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Images\icons.psd" />
