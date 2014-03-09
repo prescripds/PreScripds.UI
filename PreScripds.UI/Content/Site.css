@@ -41,6 +41,54 @@ input[type="checkbox"].input-validation-error {
     display: none;
 }
 
-.error-div{
-    background-image:url("~/../../../Images/waves.gif")
+.error-div {
+    background-image: url("~/../../../Images/waves.gif");
+}
+
+#Home {
+    background: url(~/../../../Images/Home.jpg)50% 0 no-repeat fixed;
+    background-size: cover;
+    height: 800px;
+    margin: 0;
+    padding: 200px 0 260px 0;
+}
+
+#About {
+    background: url(~/../../../Images/about.jpg)50% 0 no-repeat fixed;
+    background-size: cover;
+    height: 800px;
+    margin: 0;
+    padding: 200px 0 260px 0;
+}
+
+#Contact {
+    background: url(~/../../../Images/Contact.jpg)50% 0 no-repeat fixed;
+    background-size: cover;
+    height: 800px;
+    margin: 0;
+    padding: 200px 0 260px 0;
+}
+
+.homeAboutbwn {
+    background-color: whitesmoke;
+    background-size: cover;
+    height: 400px;
+    margin: 0;
+    padding: 200px 0 260px 0;
+}
+
+.aboutContactbwn {
+    background-color: whitesmoke;
+    background-size: cover;
+    height: 400px;
+    margin: 0;
+    padding: 200px 0 260px 0;
+}
+
+#other {
+    background: url(~/../../../Images/home_medical_cloud_stage_rev2_1.jpg)50% 0 no-repeat fixed;
+    background-size: cover;
+    height: 500px;
+    margin: 0;
+    padding: 200px 0 260px 0;
 }

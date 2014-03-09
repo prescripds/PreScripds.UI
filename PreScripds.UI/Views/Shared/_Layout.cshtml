@@ -19,7 +19,7 @@
                 </button>
                 <div>
                     <a class="navbar-brand" href="@Url.Action("Index")">
-                        <img src="Images/logo_532279_web.jpg" />
+                        <img src="~/Images/logo_532279_web.jpg" alt="prescripds" title="prescripds" />
                     </a>
                 </div>
 
@@ -27,8 +27,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="#Home" title="Home"><span class="glyphicon glyphicon-home" title="Home"></span></a></li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li><a href="#About" title="About"><span class="glyphicon glyphicon-cog" title="About"></span></a></li>
+                    <li><a href="#Contact" title="About"><span class="glyphicon glyphicon-earphone" title="Contact"></span></a></li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -36,16 +36,38 @@
     </div>
     <div id="Home">
         <div>
-
+            <div>
+                <h3>
+                    PreScripds - Provides easy access to all your queries.
+                </h3>
+            </div>
         </div>
-
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - PreScripds</p>
-        </footer>
+    <div class="homeAboutbwn">
+        <h2>Lorem Ipsum</h2>
+    </div>
+    <div id="About">
+        <div>
+            <div>
+                <h2>About PreScripds</h2>
+            </div>
+        </div>
+    </div>
+    <div class="aboutContactbwn">
+        <h2>Lorem Ipsum</h2>
+    </div>
+    <div id="Contact">
+        <div>
+            <div>
+                <h2>Contact Us for further details</h2>
+            </div>
+        </div>
+    </div>
+    <div id="other">
+        <div>
+            <h2>Lorem Ipsum</h2>
+            @RenderBody()
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
@@ -53,3 +75,27 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+@{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('a[href*=#]').each(function () {
+                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
+                && location.hostname == this.hostname
+                && this.hash.replace(/#/, '')) {
+                    var $targetId = $(this.hash), $targetAnchor = $('[name=' + this.hash.slice(1) + ']');
+                    var $target = $targetId.length ? $targetId : $targetAnchor.length ? $targetAnchor : false;
+                    if ($target) {
+                        var targetOffset = $target.offset().top;
+                        $(this).click(function () {
+                            $("#nav li a").removeClass("active");
+                            $(this).addClass('active');
+                            $('html, body').animate({ scrollTop: targetOffset }, 1000);
+                            return false;
+                        });
+                    }
+                }
+            });
+
+        });
+    </script>
+}

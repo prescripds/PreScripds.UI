@@ -191,12 +191,14 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\clndr.css" />
+    <Content Include="Content\HomePage.css" />
     <Content Include="Content\nav.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\about.jpg" />
     <Content Include="Images\arrow-left.png" />
     <Content Include="Images\arrow-right.png" />
     <Content Include="Images\chart.png" />
@@ -211,6 +213,9 @@
     <Content Include="Images\follow_user.png" />
     <Content Include="Images\google+.png" />
     <Content Include="Images\graph.png" />
+    <Content Include="Images\Contact.jpg" />
+    <Content Include="Images\Home.jpg" />
+    <Content Include="Images\home_medical_cloud_stage_rev2_1.jpg" />
     <Content Include="Images\invites-hover.png" />
     <Content Include="Images\invites.png" />
     <Content Include="Images\likes.png" />
@@ -308,6 +313,7 @@
     <None Include="Service References\UserServiceReference\UserService2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Views\Shared\_MainLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
