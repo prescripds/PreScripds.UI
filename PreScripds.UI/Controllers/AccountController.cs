@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using PreScripds.UI.Models;
+using PreScripds.Infrastructure;
 
 namespace PreScripds.UI.Controllers
 {
@@ -64,9 +65,17 @@ namespace PreScripds.UI.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult Register(string ps = null)
         {
-            return View();
+            if (ps.IsNotEmpty())
+            {
+                var registerViewModel = new RegisterViewModel() { IsHomeUrl = true };
+                return View(registerViewModel);
+            }
+            else
+            {
+                return View();
+            }
         }
 
         //
@@ -378,7 +387,8 @@ namespace PreScripds.UI.Controllers
 
         private class ChallengeResult : HttpUnauthorizedResult
         {
-            public ChallengeResult(string provider, string redirectUri) : this(provider, redirectUri, null)
+            public ChallengeResult(string provider, string redirectUri)
+                : this(provider, redirectUri, null)
             {
             }
 

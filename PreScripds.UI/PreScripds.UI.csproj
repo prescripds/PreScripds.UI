@@ -52,6 +52,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector Net 6.8.3\Assemblies\v4.0\MySql.Web.dll</HintPath>
     </Reference>
+    <Reference Include="PreScripds.Domain">
+      <HintPath>..\PreScripds.Domain\bin\Debug\PreScripds.Domain.dll</HintPath>
+    </Reference>
+    <Reference Include="PreScripds.Infrastructure">
+      <HintPath>..\PreScripds.Infrastructure\bin\Debug\PreScripds.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="PreScripds.WebServices">
+      <HintPath>..\PreScripds.WebServices\bin\PreScripds.WebServices.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -317,6 +326,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Account\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
