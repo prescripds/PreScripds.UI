@@ -218,6 +218,7 @@
     <Content Include="Images\events.png" />
     <Content Include="Images\facebook.png" />
     <Content Include="Images\facebook_icon.png" />
+    <Content Include="Images\favicon.ico" />
     <Content Include="Images\favourite.png" />
     <Content Include="Images\follow_user.png" />
     <Content Include="Images\google+.png" />
