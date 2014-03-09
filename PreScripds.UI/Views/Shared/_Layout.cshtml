@@ -26,13 +26,19 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li><a href="#Home" title="Home"><span class="glyphicon glyphicon-home" title="Home"></span></a></li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
+    </div>
+    <div id="Home">
+        <div>
+
+        </div>
+
     </div>
     <div class="container body-content">
         @RenderBody()
