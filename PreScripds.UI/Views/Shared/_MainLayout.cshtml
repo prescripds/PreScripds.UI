@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="~/Images/favicon.ico">
     <title>PreScripds</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="~/Content/nav.css" rel="stylesheet" type="text/css" media="all" />
     <link href='http://fonts.googleapis.com/css?family=Carrois+Gothic+SC' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="~/Content/clndr.css" type="text/css" />
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/dashboard")
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -35,7 +36,7 @@
             </div>
         </div>
     </div>
-    <div class="wrap" style="margin-top:4%;">
+    <div class="wrap" style="margin-top:8%;">
         <div class="header">
             <div class="header_top">
                 @Html.Partial("Partials/_Menu")
@@ -43,8 +44,12 @@
             </div>
         </div>
     </div>
+    <div class="main">
+        <div class="wrap">
+            @RenderBody()
+        </div>
+    </div>
     <div class="container body-content">
-        @RenderBody()
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - PreScripds</p>
@@ -52,6 +57,7 @@
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/dashboard")
     @RenderSection("scripts", required: false)
     <script type="text/javascript" src="~/Scripts/responsive-nav.js"></script>
 </body>
