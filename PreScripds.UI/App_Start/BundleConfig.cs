@@ -18,6 +18,16 @@ namespace PreScripds.UI
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
+            bundles.Add(new ScriptBundle("~/bundles/dashboard").Include(
+                      "~/Scripts/jquery.js",
+                      "~/Scripts/login.js",
+                      "~/Scripts/Chart.js",
+                      "~/Scripts/jquery.easing.js",
+                      "~/Scripts/jquery.ulslide.js",
+                      "~/Scripts/underscore-min.js",
+                      "~/Scripts/moment-2.2.1.js",
+                      "~/Scripts/clndr.js",
+                      "~/Scripts/site.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
