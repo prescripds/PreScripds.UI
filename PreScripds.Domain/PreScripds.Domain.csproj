@@ -41,6 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Department.cs" />
+    <Compile Include="Master\City.cs" />
+    <Compile Include="Master\SecurityQuestion.cs" />
+    <Compile Include="Master\State.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

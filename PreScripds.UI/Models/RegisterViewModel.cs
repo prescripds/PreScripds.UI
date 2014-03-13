@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using PreScripds.Domain;
+using PreScripds.Domain.Master;
 
 namespace PreScripds.UI.Models
 {
@@ -20,6 +22,51 @@ namespace PreScripds.UI.Models
         public string LastName { get; set; }
 
         [Required]
+        [Display(Name = "Gender")]
+        public int Gender { get; set; }
+
+        [Required]
+        [Display(Name = "Date Of Birth")]
+        [DataType(DataType.Date)]
+        public DateTime Dob { get; set; }
+        [Required]
+        [Display(Name = "Mobile")]
+        [DataType(DataType.PhoneNumber)]
+        public long Mobile { get; set; }
+
+        [Display(Name = "Phone")]
+        [DataType(DataType.PhoneNumber)]
+        public long Phone { get; set; }
+
+        [Required]
+        [Display(Name = "Email")]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Aternate Email")]
+        [DataType(DataType.EmailAddress)]
+        public string AltEmail { get; set; }
+
+        [Required]
+        [Display(Name = "Alternate Mobile")]
+        [DataType(DataType.PhoneNumber)]
+        public string AltMobile { get; set; }
+
+        [Display(Name = "Address")]
+        public string Address { get; set; }
+
+        public List<City> City { get; set; }
+        public int CityId { get; set; }
+
+        public List<State> State { get; set; }
+        public int StateId { get; set; }
+
+        [Display(Name = "Zip Code")]
+        [DataType(DataType.PostalCode)]
+        public long PinCode { get; set; }
+
+        [Required]
         [Display(Name = "User name")]
         public string UserName { get; set; }
 
@@ -31,8 +78,15 @@ namespace PreScripds.UI.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "The password and confirm password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public List<SecurityQuestion> SecurityQuestion { get; set; }
+        public int SecurityQuestionId { get; set; }
+
+        [Required]
+        [Display(Name = "Security Answer")]
+        public string SecurityAnswer { get; set; }
 
         public bool IsHomeUrl { get; set; }
     }
