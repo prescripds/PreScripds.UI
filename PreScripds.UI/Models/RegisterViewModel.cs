@@ -95,5 +95,7 @@ namespace PreScripds.UI.Models
         public string SecurityAnswer { get; set; }
 
         public bool IsHomeUrl { get; set; }
+
+        public int Active { get; set; }
     }
 }
