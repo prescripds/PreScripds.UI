@@ -25,10 +25,13 @@ namespace PreScripds.UI.Models
         [Display(Name = "Gender")]
         public int Gender { get; set; }
 
-        [Required]
+
         [Display(Name = "Date Of Birth")]
         [DataType(DataType.Date)]
         public DateTime Dob { get; set; }
+        [Display(Name = "Date Of Birth")]
+        public int Age { get; set; }
+
         [Required]
         [Display(Name = "Mobile")]
         [DataType(DataType.PhoneNumber)]
@@ -61,6 +64,9 @@ namespace PreScripds.UI.Models
 
         public List<State> State { get; set; }
         public int StateId { get; set; }
+        public List<Country> Country { get; set; }
+
+        public int CountryId { get; set; }
 
         [Display(Name = "Zip Code")]
         [DataType(DataType.PostalCode)]

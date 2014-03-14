@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Department.cs" />
     <Compile Include="Master\City.cs" />
+    <Compile Include="Master\Country.cs" />
     <Compile Include="Master\SecurityQuestion.cs" />
     <Compile Include="Master\State.cs" />
     <Compile Include="Role.cs" />
