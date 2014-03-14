@@ -8,9 +8,12 @@ namespace PreScripds.Domain.Master
 {
     public class State
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Code { get; set; }
-        public int CountryId { get; set; }
+        public long StateId { get; set; }
+        public string StateName { get; set; }
+        public string StateCode { get; set; }
+        public long CountryId { get; set; }
+        public virtual ICollection<City> City { get; set; }
+        public virtual Country Country { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

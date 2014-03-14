@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Interface\IMasterRepository.cs" />
     <Compile Include="Interface\IUserRepository.cs" />
+    <Compile Include="Mapping\CityMap.cs" />
     <Compile Include="Mapping\DepartmentMap.cs" />
     <Compile Include="Mapping\RoleMap.cs" />
     <Compile Include="Mapping\UserMap.cs" />

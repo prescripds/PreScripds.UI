@@ -8,7 +8,8 @@ namespace PreScripds.Domain.Master
 {
     public class SecurityQuestion
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public long SecurityQuestionId { get; set; }
+        public string SecurityQuestionName { get; set; }
+        public virtual ICollection<UserLogin> UserLogin { get; set; }
     }
 }
