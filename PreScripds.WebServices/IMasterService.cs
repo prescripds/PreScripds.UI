@@ -32,6 +32,6 @@ namespace PreScripds.WebServices
 
         [OperationContract]
         [WebGet(UriTemplate = "/SecurityQuestion", ResponseFormat = WebMessageFormat.Xml)]
-        List<SecurityQuestion> GetSecurityQuestion()
+        List<SecurityQuestion> GetSecurityQuestion();
     }
 }

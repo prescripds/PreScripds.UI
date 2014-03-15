@@ -92,3 +92,7 @@ input[type="checkbox"].input-validation-error {
     margin: 0;
     padding: 200px 0 260px 0;
 }
+.openHtmlBg{
+    background: url(~/../../../Images/header.jpg)50% 0 no-repeat fixed;
+    background-size:cover;
+}

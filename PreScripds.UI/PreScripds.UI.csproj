@@ -225,6 +225,7 @@
     <Content Include="Images\google+.png" />
     <Content Include="Images\graph.png" />
     <Content Include="Images\Contact.jpg" />
+    <Content Include="Images\header.jpg" />
     <Content Include="Images\Home.jpg" />
     <Content Include="Images\home_medical_cloud_stage_rev2_1.jpg" />
     <Content Include="Images\invites-hover.png" />
@@ -327,6 +328,7 @@
     <Content Include="Views\Shared\_MainLayout.cshtml" />
     <Content Include="Views\Shared\Partials\_Menu.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Shared\_OpenLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

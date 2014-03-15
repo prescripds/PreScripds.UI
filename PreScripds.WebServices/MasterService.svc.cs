@@ -60,7 +60,7 @@ namespace PreScripds.WebServices
         public List<State> GetStateByCountry(long countryId)
         {
             var states = _masterBl.GetState().ToList();
-            states = states.Where(x => x.CountryId == countryId);
+            states = states.Where(x => x.CountryId == countryId).ToList();
             return states;
         }
     }
