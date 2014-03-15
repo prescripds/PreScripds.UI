@@ -88,5 +88,19 @@ namespace PreScripds.DAL.Repository
             return cities;
         }
         #endregion
+
+        #region Security Question Cache
+        public ICollection<SecurityQuestion> GetSecurityQuestion() 
+        {
+            var securityQuestions = CacheService.Get<ICollection<SecurityQuestion>>(Constants.CacheKeys.SECURITY_QUESTION);
+            if (securityQuestions == null)
+            {
+                var newSecurityQuestions = ContextRep.securtiyquestions.ToList();
+                CacheService.Set(Constants.CacheKeys.SECURITY_QUESTION, newSecurityQuestions);
+                return newSecurityQuestions;
+            }
+            return securityQuestions;
+        }
+        #endregion
     }
 }

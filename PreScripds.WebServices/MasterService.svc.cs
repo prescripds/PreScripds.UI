@@ -51,6 +51,12 @@ namespace PreScripds.WebServices
             return cities;
         }
 
+        public List<SecurityQuestion> GetSecurityQuestion()
+        {
+            var securityQuestions = _masterBl.GetSecurityQuestion().ToList();
+            return securityQuestions;
+        }
+
         public List<State> GetStateByCountry(long countryId)
         {
             var states = _masterBl.GetState().ToList();
