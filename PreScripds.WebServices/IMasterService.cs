@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using PreScripds.Domain;
+using PreScripds.Domain.Master;
 
 namespace PreScripds.WebServices
 {
@@ -16,5 +17,9 @@ namespace PreScripds.WebServices
        // [OperationContract]
         //[WebGet(UriTemplate = "/Departments", ResponseFormat = WebMessageFormat.Xml)]
         //List<Department> GetDepartments();
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Countries", ResponseFormat = WebMessageFormat.Xml)]
+        List<Country> GetCountry();
     }
 }

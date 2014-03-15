@@ -8,6 +8,7 @@ using PreScripds.BL;
 using PreScripds.BL.Interface;
 using PreScripds.DAL;
 using PreScripds.Domain;
+using PreScripds.Domain.Master;
 
 namespace PreScripds.WebServices
 {
@@ -31,5 +32,11 @@ namespace PreScripds.WebServices
         //    var departments = _masterBl.GetDepartments().ToList();
         //    return departments;
         //}
+
+        public List<Country> GetCountry()
+        {
+            var countries = _masterBl.GetCountry().ToList();
+            return countries;
+        }
     }
 }

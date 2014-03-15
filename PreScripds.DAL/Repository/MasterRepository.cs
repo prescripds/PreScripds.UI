@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PreScripds.DAL.Interface;
 using PreScripds.Domain;
+using PreScripds.Domain.Master;
 using PreScripds.Infrastructure;
 using PreScripds.Infrastructure.Repositories;
 
@@ -44,6 +45,20 @@ namespace PreScripds.DAL.Repository
         //    return roles;
         //}
 
+        #endregion
+
+        #region Country Cache
+        public ICollection<Country> GetCountry()
+        {
+            var countries = CacheService.Get<ICollection<Country>>(Constants.CacheKeys.COUNTRY);
+            if (countries == null)
+            {
+                var newCountries = ContextRep.countries.ToList();
+                CacheService.Set(Constants.CacheKeys.COUNTRY, newCountries);
+                return newCountries;
+            }
+            return countries;
+        }
         #endregion
     }
 }

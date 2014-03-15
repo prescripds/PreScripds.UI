@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PreScripds.Domain;
+using PreScripds.Domain.Master;
 
 namespace PreScripds.DAL.Interface
 {
@@ -11,6 +12,8 @@ namespace PreScripds.DAL.Interface
     {
         //ICollection<Department> GetDepartments();
 
-       // ICollection<Role> GetRoles();
+        // ICollection<Role> GetRoles();
+
+        ICollection<Country> GetCountry();
     }
 }

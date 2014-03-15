@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using PreScripds.WebServices;
 using System.Collections.Generic;
 using PreScripds.DAL;
+using PreScripds.Domain.Master;
 
 namespace PreScripds.Test
 {
@@ -25,6 +26,7 @@ namespace PreScripds.Test
         [TestMethod]
         public void TestMethod1()
         {
+            var countries = _wcfService.InvokeService<IMasterService, List<Country>>(svc => svc.GetCountry());
             //var users = userRepository.GetUsers();
 
             //var userLst = _wcfService.InvokeService<IMasterService, List<Department>>((svc => svc.GetDepartments()));
