@@ -60,5 +60,33 @@ namespace PreScripds.DAL.Repository
             return countries;
         }
         #endregion
+
+        #region State Cache
+        public ICollection<State> GetState()
+        {
+            var states = CacheService.Get<ICollection<State>>(Constants.CacheKeys.STATE);
+            if (states == null)
+            {
+                var newStates = ContextRep.states.ToList();
+                CacheService.Set(Constants.CacheKeys.STATE, newStates);
+                return newStates;
+            }
+            return states;
+        }
+        #endregion
+
+        #region City Cache
+        public ICollection<City> GetCity()
+        {
+            var cities = CacheService.Get<ICollection<City>>(Constants.CacheKeys.CITY);
+            if (cities == null)
+            {
+                var newCities = ContextRep.cities.ToList();
+                CacheService.Set(Constants.CacheKeys.CITY, newCities);
+                return newCities;
+            }
+            return cities;
+        }
+        #endregion
     }
 }

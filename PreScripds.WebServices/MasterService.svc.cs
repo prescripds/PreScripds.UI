@@ -38,5 +38,24 @@ namespace PreScripds.WebServices
             var countries = _masterBl.GetCountry().ToList();
             return countries;
         }
+
+        public List<State> GetState()
+        {
+            var states = _masterBl.GetState().ToList();
+            return states;
+        }
+
+        public List<City> GetCity()
+        {
+            var cities = _masterBl.GetCity().ToList();
+            return cities;
+        }
+
+        public List<State> GetStateByCountry(long countryId)
+        {
+            var states = _masterBl.GetState().ToList();
+            states = states.Where(x => x.CountryId == countryId);
+            return states;
+        }
     }
 }

@@ -15,5 +15,7 @@ namespace PreScripds.DAL.Interface
         // ICollection<Role> GetRoles();
 
         ICollection<Country> GetCountry();
+        ICollection<State> GetState();
+        ICollection<City> GetCity();
     }
 }

@@ -26,6 +26,7 @@ namespace PreScripds.Infrastructure
             public static string DEPARTMENTS = "Departments";
             public static string ROLE = "Role";
             public static string COUNTRY = "Country";
+            public static string STATE = "State";
             public static string CITY = "City";
             public static string LOCALE = "Locale";
             public static string CODE_VALUE = "CodeValue";
