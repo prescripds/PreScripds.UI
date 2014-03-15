@@ -211,6 +211,7 @@
     <Content Include="Images\about.jpg" />
     <Content Include="Images\arrow-left.png" />
     <Content Include="Images\arrow-right.png" />
+    <Content Include="Images\black_bg.fw.png" />
     <Content Include="Images\chart.png" />
     <Content Include="Images\clouds.png" />
     <Content Include="Images\comments.png" />

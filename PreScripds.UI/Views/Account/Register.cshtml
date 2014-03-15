@@ -1,6 +1,7 @@
 ﻿@model PreScripds.UI.Models.RegisterViewModel
 @{
     ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_OpenLayout.cshtml";
 }
 <div class="header_top">
     <span>Register</span>
@@ -9,17 +10,19 @@
 {
     @Html.ValidationSummary()
     @Html.AntiForgeryToken()
-    <div class="row">
-        <div class="col-md-3 col-sm-6">
-            <div class="form-group">
-                <label class="control-label" for="UserName">First Name</label>
-                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+    <div class="col-md-12 blackBg">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label" for="UserName">First Name</label>
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                </div>
             </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="form-group">
-                <label class="control-label" for="Password">Password</label>
-                @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label" for="Password">Password</label>
+                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+                </div>
             </div>
         </div>
     </div>
