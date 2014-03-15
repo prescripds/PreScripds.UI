@@ -26,10 +26,10 @@ namespace PreScripds.WebServices
             _context = new PreScripdsDb();
             _masterBl = new MasterBl(_context);
         }
-        public List<Department> GetDepartments()
-        {
-            var departments = _masterBl.GetDepartments().ToList();
-            return departments;
-        }
+        //public List<Department> GetDepartments()
+        //{
+        //    var departments = _masterBl.GetDepartments().ToList();
+        //    return departments;
+        //}
     }
 }

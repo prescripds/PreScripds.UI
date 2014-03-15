@@ -10,7 +10,7 @@ namespace PreScripds.DAL.Mapping
 {
     public class StateMap:EntityTypeConfiguration<State>
     {
-        public stateMap()
+        public StateMap()
         {
             // Primary Key
             this.HasKey(t => t.StateId);

@@ -10,7 +10,7 @@ namespace PreScripds.DAL.Mapping
 {
     public class UserMap : EntityTypeConfiguration<User>
     {
-       public userMap()
+       public UserMap()
         {
             // Primary Key
             this.HasKey(t => t.UserId);

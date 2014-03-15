@@ -18,31 +18,31 @@ namespace PreScripds.DAL.Repository
 
         }
         #region Department Cache
-        public ICollection<Department> GetDepartments()
-        {
-            var departments = CacheService.Get<ICollection<Department>>(Constants.CacheKeys.DEPARTMENTS);
-            if (departments == null)
-            {
-                var newDepartments = ContextRep.departments.ToList();
-                CacheService.Set(Constants.CacheKeys.DEPARTMENTS, newDepartments);
-                return newDepartments;
-            }
-            return departments;
-        }
+        //public ICollection<Department> GetDepartments()
+        //{
+        //    var departments = CacheService.Get<ICollection<Department>>(Constants.CacheKeys.DEPARTMENTS);
+        //    if (departments == null)
+        //    {
+        //        var newDepartments = ContextRep.departments.ToList();
+        //        CacheService.Set(Constants.CacheKeys.DEPARTMENTS, newDepartments);
+        //        return newDepartments;
+        //    }
+        //    return departments;
+        //}
 
         #endregion
         #region Role Cache
-        public ICollection<Role> GetRoles()
-        {
-            var roles = CacheService.Get<ICollection<Role>>(Constants.CacheKeys.ROLE);
-            if (roles == null)
-            {
-                var newRoles = ContextRep.roles.ToList();
-                CacheService.Set(Constants.CacheKeys.ROLE, newRoles);
-                return newRoles;
-            }
-            return roles;
-        }
+        //public ICollection<Role> GetRoles()
+        //{
+        //    var roles = CacheService.Get<ICollection<Role>>(Constants.CacheKeys.ROLE);
+        //    if (roles == null)
+        //    {
+        //        var newRoles = ContextRep.roles.ToList();
+        //        CacheService.Set(Constants.CacheKeys.ROLE, newRoles);
+        //        return newRoles;
+        //    }
+        //    return roles;
+        //}
 
         #endregion
     }

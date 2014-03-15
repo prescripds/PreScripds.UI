@@ -9,8 +9,8 @@ namespace PreScripds.DAL.Interface
 {
     public interface IMasterRepository
     {
-        ICollection<Department> GetDepartments();
+        //ICollection<Department> GetDepartments();
 
-        ICollection<Role> GetRoles();
+       // ICollection<Role> GetRoles();
     }
 }

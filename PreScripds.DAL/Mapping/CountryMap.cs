@@ -10,7 +10,7 @@ namespace PreScripds.DAL.Mapping
 {
     public class CountryMap:EntityTypeConfiguration<Country>
     {
-        public countryMap()
+        public CountryMap()
         {
             // Primary Key
             this.HasKey(t => t.CountryId);
