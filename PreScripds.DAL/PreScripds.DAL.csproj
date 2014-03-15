@@ -63,8 +63,12 @@
     <Compile Include="Interface\IMasterRepository.cs" />
     <Compile Include="Interface\IUserRepository.cs" />
     <Compile Include="Mapping\CityMap.cs" />
+    <Compile Include="Mapping\CountryMap.cs" />
     <Compile Include="Mapping\DepartmentMap.cs" />
     <Compile Include="Mapping\RoleMap.cs" />
+    <Compile Include="Mapping\SecurityQuestionMap.cs" />
+    <Compile Include="Mapping\StateMap.cs" />
+    <Compile Include="Mapping\UserLoginMap.cs" />
     <Compile Include="Mapping\UserMap.cs" />
     <Compile Include="PreScripdsDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

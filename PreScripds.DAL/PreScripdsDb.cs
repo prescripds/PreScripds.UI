@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MySql.Data.Entity;
 using PreScripds.DAL.Mapping;
 using PreScripds.Domain;
+using PreScripds.Domain.Master;
 
 namespace PreScripds.DAL
 {
@@ -20,31 +21,21 @@ namespace PreScripds.DAL
             Configuration.ProxyCreationEnabled = false;
         }
 
-        public DbSet<Department> departments { get; set; }
-        public DbSet<Role> roles { get; set; }
+        public DbSet<City> cities { get; set; }
+        public DbSet<Country> countries { get; set; }
+        public DbSet<SecurityQuestion> securtiyquestions { get; set; }
+        public DbSet<State> states { get; set; }
         public DbSet<User> users { get; set; }
+        public DbSet<UserLogin> user_login { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new DepartmentMap());
+            modelBuilder.Configurations.Add(new CityMap());
+            modelBuilder.Configurations.Add(new CountryMap());
+            modelBuilder.Configurations.Add(new SecurityQuestionMap());
+            modelBuilder.Configurations.Add(new StateMap());
             modelBuilder.Configurations.Add(new UserMap());
-            modelBuilder.Configurations.Add(new RoleMap());
-            //modelBuilder.Configurations.Add(new organizationMap());
-            //modelBuilder.Configurations.Add(new organization_departmentMap());
-            //modelBuilder.Configurations.Add(new organization_department_masterMap());
-            //modelBuilder.Configurations.Add(new organization_roleMap());
-            //modelBuilder.Configurations.Add(new organization_statusMap());
-            //modelBuilder.Configurations.Add(new organization_userMap());
-            //modelBuilder.Configurations.Add(new organizationsocial_detailMap());
-            //modelBuilder.Configurations.Add(new organizationsocial_masterMap());
-            //modelBuilder.Configurations.Add(new organizationtype_masterMap());
-            //modelBuilder.Configurations.Add(new patient_detailMap());
-            //modelBuilder.Configurations.Add(new patient_folderMap());
-            //modelBuilder.Configurations.Add(new patient_organizationMap());
-            //modelBuilder.Configurations.Add(new patientlibrary_assetMap());
-            //modelBuilder.Configurations.Add(new roleMap());
-            //modelBuilder.Configurations.Add(new userMap());
-            //modelBuilder.Configurations.Add(new valueadded_serviceMap());
+            modelBuilder.Configurations.Add(new UserLoginMap());
         }
 
     }
