@@ -11,7 +11,29 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body class="openHtmlBg">
-    <div class="container body-content">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div>
+                    <a class="navbar-brand" href="@Url.Action("Index")">
+                        <img src="~/Images/logo_532279_web.jpg" alt="prescripds" title="prescripds" />
+                    </a>
+                </div>
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav pull-right">
+                    <li><a href="@Url.Action("Index","Home")" title="Home"><span class="glyphicon glyphicon-home" title="Home"></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content" style="margin-top:5%">
         @RenderBody()
     </div>
     @Scripts.Render("~/bundles/jquery")

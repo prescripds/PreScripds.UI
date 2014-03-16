@@ -808,7 +808,7 @@ pre {
 
 .row {
     margin-right: -15px;
-    margin-left: -15px;
+    margin-left: 0px;
 }
 
     .row:before,
@@ -1827,7 +1827,6 @@ legend {
 label {
     display: inline-block;
     margin-bottom: 5px;
-    font-weight: bold;
 }
 
 input[type="search"] {
@@ -4746,7 +4745,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
         }
 
         .navbar-inverse .navbar-toggle .icon-bar {
-            background-color: #ffffff;
+            background-color: #d58512;
         }
 
     .navbar-inverse .navbar-collapse,

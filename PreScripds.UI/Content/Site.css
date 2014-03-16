@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: 'Segoe UI' !important;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -34,7 +35,10 @@ input[type="checkbox"].input-validation-error {
 }
 
 .validation-summary-errors {
-    color: #b94a48;
+    color: red;
+    background-color: #1E5530;
+    border: 1px solid red;
+    border-radius: 25px;
 }
 
 .validation-summary-valid {
@@ -101,6 +105,12 @@ input[type="checkbox"].input-validation-error {
 
 .blackBg {
     background: url(~/../../../Images/black_bg.fw.png);
-    padding-top: 5px;
-    padding-left:3%;
+    padding: 3%;
+    border-radius: 25px;
+}
+
+.buttons button {
+    display: block;
+    margin-bottom: 1%;
+    margin-right: 1%;
 }
