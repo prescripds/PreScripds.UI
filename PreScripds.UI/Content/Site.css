@@ -102,4 +102,5 @@ input[type="checkbox"].input-validation-error {
 .blackBg {
     background: url(~/../../../Images/black_bg.fw.png);
     padding-top: 5px;
+    padding-left:3%;
 }

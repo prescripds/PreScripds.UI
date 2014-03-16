@@ -12,39 +12,51 @@
     @Html.AntiForgeryToken()
     <div class="col-md-12 blackBg">
         <div class="row">
-            <div class="col-md-3 col-sm-6">
+            <div class="col-md-4 col-sm-6">
                 <div class="form-group">
-                    <label class="control-label" for="UserName">First Name</label>
-                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                    <label class="control-label" for="FirstName">First Name*</label>
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6">
+            <div class="col-md-4 col-sm-6">
                 <div class="form-group">
-                    <label class="control-label" for="Password">Password</label>
-                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+                    <label class="control-label" for="LastName">Last Name*</label>
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label" for="MiddleName">Middle Name</label>
+                    @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-6">
+                <div class="form-group">
+
+                    <input type="submit" class="btn btn-warning pull-right" value="Register" />
+                    <input type="reset" class="btn btn-warning pull-right" value="Clear" />
+
                 </div>
             </div>
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-        </div>
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
+    @*<div class="form-group">
+            @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+            </div>
+            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+        </div>*@
+
 }
 
 @section Scripts {
