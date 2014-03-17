@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Department.cs" />
+    <Compile Include="Enums\Enum.cs" />
     <Compile Include="Master\City.cs" />
     <Compile Include="Master\Country.cs" />
     <Compile Include="Master\SecurityQuestion.cs" />

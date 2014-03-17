@@ -1,164 +1,176 @@
 ﻿@using PreScripds.UI.Common;
-@model PreScripds.UI.Models.RegisterViewModel
-@{
+@using PreScripds.Domain;
+    @model PreScripds.UI.Models.RegisterViewModel
+    @{
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_OpenLayout.cshtml";
-}
-<div class="header_top">
-    <h2><span>Register</span></h2>
-</div>
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.ValidationSummary()<br />
-    @Html.AntiForgeryToken()
-    <div class="col-md-12 blackBg">
-        <h4><span>Personal Details</span><hr /> </h4>
-        <div class="row">
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="FirstName">First Name*</label>
-                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="LastName">Last Name*</label>
-                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="MiddleName">Middle Name</label>
-                    @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control" })
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="FirstName">Date Of Birth</label>
-                    @Html.TextBoxFor(m => m.Dob, new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="LastName">Mobile*</label>
-                    @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="MiddleName">Phone</label>
-                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="FirstName">Email*</label>
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="LastName">Alternate Email*</label>
-                    @Html.TextBoxFor(m => m.AltEmail, new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="MiddleName">Alternate Mobile*</label>
-                    @Html.TextBoxFor(m => m.AltMobile, new { @class = "form-control" })
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="FirstName">Address</label>
-                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="LastName">Country*</label>
-                    @Html.DropDownListFor(m => m.CountryId, Model.Country.ToSelectListItems(model => model.CountryId.ToString(), model => model.CountryName), "--Select--", new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="MiddleName">State*</label>
-                    @Html.DropDownListFor(m => m.StateId, Model.State.ToSelectListItems(model => model.StateId.ToString(), model => model.StateName), "--Select--", new { @class = "form-control" })
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="FirstName">City</label>
-                    @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="LastName">ZipCode</label>
-                    @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="MiddleName">Profile Picture</label>
-                    <input type="file" id="postedProfilePic" name="postedProfilePic" />
-                </div>
-            </div>
-        </div>
-        <hr />
-        <h4><span>Login Details</span><hr /> </h4>
-        <div class="row">
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="FirstName">User Name*</label>
-                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="LastName">Password*</label>
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="MiddleName">Confirm Password*</label>
-                    @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control" })
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="FirstName">Security Question*</label>
-                    @Html.DropDownListFor(m => m.SecurityQuestionId, Model.SecurityQuestion.ToSelectListItems(model => model.SecurityQuestionId.ToString(), model => model.SecurityQuestionName), "--Select--", new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="LastName">Security Answer*</label>
-                    @Html.PasswordFor(m => m.SecurityAnswer, new { @class = "form-control" })
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 buttons">
-                <button type="submit" class="btn btn-warning pull-right" value="Register">Register</button>
-
-                <button type="reset" class="btn btn-warning pull-right" value="Clear">Clear</button>
-            </div>
-        </div>
+    }
+    <div class="header_top">
+        <h2><span>Register</span></h2>
     </div>
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+        @Html.ValidationSummary()<br />
+        @Html.AntiForgeryToken()
+        <div class="col-md-12 blackBg">
+            <h4><span>Personal Details</span><hr /> </h4>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="FirstName">First Name*</label>
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="LastName">Last Name*</label>
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="MiddleName">Middle Name</label>
+                        @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="MiddleName">Gender*</label>
+                        @Html.EnumDropDownListFor(m => m.Gender, new {@class = "form-control"}, typeof (PreScripds.Domain.Enums.Gender))
+                        @Html.HiddenFor(x => x.Gender)
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="FirstName">Date Of Birth</label>
+                        @Html.TextBoxFor(m => m.Dob, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="LastName">Mobile*</label>
+                        @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="MiddleName">Phone</label>
+                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="FirstName">Email*</label>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="LastName">Alternate Email*</label>
+                        @Html.TextBoxFor(m => m.AltEmail, new { @class = "form-control" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="MiddleName">Alternate Mobile*</label>
+                        @Html.TextBoxFor(m => m.AltMobile, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="FirstName">Address</label>
+                        @Html.TextAreaFor(m => m.Address, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="LastName">Country*</label>
+                        @Html.DropDownListFor(m => m.CountryId, Model.Country.ToSelectListItems(model => model.CountryId.ToString(), model => model.CountryName), "--Select--", new { @class = "form-control" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="MiddleName">State*</label>
+                        @Html.DropDownListFor(m => m.StateId, Model.State.ToSelectListItems(model => model.StateId.ToString(), model => model.StateName), "--Select--", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="FirstName">City</label>
+                        @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="LastName">ZipCode</label>
+                        @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="MiddleName">Profile Picture</label>
+                        <input type="file" id="postedProfilePic" name="postedProfilePic" />
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <h4><span>Login Details</span><hr /> </h4>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="FirstName">User Name*</label>
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="LastName">Password*</label>
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="MiddleName">Confirm Password*</label>
+                        @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="FirstName">Security Question*</label>
+                        @Html.DropDownListFor(m => m.SecurityQuestionId, Model.SecurityQuestion.ToSelectListItems(model => model.SecurityQuestionId.ToString(), model => model.SecurityQuestionName), "--Select--", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="LastName">Security Answer*</label>
+                        @Html.PasswordFor(m => m.SecurityAnswer, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 buttons">
+                    <button type="submit" class="btn btn-warning pull-right" value="Register">Register</button>
+
+                    <button type="reset" class="btn btn-warning pull-right" value="Clear">Clear</button>
+                </div>
+            </div>
+        </div>
 }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
