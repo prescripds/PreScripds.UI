@@ -28,18 +28,18 @@ namespace PreScripds.UI.Models
 
         [Display(Name = "Date Of Birth")]
         [DataType(DataType.Date)]
-        public DateTime Dob { get; set; }
+        public DateTime? Dob { get; set; }
         [Display(Name = "Date Of Birth")]
         public int Age { get; set; }
 
         [Required]
         [Display(Name = "Mobile")]
         [DataType(DataType.PhoneNumber)]
-        public long Mobile { get; set; }
+        public long? Mobile { get; set; }
 
         [Display(Name = "Phone")]
         [DataType(DataType.PhoneNumber)]
-        public long Phone { get; set; }
+        public long? Phone { get; set; }
 
         [Required]
         [Display(Name = "Email")]

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="db7970af-7158-42bc-8ebe-f982e39fc1b6" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:1346/MasterService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MasterService.xsd" MetadataType="Schema" ID="7bcdfa70-c338-4a06-aa25-5a9c18e121c6" SourceId="1" SourceUrl="http://localhost:1346/MasterService.svc?xsd=xsd0" />
+    <MetadataFile FileName="MasterService.disco" MetadataType="Disco" ID="07386252-657f-4570-86b7-0f04a0680d5e" SourceId="1" SourceUrl="http://localhost:1346/MasterService.svc?disco" />
+    <MetadataFile FileName="MasterService.wsdl" MetadataType="Wsdl" ID="53f7caf9-5a34-4dd3-a5a6-e688dbbc383e" SourceId="1" SourceUrl="http://localhost:1346/MasterService.svc?wsdl" />
+    <MetadataFile FileName="MasterService1.xsd" MetadataType="Schema" ID="ae18f722-e006-4bea-a507-483ee7fd033c" SourceId="1" SourceUrl="http://localhost:1346/MasterService.svc?xsd=xsd1" />
+    <MetadataFile FileName="MasterService2.xsd" MetadataType="Schema" ID="7b0627fe-8843-47c8-a502-964ee60b1d21" SourceId="1" SourceUrl="http://localhost:1346/MasterService.svc?xsd=xsd3" />
+    <MetadataFile FileName="MasterService3.xsd" MetadataType="Schema" ID="1f333cf5-6552-4745-8afb-3bbfdb4af558" SourceId="1" SourceUrl="http://localhost:1346/MasterService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

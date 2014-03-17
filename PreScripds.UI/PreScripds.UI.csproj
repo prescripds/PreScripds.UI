@@ -192,6 +192,11 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\MasterServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\UserServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -259,6 +264,10 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Images\icons.psd" />
     <Content Include="fonts\Amble-Regular-webfont.ttf" />
+    <Content Include="Properties\DataSources\PreScripds.Domain.Master.City.datasource" />
+    <Content Include="Properties\DataSources\PreScripds.Domain.Master.Country.datasource" />
+    <Content Include="Properties\DataSources\PreScripds.Domain.Master.SecurityQuestion.datasource" />
+    <Content Include="Properties\DataSources\PreScripds.Domain.Master.State.datasource" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\clndr.js" />
@@ -282,9 +291,29 @@
     <Content Include="Scripts\site.js" />
     <Content Include="Scripts\underscore-min.js" />
     <Content Include="Scripts\_references.js" />
+    <None Include="Service References\MasterServiceReference\MasterService.disco" />
+    <None Include="Service References\MasterServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\MasterServiceReference\configuration.svcinfo" />
+    <None Include="Service References\MasterServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Service References\UserServiceReference\PreScripds.UI.UserServiceReference.User.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Service References\MasterServiceReference\MasterService.wsdl" />
+    <None Include="Service References\MasterServiceReference\MasterService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MasterServiceReference\MasterService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MasterServiceReference\MasterService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MasterServiceReference\MasterService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\UserServiceReference\UserService.disco" />
     <None Include="Service References\UserServiceReference\configuration91.svcinfo" />
     <None Include="Service References\UserServiceReference\configuration.svcinfo" />
@@ -347,6 +376,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\MasterServiceReference\" />
     <WCFMetadataStorage Include="Service References\UserServiceReference\" />
   </ItemGroup>
   <PropertyGroup>

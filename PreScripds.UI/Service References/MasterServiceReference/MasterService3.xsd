@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/PreScripds.Domain.Master" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/PreScripds.Domain.Master" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:1346/MasterService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/PreScripds.Domain" />
+  <xs:complexType name="ArrayOfCountry">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Country" nillable="true" type="tns:Country" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCountry" nillable="true" type="tns:ArrayOfCountry" />
+  <xs:complexType name="Country">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CountryCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CountryId" type="xs:long" />
+      <xs:element minOccurs="0" name="CountryName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="States" nillable="true" type="tns:ArrayOfState" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/PreScripds.Domain" minOccurs="0" name="Users" nillable="true" type="q1:ArrayOfUser" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Country" nillable="true" type="tns:Country" />
+  <xs:complexType name="ArrayOfState">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="State" nillable="true" type="tns:State" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfState" nillable="true" type="tns:ArrayOfState" />
+  <xs:complexType name="State">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="City" nillable="true" type="tns:ArrayOfCity" />
+      <xs:element minOccurs="0" name="Country" nillable="true" type="tns:Country" />
+      <xs:element minOccurs="0" name="CountryId" type="xs:long" />
+      <xs:element minOccurs="0" name="StateCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StateId" type="xs:long" />
+      <xs:element minOccurs="0" name="StateName" nillable="true" type="xs:string" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/PreScripds.Domain" minOccurs="0" name="Users" nillable="true" type="q2:ArrayOfUser" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="State" nillable="true" type="tns:State" />
+  <xs:complexType name="ArrayOfCity">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="City" nillable="true" type="tns:City" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCity" nillable="true" type="tns:ArrayOfCity" />
+  <xs:complexType name="City">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CityCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CityId" type="xs:long" />
+      <xs:element minOccurs="0" name="CityName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="State" nillable="true" type="tns:State" />
+      <xs:element minOccurs="0" name="StateId" type="xs:long" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/PreScripds.Domain" minOccurs="0" name="Users" nillable="true" type="q3:ArrayOfUser" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="City" nillable="true" type="tns:City" />
+  <xs:complexType name="SecurityQuestion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SecurityQuestionId" type="xs:long" />
+      <xs:element minOccurs="0" name="SecurityQuestionName" nillable="true" type="xs:string" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/PreScripds.Domain" minOccurs="0" name="UserLogin" nillable="true" type="q4:ArrayOfUserLogin" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SecurityQuestion" nillable="true" type="tns:SecurityQuestion" />
+  <xs:complexType name="ArrayOfSecurityQuestion">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SecurityQuestion" nillable="true" type="tns:SecurityQuestion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSecurityQuestion" nillable="true" type="tns:ArrayOfSecurityQuestion" />
+</xs:schema>

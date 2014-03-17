@@ -10,15 +10,20 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using PreScripds.UI.Models;
 using PreScripds.Infrastructure;
+using PreScripds.Infrastructure.Services;
+using PreScripds.WebServices;
+using PreScripds.Domain.Master;
 
 namespace PreScripds.UI.Controllers
 {
     [Authorize]
     public class AccountController : BaseController
     {
+        private WcfServiceInvoker _wcfService;
         public AccountController()
             : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
         {
+            _wcfService = new WcfServiceInvoker();
         }
 
         public AccountController(UserManager<ApplicationUser> userManager)
@@ -67,15 +72,31 @@ namespace PreScripds.UI.Controllers
         [AllowAnonymous]
         public ActionResult Register(string ps = null)
         {
+            var registerViewModel = new RegisterViewModel();
+            BindDropDowns(registerViewModel);
             if (ps.IsNotEmpty())
             {
-                var registerViewModel = new RegisterViewModel() { IsHomeUrl = true };
+                registerViewModel.IsHomeUrl = true;
                 return View(registerViewModel);
             }
             else
             {
-                return View();
+                registerViewModel.CountryId = 1;
+                return View(registerViewModel);
             }
+        }
+
+        private void BindDropDowns(RegisterViewModel registerViewModel)
+        {
+            var countries = _wcfService.InvokeService<IMasterService, List<Country>>(svc => svc.GetCountry());
+            var states = _wcfService.InvokeService<IMasterService, List<State>>(svc => svc.GetState());
+            var securityQuestions = _wcfService.InvokeService<IMasterService, List<SecurityQuestion>>(svc => svc.GetSecurityQuestion());
+            if (countries.IsCollectionValid())
+                registerViewModel.Country = countries;
+            if (states.IsCollectionValid())
+                registerViewModel.State = states;
+            if (securityQuestions.IsCollectionValid())
+                registerViewModel.SecurityQuestion = securityQuestions;
         }
 
         //

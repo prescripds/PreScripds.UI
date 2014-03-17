@@ -13,6 +13,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using Newtonsoft.Json;
+using PreScripds.Infrastructure;
+using PreScripds.Infrastructure.Utilities;
 
 namespace PreScripds.UI.Common
 {
@@ -83,15 +85,15 @@ namespace PreScripds.UI.Common
         //    }, "--Select--", htmlAttributes);
         //}
 
-        //public static MvcHtmlString EnumDropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper,
-        //    Expression<Func<TModel, TProperty>> expression, object htmlAttributes, Type enumType)
-        //{
-        //    var values = Enum.GetValues(enumType)
-        //        .Cast<Enum>()
-        //        .Select(e => new SelectListItem() { Value = Convert.ToInt32(e).ToString(), Text = e.GetDisplayName() })
-        //        .ToList();
-        //    return htmlHelper.DropDownListFor(expression, values, "--Select--", htmlAttributes);
-        //}
+        public static MvcHtmlString EnumDropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression, object htmlAttributes, Type enumType)
+        {
+            var values = Enum.GetValues(enumType)
+                .Cast<Enum>()
+                .Select(e => new SelectListItem() { Value = Convert.ToInt32(e).ToString(), Text = e.GetDisplayName() })
+                .ToList();
+            return htmlHelper.DropDownListFor(expression, values, "--Select--", htmlAttributes);
+        }
 
         //public static void RemoveFor<TModel>(this ModelStateDictionary modelState,
         //    Expression<Func<TModel, object>> expression)
