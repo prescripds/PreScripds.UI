@@ -208,6 +208,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\clndr.css" />
+    <Content Include="Content\datepicker.css" />
     <Content Include="Content\nav.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
@@ -260,6 +261,7 @@
     <Content Include="Images\user.png" />
     <Content Include="Images\views.png" />
     <Content Include="Images\waves.gif" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Images\icons.psd" />
