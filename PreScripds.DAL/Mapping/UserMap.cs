@@ -10,7 +10,7 @@ namespace PreScripds.DAL.Mapping
 {
     public class UserMap : EntityTypeConfiguration<User>
     {
-       public UserMap()
+        public UserMap()
         {
             // Primary Key
             this.HasKey(t => t.UserId);
@@ -55,26 +55,17 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.AltEmail).HasColumnName("alt_email");
             this.Property(t => t.AltMobile).HasColumnName("alt_mobile");
             this.Property(t => t.Address).HasColumnName("address");
-            this.Property(t => t.CityId).HasColumnName("fkusercity_id");
-            this.Property(t => t.StateId).HasColumnName("fkuserstate_id");
-            this.Property(t => t.CountryId).HasColumnName("fkusercountry_id");
+            this.Property(t => t.CityId).HasColumnName("city_id");
+            this.Property(t => t.StateId).HasColumnName("state_id");
+            this.Property(t => t.CountryId).HasColumnName("country_id");
             this.Property(t => t.ZipCode).HasColumnName("zipcode");
             this.Property(t => t.Active).HasColumnName("active");
             this.Property(t => t.AdminApprove).HasColumnName("adminapprove");
             this.Property(t => t.IsSuperAdmin).HasColumnName("issuperadmin");
             this.Property(t => t.IsAdmin).HasColumnName("isadmin");
-            this.Property(t=> t.IsHomeUrl).HasColumnName("ishomeurl");
+            this.Property(t => t.IsHomeUrl).HasColumnName("ishomeurl");
 
-            // Relationships
-            this.HasRequired(t => t.City)
-                .WithMany(t => t.Users)
-                .HasForeignKey(d => d.CityId);
-            this.HasRequired(t => t.Country)
-                .WithMany(t => t.Users)
-                .HasForeignKey(d => d.CountryId);
-            this.HasRequired(t => t.State)
-                .WithMany(t => t.Users)
-                .HasForeignKey(d => d.StateId);
+
 
         }
     }

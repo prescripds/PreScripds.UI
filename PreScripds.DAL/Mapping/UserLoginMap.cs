@@ -8,9 +8,9 @@ using PreScripds.Domain;
 
 namespace PreScripds.DAL.Mapping
 {
-    public class UserLoginMap:EntityTypeConfiguration<UserLogin>
+    public class UserLoginMap : EntityTypeConfiguration<UserLogin>
     {
-         public UserLoginMap()
+        public UserLoginMap()
         {
             // Primary Key
             this.HasKey(t => t.UserLoginId);
@@ -43,9 +43,7 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.UserLoginId).HasColumnName("userlogin_id");
 
             // Relationships
-            this.HasRequired(t => t.SecurtiyQuestion)
-                .WithMany(t => t.UserLogin)
-                .HasForeignKey(d => d.SecurityQuestionId);
+
             this.HasRequired(t => t.User)
                 .WithMany(t => t.UserLogin)
                 .HasForeignKey(d => d.UserId);
