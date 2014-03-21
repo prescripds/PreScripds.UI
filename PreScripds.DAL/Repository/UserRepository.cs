@@ -7,6 +7,8 @@ using PreScripds.DAL.Interface;
 using PreScripds.Domain;
 using PreScripds.Infrastructure.Repositories;
 using System.Data.Entity;
+using PreScripds.Infrastructure.Security;
+using PreScripds.Infrastructure;
 
 namespace PreScripds.DAL.Repository
 {
@@ -26,7 +28,21 @@ namespace PreScripds.DAL.Repository
 
         public User AddUser(User user)
         {
-            ContextRep.users.Add(user);            
+            if (user.UserLogin.IsCollectionValid())
+            {
+                foreach (var userLogin in user.UserLogin)
+                {
+                    var saltKey = EncryptionExtensions.CreateSaltKey();
+                    userLogin.SaltKey = saltKey;
+                    var encryptedPassword = EncryptionExtensions.CreatePasswordHash(userLogin.Password,
+                                userLogin.SaltKey);
+                    userLogin.Password = encryptedPassword;
+                    var encryptedSecurityAnswer = EncryptionExtensions.CreatePasswordHash(userLogin.SecurityAnswer, userLogin.SaltKey);
+                    userLogin.SecurityAnswer = encryptedSecurityAnswer;
+                }
+            }
+
+            ContextRep.users.Add(user);
             ContextRep.SaveChanges();
             return user;
         }

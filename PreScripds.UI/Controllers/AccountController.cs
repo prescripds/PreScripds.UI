@@ -83,6 +83,7 @@ namespace PreScripds.UI.Controllers
             else
             {
                 registerViewModel.CountryId = 1;
+                registerViewModel.IsHomeUrl = 0;
                 return View(registerViewModel);
             }
         }
