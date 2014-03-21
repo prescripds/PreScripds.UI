@@ -23,7 +23,7 @@ namespace PreScripds.UI.Common
         public IDictionary<string, object> htmlAttributes { get; set; }
     }
 
-    public static class HtmlHelper
+    public static class HtmlHelpers
     {
         public static IEnumerable<SelectListItem> ToSelectListItems<T>(this ICollection<T> collection,
             Func<T, string> valueSelector,

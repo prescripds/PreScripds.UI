@@ -190,7 +190,7 @@
     <Compile Include="Common\Automapper\Bootstrapper.cs" />
     <Compile Include="Common\Automapper\MasterProfile.cs" />
     <Compile Include="Common\Automapper\UserProfile.cs" />
-    <Compile Include="Common\HtmlHelper.cs" />
+    <Compile Include="Common\HtmlHelpers.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />

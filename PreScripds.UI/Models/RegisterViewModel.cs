@@ -82,7 +82,7 @@ namespace PreScripds.UI.Models
             get
             {
                 string secondPartName = string.Empty;
-                if (MiddleName.IsEmpty)
+                if (MiddleName.IsEmpty())
                 {
                     secondPartName = LastName;
                 }
