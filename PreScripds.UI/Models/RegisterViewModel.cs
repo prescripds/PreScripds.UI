@@ -27,9 +27,8 @@ namespace PreScripds.UI.Models
 
 
         [Display(Name = "Date Of Birth")]
-        [DataType(DataType.Date)]
         public DateTime? Dob { get; set; }
-        public int Age { get; set; }
+        public int? Age { get; set; }
 
         [Required(ErrorMessage = "Mobile is required.")]
         [Display(Name = "Mobile")]
@@ -72,7 +71,7 @@ namespace PreScripds.UI.Models
 
         [Display(Name = "Zip Code")]
         [DataType(DataType.PostalCode)]
-        public long PinCode { get; set; }
+        public long? PinCode { get; set; }
 
         [Required(ErrorMessage = "User name is required.")]
         [Display(Name = "User name")]
@@ -91,6 +90,8 @@ namespace PreScripds.UI.Models
         public string ConfirmPassword { get; set; }
 
         public List<SecurityQuestion> SecurityQuestion { get; set; }
+        [Required(ErrorMessage = "Security Question is required.")]
+        [Display(Name = "Security Question")]
         public int SecurityQuestionId { get; set; }
 
         [Required(ErrorMessage = "Security Answer is required.")]

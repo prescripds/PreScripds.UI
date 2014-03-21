@@ -108,7 +108,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="form-group">
                     <label class="control-label" for="FirstName">City</label>
-                    @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.CityName, new { @class = "form-control" })
                 </div>
             </div>
             <div class="col-md-4 col-sm-6">
@@ -144,7 +144,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="form-group">
                     <label class="control-label" for="MiddleName">Confirm Password*</label>
-                    @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
                 </div>
             </div>
         </div>
