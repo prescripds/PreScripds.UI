@@ -69,7 +69,10 @@ namespace PreScripds.UI.Controllers
         [AllowAnonymous]
         public ActionResult Register(string ps = null)
         {
-            var registerViewModel = new RegisterViewModel();
+            var registerViewModel = new RegisterViewModel()
+            {
+                userLoginViewModel = new List<UserLoginViewModel>()
+            };
             BindDropDowns(registerViewModel);
             if (ps.IsNotEmpty())
             {
@@ -94,7 +97,13 @@ namespace PreScripds.UI.Controllers
             if (states.IsCollectionValid())
                 registerViewModel.State = states;
             if (securityQuestions.IsCollectionValid())
-                registerViewModel.SecurityQuestion = securityQuestions;
+            {
+                registerViewModel.userLoginViewModel = new List<UserLoginViewModel>(){
+                    new UserLoginViewModel{
+                        SecurityQuestion = securityQuestions
+                    }
+                };
+            }
         }
 
         //
