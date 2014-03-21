@@ -73,7 +73,7 @@ namespace PreScripds.UI.Controllers
             BindDropDowns(registerViewModel);
             if (ps.IsNotEmpty())
             {
-                registerViewModel.IsHomeUrl = true;
+                registerViewModel.IsHomeUrl = 1;
                 registerViewModel.CountryId = 1;
                 return View(registerViewModel);
             }

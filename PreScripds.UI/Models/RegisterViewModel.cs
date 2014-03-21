@@ -25,7 +25,6 @@ namespace PreScripds.UI.Models
         [Display(Name = "Gender")]
         public int Gender { get; set; }
 
-
         [Display(Name = "Date Of Birth")]
         public DateTime? Dob { get; set; }
         public int? Age { get; set; }
@@ -57,8 +56,8 @@ namespace PreScripds.UI.Models
         [Display(Name = "Address")]
         public string Address { get; set; }
 
-        public List<City> City { get; set; }
-        public int? CityId { get; set; }
+        //public List<City> City { get; set; }
+        //public int? CityId { get; set; }
 
         public string CityName { get; set; }
 
@@ -98,7 +97,7 @@ namespace PreScripds.UI.Models
         [Display(Name = "Security Answer")]
         public string SecurityAnswer { get; set; }
 
-        public bool IsHomeUrl { get; set; }
+        public short IsHomeUrl { get; set; }
 
         public int Active { get; set; }
     }

@@ -13,6 +13,7 @@ namespace PreScripds.UI.Common.Automapper
             Mapper.Initialize(prof =>
             {
                 prof.AddProfile<UserProfile>();
+                prof.AddProfile<MasterProfile>();
             });
             Mapper.AssertConfigurationIsValid();
         }

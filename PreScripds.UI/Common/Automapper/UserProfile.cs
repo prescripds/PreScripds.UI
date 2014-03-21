@@ -13,7 +13,11 @@ namespace PreScripds.UI.Common.Automapper
     {
         protected override void Configure()
         {
-            Mapper.CreateMap<RegisterViewModel, User>().IgnoreAllNonExisting();
+            Mapper.CreateMap<RegisterViewModel, User>()
+                .ForMember(d => d.City, s => s.Ignore())
+                .ForMember(d => d.Country, s => s.Ignore())
+                .ForMember(d => d.State, s => s.Ignore())
+                .IgnoreAllNonExisting();
             Mapper.CreateMap<RegisterViewModel, UserLogin>()
                 .ForMember(d => d.UserName, s => s.MapFrom(p => p.UserName))
                 .ForMember(d => d.Password, s => s.MapFrom(p => p.Password))
