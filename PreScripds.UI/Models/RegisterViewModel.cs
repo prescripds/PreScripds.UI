@@ -10,18 +10,18 @@ namespace PreScripds.UI.Models
 {
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "First name is required.")]
         [Display(Name = "First name")]
         public string FirstName { get; set; }
 
         [Display(Name = "Middle name")]
         public string MiddleName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Last name is required.")]
         [Display(Name = "Last name")]
         public string LastName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Gender is required.")]
         [Display(Name = "Gender")]
         public int Gender { get; set; }
 
@@ -29,10 +29,9 @@ namespace PreScripds.UI.Models
         [Display(Name = "Date Of Birth")]
         [DataType(DataType.Date)]
         public DateTime? Dob { get; set; }
-        [Display(Name = "Date Of Birth")]
         public int Age { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Mobile is required.")]
         [Display(Name = "Mobile")]
         [DataType(DataType.PhoneNumber)]
         public long? Mobile { get; set; }
@@ -41,17 +40,17 @@ namespace PreScripds.UI.Models
         [DataType(DataType.PhoneNumber)]
         public long? Phone { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Email is required.")]
         [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Aternate Email is required.")]
         [Display(Name = "Aternate Email")]
         [DataType(DataType.EmailAddress)]
         public string AltEmail { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Aternate Mobile is required.")]
         [Display(Name = "Alternate Mobile")]
         [DataType(DataType.PhoneNumber)]
         public string AltMobile { get; set; }
@@ -60,27 +59,31 @@ namespace PreScripds.UI.Models
         public string Address { get; set; }
 
         public List<City> City { get; set; }
-        public int CityId { get; set; }
+        public int? CityId { get; set; }
+
+        public string CityName { get; set; }
 
         public List<State> State { get; set; }
+        [Required(ErrorMessage = "State is required.")]
         public int StateId { get; set; }
         public List<Country> Country { get; set; }
-
+        [Required(ErrorMessage = "Country is required.")]
         public int CountryId { get; set; }
 
         [Display(Name = "Zip Code")]
         [DataType(DataType.PostalCode)]
         public long PinCode { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "User name is required.")]
         [Display(Name = "User name")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Password is required.")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
+
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
@@ -90,7 +93,7 @@ namespace PreScripds.UI.Models
         public List<SecurityQuestion> SecurityQuestion { get; set; }
         public int SecurityQuestionId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Security Answer is required.")]
         [Display(Name = "Security Answer")]
         public string SecurityAnswer { get; set; }
 
