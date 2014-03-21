@@ -102,10 +102,9 @@ namespace PreScripds.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            //ValidateViewModel(model);
             if (ModelState.IsValid)
             {
-
+               
             }
 
             // If we got this far, something failed, redisplay form
