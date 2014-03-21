@@ -39,5 +39,11 @@ namespace PreScripds.WebServices
             //var users = _userBl.GetDepartments();
             return new List<User>();
         }
+
+        public List<User> AddUser(User user)
+        {
+            var userFromDb = _userBl.AddUser(user);
+            return userFromDb;
+        }
     }
 }

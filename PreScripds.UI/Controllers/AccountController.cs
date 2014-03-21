@@ -13,6 +13,8 @@ using PreScripds.Infrastructure;
 using PreScripds.Infrastructure.Services;
 using PreScripds.WebServices;
 using PreScripds.Domain.Master;
+using AutoMapper;
+using PreScripds.Domain;
 
 namespace PreScripds.UI.Controllers
 {
@@ -104,7 +106,9 @@ namespace PreScripds.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-               
+                model.Active = 1;
+                var mappedUserProfile = Mapper.Map<RegisterViewModel, User>(model);
+                var userFromDb = _wcfService.InvokeService<>
             }
 
             // If we got this far, something failed, redisplay form

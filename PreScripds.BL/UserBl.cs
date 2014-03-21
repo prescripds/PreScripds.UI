@@ -20,11 +20,17 @@ namespace PreScripds.BL
         {
             _userRepository = new UserRepository(context);
         }
-        
+
         public List<User> GetUsers()
         {
             var users = _userRepository.GetUsers();
             return users;
+        }
+
+        public List<User> AddUser(User user)
+        {
+            var userFromDb = _userRepository.AddUser();
+            return userFromDb;
         }
     }
 }

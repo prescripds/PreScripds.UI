@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PreScripds.DAL.Interface;
 using PreScripds.Domain;
 using PreScripds.Infrastructure.Repositories;
+using System.Data.Entity;
 
 namespace PreScripds.DAL.Repository
 {
@@ -19,14 +20,14 @@ namespace PreScripds.DAL.Repository
         }
         public List<User> GetUsers()
         {
-            var userLst = _dbContext.users.ToList();
+            var userLst = ContextRep.users.Include(x => x.UserLogin).ToList();
             return userLst;
         }
 
         public User AddUser(User user)
         {
-            _dbContext.users.Add(user);
-            _dbContext.SaveChanges();
+            ContextRep.users.Add(user);            
+            ContextRep.SaveChanges();
             return user;
         }
     }
