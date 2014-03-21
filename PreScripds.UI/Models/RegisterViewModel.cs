@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using PreScripds.Domain;
 using PreScripds.Domain.Master;
+using PreScripds.Infrastructure;
 
 namespace PreScripds.UI.Models
 {
@@ -73,6 +74,26 @@ namespace PreScripds.UI.Models
         public long? PinCode { get; set; }
         public short IsHomeUrl { get; set; }
         public int Active { get; set; }
+
+        public string Message { get; set; }
+
+        public string FullName
+        {
+            get
+            {
+                string secondPartName = string.Empty;
+                if (MiddleName.IsEmpty)
+                {
+                    secondPartName = LastName;
+                }
+                else
+                {
+                    secondPartName = MiddleName + " " + LastName;
+                }
+                return "{0} {1}".ToFormat(FirstName, secondPartName);
+
+            }
+        }
         public List<UserLoginViewModel> userLoginViewModel { get; set; }
     }
 }

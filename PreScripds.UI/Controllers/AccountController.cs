@@ -119,6 +119,11 @@ namespace PreScripds.UI.Controllers
                 model.Active = 1;
                 var mappedUserProfile = Mapper.Map<RegisterViewModel, User>(model);
                 var userFromDb = _wcfService.InvokeService<IUserService, User>(svc => svc.AddUser(mappedUserProfile));
+                if (userFromDb != null)
+                {
+                    model.Message = "Dear {0}. You have been registered successfully and a welcome email has been sent to {1} and a welcome sms is sent to {2}".ToFormat(model.FullName, model.Email, model.Mobile);
+                }
+
             }
 
             // If we got this far, something failed, redisplay form

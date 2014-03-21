@@ -153,31 +153,29 @@ namespace PreScripds.UI.Common
         //    return MvcHtmlString.Create(modalContentBuilder.ToString());
         //}
 
-        //public static MvcHtmlString MessageDialogRedirect(this HtmlHelper htmlHelper, string message, string ActionName, string ControllerName, bool isSuccess = true)
-        //{
-        //    // Convert each ListItem to an <option> tag
-        //    //string url = @"redirect('@Url.Action(" + ActionName + ", " + ControllerName + ")')";
-        //    string url = "location.href= buildUrl('" + ControllerName + "/" + ActionName + "');";
-        //    StringBuilder modalContentBuilder = new StringBuilder();
-        //    modalContentBuilder.AppendFormat("<div class='modal fade in' id='{0}-modal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='false' style='display: none;'>", isSuccess ? "success" : "error");
-        //    modalContentBuilder.AppendLine("<div class='modal-dialog'>");
-        //    modalContentBuilder.AppendLine("<div class='modal-content'>");
-        //    modalContentBuilder.AppendLine("<div class='modal-body'>");
-        //    modalContentBuilder.AppendFormat("<div class='{0}'>{1}.</div>", isSuccess ? "successMsg" : "errorMsg", message);
-        //    modalContentBuilder.AppendLine("</div>");
-        //    modalContentBuilder.AppendLine("<div class='modal-footer'>");
-        //    //modalContentBuilder.AppendLine("<button type='button' class='' data-dismiss='modal'>OK</button>");
-        //    modalContentBuilder.AppendLine("<button id='sucessBtn' type='button' onclick='" + url + "'>OK</button>");
-        //    //modalContentBuilder.AppendLine("<input type='button' value='OK' onclick='location.href='<%: Url.Action('"+ActionName+"','"+ControllerName+"') %>' />");
+        public static MvcHtmlString MessageDialogRedirect(this HtmlHelper htmlHelper, string message, string ActionName, string ControllerName, bool isSuccess = true)
+        {
+            // Convert each ListItem to an <option> tag
+            //string url = @"redirect('@Url.Action(" + ActionName + ", " + ControllerName + ")')";
+            string url = "location.href= buildUrl('" + ControllerName + "/" + ActionName + "');";
+            StringBuilder modalContentBuilder = new StringBuilder();
+            modalContentBuilder.AppendFormat("<div class='modal fade in' id='{0}-modal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='false' style='display: none;'>", isSuccess ? "success" : "error");
+            modalContentBuilder.AppendLine("<div class='modal-dialog'>");
+            modalContentBuilder.AppendLine("<div class='modal-content'>");
+            modalContentBuilder.AppendLine("<div class='modal-body'>");
+            modalContentBuilder.AppendFormat("<div class='{0}'>{1}.</div>", isSuccess ? "successMsg" : "errorMsg", message);
+            modalContentBuilder.AppendLine("</div>");
+            modalContentBuilder.AppendLine("<div class='modal-footer'>");
 
-        //    modalContentBuilder.AppendLine("</div>");
-        //    modalContentBuilder.AppendLine("</div>");
-        //    modalContentBuilder.AppendLine("</div>");
-        //    modalContentBuilder.AppendLine("</div>");
-        //    modalContentBuilder.AppendLine("<script type='text/javascript'>$('#{0}-modal').on('hidden.bs.modal', function () {{ $('#sucessBtn').click(); }}); $('#sucessBtn').click(function(){{ {1} }})</script>".ToFormat(isSuccess ? "success" : "error", url));
+            modalContentBuilder.AppendLine("<button id='sucessBtn' type='button' onclick='" + url + "'>OK</button>");
+            modalContentBuilder.AppendLine("</div>");
+            modalContentBuilder.AppendLine("</div>");
+            modalContentBuilder.AppendLine("</div>");
+            modalContentBuilder.AppendLine("</div>");
+            modalContentBuilder.AppendLine("<script type='text/javascript'>$('#{0}-modal').on('hidden.bs.modal', function () {{ $('#sucessBtn').click(); }}); $('#sucessBtn').click(function(){{ {1} }})</script>".ToFormat(isSuccess ? "success" : "error", url));
 
-        //    return MvcHtmlString.Create(modalContentBuilder.ToString());
-        //}
+            return MvcHtmlString.Create(modalContentBuilder.ToString());
+        }
         //private static MvcHtmlString SelectInternal(this HtmlHelper htmlHelper, string optionLabel, string name,
         //    IEnumerable<ExtendedSelectListItem> selectList, bool allowMultiple,
         //    IDictionary<string, object> htmlAttributes)
