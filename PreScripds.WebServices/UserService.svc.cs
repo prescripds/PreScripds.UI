@@ -40,7 +40,7 @@ namespace PreScripds.WebServices
             return new List<User>();
         }
 
-        public List<User> AddUser(User user)
+        public User AddUser(User user)
         {
             var userFromDb = _userBl.AddUser(user);
             return userFromDb;

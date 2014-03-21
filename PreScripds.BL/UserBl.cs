@@ -27,9 +27,9 @@ namespace PreScripds.BL
             return users;
         }
 
-        public List<User> AddUser(User user)
+        public User AddUser(User user)
         {
-            var userFromDb = _userRepository.AddUser();
+            var userFromDb = _userRepository.AddUser(user);
             return userFromDb;
         }
     }

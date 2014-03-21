@@ -108,7 +108,7 @@ namespace PreScripds.UI.Controllers
             {
                 model.Active = 1;
                 var mappedUserProfile = Mapper.Map<RegisterViewModel, User>(model);
-                var userFromDb = _wcfService.InvokeService<>
+                var userFromDb = _wcfService.InvokeService<IUserService, User>(svc => svc.AddUser(mappedUserProfile));
             }
 
             // If we got this far, something failed, redisplay form
