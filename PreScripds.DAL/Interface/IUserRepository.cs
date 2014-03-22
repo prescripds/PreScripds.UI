@@ -12,5 +12,7 @@ namespace PreScripds.DAL.Interface
     {
         Task<List<User>> GetUsers();
         User AddUser(User user);
+
+        Task<User> GetUserByUsername(string loginName);
     }
 }

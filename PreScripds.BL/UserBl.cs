@@ -32,5 +32,11 @@ namespace PreScripds.BL
             var userFromDb = _userRepository.AddUser(user);
             return userFromDb;
         }
+
+        public Task<User> GetUserByUsername(string loginName)
+        {
+            var user = _userRepository.GetUserByUsername(loginName);
+            return user;
+        }
     }
 }

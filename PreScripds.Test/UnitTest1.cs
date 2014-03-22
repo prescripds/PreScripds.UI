@@ -7,6 +7,7 @@ using PreScripds.WebServices;
 using System.Collections.Generic;
 using PreScripds.DAL;
 using PreScripds.Domain.Master;
+using System.Threading.Tasks;
 
 namespace PreScripds.Test
 {
@@ -26,7 +27,7 @@ namespace PreScripds.Test
         [TestMethod]
         public void TestMethod1()
         {
-            var countries = _wcfService.InvokeService<IMasterService, List<Country>>(svc => svc.GetCountry());
+            var countries = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername("shreyas"));
             //var users = userRepository.GetUsers();
 
             //var userLst = _wcfService.InvokeService<IMasterService, List<Department>>((svc => svc.GetDepartments()));

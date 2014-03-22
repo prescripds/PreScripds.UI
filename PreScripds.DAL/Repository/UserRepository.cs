@@ -46,5 +46,15 @@ namespace PreScripds.DAL.Repository
             ContextRep.SaveChangesAsync();
             return user;
         }
+
+        public async Task<User> GetUserByUsername(string loginName)
+        {
+            var users = await ContextRep.users.Include(x => x.UserLogin).Where(x => x.Active == 1).ToListAsync();
+            if (users.IsCollectionValid())
+            {
+
+            }
+            return null;
+        }
     }
 }

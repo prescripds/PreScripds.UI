@@ -47,9 +47,10 @@ namespace PreScripds.WebServices
             return userFromDb;
         }
 
-        //public User GetUserByUserName(string userName)
-        //{
-
-        //}
+        public User GetUserByUsername(string loginName)
+        {
+            var user = _userBl.GetUserByUsername(loginName).Result;
+            return user;
+        }
     }
 }
