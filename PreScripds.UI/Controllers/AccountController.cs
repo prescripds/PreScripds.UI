@@ -48,7 +48,7 @@ namespace PreScripds.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var user = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername(model.UserName));
+                var user = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername(model.UserName));
                 //var user = await UserManager.FindAsync(model.UserName, model.Password);
                 //if (user != null)
                 //{

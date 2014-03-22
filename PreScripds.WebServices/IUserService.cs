@@ -22,7 +22,7 @@ namespace PreScripds.WebServices
         User AddUser(User model);
 
         [OperationContract]
-        [WebGet(UriTemplate = "/User", ResponseFormat = WebMessageFormat.Xml)]
+        [WebInvoke(UriTemplate = "/User", ResponseFormat = WebMessageFormat.Xml)]
         User GetUserByUsername(string loginName);
     }
 }

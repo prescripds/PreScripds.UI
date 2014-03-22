@@ -27,7 +27,7 @@ namespace PreScripds.Test
         [TestMethod]
         public void TestMethod1()
         {
-            var countries = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername("shreyas"));
+            //var countries = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername("shreyas"));
             //var users = userRepository.GetUsers();
 
             //var userLst = _wcfService.InvokeService<IMasterService, List<Department>>((svc => svc.GetDepartments()));
