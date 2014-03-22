@@ -26,9 +26,23 @@ namespace PreScripds.UI.Models
         [Display(Name = "Gender")]
         public int Gender { get; set; }
 
+        [Required(ErrorMessage = "Date Of Birth is required.")]
+        [DataType(DataType.Date)]
         [Display(Name = "Date Of Birth")]
         public DateTime? Dob { get; set; }
-        public int? Age { get; set; }
+        public int? Age
+        {
+            get
+            {
+                var presentYear = DateTime.Now.Year;
+                if (Dob.HasValue)
+                {
+                    var dob = Dob.Value.Year;
+                    return (presentYear - dob);
+                }
+                return 0;
+            }
+        }
 
         [Required(ErrorMessage = "Mobile is required.")]
         [Display(Name = "Mobile")]
@@ -94,6 +108,10 @@ namespace PreScripds.UI.Models
 
             }
         }
+        [Required(ErrorMessage = "User Type is required.")]
+        public short? UserType { get; set; }
+        [Required(ErrorMessage = "Terms and condition is required.")]
+        public bool TermsCondition { get; set; }
         public List<UserLoginViewModel> userLoginViewModel { get; set; }
     }
 }

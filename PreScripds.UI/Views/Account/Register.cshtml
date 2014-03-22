@@ -113,7 +113,7 @@
             </div>
             <div class="col-md-4 col-sm-6">
                 <div class="form-group">
-                    <label class="control-label" for="LastName">ZipCode</label>
+                    <label class="control-label" for="LastName">Zip Code</label>
                     @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control" })
                 </div>
             </div>
@@ -163,9 +163,23 @@
                         @Html.PasswordFor(m => m.userLoginViewModel[0].SecurityAnswer, new { @class = "form-control" })
                     </div>
                 </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="LastName">User Type*</label>
+                        @Html.EnumDropDownListFor(m => m.UserType, new { @class = "form-control" }, typeof(PreScripds.Domain.Enums.UserType))
+                        @Html.HiddenFor(x => x.UserType)
+                    </div>
+                </div>
             </div>
         }
-
+        <div class="row">
+            <div class="col-md-4 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label" for="LastName">User Type*</label>
+                    @Html.CheckBoxFor(m => m.TermsCondition, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12 buttons">
                 <button type="submit" class="btn btn-warning pull-right" value="Register">Register</button>

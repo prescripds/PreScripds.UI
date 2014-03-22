@@ -16,4 +16,12 @@ namespace PreScripds.Domain.Enums
         [DataMember]
         Other = 3
     }
+
+    public enum UserType
+    {
+        [DataMember]
+        Organization = 1,
+        [DataMember]
+        Self = 2
+    }
 }

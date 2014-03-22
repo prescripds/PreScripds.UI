@@ -64,7 +64,9 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.IsSuperAdmin).HasColumnName("issuperadmin");
             this.Property(t => t.IsAdmin).HasColumnName("isadmin");
             this.Property(t => t.IsHomeUrl).HasColumnName("ishomeurl");
-
+            this.Property(t => t.CityName).HasColumnName("city_name");
+            this.Property(t => t.UserType).HasColumnName("user_type");
+            this.Property(t => t.TermsCondition).HasColumnName("terms_condition");
 
 
         }

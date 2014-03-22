@@ -15,8 +15,11 @@ namespace PreScripds.UI.Common.Automapper
         {
             Mapper.CreateMap<UserLoginViewModel, UserLogin>()
                .IgnoreAllNonExisting();
-            Mapper.CreateMap<UserLogin, UserLoginViewModel>().IgnoreAllNonExisting();
+            Mapper.CreateMap<UserLogin, UserLoginViewModel>()
+                .IgnoreAllNonExisting();
             Mapper.CreateMap<RegisterViewModel, User>()
+                .ForMember(d => d.ZipCode, s => s.MapFrom(p => p.PinCode))
+                .ForMember(d => d.TermsCondition, s => s.MapFrom(p => Convert.ToByte(p.TermsCondition)))
                 .AfterMap((s, d) =>
                 {
                     var mappedLoginProfile = Mapper.Map<List<UserLoginViewModel>, List<UserLogin>>(s.userLoginViewModel);
