@@ -11,6 +11,7 @@ using PreScripds.BL.Interface;
 using PreScripds.BL;
 using PreScripds.DAL;
 using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace PreScripds.WebServices
 {
@@ -34,10 +35,10 @@ namespace PreScripds.WebServices
             _context = new PreScripdsDb();
             _userBl = new UserBl(_context);
         }
-        public List<User> GetUsers()
+        public async Task<List<User>> GetUsers()
         {
-            //var users = _userBl.GetDepartments();
-            return new List<User>();
+            var users = await _userBl.GetUsers();
+            return users;
         }
 
         public User AddUser(User user)

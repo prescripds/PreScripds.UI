@@ -9,6 +9,7 @@ using PreScripds.Infrastructure.Repositories;
 using System.Data.Entity;
 using PreScripds.Infrastructure.Security;
 using PreScripds.Infrastructure;
+using MySql.Data.MySqlClient;
 
 namespace PreScripds.DAL.Repository
 {
@@ -20,9 +21,9 @@ namespace PreScripds.DAL.Repository
         {
             _dbContext = context;
         }
-        public List<User> GetUsers()
+        public Task<List<User>> GetUsers()
         {
-            var userLst = ContextRep.users.Include(x => x.UserLogin).ToList();
+            var userLst = ContextRep.users.Include(x => x.UserLogin).ToListAsync();
             return userLst;
         }
 
@@ -41,9 +42,8 @@ namespace PreScripds.DAL.Repository
                     userLogin.SecurityAnswer = encryptedSecurityAnswer;
                 }
             }
-
             ContextRep.users.Add(user);
-            ContextRep.SaveChanges();
+            ContextRep.SaveChangesAsync();
             return user;
         }
     }

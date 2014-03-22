@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Threading.Tasks;
 using PreScripds.Domain;
 
 namespace PreScripds.WebServices
@@ -15,7 +16,7 @@ namespace PreScripds.WebServices
     {
         [OperationContract]
         [WebGet(UriTemplate = "/Users", ResponseFormat = WebMessageFormat.Xml)]
-        List<User> GetUsers();
+        Task<List<User>> GetUsers();
         [OperationContract]
         [WebInvoke(UriTemplate = "/AddUser", ResponseFormat = WebMessageFormat.Xml)]
         User AddUser(User model);

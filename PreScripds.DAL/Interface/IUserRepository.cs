@@ -10,7 +10,7 @@ namespace PreScripds.DAL.Interface
 {
     public interface IUserRepository : IRepository<User>
     {
-        List<User> GetUsers();
+        Task<List<User>> GetUsers();
         User AddUser(User user);
     }
 }

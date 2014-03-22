@@ -15,6 +15,7 @@ using PreScripds.WebServices;
 using PreScripds.Domain.Master;
 using AutoMapper;
 using PreScripds.Domain;
+using System.Data.Entity.Infrastructure;
 
 namespace PreScripds.UI.Controllers
 {
@@ -112,21 +113,19 @@ namespace PreScripds.UI.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register([Bind(Include = "FirstName,Dob,Email,LastName")]RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
                 model.Active = 1;
                 var mappedUserProfile = Mapper.Map<RegisterViewModel, User>(model);
+
                 var userFromDb = _wcfService.InvokeService<IUserService, User>(svc => svc.AddUser(mappedUserProfile));
                 if (userFromDb != null)
                 {
                     model.Message = "Dear {0}. You have been registered successfully and a welcome email has been sent to {1} and a welcome sms is sent to {2}".ToFormat(model.FullName, model.Email, model.Mobile);
                 }
-
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 

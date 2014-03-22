@@ -21,9 +21,9 @@ namespace PreScripds.BL
             _userRepository = new UserRepository(context);
         }
 
-        public List<User> GetUsers()
+        public async Task<List<User>> GetUsers()
         {
-            var users = _userRepository.GetUsers();
+            var users = await _userRepository.GetUsers();
             return users;
         }
 
