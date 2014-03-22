@@ -112,6 +112,8 @@ namespace PreScripds.UI.Models
         public short? UserType { get; set; }
         [Required(ErrorMessage = "Terms and condition is required.")]
         public bool TermsCondition { get; set; }
+
+        public bool CreationSuccessful { get; set; }
         public List<UserLoginViewModel> userLoginViewModel { get; set; }
     }
 }
