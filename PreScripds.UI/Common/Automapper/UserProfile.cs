@@ -19,7 +19,7 @@ namespace PreScripds.UI.Common.Automapper
                 .IgnoreAllNonExisting();
             Mapper.CreateMap<RegisterViewModel, User>()
                 .ForMember(d => d.ZipCode, s => s.MapFrom(p => p.PinCode))
-                .ForMember(d => d.TermsCondition, s => s.MapFrom(p => Convert.ToByte(p.TermsCondition)))
+                .ForMember(d => d.TermsCondition, s => s.MapFrom(p => ConvertTermsAndCondition(p.TermsCondition)))
                 .AfterMap((s, d) =>
                 {
                     var mappedLoginProfile = Mapper.Map<List<UserLoginViewModel>, List<UserLogin>>(s.userLoginViewModel);
@@ -30,6 +30,11 @@ namespace PreScripds.UI.Common.Automapper
 
             Mapper.CreateMap<User, RegisterViewModel>()
                .IgnoreAllNonExisting();
+        }
+
+        private sbyte ConvertTermsAndCondition(bool p)
+        {
+            if (p) { return 1; } else { return 0; }
         }
     }
 }

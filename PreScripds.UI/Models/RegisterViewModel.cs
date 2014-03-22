@@ -110,6 +110,7 @@ namespace PreScripds.UI.Models
         }
         [Required(ErrorMessage = "User Type is required.")]
         public short? UserType { get; set; }
+
         [Required(ErrorMessage = "Terms and condition is required.")]
         public bool TermsCondition { get; set; }
 

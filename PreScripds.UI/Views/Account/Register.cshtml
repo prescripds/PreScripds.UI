@@ -196,13 +196,16 @@
     <script src="~/Scripts/bootstrap-datepicker.js"></script>
     <link href="~/Content/datepicker.css" rel="stylesheet" />
     <script type="text/javascript">
-        $(function () {
-            $('#datepicker').datepicker();
+        $(document).ready(function () {
+            $(function () {
+                $('#datepicker').datepicker();
 
-            $('.day').on('click', function () {
-                $('.datepicker-days').hide();
+                $('.day').on('click', function () {
+                    $('.datepicker-days').hide();
+                });
+                @Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))
             });
-            @Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))
         });
+
     </script>
 }
