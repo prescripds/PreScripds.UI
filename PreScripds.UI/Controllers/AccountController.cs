@@ -117,16 +117,22 @@ namespace PreScripds.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.Active = 1;
-
-                var mappedUserProfile = Mapper.Map<RegisterViewModel, User>(model);
-
-                var userFromDb = _wcfService.InvokeService<IUserService, User>(svc => svc.AddUser(mappedUserProfile));
-                if (userFromDb != null)
+                model.Active = 1;                
+                if (model.TermsCondition)
                 {
-                    model.CreationSuccessful = true;
-                    model.Message = "Dear {0}. You have been registered successfully and a welcome email has been sent to {1} and a welcome sms is sent to {2}".ToFormat(model.FullName, model.Email, model.Mobile);
+                    var mappedUserProfile = Mapper.Map<RegisterViewModel, User>(model);
+                    var userFromDb = _wcfService.InvokeService<IUserService, User>(svc => svc.AddUser(mappedUserProfile));
+                    if (userFromDb != null)
+                    {
+                        model.CreationSuccessful = true;
+                        model.Message = "Dear {0}. You have been registered successfully and a welcome email has been sent to {1} and a welcome sms is sent to {2}".ToFormat(model.FullName, model.Email, model.Mobile);
+                    }
                 }
+                else
+                {
+                    ModelState.AddModelError("TermsCondition","Terms and Conditions is required.")
+                }
+               
             }
             return View(new RegisterViewModel { userLoginViewModel = new List<UserLoginViewModel>() });
         }
