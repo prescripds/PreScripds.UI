@@ -175,8 +175,8 @@
         <div class="row">
             <div class="col-md-4 col-sm-6">
                 <div class="form-group">
-                    <label class="control-label" for="LastName">User Type*</label>
-                    @Html.CheckBoxFor(m => m.TermsCondition, new { @class = "form-control" })
+                    @Html.CheckBoxFor(m => m.TermsCondition)
+                    <label class="control-label" for="LastName">Terms And Condition*</label>
                 </div>
             </div>
         </div>
@@ -202,6 +202,7 @@
             $('.day').on('click', function () {
                 $('.datepicker-days').hide();
             });
+            @Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))
         });
     </script>
 }

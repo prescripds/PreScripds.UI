@@ -115,15 +115,15 @@ namespace PreScripds.UI.Common
         //    return htmlHelper.TextBoxFor(expression, new { @class = "hidden" });
         //}
 
-        //public static T Iff<T>(this HtmlHelper html, bool condition, T trueValue, T falseValue)
-        //{
-        //    return condition ? trueValue : falseValue;
-        //}
+        public static T Iff<T>(this HtmlHelper html, bool condition, T trueValue, T falseValue)
+        {
+            return condition ? trueValue : falseValue;
+        }
 
-        //public static T Iff<T>(this HtmlHelper html, bool condition, T trueValue)
-        //{
-        //    return html.Iff<T>(condition, trueValue, default(T));
-        //}
+        public static T Iff<T>(this HtmlHelper html, bool condition, T trueValue)
+        {
+            return html.Iff<T>(condition, trueValue, default(T));
+        }
 
         //public static MvcHtmlString ExtendedDropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper,
         //    Expression<Func<TModel, TProperty>> expression, IEnumerable<ExtendedSelectListItem> selectList,

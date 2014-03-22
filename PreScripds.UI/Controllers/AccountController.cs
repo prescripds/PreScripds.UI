@@ -113,11 +113,12 @@ namespace PreScripds.UI.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register([Bind(Include = "FirstName,Dob,Email,LastName")]RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
                 model.Active = 1;
+                
                 var mappedUserProfile = Mapper.Map<RegisterViewModel, User>(model);
 
                 var userFromDb = _wcfService.InvokeService<IUserService, User>(svc => svc.AddUser(mappedUserProfile));
