@@ -130,7 +130,7 @@ namespace PreScripds.UI.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("TermsCondition","Terms and Conditions is required.")
+                    ModelState.AddModelError("TermsCondition", "Terms and Conditions is required.");
                 }
                
             }

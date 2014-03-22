@@ -36,24 +36,8 @@
     <div class="container body-content" style="margin-top:7%">
         @RenderBody()
     </div>
-    <div class="container body-content">
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - PreScripds</p>
-            <div class="col-md-4 col-sm-6 footer-links">
-                <ul>
+    @Html.Partial("Partials/_Footer")
 
-                    <li>
-                        <a data-toggle="modal" class="opentac" title="Privacy Policy" href="~/Views/Static/PrivacyPolicy.html" data-target="#">Privacy Policy</a>
-                    </li>
-
-                    <li class="last">
-                        <a data-toggle="modal" title="Terms and Conditions" class="opentac" href="~/Views/Static/TermsConditions.html" data-target="#">Terms and Conditions</a>
-                    </li>
-                </ul>
-            </div>
-        </footer>
-    </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

@@ -379,6 +379,7 @@
     <Content Include="Views\Shared\Partials\_Menu.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Shared\_OpenLayout.cshtml" />
+    <Content Include="Views\Shared\Partials\_Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
