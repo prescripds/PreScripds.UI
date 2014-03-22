@@ -48,6 +48,7 @@ namespace PreScripds.UI.Controllers
         {
             if (ModelState.IsValid)
             {
+                //var user = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername(model.UserName));
                 //var user = await UserManager.FindAsync(model.UserName, model.Password);
                 //if (user != null)
                 //{
@@ -72,18 +73,17 @@ namespace PreScripds.UI.Controllers
         {
             var registerViewModel = new RegisterViewModel()
             {
+                CountryId = 1,
                 userLoginViewModel = new List<UserLoginViewModel>()
             };
             BindDropDowns(registerViewModel);
             if (ps.IsNotEmpty())
             {
                 registerViewModel.IsHomeUrl = 1;
-                registerViewModel.CountryId = 1;
                 return View(registerViewModel);
             }
             else
             {
-                registerViewModel.CountryId = 1;
                 registerViewModel.IsHomeUrl = 0;
                 return View(registerViewModel);
             }
@@ -117,7 +117,7 @@ namespace PreScripds.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.Active = 1;                
+                model.Active = 1;
                 if (model.TermsCondition)
                 {
                     var mappedUserProfile = Mapper.Map<RegisterViewModel, User>(model);
@@ -132,7 +132,7 @@ namespace PreScripds.UI.Controllers
                 {
                     ModelState.AddModelError("TermsCondition", "Terms and Conditions is required.");
                 }
-               
+
             }
             return View(new RegisterViewModel { userLoginViewModel = new List<UserLoginViewModel>() });
         }

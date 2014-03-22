@@ -46,5 +46,10 @@ namespace PreScripds.WebServices
             var userFromDb = _userBl.AddUser(user);
             return userFromDb;
         }
+
+        //public User GetUserByUserName(string userName)
+        //{
+
+        //}
     }
 }
