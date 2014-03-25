@@ -137,6 +137,16 @@ namespace PreScripds.UI.Controllers
             return View(new RegisterViewModel { userLoginViewModel = new List<UserLoginViewModel>() });
         }
 
+        [HttpPost]
+        public bool CheckUserName(string loginName)
+        {
+            var user = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername(loginName));
+            if (user == null)
+            {
+                return false;
+            }
+            return true;
+        }
         ////
         //// GET: /Account/Manage
         //public ActionResult Manage(ManageMessageId? message)

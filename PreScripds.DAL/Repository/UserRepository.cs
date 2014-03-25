@@ -52,7 +52,7 @@ namespace PreScripds.DAL.Repository
             var users = await ContextRep.users.Include(x => x.UserLogin).Where(x => x.Active == 1).ToListAsync();
             if (users.IsCollectionValid())
             {
-
+                var loginUser = users.Where(x => x.UserLogin.First().UserName == loginName);
             }
             return null;
         }

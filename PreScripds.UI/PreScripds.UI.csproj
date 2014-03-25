@@ -276,6 +276,7 @@
     <Content Include="Images\user.png" />
     <Content Include="Images\views.png" />
     <Content Include="Images\waves.gif" />
+    <Content Include="Scripts\ajax.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -303,6 +304,7 @@
     <Content Include="Scripts\login.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\moment-2.2.1.js" />
+    <Content Include="Scripts\PreScripds.Register.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\responsive-nav.js" />
