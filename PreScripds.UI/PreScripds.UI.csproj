@@ -199,6 +199,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AppSettingModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\UserLoginViewModel.cs" />
@@ -382,6 +383,7 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Shared\_OpenLayout.cshtml" />
     <Content Include="Views\Shared\Partials\_Footer.cshtml" />
+    <Content Include="Views\Base\AppSettings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

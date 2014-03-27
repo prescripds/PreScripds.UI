@@ -20,7 +20,7 @@ using System.Data.Entity.Infrastructure;
 namespace PreScripds.UI.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private WcfServiceInvoker _wcfService;
         public AccountController()
@@ -138,9 +138,10 @@ namespace PreScripds.UI.Controllers
         }
 
         [HttpPost]
-        public bool CheckUserName(string loginName)
+        [AcceptVerbs(HttpVerbs.Post)]
+        public bool CheckUserName(string username)
         {
-            var user = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername(loginName));
+            var user = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername(username));
             if (user == null)
             {
                 return false;

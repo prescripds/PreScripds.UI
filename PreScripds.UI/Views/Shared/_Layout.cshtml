@@ -72,6 +72,8 @@
     </div>
     @Html.Partial("Partials/_Footer")
 
+    @{ Html.RenderAction("AppSettings", "Base"); }
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

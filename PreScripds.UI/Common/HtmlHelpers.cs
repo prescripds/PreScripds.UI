@@ -69,10 +69,10 @@ namespace PreScripds.UI.Common
         //    });
         //}
 
-        //public static string ToJson(this object obj)
-        //{
-        //    return JsonConvert.SerializeObject(obj, Formatting.None);
-        //}
+        public static string ToJson(this object obj)
+        {
+            return JsonConvert.SerializeObject(obj, Formatting.None);
+        }
 
 
         //public static MvcHtmlString BooleanDropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper,

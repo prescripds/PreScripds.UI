@@ -1,0 +1,12 @@
+﻿@using PreScripds.UI.Common
+@model PreScripds.UI.Models.AppSettingModel
+
+@{
+    Layout = null;
+}
+
+<script type="text/javascript">
+    (function () {
+        window.appSettings = @Html.Raw(Model.ToJson());
+    })();
+</script>
