@@ -15,6 +15,14 @@
     <div class="col-md-12 blackBg">
 
         @Html.ValidationSummary()<br />
+        <div class="validation-summary-errors" style="display:none" id="emailExistsDiv">
+            <ul>
+                <li class="success" id="userNameExists">
+
+                </li>
+            </ul>
+        </div>
+
         <h4><span>Personal Details</span><hr /> </h4>
         <div class="row">
             <div class="col-md-4 col-sm-6">
@@ -205,9 +213,9 @@
                 $('.day').on('click', function () {
                     $('.datepicker-days').hide();
                 });
-               
+
             });
-             @Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))
+            @Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))
         });
 
     </script>

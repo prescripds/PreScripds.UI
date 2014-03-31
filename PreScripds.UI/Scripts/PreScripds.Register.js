@@ -3,10 +3,10 @@
         var username = $(this).val();
         if (username != '') {
             ajaxPost("/Account/CheckUserName", { username: username }, function (data) {
-                if (data != '' && data == true) {
-                    $(this).attr('style', 'border:red 1px solid');
-                } else {
-                    alert(data);
+                if (data != '' && data == "True") {
+                    $('#emailExistsDiv').removeAttr('style');
+                    $('#emailExistsDiv').attr('style', 'display:block');
+                    $('#userNameExists').text('User Name already exists.');
                 }
             });
         }

@@ -139,6 +139,7 @@ namespace PreScripds.UI.Controllers
 
         [HttpPost]
         [AcceptVerbs(HttpVerbs.Post)]
+        [AllowAnonymous]
         public bool CheckUserName(string username)
         {
             var user = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername(username));

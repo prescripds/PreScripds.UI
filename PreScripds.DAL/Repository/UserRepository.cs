@@ -53,6 +53,8 @@ namespace PreScripds.DAL.Repository
             if (users.IsCollectionValid())
             {
                 var loginUser = users.Where(x => x.UserLogin.First().UserName == loginName);
+                if (loginUser != null)
+                    return loginUser.FirstOrDefault();
             }
             return null;
         }
