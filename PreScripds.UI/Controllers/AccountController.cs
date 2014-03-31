@@ -49,6 +49,22 @@ namespace PreScripds.UI.Controllers
             if (ModelState.IsValid)
             {
                 var user = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername(model.UserName));
+
+                if (user != null)
+                {
+                    var userLogin = user.UserLogin.FirstOrDefault();
+                    if (user.Active == 0)
+                        throw new ApplicationException("Your account is currently not active.Please contact your administrator.");
+                    var hashedPassword = Common.Common.CreatePasswordHash(userLogin.Password, userLogin.SaltKey);
+                    if (hashedPassword.Equals(userLogin.Password))
+                    {
+                        //Sess
+                    }
+                }
+                else
+                {
+                    throw new ApplicationException("Please enter a valid Username/Password");
+                }
                 //var user = await UserManager.FindAsync(model.UserName, model.Password);
                 //if (user != null)
                 //{
