@@ -16,6 +16,10 @@ using PreScripds.Domain.Master;
 using AutoMapper;
 using PreScripds.Domain;
 using System.Data.Entity.Infrastructure;
+using PreScripds.UI.Common;
+using System.Web.Security;
+using System.Security.Principal;
+using PreScripds.Domain.Enums;
 
 namespace PreScripds.UI.Controllers
 {
@@ -23,9 +27,11 @@ namespace PreScripds.UI.Controllers
     public class AccountController : BaseController
     {
         private WcfServiceInvoker _wcfService;
+        private SessionContext _sessionContext;
         public AccountController()
         {
             _wcfService = new WcfServiceInvoker();
+            _sessionContext = new SessionContext();
         }
 
         //public UserManager<ApplicationUser> UserManager { get; private set; }
@@ -58,7 +64,8 @@ namespace PreScripds.UI.Controllers
                     var hashedPassword = Common.Common.CreatePasswordHash(userLogin.Password, userLogin.SaltKey);
                     if (hashedPassword.Equals(userLogin.Password))
                     {
-                        //Sess
+                        _sessionContext.SetUpSessionContext(HttpContext, SessionContext.CurrentUser);
+                        // SetUserIdentity(user);
                     }
                 }
                 else
@@ -81,6 +88,21 @@ namespace PreScripds.UI.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+        //private void SetUserIdentity(Domain.User user)
+        //{
+        //    var identity = new GenericIdentity(user.Email);
+        //    GenericPrincipal principal;
+        //    string[] userRole = { UserRoles.SuperAdmin.ToString(), UserRoles.Admin.ToString(), UserRoles.User.ToString() };
+        //    if (user.IsSuperAdmin == 1)
+        //        principal = new GenericPrincipal(identity, userRole[0]);
+        //    else if (user.IsAdmin == 1)
+        //        principal = new GenericPrincipal(identity, userRole[1]);
+        //    else
+        //        principal = new GenericPrincipal(identity, userRole[2]);
+        //    HttpContext.User = principal;
+        //    //SiteSession siteSession = new SiteSession();
+        //}
 
         //
         // GET: /Account/Register
@@ -237,10 +259,28 @@ namespace PreScripds.UI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            SignOut();
             //AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
 
+        public void SignOut()
+        {
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetExpires(DateTime.Now.AddSeconds(-1));
+            Response.Cache.SetNoStore();
+            SessionContext.LogOff(HttpContext);
+            Session.Clear();
+            Session.RemoveAll();
+            Session.Abandon();
+            FormsAuthentication.SignOut();
+            HttpCookie cookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+            if (cookie != null)
+            {
+                cookie.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(cookie);
+            }
+        }
 
 
         protected override void Dispose(bool disposing)

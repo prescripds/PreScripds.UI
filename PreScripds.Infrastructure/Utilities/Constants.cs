@@ -86,7 +86,7 @@ namespace PreScripds.Infrastructure
         }
         public static class ReportFont
         {
-            
+
 
         }
         public static T GetConfigValue<T>(string configKey)

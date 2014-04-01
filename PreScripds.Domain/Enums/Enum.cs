@@ -24,4 +24,14 @@ namespace PreScripds.Domain.Enums
         [DataMember]
         Self = 2
     }
+
+    public enum UserRoles
+    {
+        [DataMember]
+        SuperAdmin = 1,
+        [DataMember]
+        Admin = 2,
+        [DataMember]
+        User = 3
+    }
 }
