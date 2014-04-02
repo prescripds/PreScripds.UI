@@ -14,5 +14,6 @@ namespace PreScripds.DAL.Interface
         User AddUser(User user);
 
         Task<User> GetUserByUsername(string loginName);
+        Task<User> CheckEmailExists(string email);
     }
 }

@@ -24,5 +24,8 @@ namespace PreScripds.WebServices
         [OperationContract]
         [WebInvoke(UriTemplate = "/User", ResponseFormat = WebMessageFormat.Xml)]
         User GetUserByUsername(string loginName);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/EmailExist", ResponseFormat = WebMessageFormat.Xml)]
+        User CheckEmailExists(string email);
     }
 }

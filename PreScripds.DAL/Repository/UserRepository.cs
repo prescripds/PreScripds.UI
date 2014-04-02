@@ -58,5 +58,15 @@ namespace PreScripds.DAL.Repository
             }
             return null;
         }
+
+        public async Task<User> CheckEmailExists(string email)
+        {
+            var users = await ContextRep.users.Include(x => x.UserLogin).Where(x => x.Active == 1 && x.Email == email).ToListAsync();
+            if (users.IsCollectionValid())
+            {
+                return users.First();
+            }
+            return null;
+        }
     }
 }

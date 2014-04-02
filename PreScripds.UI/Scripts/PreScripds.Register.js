@@ -1,8 +1,8 @@
 ﻿$(document).ready(function () {
-    $('#userLoginViewModel_0__UserName').on('blur', function () {
+    $('#Email').on('blur', function () {
         var username = $(this).val();
         if (username != '') {
-            ajaxPost("/Account/CheckUserName", { username: username }, function (data) {
+            ajaxPost("/Account/CheckUserEmail", { username: username }, function (data) {
                 if (data != '' && data == "True") {
                     $('#emailExistsDiv').removeAttr('style');
                     $('#emailExistsDiv').attr('style', 'display:block');

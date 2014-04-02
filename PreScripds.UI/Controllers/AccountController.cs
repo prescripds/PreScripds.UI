@@ -65,7 +65,11 @@ namespace PreScripds.UI.Controllers
                     if (hashedPassword.Equals(userLogin.Password))
                     {
                         _sessionContext.SetUpSessionContext(HttpContext, SessionContext.CurrentUser);
-                        // SetUserIdentity(user);
+                        SetUserIdentity(user);
+                    }
+                    else
+                    {
+                        throw new ApplicationException("Please enter a valid Username/Password");
                     }
                 }
                 else
@@ -89,20 +93,15 @@ namespace PreScripds.UI.Controllers
             return View(model);
         }
 
-        //private void SetUserIdentity(Domain.User user)
-        //{
-        //    var identity = new GenericIdentity(user.Email);
-        //    GenericPrincipal principal;
-        //    string[] userRole = { UserRoles.SuperAdmin.ToString(), UserRoles.Admin.ToString(), UserRoles.User.ToString() };
-        //    if (user.IsSuperAdmin == 1)
-        //        principal = new GenericPrincipal(identity, userRole[0]);
-        //    else if (user.IsAdmin == 1)
-        //        principal = new GenericPrincipal(identity, userRole[1]);
-        //    else
-        //        principal = new GenericPrincipal(identity, userRole[2]);
-        //    HttpContext.User = principal;
-        //    //SiteSession siteSession = new SiteSession();
-        //}
+        private void SetUserIdentity(Domain.User user)
+        {
+            var identity = new GenericIdentity(user.Email);
+            GenericPrincipal principal;
+            string[] userRole = { UserRoles.SuperAdmin.ToString(), UserRoles.Admin.ToString(), UserRoles.User.ToString() };
+            principal = new GenericPrincipal(identity, userRole);
+            HttpContext.User = principal;
+            SiteSession siteSession = new SiteSession(user);
+        }
 
         //
         // GET: /Account/Register
@@ -178,9 +177,9 @@ namespace PreScripds.UI.Controllers
         [HttpPost]
         [AcceptVerbs(HttpVerbs.Post)]
         [AllowAnonymous]
-        public bool CheckUserName(string username)
+        public bool CheckUserEmail(string username)
         {
-            var user = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername(username));
+            var user = _wcfService.InvokeService<IUserService, User>(svc => svc.CheckEmailExists(username));
             if (user == null)
             {
                 return false;

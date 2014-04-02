@@ -52,5 +52,11 @@ namespace PreScripds.WebServices
             var user = _userBl.GetUserByUsername(loginName).Result;
             return user;
         }
+
+        public User CheckEmailExists(string email)
+        {
+            var user = _userBl.CheckEmailExists(email).Result;
+            return user;
+        }
     }
 }

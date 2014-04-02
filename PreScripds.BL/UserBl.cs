@@ -38,5 +38,11 @@ namespace PreScripds.BL
             var user = _userRepository.GetUserByUsername(loginName);
             return user;
         }
+
+        public Task<User> CheckEmailExists(string email)
+        {
+            var user = _userRepository.CheckEmailExists(email);
+            return user;
+        }
     }
 }
