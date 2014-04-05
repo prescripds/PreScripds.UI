@@ -61,20 +61,28 @@ namespace PreScripds.UI.Controllers
                     var userLogin = user.UserLogin.FirstOrDefault();
                     if (user.Active == 0)
                         throw new ApplicationException("Your account is currently not active.Please contact your administrator.");
-                    var hashedPassword = Common.Common.CreatePasswordHash(userLogin.Password, userLogin.SaltKey);
+                    var hashedPassword = Common.Common.CreatePasswordHash(model.Password, userLogin.SaltKey);
                     if (hashedPassword.Equals(userLogin.Password))
                     {
                         _sessionContext.SetUpSessionContext(HttpContext, SessionContext.CurrentUser);
                         SetUserIdentity(user);
+                        if (returnUrl != null)
+                        {
+                            return RedirectToLocal(returnUrl);
+                        }
+                        else
+                        {
+
+                        }
                     }
                     else
                     {
-                        throw new ApplicationException("Please enter a valid Username/Password");
+                        ModelState.AddModelError("", "Please enter a valid Username/Password");
                     }
                 }
                 else
                 {
-                    throw new ApplicationException("Please enter a valid Username/Password");
+                    ModelState.AddModelError("", "Please enter a valid Username/Password");
                 }
                 //var user = await UserManager.FindAsync(model.UserName, model.Password);
                 //if (user != null)
@@ -332,17 +340,17 @@ namespace PreScripds.UI.Controllers
         //    Error
         //}
 
-        //private ActionResult RedirectToLocal(string returnUrl)
-        //{
-        //    if (Url.IsLocalUrl(returnUrl))
-        //    {
-        //        return Redirect(returnUrl);
-        //    }
-        //    else
-        //    {
-        //        return RedirectToAction("Index", "Home");
-        //    }
-        //}
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Dashboard");
+            }
+        }
 
         //private class ChallengeResult : HttpUnauthorizedResult
         //{

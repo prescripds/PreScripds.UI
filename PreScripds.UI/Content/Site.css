@@ -51,27 +51,33 @@ input[type="checkbox"].input-validation-error {
 }
 
 #Home {
-    background: url(~/../../../Images/Home.jpg)50% 0 no-repeat fixed;
+    background: url(~/../../../Images/Home.jpg)no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
-    height: 800px;
+    min-height: 800px;
+    /*height: 800px;
     margin: 0;
-    padding: 200px 0 260px 0;
+    padding: 200px 0 260px 0;*/
 }
 
 #About {
     background: url(~/../../../Images/about.jpg)50% 0 no-repeat fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
-    height: 800px;
-    margin: 0;
-    padding: 200px 0 260px 0;
+    min-height: 800px;
 }
 
 #Contact {
     background: url(~/../../../Images/Contact.jpg)50% 0 no-repeat fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
-    height: 800px;
-    margin: 0;
-    padding: 200px 0 260px 0;
+    min-height: 800px;
 }
 
 .homeAboutbwn {
