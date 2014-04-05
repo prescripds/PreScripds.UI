@@ -65,16 +65,7 @@ namespace PreScripds.UI.Controllers
                     if (hashedPassword.Equals(userLogin.Password))
                     {
 
-                        SessionContext.CurrentUser = user;
-                        FormsAuthentication.SetAuthCookie(userLogin.UserName, false);
-                        var ticket = new FormsAuthenticationTicket(1, userLogin.UserName, DateTime.UtcNow, DateTime.UtcNow.AddMinutes(System.Web.HttpContext.Current.Session.Timeout),
-                            false, user.ToString(), FormsAuthentication.FormsCookiePath);
-                        var encryptedTicket = FormsAuthentication.Encrypt(ticket);
-                        var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket) { HttpOnly = true };
-                        authCookie.Expires = ticket.Expiration;
-                        System.Web.HttpContext.Current.Response.Cookies.Add(authCookie);
-                        _sessionContext.SetUpSessionContext(HttpContext, SessionContext.CurrentUser);
-                        SetUserIdentity(SessionContext.LoggedOnUser);
+                        AuthenticateUser(user, userLogin);
                         if (returnUrl != null)
                         {
                             return RedirectToLocal(returnUrl);
@@ -108,6 +99,20 @@ namespace PreScripds.UI.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        private void AuthenticateUser(Domain.User user, UserLogin userLogin)
+        {
+            SessionContext.CurrentUser = user;
+            FormsAuthentication.SetAuthCookie(userLogin.UserName, false);
+            var ticket = new FormsAuthenticationTicket(1, userLogin.UserName, DateTime.UtcNow, DateTime.UtcNow.AddMinutes(System.Web.HttpContext.Current.Session.Timeout),
+                false, user.ToString(), FormsAuthentication.FormsCookiePath);
+            var encryptedTicket = FormsAuthentication.Encrypt(ticket);
+            var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket) { HttpOnly = true };
+            authCookie.Expires = ticket.Expiration;
+            System.Web.HttpContext.Current.Response.Cookies.Add(authCookie);
+            _sessionContext.SetUpSessionContext(HttpContext, SessionContext.CurrentUser);
+            SetUserIdentity(SessionContext.LoggedOnUser);
         }
 
         private void SetUserIdentity(Domain.User user)
