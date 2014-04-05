@@ -64,7 +64,6 @@ namespace PreScripds.UI.Controllers
                     var hashedPassword = Common.Common.CreatePasswordHash(model.Password, userLogin.SaltKey);
                     if (hashedPassword.Equals(userLogin.Password))
                     {
-
                         AuthenticateUser(user, userLogin);
                         if (returnUrl != null)
                         {
