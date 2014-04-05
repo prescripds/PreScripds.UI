@@ -64,15 +64,24 @@ namespace PreScripds.UI.Controllers
                     var hashedPassword = Common.Common.CreatePasswordHash(model.Password, userLogin.SaltKey);
                     if (hashedPassword.Equals(userLogin.Password))
                     {
+
+                        SessionContext.CurrentUser = user;
+                        FormsAuthentication.SetAuthCookie(userLogin.UserName, false);
+                        var ticket = new FormsAuthenticationTicket(1, userLogin.UserName, DateTime.UtcNow, DateTime.UtcNow.AddMinutes(System.Web.HttpContext.Current.Session.Timeout),
+                            false, user.ToString(), FormsAuthentication.FormsCookiePath);
+                        var encryptedTicket = FormsAuthentication.Encrypt(ticket);
+                        var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket) { HttpOnly = true };
+                        authCookie.Expires = ticket.Expiration;
+                        System.Web.HttpContext.Current.Response.Cookies.Add(authCookie);
                         _sessionContext.SetUpSessionContext(HttpContext, SessionContext.CurrentUser);
-                        SetUserIdentity(user);
+                        SetUserIdentity(SessionContext.LoggedOnUser);
                         if (returnUrl != null)
                         {
                             return RedirectToLocal(returnUrl);
                         }
                         else
                         {
-
+                            return RedirectToAction("Index", "Dashboard");
                         }
                     }
                     else

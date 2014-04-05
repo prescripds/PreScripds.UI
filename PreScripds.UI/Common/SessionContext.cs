@@ -9,6 +9,21 @@ namespace PreScripds.UI.Common
 {
     public class SessionContext
     {
+        public static User LoggedOnUser
+        {
+            get
+            {
+                if (HttpContext.Current.Session != null)
+                {
+                    var sessionContext = HttpContext.Current.Session[Constants.SiteSession] as User;
+                    if (sessionContext != null)
+                    {
+                        return sessionContext;
+                    }
+                }
+                return null;
+            }
+        }
         public void SetUpSessionContext(HttpContextBase httpContext, User requestContext)
         {
             if (httpContext == null) throw new ArgumentNullException("httpContext");
