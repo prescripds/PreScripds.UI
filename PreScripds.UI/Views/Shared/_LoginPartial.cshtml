@@ -7,10 +7,13 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("Welcome " + User.Identity.GetUserName(), "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink("Welcome " + User.Identity.GetUserName(), "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Profile" })
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Sign out</a></li>
         </ul>
+        <a href="@Url.Action("Index","Dashboard")">
+            <span title="Dashboard" style="margin-top:7%" class="glyphicon glyphicon-book"></span>
+        </a>
     }
 }
 else
