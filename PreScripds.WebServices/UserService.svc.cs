@@ -35,9 +35,9 @@ namespace PreScripds.WebServices
             _context = new PreScripdsDb();
             _userBl = new UserBl(_context);
         }
-        public async Task<List<User>> GetUsers()
+        public List<User> GetUsers()
         {
-            var users = await _userBl.GetUsers();
+            var users = _userBl.GetUsers().Result;
             return users;
         }
 

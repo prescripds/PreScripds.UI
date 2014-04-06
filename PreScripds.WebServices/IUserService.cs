@@ -16,7 +16,7 @@ namespace PreScripds.WebServices
     {
         [OperationContract]
         [WebGet(UriTemplate = "/Users", ResponseFormat = WebMessageFormat.Xml)]
-        Task<List<User>> GetUsers();
+        List<User> GetUsers();
         [OperationContract]
         [WebInvoke(UriTemplate = "/AddUser", ResponseFormat = WebMessageFormat.Xml)]
         User AddUser(User model);
