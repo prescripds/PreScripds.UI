@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace PreScripds.UI.Controllers
 {
+    [Authorize]
     public class DashboardController : BaseController
     {
         //
@@ -14,5 +15,5 @@ namespace PreScripds.UI.Controllers
         {
             return View();
         }
-	}
+    }
 }

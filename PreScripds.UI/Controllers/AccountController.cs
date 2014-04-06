@@ -60,7 +60,7 @@ namespace PreScripds.UI.Controllers
                 {
                     var userLogin = user.UserLogin.FirstOrDefault();
                     if (user.Active == 0)
-                        throw new ApplicationException("Your account is currently not active.Please contact your administrator.");
+                        ModelState.AddModelError("", "Please enter a valid Username/Password");
                     var hashedPassword = Common.Common.CreatePasswordHash(model.Password, userLogin.SaltKey);
                     if (hashedPassword.Equals(userLogin.Password))
                     {

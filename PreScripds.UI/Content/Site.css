@@ -57,6 +57,7 @@ input[type="checkbox"].input-validation-error {
     -o-background-size: cover;
     background-size: cover;
     min-height: 800px;
+    padding: 200px 0 260px 0;
     /*height: 800px;
     margin: 0;
     padding: 200px 0 260px 0;*/
@@ -69,6 +70,7 @@ input[type="checkbox"].input-validation-error {
     -o-background-size: cover;
     background-size: cover;
     min-height: 800px;
+    padding: 200px 0 260px 0;
 }
 
 #Contact {
@@ -78,6 +80,7 @@ input[type="checkbox"].input-validation-error {
     -o-background-size: cover;
     background-size: cover;
     min-height: 800px;
+    padding: 200px 0 260px 0;
 }
 
 .homeAboutbwn {
