@@ -6,6 +6,11 @@
         <li class="active"><a href="#"><i><img src="~/Images/user.png" alt="" /></i>Account</a></li>
         <li><a href="#"><i><img src="~/Images/mail.png" alt="" /></i>Messages <span class="messages">5</span></a></li>
         <li><a href="#"><i><img src="~/Images/favourite.png" alt="" /></i>Favorites</a></li>
+        @if (PreScripds.UI.Common.SessionContext.CurrentUser != null && PreScripds.UI.Common.SessionContext.CurrentUser.IsAdmin == 1)
+        {
+            <li><a href="#"><i><img src="~/Images/favourite.png" alt="" /></i>Admin</a></li>
+        }
+
         <div class="clear"></div>
     </ul>
 </div>
