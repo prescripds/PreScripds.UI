@@ -1,0 +1,31 @@
+﻿@model PreScripds.UI.Models.
+@{
+    ViewBag.Title = "AddRole";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+<div class="col-md-12 blackBg">
+    <div class="row">
+        <div class="col-md-4 col-sm-6">
+            <div class="form-group">
+                <label class="control-label" for="FirstName">User Role Id</label>
+                @
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="form-group">
+                <label class="control-label" for="LastName">User Role Name</label>
+
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="form-group">
+                <label class="control-label" for="MiddleName">User Role Description</label>
+
+            </div>
+        </div>
+    </div>
+</div>
+}
+
