@@ -26,14 +26,18 @@ namespace PreScripds.UI.Controllers
         // GET: /Dashboard/
         public ActionResult Index()
         {
-            
-            //var users = _wcfService.InvokeService<IUserService, List<Domain.User>>((svc) => svc.GetUsers());
-            //if (users.IsCollectionValid())
-            //{
-            //    var user = users.Where(x => x.UserLogin.First().UserName.EqualsIgnoreCase(SessionContext.CurrentUser.UserLogin.First().UserName)).FirstOrDefault();
-            //    if (user.IsAdmin == 1)
-            //        return View("");
-            //}
+            var users = _wcfService.InvokeService<IUserService, List<Domain.User>>((svc) => svc.GetUsers());
+            if (users.IsCollectionValid())
+            {
+                var user = users.Where(x => x.UserLogin.First().UserName.EqualsIgnoreCase(SessionContext.CurrentUser.UserLogin.First().UserName)).FirstOrDefault();
+                if (user.IsSuperAdmin == 1)
+                    return View("AddRole", "Dashboard");
+            }
+            return View();
+        }
+
+        public ActionResult AddRole()
+        {
             return View();
         }
     }

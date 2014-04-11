@@ -3,7 +3,7 @@
     ViewBag.Title = "AddRole";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("AddRole", "Dashboard", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     <div class="col-md-12 blackBg">
         <div class="row">
@@ -16,7 +16,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="form-group">
                     <label class="control-label" for="MiddleName">User Role Description</label>
-                    @Html.TextBoxFor(m => m.RoleDesc, new { @class = "form-control" })
+                    @Html.TextAreaFor(m => m.RoleDesc, new { @class = "form-control" })
                 </div>
             </div>
         </div>
