@@ -44,5 +44,10 @@ namespace PreScripds.BL
             var user = _userRepository.CheckEmailExists(email);
             return user;
         }
+        public List<Role> GetRole(long organizationId)
+        {
+            var roles = _userRepository.GetRole(organizationId);
+            return roles;
+        }
     }
 }

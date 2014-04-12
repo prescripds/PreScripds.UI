@@ -58,5 +58,11 @@ namespace PreScripds.WebServices
             var user = _userBl.CheckEmailExists(email).Result;
             return user;
         }
+
+        public List<Role> GetRole(long organizationId)
+        {
+            var roles = _userBl.GetRole(organizationId);
+            return roles;
+        }
     }
 }

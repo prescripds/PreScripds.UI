@@ -70,6 +70,7 @@
     <Compile Include="Mapping\CityMap.cs" />
     <Compile Include="Mapping\CountryMap.cs" />
     <Compile Include="Mapping\DepartmentMap.cs" />
+    <Compile Include="Mapping\OrganizationMap.cs" />
     <Compile Include="Mapping\PermissionMap.cs" />
     <Compile Include="Mapping\RoleMap.cs" />
     <Compile Include="Mapping\SecurityQuestionMap.cs" />

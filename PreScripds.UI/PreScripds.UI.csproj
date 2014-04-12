@@ -391,6 +391,7 @@
     <Content Include="Views\Base\AppSettings.cshtml" />
     <Content Include="Views\Dashboard\AddRole.cshtml" />
     <Content Include="Views\Dashboard\Approvals.cshtml" />
+    <Content Include="Views\Dashboard\Selfie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
