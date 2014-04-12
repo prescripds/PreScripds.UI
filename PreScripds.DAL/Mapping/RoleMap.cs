@@ -12,22 +12,27 @@ namespace PreScripds.DAL.Mapping
     {
         public RoleMap()
         {
-            // Primary Key
-            this.HasKey(t => t.role_id);
+            this.HasKey(t => t.RoleId);
 
             // Properties
-            this.Property(t => t.role_name)
+            this.Property(t => t.RoleName)
                 .IsRequired()
-                .HasMaxLength(45);
+                .HasMaxLength(450);
 
-            this.Property(t => t.role_desc)
-                .HasMaxLength(250);
+            this.Property(t => t.RoleDesc)
+                .HasMaxLength(450);
 
             // Table & Column Mappings
-            this.ToTable("role", "mydb");
-            this.Property(t => t.role_id).HasColumnName("role_id");
-            this.Property(t => t.role_name).HasColumnName("role_name");
-            this.Property(t => t.role_desc).HasColumnName("role_desc");
+            this.ToTable("roles", "turtleinc");
+            this.Property(t => t.RoleId).HasColumnName("role_id");
+            this.Property(t => t.RoleName).HasColumnName("role_name");
+            this.Property(t => t.RoleDesc).HasColumnName("role_desc");
+            this.Property(t => t.PermissionId).HasColumnName("fk_permission_id");
+
+            // Relationships
+            this.HasRequired(t => t.Permission)
+                .WithMany(t => t.Roles)
+                .HasForeignKey(d => d.PermissionId);
         }
     }
 }
