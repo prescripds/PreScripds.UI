@@ -37,11 +37,7 @@ namespace PreScripds.UI.Controllers
                 if (user.OrganizationId == 1)
                     return View("Organization", "Dashboard");
                 if (user.IsSuperAdmin == 1)
-                {
-                    var role = _wcfService.InvokeService<IUserService, List<Role>>(svc => svc.GetRole(user.OrganizationId.Value));
-                    return View("AddRole", "Dashboard");
-                }
-
+                    return RedirectToAction("AddRole");
                 if (user.IsAdmin == 1)
                     return View("Approvals", "Dashboard");
             }
@@ -52,6 +48,7 @@ namespace PreScripds.UI.Controllers
         [HttpGet]
         public ActionResult AddRole()
         {
+            var role = _wcfService.InvokeService<IUserService, List<Role>>(svc => svc.GetRole(user.OrganizationId.Value));
             var permissions = _wcfService.InvokeService<IMasterService, List<Permission>>((svc) => svc.GetPermission());
             if (!permissions.IsCollectionValid()) permissions = new List<Permission>();
             var roleViewModel = new RoleViewModel()
