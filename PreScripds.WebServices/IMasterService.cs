@@ -14,9 +14,9 @@ namespace PreScripds.WebServices
     [ServiceContract]
     public interface IMasterService
     {
-        // [OperationContract]
-        //[WebGet(UriTemplate = "/Departments", ResponseFormat = WebMessageFormat.Xml)]
-        //List<Department> GetDepartments();
+        [OperationContract]
+        [WebGet(UriTemplate = "/Permissions", ResponseFormat = WebMessageFormat.Xml)]
+        List<Permission> GetPermission();
 
         [OperationContract]
         [WebGet(UriTemplate = "/Countries", ResponseFormat = WebMessageFormat.Xml)]

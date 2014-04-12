@@ -21,9 +21,9 @@ namespace PreScripds.DAL.Repository
         {
             _dbContext = context;
         }
-        public Task<List<User>> GetUsers()
+        public async Task<List<User>> GetUsers()
         {
-            var userLst = ContextRep.users.Include(x => x.UserLogin).ToListAsync();
+            var userLst = await ContextRep.users.Include(x => x.UserLogin).ToListAsync();
             return userLst;
         }
 

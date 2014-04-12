@@ -32,18 +32,18 @@ namespace PreScripds.DAL.Repository
         //}
 
         #endregion
-        #region Role Cache
-        //public ICollection<Role> GetRoles()
-        //{
-        //    var roles = CacheService.Get<ICollection<Role>>(Constants.CacheKeys.ROLE);
-        //    if (roles == null)
-        //    {
-        //        var newRoles = ContextRep.roles.ToList();
-        //        CacheService.Set(Constants.CacheKeys.ROLE, newRoles);
-        //        return newRoles;
-        //    }
-        //    return roles;
-        //}
+        #region Permission Cache
+        public ICollection<Permission> GetPermission()
+        {
+            var permissions = CacheService.Get<ICollection<Permission>>(Constants.CacheKeys.PERMISSION);
+            if (permissions == null)
+            {
+                var newPermissions = ContextRep.permission.ToList();
+                CacheService.Set(Constants.CacheKeys.PERMISSION, newPermissions);
+                return newPermissions;
+            }
+            return permissions;
+        }
 
         #endregion
 
@@ -90,7 +90,7 @@ namespace PreScripds.DAL.Repository
         #endregion
 
         #region Security Question Cache
-        public ICollection<SecurityQuestion> GetSecurityQuestion() 
+        public ICollection<SecurityQuestion> GetSecurityQuestion()
         {
             var securityQuestions = CacheService.Get<ICollection<SecurityQuestion>>(Constants.CacheKeys.SECURITY_QUESTION);
             if (securityQuestions == null)

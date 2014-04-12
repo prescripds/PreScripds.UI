@@ -203,6 +203,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AppSettingModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\PermissionViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\SiteSession.cs" />
@@ -389,6 +390,7 @@
     <Content Include="Views\Shared\Partials\_Footer.cshtml" />
     <Content Include="Views\Base\AppSettings.cshtml" />
     <Content Include="Views\Dashboard\AddRole.cshtml" />
+    <Content Include="Views\Dashboard\Approvals.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

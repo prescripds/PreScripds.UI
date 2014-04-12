@@ -27,11 +27,11 @@ namespace PreScripds.WebServices
             _context = new PreScripdsDb();
             _masterBl = new MasterBl(_context);
         }
-        //public List<Department> GetDepartments()
-        //{
-        //    var departments = _masterBl.GetDepartments().ToList();
-        //    return departments;
-        //}
+        public List<Permission> GetPermission()
+        {
+            var permissions = _masterBl.GetPermission().ToList();
+            return permissions;
+        }
 
         public List<Country> GetCountry()
         {

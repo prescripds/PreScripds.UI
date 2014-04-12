@@ -8,6 +8,9 @@ using PreScripds.UI.Common;
 using PreScripds.WebServices;
 using PreScripds.Domain;
 using PreScripds.Infrastructure;
+using System.Threading.Tasks;
+using PreScripds.UI.Models;
+using AutoMapper;
 
 
 namespace PreScripds.UI.Controllers
@@ -26,17 +29,32 @@ namespace PreScripds.UI.Controllers
         // GET: /Dashboard/
         public ActionResult Index()
         {
-            var users = _wcfService.InvokeService<IUserService, List<Domain.User>>((svc) => svc.GetUsers());
-            if (users.IsCollectionValid())
+            var user = SessionContext.CurrentUser;
+            if (user != null)
             {
-                var user = users.Where(x => x.UserLogin.First().UserName.EqualsIgnoreCase(SessionContext.CurrentUser.UserLogin.First().UserName)).FirstOrDefault();
                 if (user.IsSuperAdmin == 1)
                     return View("AddRole", "Dashboard");
+                if (user.IsAdmin == 1)
+                    return View("Approvals", "Dashboard");
             }
+
             return View();
         }
 
+        [HttpGet]
         public ActionResult AddRole()
+        {
+            var permissions = _wcfService.InvokeService<IMasterService, List<Permission>>((svc) => svc.GetPermission());
+            if (!permissions.IsCollectionValid()) permissions = new List<Permission>();
+            var roleViewModel = new RoleViewModel()
+            {
+                Permission = permissions
+            };
+            return View(roleViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult AddRole(RoleViewModel roleViewModel)
         {
             return View();
         }
