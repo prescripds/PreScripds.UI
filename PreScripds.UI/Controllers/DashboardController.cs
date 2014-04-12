@@ -34,9 +34,11 @@ namespace PreScripds.UI.Controllers
             {
                 if (user.OrganizationId == 0)
                     return View("Selfie", "Dashboard");
+                if (user.OrganizationId == 1)
+                    return View("Organization", "Dashboard");
                 if (user.IsSuperAdmin == 1)
                 {
-                    var role = _wcfService.InvokeService<IUserService, List<Role>>(svc => svc.GetRole(user.OrganizationId));
+                    var role = _wcfService.InvokeService<IUserService, List<Role>>(svc => svc.GetRole(user.OrganizationId.Value));
                     return View("AddRole", "Dashboard");
                 }
 
