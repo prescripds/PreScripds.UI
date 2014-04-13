@@ -72,7 +72,21 @@ namespace PreScripds.UI.Controllers
                 if (checkRoleNameExists)
                 {
                     ModelState.AddModelError("RoleName", "Role Name already exists for your organization.");
-                    return View();
+                }
+                else
+                {
+                    roleViewModel.OrganizationId = SessionContext.CurrentUser.OrganizationId.Value;
+                    var mappedRoleModel = Mapper.Map<RoleViewModel, Role>(roleViewModel);
+                    var roleModel = _wcfService.InvokeService<IUserService, PreScripds.Domain.Role>((svc) => svc.AddRole(mappedRoleModel));
+                    if (roleModel.RoleId != 0)
+                    {
+                        roleViewModel.CreationSuccessful = true;
+                        roleViewModel.Message = "Role {0} has been created successfully.".ToFormat(roleViewModel.RoleName);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "There was an error while saving your changes. Please re-enter the details.");
+                    }
                 }
             }
             else
@@ -86,7 +100,8 @@ namespace PreScripds.UI.Controllers
         private bool CheckRoleNameExists(RoleViewModel roleViewModel)
         {
             var mappedRoleModel = Mapper.Map<RoleViewModel, Role>(roleViewModel);
-            return false;
+            var roleCheck = _wcfService.InvokeService<IUserService, bool>((svc) => svc.CheckRoleExists(mappedRoleModel));
+            return roleCheck;
         }
     }
 }

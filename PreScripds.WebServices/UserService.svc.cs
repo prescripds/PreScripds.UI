@@ -47,6 +47,12 @@ namespace PreScripds.WebServices
             return userFromDb;
         }
 
+        public Role AddRole(Role role)
+        {
+            var roleFromDb = _userBl.AddRole(role);
+            return roleFromDb;
+        }
+
         public User GetUserByUsername(string loginName)
         {
             var user = _userBl.GetUserByUsername(loginName).Result;

@@ -12,7 +12,7 @@ namespace PreScripds.DAL.Interface
     {
         Task<List<User>> GetUsers();
         User AddUser(User user);
-
+        Role AddRole(Role role);
         Task<User> GetUserByUsername(string loginName);
         Task<User> CheckEmailExists(string email);
         List<Role> GetRole(long organizationId);

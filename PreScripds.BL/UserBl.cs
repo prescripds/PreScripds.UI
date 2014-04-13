@@ -33,6 +33,12 @@ namespace PreScripds.BL
             return userFromDb;
         }
 
+        public Role AddRole(Role role)
+        {
+            var roleFromDb = _userRepository.AddRole(role);
+            return roleFromDb;
+        }
+
         public Task<User> GetUserByUsername(string loginName)
         {
             var user = _userRepository.GetUserByUsername(loginName);
