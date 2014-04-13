@@ -27,7 +27,9 @@ namespace PreScripds.WebServices
         [OperationContract]
         [WebInvoke(UriTemplate = "/EmailExist", ResponseFormat = WebMessageFormat.Xml)]
         User CheckEmailExists(string email);
-
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/EmailExist", ResponseFormat = WebMessageFormat.Xml)]
+        bool CheckRoleExists(Role role);
         [OperationContract]
         [WebInvoke(UriTemplate = "/Role", ResponseFormat = WebMessageFormat.Xml)]
         List<Role> GetRole(long organizationId);

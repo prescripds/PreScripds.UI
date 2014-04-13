@@ -69,6 +69,14 @@ namespace PreScripds.DAL.Repository
             return null;
         }
 
+        public bool CheckRoleExists(Role role)
+        {
+            var roleModel = ContextRep.role.Where(x => x.RoleName.EqualsIgnoreCase(role.RoleName));
+            if (roleModel == null)
+                return false;
+            return true;
+        }
+
         public List<Role> GetRole(long organizationId)
         {
             var role = ContextRep.role.Where(x => x.OrganizationId == organizationId).ToList();

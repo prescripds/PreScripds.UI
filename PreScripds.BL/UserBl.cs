@@ -44,6 +44,12 @@ namespace PreScripds.BL
             var user = _userRepository.CheckEmailExists(email);
             return user;
         }
+
+        public bool CheckRoleExists(Role role)
+        {
+            var roleModel = _userRepository.CheckRoleExists(role);
+            return roleModel;
+        }
         public List<Role> GetRole(long organizationId)
         {
             var roles = _userRepository.GetRole(organizationId);

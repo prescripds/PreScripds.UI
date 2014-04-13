@@ -64,5 +64,11 @@ namespace PreScripds.WebServices
             var roles = _userBl.GetRole(organizationId);
             return roles;
         }
+
+        public bool CheckRoleExists(Role role)
+        {
+            var roleModel = _userBl.CheckRoleExists(role);
+            return roleModel;
+        }
     }
 }

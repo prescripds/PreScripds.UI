@@ -42,7 +42,6 @@ namespace PreScripds.UI.Controllers
                     if (role == null)
                         return View("AddRole", "Dashboard");
                     return View("Approvals", "Dashboard");
-
                 }
 
                 if (user.IsAdmin == 1)
@@ -67,7 +66,27 @@ namespace PreScripds.UI.Controllers
         [HttpPost]
         public ActionResult AddRole(RoleViewModel roleViewModel)
         {
+            if (ModelState.IsValid)
+            {
+                var checkRoleNameExists = CheckRoleNameExists(roleViewModel);
+                if (checkRoleNameExists)
+                {
+                    ModelState.AddModelError("RoleName", "Role Name already exists for your organization.");
+                    return View();
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("RoleName", "Role Name is mandatory.");
+            }
             return View();
+
+        }
+
+        private bool CheckRoleNameExists(RoleViewModel roleViewModel)
+        {
+            var mappedRoleModel = Mapper.Map<RoleViewModel, Role>(roleViewModel);
+            return false;
         }
     }
 }

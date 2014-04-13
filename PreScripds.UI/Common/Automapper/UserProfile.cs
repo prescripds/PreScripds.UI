@@ -30,6 +30,12 @@ namespace PreScripds.UI.Common.Automapper
 
             Mapper.CreateMap<User, RegisterViewModel>()
                .IgnoreAllNonExisting();
+            Mapper.CreateMap<RoleViewModel, Role>()
+                .ForMember(d => d.Permission, s => s.Ignore())
+                .IgnoreAllNonExisting();
+            Mapper.CreateMap<Role, RoleViewModel>()
+                .ForMember(d => d.Permission, s => s.Ignore())
+                .IgnoreAllNonExisting();
         }
 
         private sbyte ConvertTermsAndCondition(bool p)
