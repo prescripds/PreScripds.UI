@@ -7,6 +7,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using PreScripds.Infrastructure.Services;
 using PreScripds.UI.Common.Automapper;
+using PreScripds.UI.Controllers;
 
 namespace PreScripds.UI
 {

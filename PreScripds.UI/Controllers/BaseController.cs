@@ -24,7 +24,7 @@ namespace PreScripds.UI.Controllers
             return Request.ApplicationPath == "/" ? Request.ApplicationPath : Request.ApplicationPath + "/";
         }
 
-        public ActionResult CheckSessionContext(string returnUrl)
+        public ActionResult CheckSessionContext(string returnUrl = "")
         {
             if (SessionContext.CurrentUser == null)
                 return RedirectToAction("Login", "Account");

@@ -38,7 +38,8 @@ namespace PreScripds.UI.Controllers
                     return View("Organization", "Dashboard");
                 if (user.IsSuperAdmin == 1)
                 {
-                    var role = _wcfService.InvokeService<IUserService, List<Role>>(svc => svc.GetRole(user.OrganizationId.Value));
+                    var organizationId = user.OrganizationId.Value;
+                    var role = _wcfService.InvokeService<IUserService, List<Role>>(svc => svc.GetRole(organizationId));
                     if (role == null)
                         return View("AddRole", "Dashboard");
                     return View("Approvals", "Dashboard");
@@ -47,7 +48,10 @@ namespace PreScripds.UI.Controllers
                 if (user.IsAdmin == 1)
                     return View("Approvals", "Dashboard");
             }
-
+            else
+            {
+                base.CheckSessionContext();
+            }
             return View();
         }
 
