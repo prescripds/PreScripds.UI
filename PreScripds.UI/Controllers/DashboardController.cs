@@ -35,24 +35,31 @@ namespace PreScripds.UI.Controllers
                 if (user.OrganizationId == 0)
                     return View("Selfie", "Dashboard");
                 if (user.OrganizationId == 1)
-                    return View("Organization", "Dashboard");
-                if (user.IsSuperAdmin == 1)
                 {
-                    var organizationId = user.OrganizationId.Value;
-                    var role = _wcfService.InvokeService<IUserService, List<Role>>(svc => svc.GetRole(organizationId));
-                    if (role == null)
-                        return View("AddRole", "Dashboard");
-                    return View("Approvals", "Dashboard");
-                }
+                    if (user.IsSuperAdmin == 1)
+                    {
+                        //TODO: Get organization details 
+                        long organizationId = 0;
+                        if (user.OrganizationId.HasValue)
+                        {
+                            organizationId = user.OrganizationId.Value;
+                        }
+                        var role = _wcfService.InvokeService<IUserService, List<Role>>(svc => svc.GetRole(organizationId));
+                        if (role == null)
+                            return View("AddRole", "Dashboard");
+                        return View("Approvals", "Dashboard");
+                    }
 
-                if (user.IsAdmin == 1)
-                    return View("Approvals", "Dashboard");
+                    if (user.IsAdmin == 1)
+                        return View("Approvals", "Dashboard");
+                    return View("Organization", "Dashboard");
+                }
             }
             else
             {
-                base.CheckSessionContext();
+                return CheckSessionContext();
             }
-            return View();
+            return null;
         }
 
         [HttpGet]

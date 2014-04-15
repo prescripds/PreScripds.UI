@@ -116,5 +116,7 @@ namespace PreScripds.UI.Models
 
         public bool CreationSuccessful { get; set; }
         public List<UserLoginViewModel> userLoginViewModel { get; set; }
+
+        public long OrganizationId { get; set; }
     }
 }

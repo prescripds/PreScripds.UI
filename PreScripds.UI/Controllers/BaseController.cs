@@ -24,6 +24,12 @@ namespace PreScripds.UI.Controllers
             return Request.ApplicationPath == "/" ? Request.ApplicationPath : Request.ApplicationPath + "/";
         }
 
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            var cntxt = System.Web.HttpContext.Current;
+            base.OnActionExecuting(filterContext);
+        }
+
         public ActionResult CheckSessionContext(string returnUrl = "")
         {
             if (SessionContext.CurrentUser == null)
@@ -34,5 +40,7 @@ namespace PreScripds.UI.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+
+        
     }
 }
