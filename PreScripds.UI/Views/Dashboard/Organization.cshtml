@@ -1,12 +1,11 @@
 ﻿@model PreScripds.UI.Models.RegisterViewModel
+@using PreScripds.UI.Common;
+@using PreScripds.Domain;
 @{
     ViewBag.Title = "Organization";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<div class="header_top">
-    <h2><span>Register</span></h2>
-</div>
 @using (Html.BeginForm("Organization", "Dashboard", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
 

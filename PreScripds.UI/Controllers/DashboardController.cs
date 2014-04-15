@@ -114,5 +114,10 @@ namespace PreScripds.UI.Controllers
             var roleCheck = _wcfService.InvokeService<IUserService, bool>((svc) => svc.CheckRoleExists(mappedRoleModel));
             return roleCheck;
         }
+        [HttpGet]
+        public ActionResult Organization()
+        {
+            return View();
+        }
     }
 }
