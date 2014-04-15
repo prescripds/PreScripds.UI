@@ -1,8 +1,131 @@
-﻿
+﻿@model PreScripds.UI.Models.RegisterViewModel
 @{
     ViewBag.Title = "Organization";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>Organization</h2>
+<div class="header_top">
+    <h2><span>Register</span></h2>
+</div>
+@using (Html.BeginForm("Organization", "Dashboard", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
 
+    @Html.AntiForgeryToken()
+    <div class="col-md-12 blackBg">
+
+        @Html.ValidationSummary()<br />
+        <div class="validation-summary-errors" style="display:none" id="emailExistsDiv">
+            <ul>
+                <li class="success" id="userNameExists">
+                </li>
+            </ul>
+        </div>
+
+        <h4><span>Let Us Know You More.</span><hr /> </h4>
+        <div class="row">
+            <div class="col-md-4 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label" for="FirstName">Organization Type*</label>
+                    @Html.EnumDropDownListFor(m => m.OrganizationType, new { @class = "form-control" }, typeof(PreScripds.Domain.Enums.OrganizationType))
+                    @Html.HiddenFor(x => x.OrganizationType)
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div id="organizationDtlsN">
+            <h4><span>Organization Details</span><hr /> </h4>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="FirstName">Organization Name</label>
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="LastName">Organization Address</label>
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="MiddleName">Organization Phone</label>
+                        @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="FirstName">Organization Mobile</label>
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="LastName">Organization Email</label>
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="MiddleName">Contact Person</label>
+                        @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="FirstName">Date for verification by us</label>
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="LastName">Please @Html.ActionLink("Click Here", "CheckList", "Dashboard") to download the check list required during verification by us.</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="organizationDtlsE">
+            <h4><span>Profile Details</span><hr /> </h4>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="FirstName">Referenced Name</label>
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="LastName">Organization Name</label>
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="MiddleName">Department</label>
+                        @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="FirstName">Employee Id</label>
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="LastName">Designation</label>
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}

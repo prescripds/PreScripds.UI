@@ -18,7 +18,6 @@
         <div class="validation-summary-errors" style="display:none" id="emailExistsDiv">
             <ul>
                 <li class="success" id="userNameExists">
-
                 </li>
             </ul>
         </div>
@@ -143,13 +142,13 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="form-group">
                         <label class="control-label" for="FirstName">User Name*</label>
-                        @Html.TextBoxFor(m => m.userLoginViewModel[0].UserName, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.userLoginViewModel[0].UserName, new { @class = "form-control", autocomplete = "off" })
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6">
                     <div class="form-group">
                         <label class="control-label" for="LastName">Password*</label>
-                        @Html.PasswordFor(m => m.userLoginViewModel[0].Password, new { @class = "form-control" })
+                        @Html.PasswordFor(m => m.userLoginViewModel[0].Password, new { @class = "form-control", autocomplete = "off" })
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6">

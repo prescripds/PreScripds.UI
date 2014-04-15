@@ -89,5 +89,7 @@ namespace PreScripds.DAL.Repository
             var role = ContextRep.role.Where(x => x.OrganizationId == organizationId).ToList();
             return role;
         }
+
+        
     }
 }

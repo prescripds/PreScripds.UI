@@ -25,6 +25,14 @@ namespace PreScripds.Domain.Enums
         Self = 2
     }
 
+    public enum OrganizationType
+    {
+        [DataMember]
+        New = 1,
+        [DataMember]
+        Registered = 2
+    }
+
     public enum UserRoles
     {
         [DataMember]

@@ -38,12 +38,12 @@ namespace PreScripds.UI.Controllers
                 {
                     if (user.IsSuperAdmin == 1)
                     {
-                        //TODO: Get organization details 
                         long organizationId = 0;
                         if (user.OrganizationId.HasValue)
                         {
                             organizationId = user.OrganizationId.Value;
                         }
+                        //TODO: Get organization details 
                         var role = _wcfService.InvokeService<IUserService, List<Role>>(svc => svc.GetRole(organizationId));
                         if (role == null)
                             return View("AddRole", "Dashboard");

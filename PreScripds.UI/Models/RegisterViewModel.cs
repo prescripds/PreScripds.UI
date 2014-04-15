@@ -118,5 +118,7 @@ namespace PreScripds.UI.Models
         public List<UserLoginViewModel> userLoginViewModel { get; set; }
 
         public long OrganizationId { get; set; }
+
+        public int OrganizationType { get; set; }
     }
 }
