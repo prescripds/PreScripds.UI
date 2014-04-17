@@ -12,6 +12,8 @@ namespace PreScripds.DAL.Mapping
     {
         public RoleMap()
         {
+
+            // Primary Key
             this.HasKey(t => t.RoleId);
 
             // Properties
@@ -27,12 +29,8 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.RoleId).HasColumnName("role_id");
             this.Property(t => t.RoleName).HasColumnName("role_name");
             this.Property(t => t.RoleDesc).HasColumnName("role_desc");
-            this.Property(t => t.PermissionId).HasColumnName("fk_permission_id");
-
-            // Relationships
-            this.HasRequired(t => t.Permission)
-                .WithMany(t => t.Roles)
-                .HasForeignKey(d => d.PermissionId);
+            this.Property(t => t.PermissionId).HasColumnName("permission_id");
+            this.Property(t => t.OrganizationId).HasColumnName("organization_id");
         }
     }
 }

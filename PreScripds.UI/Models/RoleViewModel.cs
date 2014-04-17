@@ -14,8 +14,9 @@ namespace PreScripds.UI.Models
         public string RoleName { get; set; }
         public string RoleDesc { get; set; }
         public List<Permission> Permission { get; set; }
-        [Required(ErrorMessage = "Permission is mandatory.")]
         public long PermissionId { get; set; }
+        [Required(ErrorMessage = "Permission is mandatory.")]
+        public bool IsPermissionCheckd { get; set; }
         public string Message { get; set; }
         public bool CreationSuccessful { get; set; }
         public long OrganizationId { get; set; }

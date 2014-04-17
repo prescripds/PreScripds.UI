@@ -27,6 +27,7 @@ namespace PreScripds.UI.Controllers
         }
         //
         // GET: /Dashboard/
+        [Authorize]
         public ActionResult Index()
         {
             var user = SessionContext.CurrentUser;
@@ -46,7 +47,7 @@ namespace PreScripds.UI.Controllers
                         //TODO: Get organization details 
                         var role = _wcfService.InvokeService<IUserService, List<Role>>(svc => svc.GetRole(organizationId));
                         if (role == null)
-                            return View("AddRole", "Dashboard");
+                            return RedirectToAction("AddRole", "Dashboard");
                         return View("Approvals", "Dashboard");
                     }
 
@@ -61,7 +62,7 @@ namespace PreScripds.UI.Controllers
             }
             return null;
         }
-
+        [Authorize]
         [HttpGet]
         public ActionResult AddRole()
         {
@@ -73,7 +74,7 @@ namespace PreScripds.UI.Controllers
             };
             return View(roleViewModel);
         }
-
+        [Authorize]
         [HttpPost]
         public ActionResult AddRole(RoleViewModel roleViewModel)
         {

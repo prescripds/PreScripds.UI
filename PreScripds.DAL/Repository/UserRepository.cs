@@ -86,10 +86,12 @@ namespace PreScripds.DAL.Repository
 
         public List<Role> GetRole(long organizationId)
         {
-            var role = ContextRep.role.Where(x => x.OrganizationId == organizationId).ToList();
-            return role;
+            var role = ContextRep.role.ToList();
+            if (role.IsCollectionValid())
+                return role.Where(x => x.OrganizationId == organizationId).ToList();
+            return null;
         }
 
-        
+
     }
 }
