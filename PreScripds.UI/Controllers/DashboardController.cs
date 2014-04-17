@@ -105,7 +105,7 @@ namespace PreScripds.UI.Controllers
             {
                 ModelState.AddModelError("RoleName", "Role Name is mandatory.");
             }
-            return View();
+            return View(roleViewModel);
 
         }
 
