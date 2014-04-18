@@ -78,8 +78,12 @@ namespace PreScripds.UI.Controllers
         [HttpPost]
         public ActionResult AddRole(RoleViewModel roleViewModel)
         {
+            roleViewModel.Permission = _wcfService.InvokeService<IMasterService, List<Permission>>((svc) => svc.GetPermission());
             if (ModelState.IsValid)
             {
+                if (roleViewModel.SelectedPermission == 0)
+                    ModelState.AddModelError("IsPermissionCheckd", "Please choose a permission for the role {0}".ToFormat(roleViewModel.RoleName));
+
                 var checkRoleNameExists = CheckRoleNameExists(roleViewModel);
                 if (checkRoleNameExists)
                 {
@@ -100,10 +104,6 @@ namespace PreScripds.UI.Controllers
                         ModelState.AddModelError("", "There was an error while saving your changes. Please re-enter the details.");
                     }
                 }
-            }
-            else
-            {
-                ModelState.AddModelError("RoleName", "Role Name is mandatory.");
             }
             return View(roleViewModel);
 

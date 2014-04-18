@@ -1,11 +1,15 @@
-﻿@model PreScripds.UI.Models.RoleViewModel
+﻿@using PreScripds.UI.Common;
+@using PreScripds.Domain;
+@model PreScripds.UI.Models.RoleViewModel
 @{
     ViewBag.Title = "AddRole";
     Layout = "~/Views/Shared/_OpenLayout.cshtml";
 }
 @using (Html.BeginForm("AddRole", "Dashboard", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
+    @Html.AntiForgeryToken()
     <div class="col-md-12 blackBg">
+        @Html.ValidationSummary()<br />
         <h3><span style="color:white;">Add Role</span><hr /> </h3>
         <div class="row">
             <div class="col-md-4 col-sm-6">
@@ -27,11 +31,12 @@
         {
             <div class="row">
                 <div class="col-md-4 col-sm-6">
-                    @Html.RadioButtonFor(m => m.IsPermissionCheckd, new { id = string.Format("checkPerm" + i), title = Model.Permission[i].PermissionDesc }) <span style="color:white;">@Model.Permission[i].PermissionName</span>
+                    @Html.RadioButtonFor(m => m.IsPermissionCheckd, "false", new { @class = "checkPerm", id = string.Format("checkPerm" + i), title = Model.Permission[i].PermissionDesc, data_permid = Model.Permission[i].PermissionId }) <span style="color:white;">@Model.Permission[i].PermissionName</span>
 
                 </div>
             </div>
         }
+        @Html.TextBoxFor(m => m.SelectedPermission, new { @class = "hidden" })
         <div class="row">
             <div class="col-md-12 buttons">
                 <button type="submit" class="btn btn-warning pull-right" value="Register">Save</button>
@@ -39,6 +44,21 @@
                 <button type="reset" class="btn btn-warning pull-right" value="Clear">Clear</button>
             </div>
         </div>
+        @Html.MessageDialogRedirect(Model.Message, "Index", "Dashboard", true)
     </div>
 }
+@section Scripts {
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.checkPerm').on('click', function () {
+                var permVal = $(this).data('permid');
+                alert(permVal);
+                $('#SelectedPermission').val(permVal);
+            });
+
+            @Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))
+        });
+
+    </script>
+}

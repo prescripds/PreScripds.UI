@@ -20,5 +20,6 @@ namespace PreScripds.UI.Models
         public string Message { get; set; }
         public bool CreationSuccessful { get; set; }
         public long OrganizationId { get; set; }
+        public long SelectedPermission { get; set; }
     }
 }
