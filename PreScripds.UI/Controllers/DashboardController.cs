@@ -92,6 +92,7 @@ namespace PreScripds.UI.Controllers
                 else
                 {
                     roleViewModel.OrganizationId = SessionContext.CurrentUser.OrganizationId.Value;
+                    roleViewModel.PermissionId = roleViewModel.SelectedPermission;
                     var mappedRoleModel = Mapper.Map<RoleViewModel, Role>(roleViewModel);
                     var roleModel = _wcfService.InvokeService<IUserService, PreScripds.Domain.Role>((svc) => svc.AddRole(mappedRoleModel));
                     if (roleModel.RoleId != 0)

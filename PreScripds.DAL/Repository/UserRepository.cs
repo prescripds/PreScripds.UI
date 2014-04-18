@@ -78,7 +78,7 @@ namespace PreScripds.DAL.Repository
 
         public bool CheckRoleExists(Role role)
         {
-            var roleModel = ContextRep.role.Where(x => x.RoleName.EqualsIgnoreCase(role.RoleName));
+            var roleModel = ContextRep.role.FirstOrDefault(x => x.RoleName == role.RoleName);
             if (roleModel == null)
                 return false;
             return true;

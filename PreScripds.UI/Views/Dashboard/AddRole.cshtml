@@ -51,9 +51,10 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            var permissionId = $('.checkPerm:checked').data('permid');
+            $('#SelectedPermission').val(permissionId);
             $('.checkPerm').on('click', function () {
                 var permVal = $(this).data('permid');
-                alert(permVal);
                 $('#SelectedPermission').val(permVal);
             });
 
