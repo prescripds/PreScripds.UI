@@ -3,7 +3,7 @@
 @using PreScripds.Domain;
 @{
     ViewBag.Title = "Organization";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_OpenLayout.cshtml";
 }
 
 @using (Html.BeginForm("Organization", "Dashboard", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -26,7 +26,7 @@
                 <div class="form-group">
                     <label class="control-label" for="FirstName">Organization Type*</label>
                     @Html.EnumDropDownListFor(m => m.OrganizationType, new { @class = "form-control" }, typeof(PreScripds.Domain.Enums.OrganizationType))
-                    @Html.HiddenFor(x => x.OrganizationType)
+                    @Html.HiddenFor(x => x.OrganizationType, new { @id = "hdfOrgType" })
                 </div>
             </div>
         </div>
@@ -129,7 +129,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="buttons">
             <div class="col-md-12 buttons">
                 <button type="submit" class="btn btn-warning pull-right" value="Save">Save</button>
 
@@ -137,4 +137,32 @@
             </div>
         </div>
     </div>
+}
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            @*@Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))*@
+            var orgVal = $('#OrganizationType').val();
+            if (orgVal == "") {
+                $('#organizationDtlsN').attr('style', 'display:none');
+                $('#organizationDtlsE').attr('style', 'display:none');
+                $('#buttons').attr('style', 'display:none');
+            }
+            $('#OrganizationType').on('change', function () {
+                var orgType = $(this).val();
+                $('hdfOrgType').val(orgType);
+                if (orgType == 1) {
+                    $('#organizationDtlsN').removeAttr('style');
+                    $('#organizationDtlsE').attr('style', 'display:none');
+                    $('#buttons').removeAttr('style');
+                }
+                if (orgType == 2) {
+                    $('#organizationDtlsE').removeAttr('style');
+                    $('#organizationDtlsN').attr('style', 'display:none');
+                    $('#buttons').removeAttr('style');
+                }
+            });
+        });
+
+    </script>
 }

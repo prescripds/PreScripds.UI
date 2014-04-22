@@ -11,6 +11,7 @@ using PreScripds.Infrastructure;
 using System.Threading.Tasks;
 using PreScripds.UI.Models;
 using AutoMapper;
+using PreScripds.Domain.Enums;
 
 
 namespace PreScripds.UI.Controllers
@@ -45,14 +46,17 @@ namespace PreScripds.UI.Controllers
                             organizationId = user.OrganizationId.Value;
                         }
                         //TODO: Get organization details 
+                        //var organization = _wcfService.InvokeService<IUserService,List<>>
                         var role = _wcfService.InvokeService<IUserService, List<Role>>(svc => svc.GetRole(organizationId));
                         if (role == null)
                             return RedirectToAction("AddRole", "Dashboard");
                         return View("Approvals", "Dashboard");
                     }
-
-                    if (user.IsAdmin == 1)
+                    else if (user.IsAdmin == 1)
+                    {
                         return View("Approvals", "Dashboard");
+                    }
+                     
                     return View("Organization", "Dashboard");
                 }
             }
@@ -120,6 +124,29 @@ namespace PreScripds.UI.Controllers
         public ActionResult Organization()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Organization(RegisterViewModel registerViewModel)
+        {
+            if (registerViewModel.OrganizationType == (int)OrganizationType.New)
+            {
+                ValidateViewModel(registerViewModel);
+            }
+            else if (registerViewModel.OrganizationType == (int)OrganizationType.Registered)
+            {
+                ValidateViewModel(registerViewModel);
+            }
+            else
+            {
+                ModelState.AddModelError("OrganizationType", "Please select an organization Type.");
+            }
+            return View(registerViewModel);
+        }
+
+        private void ValidateViewModel(RegisterViewModel registerViewModel)
+        {
+            throw new NotImplementedException();
         }
     }
 }
