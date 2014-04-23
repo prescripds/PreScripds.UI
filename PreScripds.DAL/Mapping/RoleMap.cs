@@ -31,6 +31,12 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.RoleDesc).HasColumnName("role_desc");
             this.Property(t => t.PermissionId).HasColumnName("permission_id");
             this.Property(t => t.OrganizationId).HasColumnName("organization_id");
+            this.Property(t => t.DepartmentId).HasColumnName("department_id");
+
+            // Relationships
+            this.HasRequired(t => t.Permission)
+                .WithMany(t => t.Roles)
+                .HasForeignKey(d => d.PermissionId);
         }
     }
 }

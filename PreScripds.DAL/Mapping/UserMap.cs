@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
@@ -42,7 +43,7 @@ namespace PreScripds.DAL.Mapping
 
             // Table & Column Mappings
             this.ToTable("user", "turtleinc");
-            this.Property(t => t.UserId).HasColumnName("user_id");
+            this.Property(t => t.UserId).HasColumnName("user_id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(t => t.FirstName).HasColumnName("firstname");
             this.Property(t => t.LastName).HasColumnName("lastname");
             this.Property(t => t.MiddleName).HasColumnName("middlename");
@@ -70,6 +71,15 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.RoleId).HasColumnName("role_id");
             this.Property(t => t.ReferencedId).HasColumnName("referenced_id");
             this.Property(t => t.OrganizationId).HasColumnName("organization_id");
+            this.Property(t => t.DepartmentId).HasColumnName("department_id");
+            this.Property(t => t.EmployeeId).HasColumnName("employee_id");
+            this.Property(t => t.Designation).HasColumnName("designation");
+            this.Property(t => t.IsOrganization).HasColumnName("isorganization");
+
+            // Relationships
+            this.HasOptional(t => t.Department)
+                .WithMany(t => t.Users)
+                .HasForeignKey(d => d.DepartmentId);
 
         }
     }
