@@ -76,5 +76,11 @@ namespace PreScripds.WebServices
             var roleModel = _userBl.CheckRoleExists(role);
             return roleModel;
         }
+
+        public List<Department> GetDepartment(long organizationId)
+        {
+            var departmentModel = _userBl.GetDepartment(organizationId);
+            return departmentModel;
+        }
     }
 }

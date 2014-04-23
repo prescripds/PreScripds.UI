@@ -17,5 +17,6 @@ namespace PreScripds.DAL.Interface
         Task<User> CheckEmailExists(string email);
         List<Role> GetRole(long organizationId);
         bool CheckRoleExists(Role role);
+        List<Department> GetDepartment(long organizationId);
     }
 }

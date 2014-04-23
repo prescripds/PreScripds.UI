@@ -38,7 +38,7 @@ namespace PreScripds.DAL.Repository
             var permissions = CacheService.Get<ICollection<Permission>>(Constants.CacheKeys.PERMISSION);
             if (permissions == null)
             {
-                var newPermissions = ContextRep.permission.ToList();
+                var newPermissions = ContextRep.permissions.ToList();
                 CacheService.Set(Constants.CacheKeys.PERMISSION, newPermissions);
                 return newPermissions;
             }

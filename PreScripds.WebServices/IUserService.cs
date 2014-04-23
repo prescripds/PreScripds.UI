@@ -37,5 +37,8 @@ namespace PreScripds.WebServices
         [OperationContract]
         [WebInvoke(UriTemplate = "/AddRole", ResponseFormat = WebMessageFormat.Xml)]
         Role AddRole(Role model);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/GetDepartment", ResponseFormat = WebMessageFormat.Xml)]
+        List<Department> GetDepartment(long organizationId);
     }
 }

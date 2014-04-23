@@ -28,8 +28,9 @@ namespace PreScripds.DAL
         public DbSet<User> users { get; set; }
         public DbSet<UserLogin> user_login { get; set; }
         public DbSet<Role> role { get; set; }
-        public DbSet<Permission> permission { get; set; }
-
+        public DbSet<Permission> permissions { get; set; }
+        public DbSet<Department> departments { get; set; }
+        public DbSet<Organization> organizations { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -41,6 +42,8 @@ namespace PreScripds.DAL
             modelBuilder.Configurations.Add(new UserLoginMap());
             modelBuilder.Configurations.Add(new RoleMap());
             modelBuilder.Configurations.Add(new PermissionMap());
+            modelBuilder.Configurations.Add(new DepartmentMap());
+            modelBuilder.Configurations.Add(new OrganizationMap());
         }
 
     }

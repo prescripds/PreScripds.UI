@@ -92,6 +92,12 @@ namespace PreScripds.DAL.Repository
             return null;
         }
 
-
+        public List<Department> GetDepartment(long organizationId)
+        {
+            var department = ContextRep.departments.Where(x => x.OrganizationId == organizationId).ToList();
+            if (department.IsCollectionValid())
+                return department;
+            return null;
+        }
     }
 }

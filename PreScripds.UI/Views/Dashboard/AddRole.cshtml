@@ -14,6 +14,12 @@
         <div class="row">
             <div class="col-md-4 col-sm-6">
                 <div class="form-group">
+                    <label class="control-label" for="RoleName">Department</label>
+                    @Html.DropDownListFor(m => m.DepartmentId, Model.Department.ToSelectListItems(model => model.DepartmentId.ToString(), model => model.DepartmentName), "--Select--", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="form-group">
                     <label class="control-label" for="RoleName">User Role Name</label>
                     @Html.TextBoxFor(m => m.RoleName, new { @class = "form-control" })
                 </div>

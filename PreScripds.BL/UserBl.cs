@@ -61,5 +61,10 @@ namespace PreScripds.BL
             var roles = _userRepository.GetRole(organizationId);
             return roles;
         }
+        public List<Department> GetDepartment(long organizationId)
+        {
+            var departments = _userRepository.GetDepartment(organizationId);
+            return departments;
+        }
     }
 }
