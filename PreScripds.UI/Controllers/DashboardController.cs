@@ -34,30 +34,29 @@ namespace PreScripds.UI.Controllers
             var user = SessionContext.CurrentUser;
             if (user != null)
             {
-                if (user.OrganizationId == 0)
+                if (user.IsOrganization.HasValue && user.IsOrganization.Value == 0)
                     return View("Selfie", "Dashboard");
-                if (user.OrganizationId == 1)
+                if (user.IsOrganization.HasValue && user.IsOrganization.Value == 1)
                 {
                     if (user.IsSuperAdmin == 1)
                     {
-                        long organizationId = 0;
-                        if (user.OrganizationId.HasValue)
+                        if (!user.OrganizationId.HasValue)
                         {
-                            organizationId = user.OrganizationId.Value;
+                            return RedirectToAction("Organization", "Dashboard");
                         }
-                        //TODO: Get organization details
-                        //TODO:Get Department details
-
-                        var role = _wcfService.InvokeService<IUserService, List<Role>>(svc => svc.GetRole(organizationId));
-                        if (role == null)
-                            return RedirectToAction("AddRole", "Dashboard");
-                        return View("Approvals", "Dashboard");
+                        else
+                        {
+                            var organizationId = user.OrganizationId.Value;
+                            var role = _wcfService.InvokeService<IUserService, List<Role>>(svc => svc.GetRole(organizationId));
+                            if (role == null)
+                                return RedirectToAction("AddRole", "Dashboard");
+                            return View("Approvals", "Dashboard");
+                        }
                     }
-                    else if (user.IsAdmin == 1)
+                    if (user.IsAdmin == 1)
                     {
                         return View("Approvals", "Dashboard");
                     }
-
                     return View("Organization", "Dashboard");
                 }
             }

@@ -179,9 +179,9 @@ namespace PreScripds.UI.Controllers
                 if (model.TermsCondition)
                 {
                     if (model.UserType == (short)UserType.Self)
-                        model.OrganizationId = 0;
+                        model.IsOrganization = 0;
                     if (model.UserType == (short)UserType.Organization)
-                        model.OrganizationId = 1;
+                        model.IsOrganization = 1;
                     var mappedUserProfile = Mapper.Map<RegisterViewModel, User>(model);
                     var userFromDb = _wcfService.InvokeService<IUserService, User>(svc => svc.AddUser(mappedUserProfile));
                     if (userFromDb != null)
