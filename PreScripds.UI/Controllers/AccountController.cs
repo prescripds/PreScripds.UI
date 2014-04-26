@@ -175,7 +175,7 @@ namespace PreScripds.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.Active = 1;
+                model.Active = true;
                 if (model.TermsCondition)
                 {
                     if (model.UserType == (short)UserType.Self)

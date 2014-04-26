@@ -203,6 +203,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AppSettingModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\OrganizationViewModel.cs" />
     <Compile Include="Models\PermissionViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
