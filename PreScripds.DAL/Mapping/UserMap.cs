@@ -82,6 +82,7 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.EmployeeId).HasColumnName("employee_id");
             this.Property(t => t.Designation).HasColumnName("designation");
             this.Property(t => t.IsOrganization).HasColumnName("isorganization");
+            this.Property(t => t.CreatedDate).HasColumnName("created_date");
         }
     }
 }
