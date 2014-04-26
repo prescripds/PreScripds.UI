@@ -59,7 +59,7 @@ namespace PreScripds.UI.Controllers
                 if (user != null)
                 {
                     var userLogin = user.UserLogin.FirstOrDefault();
-                    if (user.Active == 0)
+                    if (!user.Active)
                         ModelState.AddModelError("", "Please enter a valid Username/Password");
                     var hashedPassword = Common.Common.CreatePasswordHash(model.Password, userLogin.SaltKey);
                     if (hashedPassword.Equals(userLogin.Password))

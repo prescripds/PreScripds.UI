@@ -56,7 +56,7 @@ namespace PreScripds.DAL.Repository
 
         public async Task<User> GetUserByUsername(string loginName)
         {
-            var users = await ContextRep.users.Include(x => x.UserLogin).Where(x => x.Active == 1).ToListAsync();
+            var users = await ContextRep.users.Include(x => x.UserLogin).Where(x => x.Active).ToListAsync();
             if (users.IsCollectionValid())
             {
                 var loginUser = users.Where(x => x.UserLogin.First().UserName == loginName);
@@ -68,7 +68,7 @@ namespace PreScripds.DAL.Repository
 
         public async Task<User> CheckEmailExists(string email)
         {
-            var users = await ContextRep.users.Include(x => x.UserLogin).Where(x => x.Active == 1 && x.Email == email).ToListAsync();
+            var users = await ContextRep.users.Include(x => x.UserLogin).Where(x => x.Active && x.Email == email).ToListAsync();
             if (users.IsCollectionValid())
             {
                 return users.First();

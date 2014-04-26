@@ -9,6 +9,18 @@
     @Styles.Render("~/Content/css")
     <script src="~/Scripts/jquery-2.1.0.js"></script>
     @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            window.onbeforeunload = function () {
+                return "Are you sure you wish to leave this page?";
+            };
+            $(window).unload(function () {
+                document.getElementById('logoutForm').submit();
+            });
+        });
+
+    </script>
 </head>
 <body class="openHtmlBg">
     <div class="navbar navbar-inverse navbar-fixed-top">

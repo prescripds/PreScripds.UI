@@ -38,6 +38,9 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.EmployeeIdOrg)
                 .HasMaxLength(450);
 
+            this.Property(t => t.ApproverId)
+                .HasMaxLength(450);
+
             // Table & Column Mappings
             this.ToTable("organization", "turtleinc");
             this.Property(t => t.OrganizationId).HasColumnName("organization_id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
@@ -50,6 +53,11 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.VerificationDate).HasColumnName("verification_date");
             this.Property(t => t.ReferencedEmail).HasColumnName("referenced_email");
             this.Property(t => t.EmployeeIdOrg).HasColumnName("employee_id_org");
+            this.Property(t => t.OrganiztionIncorporation).HasColumnName("organiztion_incorporation");
+            this.Property(t => t.Isactive).HasColumnName("isactive");
+            this.Property(t => t.IsApproved).HasColumnName("isapproved");
+            this.Property(t => t.ApproverId).HasColumnName("approver_id");
+            this.Property(t => t.ApprovedDate).HasColumnName("approved_date");
         }
     }
 }

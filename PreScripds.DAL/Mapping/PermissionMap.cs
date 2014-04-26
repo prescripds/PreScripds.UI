@@ -29,6 +29,7 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.PermissionId).HasColumnName("permission_id");
             this.Property(t => t.PermissionName).HasColumnName("permission_name");
             this.Property(t => t.PermissionDesc).HasColumnName("permission_desc");
+            this.Property(t => t.IsActive).HasColumnName("isactive");
         }
     }
 }

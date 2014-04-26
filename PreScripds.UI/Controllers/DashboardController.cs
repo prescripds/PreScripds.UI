@@ -34,9 +34,9 @@ namespace PreScripds.UI.Controllers
             var user = SessionContext.CurrentUser;
             if (user != null)
             {
-                if (user.IsOrganization.HasValue && user.IsOrganization.Value == 0)
+                if (user.IsOrganization.HasValue && user.IsOrganization.Value == true)
                     return View("Selfie", "Dashboard");
-                if (user.IsOrganization.HasValue && user.IsOrganization.Value == 1)
+                if (user.IsOrganization.HasValue && user.IsOrganization.Value == true)
                 {
                     if (user.IsSuperAdmin == 1)
                     {

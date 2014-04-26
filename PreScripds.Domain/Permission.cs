@@ -16,6 +16,8 @@ namespace PreScripds.Domain
         [DataMember]
         public string PermissionDesc { get; set; }
         [DataMember]
+        public bool IsActive { get; set; }
+        [DataMember]
         public virtual ICollection<Role> Roles { get; set; }
     }
 }

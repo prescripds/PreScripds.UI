@@ -75,6 +75,7 @@
     <Compile Include="Mapping\RoleMap.cs" />
     <Compile Include="Mapping\SecurityQuestionMap.cs" />
     <Compile Include="Mapping\StateMap.cs" />
+    <Compile Include="Mapping\UserDepartmentMap.cs" />
     <Compile Include="Mapping\UserLoginMap.cs" />
     <Compile Include="Mapping\UserMap.cs" />
     <Compile Include="PreScripdsConfiguration.cs" />

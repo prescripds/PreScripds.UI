@@ -41,6 +41,15 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.ZipCode)
                 .HasMaxLength(45);
 
+            this.Property(t => t.CityName)
+               .HasMaxLength(250);
+
+            this.Property(t => t.EmployeeId)
+                .HasMaxLength(250);
+
+            this.Property(t => t.Designation)
+                .HasMaxLength(450);
+
             // Table & Column Mappings
             this.ToTable("user", "turtleinc");
             this.Property(t => t.UserId).HasColumnName("user_id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
@@ -68,19 +77,11 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.CityName).HasColumnName("city_name");
             this.Property(t => t.UserType).HasColumnName("user_type");
             this.Property(t => t.TermsCondition).HasColumnName("terms_condition");
-            this.Property(t => t.RoleId).HasColumnName("role_id");
             this.Property(t => t.ReferencedId).HasColumnName("referenced_id");
             this.Property(t => t.OrganizationId).HasColumnName("organization_id");
-            this.Property(t => t.DepartmentId).HasColumnName("department_id");
             this.Property(t => t.EmployeeId).HasColumnName("employee_id");
             this.Property(t => t.Designation).HasColumnName("designation");
             this.Property(t => t.IsOrganization).HasColumnName("isorganization");
-
-            // Relationships
-            this.HasOptional(t => t.Department)
-                .WithMany(t => t.Users)
-                .HasForeignKey(d => d.DepartmentId);
-
         }
     }
 }

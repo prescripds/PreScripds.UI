@@ -38,9 +38,9 @@ namespace PreScripds.UI.Common.Automapper
                 .IgnoreAllNonExisting();
         }
 
-        private sbyte ConvertTermsAndCondition(bool p)
+        private bool ConvertTermsAndCondition(bool p)
         {
-            if (p) { return 1; } else { return 0; }
+            if (p) { return true; } else { return false; }
         }
     }
 }

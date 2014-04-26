@@ -32,6 +32,8 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.PermissionId).HasColumnName("permission_id");
             this.Property(t => t.OrganizationId).HasColumnName("organization_id");
             this.Property(t => t.DepartmentId).HasColumnName("department_id");
+            this.Property(t => t.CreatedDate).HasColumnName("created_date");
+            this.Property(t => t.IsActive).HasColumnName("isactive");
 
             // Relationships
             this.HasRequired(t => t.Permission)
