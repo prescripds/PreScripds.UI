@@ -23,7 +23,7 @@ using PreScripds.Domain.Enums;
 
 namespace PreScripds.UI.Controllers
 {
-    [Authorize]
+    [PreScripds.UI.Common.Authorize]
     public class AccountController : BaseController
     {
         private WcfServiceInvoker _wcfService;
@@ -39,7 +39,7 @@ namespace PreScripds.UI.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login(string returnUrl = null)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
@@ -279,6 +279,14 @@ namespace PreScripds.UI.Controllers
 
         //
         // POST: /Account/LogOff
+
+        [HttpGet]
+        public ActionResult AccessDenied()
+        {
+            SignOut();
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()

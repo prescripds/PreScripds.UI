@@ -41,6 +41,5 @@ namespace PreScripds.UI.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        
     }
 }

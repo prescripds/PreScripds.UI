@@ -16,7 +16,7 @@ using PreScripds.Domain.Enums;
 
 namespace PreScripds.UI.Controllers
 {
-    [Authorize]
+    [PreScripds.UI.Common.Authorize]
     public class DashboardController : BaseController
     {
         private WcfServiceInvoker _wcfService;
@@ -28,7 +28,7 @@ namespace PreScripds.UI.Controllers
         }
         //
         // GET: /Dashboard/
-        [Authorize]
+        [PreScripds.UI.Common.Authorize]
         public ActionResult Index()
         {
             var user = SessionContext.CurrentUser;
@@ -66,7 +66,7 @@ namespace PreScripds.UI.Controllers
             }
             return null;
         }
-        [Authorize]
+        [PreScripds.UI.Common.Authorize]
         [HttpGet]
         public ActionResult AddRole()
         {
@@ -82,7 +82,7 @@ namespace PreScripds.UI.Controllers
             };
             return View(roleViewModel);
         }
-        [Authorize]
+        [PreScripds.UI.Common.Authorize]
         [HttpPost]
         public ActionResult AddRole(RoleViewModel roleViewModel)
         {
@@ -124,14 +124,14 @@ namespace PreScripds.UI.Controllers
             var roleCheck = _wcfService.InvokeService<IUserService, bool>((svc) => svc.CheckRoleExists(mappedRoleModel));
             return roleCheck;
         }
-        [Authorize]
+        [PreScripds.UI.Common.Authorize]
         [HttpGet]
         public ActionResult Organization()
         {
             var organizationViewModel = new OrganizationViewModel();
             return View(organizationViewModel);
         }
-        [Authorize]
+        [PreScripds.UI.Common.Authorize]
         [HttpPost]
         public ActionResult Organization(OrganizationViewModel orgViewModel)
         {
