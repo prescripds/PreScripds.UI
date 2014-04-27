@@ -124,33 +124,28 @@ namespace PreScripds.UI.Controllers
             var roleCheck = _wcfService.InvokeService<IUserService, bool>((svc) => svc.CheckRoleExists(mappedRoleModel));
             return roleCheck;
         }
+        [Authorize]
         [HttpGet]
         public ActionResult Organization()
         {
-            return View();
+            var organizationViewModel = new OrganizationViewModel();
+            return View(organizationViewModel);
         }
-
+        [Authorize]
         [HttpPost]
-        public ActionResult Organization(RegisterViewModel registerViewModel)
+        public ActionResult Organization(OrganizationViewModel orgViewModel)
         {
-            if (registerViewModel.OrganizationType == (int)OrganizationType.New)
-            {
-                ValidateViewModel(registerViewModel);
-            }
-            else if (registerViewModel.OrganizationType == (int)OrganizationType.Registered)
-            {
-                ValidateViewModel(registerViewModel);
-            }
-            else
-            {
-                ModelState.AddModelError("OrganizationType", "Please select an organization Type.");
-            }
-            return View(registerViewModel);
+            ValidateViewModel(orgViewModel, orgViewModel.OrganizationType);
+            return View(orgViewModel);
         }
 
-        private void ValidateViewModel(RegisterViewModel registerViewModel)
+        private void ValidateViewModel(OrganizationViewModel orgViewModel, int orgType)
         {
-            throw new NotImplementedException();
+            if (orgType == (int)OrganizationType.New)
+            {
+                if (!orgViewModel.OrganizationName.Clean().IsNotEmpty())
+                    ModelState.AddModelError("OrganizationName", "Organization Name is mandatory.");
+            }
         }
     }
 }

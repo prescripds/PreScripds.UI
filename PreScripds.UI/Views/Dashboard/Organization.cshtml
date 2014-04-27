@@ -147,6 +147,12 @@
                 $('#organizationDtlsE').attr('style', 'display:none');
                 $('#buttons').attr('style', 'display:none');
             }
+            if (orgVal == 1) {
+                $('#organizationDtlsE').attr('style', 'display:none');
+            }
+            if (orgVal == 2) {
+                $('#organizationDtlsN').attr('style', 'display:none');
+            }
             $('#OrganizationType').on('change', function () {
                 var orgType = $(this).val();
                 $('hdfOrgType').val(orgType);

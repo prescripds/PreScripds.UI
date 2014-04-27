@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using PreScripds.Domain;
@@ -12,10 +13,10 @@ namespace PreScripds.UI.Models
         public string OrganizationName { get; set; }
         public string OrganizationAddress { get; set; }
         public long? OrganizationPhone { get; set; }
-        public long OrganizationMobile { get; set; }
+        public long? OrganizationMobile { get; set; }
         public string OrganizationEmail { get; set; }
         public string OrganizationContact { get; set; }
-        public DateTime VerificationDate { get; set; }
+        public DateTime? VerificationDate { get; set; }
         public string ReferencedEmail { get; set; }
         public string EmployeeIdOrg { get; set; }
         public DateTime? OrganiztionIncorporation { get; set; }
