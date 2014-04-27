@@ -31,6 +31,7 @@ namespace PreScripds.DAL
         public DbSet<Permission> permissions { get; set; }
         public DbSet<Department> departments { get; set; }
         public DbSet<Organization> organizations { get; set; }
+        public DbSet<UserDepartmentMapping> UserDepartment { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -43,7 +44,7 @@ namespace PreScripds.DAL
             modelBuilder.Configurations.Add(new RoleMap());
             modelBuilder.Configurations.Add(new PermissionMap());
             modelBuilder.Configurations.Add(new DepartmentMap());
-            modelBuilder.Configurations.Add(new OrganizationMap());
+            modelBuilder.Configurations.Add(new UserDepartmentMap());
         }
 
     }

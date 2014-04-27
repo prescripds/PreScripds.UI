@@ -21,9 +21,9 @@ namespace PreScripds.BL
             _userRepository = new UserRepository(context);
         }
 
-        public async Task<List<User>> GetUsers()
+        public List<User> GetUsers()
         {
-            var users = await _userRepository.GetUsers();
+            var users =  _userRepository.GetUsers();
             return users;
         }
 
@@ -39,13 +39,13 @@ namespace PreScripds.BL
             return roleFromDb;
         }
 
-        public Task<User> GetUserByUsername(string loginName)
+        public User GetUserByUsername(string loginName)
         {
             var user = _userRepository.GetUserByUsername(loginName);
             return user;
         }
 
-        public Task<User> CheckEmailExists(string email)
+        public User CheckEmailExists(string email)
         {
             var user = _userRepository.CheckEmailExists(email);
             return user;

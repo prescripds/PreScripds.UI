@@ -21,9 +21,9 @@ namespace PreScripds.DAL.Repository
         {
             _dbContext = context;
         }
-        public async Task<List<User>> GetUsers()
+        public List<User> GetUsers()
         {
-            var userLst = await ContextRep.users.Include(x => x.UserLogin).ToListAsync();
+            var userLst = ContextRep.users.Include(x => x.UserLogin).ToList();
             return userLst;
         }
 
@@ -54,9 +54,9 @@ namespace PreScripds.DAL.Repository
             return role;
         }
 
-        public async Task<User> GetUserByUsername(string loginName)
+        public User GetUserByUsername(string loginName)
         {
-            var users = await ContextRep.users.Include(x => x.UserLogin).Where(x => x.Active).ToListAsync();
+            var users = ContextRep.users.Include(x => x.UserLogin).Where(x => x.Active).ToList();
             if (users.IsCollectionValid())
             {
                 var loginUser = users.Where(x => x.UserLogin.First().UserName == loginName);
@@ -66,9 +66,9 @@ namespace PreScripds.DAL.Repository
             return null;
         }
 
-        public async Task<User> CheckEmailExists(string email)
+        public User CheckEmailExists(string email)
         {
-            var users = await ContextRep.users.Include(x => x.UserLogin).Where(x => x.Active && x.Email == email).ToListAsync();
+            var users = ContextRep.users.Include(x => x.UserLogin).Where(x => x.Active && x.Email == email).ToList();
             if (users.IsCollectionValid())
             {
                 return users.First();

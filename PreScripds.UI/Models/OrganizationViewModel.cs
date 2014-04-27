@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using PreScripds.Domain;
 
 namespace PreScripds.UI.Models
 {
@@ -22,5 +23,10 @@ namespace PreScripds.UI.Models
         public bool? IsApproved { get; set; }
         public string ApproverId { get; set; }
         public DateTime? ApprovedDate { get; set; }
+        public long? ReferencedId { get; set; }
+        public long? DepartmentId { get; set; }
+        public string Designation { get; set; }
+        public int OrganizationType { get; set; }
+        public List<Department> Department { get; set; }
     }
 }

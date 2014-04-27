@@ -36,8 +36,10 @@ namespace PreScripds.UI.Common.Automapper
             Mapper.CreateMap<Role, RoleViewModel>()
                  .ForMember(d => d.Permission, s => s.Ignore())
                 .IgnoreAllNonExisting();
-            Mapper.CreateMap<Organization, OrganizationViewModel>().IgnoreAllNonExisting();
-            Mapper.CreateMap<OrganizationViewModel, Organization>().IgnoreAllNonExisting();
+            Mapper.CreateMap<Organization, OrganizationViewModel>()
+                .IgnoreAllNonExisting();
+            Mapper.CreateMap<OrganizationViewModel, Organization>()
+                .IgnoreAllNonExisting();
         }
 
         private bool ConvertTermsAndCondition(bool p)

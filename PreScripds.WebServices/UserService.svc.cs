@@ -37,7 +37,7 @@ namespace PreScripds.WebServices
         }
         public List<User> GetUsers()
         {
-            var users = _userBl.GetUsers().Result;
+            var users = _userBl.GetUsers();
             return users;
         }
 
@@ -55,13 +55,13 @@ namespace PreScripds.WebServices
 
         public User GetUserByUsername(string loginName)
         {
-            var user = _userBl.GetUserByUsername(loginName).Result;
+            var user = _userBl.GetUserByUsername(loginName);
             return user;
         }
 
         public User CheckEmailExists(string email)
         {
-            var user = _userBl.CheckEmailExists(email).Result;
+            var user = _userBl.CheckEmailExists(email);
             return user;
         }
 
