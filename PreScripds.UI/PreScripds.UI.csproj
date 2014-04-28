@@ -273,6 +273,7 @@
     <Content Include="Images\nav.png" />
     <Content Include="Images\profile_img150x150.jpg" />
     <Content Include="Images\profile_img40x40.jpg" />
+    <Content Include="Images\resized_535dc721588b0.jpg" />
     <Content Include="Images\settings-hover.png" />
     <Content Include="Images\settings.png" />
     <Content Include="Images\statistics-hover.png" />

@@ -3,7 +3,16 @@
     Layout = "~/Views/Shared/_OpenLayout.cshtml";
 }
 
-<p>
-    Please <a href="@Url.Action("Login","Account")">Click</a> here to login.
-</p>
+<link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+
+<div class="row blackBg  error-page">
+    <div class="col-md-2 col-sm-3">
+
+        <img src="~/Images/resized_535dc721588b0.jpg" />
+    </div>
+    <div class="col-md-6 col-sm-12 pull-right">
+        <div>The page you are looking for is no longer here. </div>
+        <div>Go to our <a title="Login Page" href="@Url.Action("Login", "Account")">Login Page</a></div>
+    </div>
+</div>
 

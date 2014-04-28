@@ -129,3 +129,8 @@ input[type="checkbox"].input-validation-error {
     color: #ed9c28;
     font-size: 140%;
 }
+.error-page{ padding:20px 0px 20px 0px}
+.error-page div{ color:#fff}
+.oops{ color:#ED6131 !important; font-family:Hobo-std; font-size:38px}
+.message{ font-size:29px; font-weight:normal}
+.error-page  a{  color:#ED6131; }
