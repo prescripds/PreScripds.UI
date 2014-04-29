@@ -52,7 +52,11 @@ namespace PreScripds.WebServices
             var roleFromDb = _userBl.AddRole(role);
             return roleFromDb;
         }
-
+        public Organization AddOrganization(Organization organization)
+        {
+            var organizationFromDb = _userBl.AddOrganization(organization);
+            return organizationFromDb;
+        }
         public User GetUserByUsername(string loginName)
         {
             var user = _userBl.GetUserByUsername(loginName);

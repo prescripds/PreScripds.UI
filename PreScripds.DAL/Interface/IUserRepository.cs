@@ -18,5 +18,6 @@ namespace PreScripds.DAL.Interface
         List<Role> GetRole(long organizationId);
         bool CheckRoleExists(Role role);
         List<Department> GetDepartment(long organizationId);
+        Organization AddOrganization(Organization organization);
     }
 }

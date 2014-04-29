@@ -23,13 +23,14 @@ namespace PreScripds.BL
 
         public List<User> GetUsers()
         {
-            var users =  _userRepository.GetUsers();
+            var users = _userRepository.GetUsers();
             return users;
         }
 
         public User AddUser(User user)
         {
             var userFromDb = _userRepository.AddUser(user);
+            //TODO:Send mail to User about successful login.
             return userFromDb;
         }
 
@@ -65,6 +66,12 @@ namespace PreScripds.BL
         {
             var departments = _userRepository.GetDepartment(organizationId);
             return departments;
+        }
+        public Organization AddOrganization(Organization organization)
+        {
+            var organizations = _userRepository.AddOrganization(organization);
+            //TODO:Send Email to Prescripds Super Admin
+            return organizations;
         }
     }
 }

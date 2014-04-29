@@ -54,6 +54,13 @@ namespace PreScripds.DAL.Repository
             return role;
         }
 
+        public Organization AddOrganization(Organization organization)
+        {
+            ContextRep.organizations.Add(organization);
+            ContextRep.SaveChanges();
+            return organization;
+        }
+
         public User GetUserByUsername(string loginName)
         {
             var users = ContextRep.users.Include(x => x.UserLogin).Where(x => x.Active).ToList();
