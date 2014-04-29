@@ -135,7 +135,14 @@ namespace PreScripds.UI.Controllers
         [HttpPost]
         public ActionResult Organization(OrganizationViewModel orgViewModel)
         {
-            ValidateViewModel(orgViewModel, orgViewModel.OrganizationType);
+            if (orgViewModel.OrganizationType != 0)
+                ValidateViewModel(orgViewModel, orgViewModel.OrganizationType);
+            else
+                ModelState.AddModelError("OrganizationType", "Please select the organization type.");
+            if (ModelState.IsValid)
+            {
+                //TODO:ADD ORGANIZATION TO DB.
+            }
             return View(orgViewModel);
         }
 
@@ -145,7 +152,40 @@ namespace PreScripds.UI.Controllers
             {
                 if (!orgViewModel.OrganizationName.Clean().IsNotEmpty())
                     ModelState.AddModelError("OrganizationName", "Organization Name is mandatory.");
+                if (!orgViewModel.OrganizationAddress.Clean().IsNotEmpty())
+                    ModelState.AddModelError("OrganizationAddress", "Organization Address is mandatory.");
+                if (!orgViewModel.OrganizationMobile.HasValue)
+                    ModelState.AddModelError("OrganizationMobile", "Organization Mobile is mandatory.");
+                if (!orgViewModel.OrganizationEmail.Clean().IsNotEmpty())
+                    ModelState.AddModelError("OrganizationEmail", "Organization Email is mandatory.");
+                if (!orgViewModel.OrganizationContact.Clean().IsNotEmpty())
+                    ModelState.AddModelError("OrganizationContact", "Organization Contact is mandatory.");
+                if (!orgViewModel.VerificationDate.HasValue)
+                    ModelState.AddModelError("VerificationDate", "Verification Date is mandatory.");
             }
+            if (orgType == (int)OrganizationType.Registered)
+            {
+                if (!orgViewModel.ReferencedEmail.Clean().IsNotEmpty())
+                    ModelState.AddModelError("ReferencedEmail", "Referenced Email is mandatory.");
+                if (!orgViewModel.DepartmentId.HasValue)
+                    ModelState.AddModelError("DepartmentId", "Please select a department.");
+                if (!orgViewModel.EmployeeIdOrg.Clean().IsNotEmpty())
+                    ModelState.AddModelError("EmployeeIdOrg", "Employee Id is mandatory.");
+                if (orgViewModel.ReferencedEmail.Clean().IsNotEmpty())
+                {
+                    var isPresent = CheckEmailExists(orgViewModel.ReferencedEmail);
+                    if (!isPresent)
+                        ModelState.AddModelError("ReferencedEmail", "The referenced email you entered does not exist.");
+                }
+            }
+        }
+
+        private bool CheckEmailExists(string referencedEmail)
+        {
+            var user = _wcfService.InvokeService<IUserService, User>((svc) => svc.CheckEmailExists(referencedEmail));
+            if (user != null && user.IsSuperAdmin == 1)
+                return true;
+            return false;
         }
     }
 }
