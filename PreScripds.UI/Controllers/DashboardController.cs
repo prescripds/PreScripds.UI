@@ -38,7 +38,7 @@ namespace PreScripds.UI.Controllers
                     return View("Selfie", "Dashboard");
                 if (user.IsOrganization.HasValue && user.IsOrganization.Value)
                 {
-                    if (user.IsSuperAdmin == 1)
+                    if (user.IsSuperAdmin)
                     {
                         if (!user.OrganizationId.HasValue)
                         {
@@ -53,7 +53,7 @@ namespace PreScripds.UI.Controllers
                             return View("Approvals", "Dashboard");
                         }
                     }
-                    if (user.IsAdmin == 1)
+                    if (user.IsAdmin)
                     {
                         return View("Approvals", "Dashboard");
                     }
@@ -141,7 +141,24 @@ namespace PreScripds.UI.Controllers
                 ModelState.AddModelError("OrganizationType", "Please select the organization type.");
             if (ModelState.IsValid)
             {
-                //TODO:ADD ORGANIZATION TO DB.
+                if (orgViewModel.IsQuickView)
+                {
+                    orgViewModel.IsQuickViewTime = DateTime.Now;
+                    orgViewModel.QuickViewEndTime = DateTime.Now.AddMinutes(15);
+
+                }
+                var mappedModel = Mapper.Map<OrganizationViewModel, Organization>(orgViewModel);
+                mappedModel.CreatedDate = DateTime.Now;
+                var organizationModel = _wcfService.InvokeService<IUserService, Organization>((svc) => svc.AddOrganization(mappedModel));
+                if (organizationModel != null)
+                {
+                    orgViewModel.CreationSuccessful = true;
+                    orgViewModel.Message = "{0} saved successfully.Your account will be activated for use after the approval process is completed by us.";
+                }
+                else
+                {
+                    ModelState.AddModelError("", "There was an error while saving. Please try again.");
+                }
             }
             return View(orgViewModel);
         }
@@ -162,6 +179,12 @@ namespace PreScripds.UI.Controllers
                     ModelState.AddModelError("OrganizationContact", "Organization Contact is mandatory.");
                 if (!orgViewModel.VerificationDate.HasValue)
                     ModelState.AddModelError("VerificationDate", "Verification Date is mandatory.");
+                if (orgViewModel.OrganizationName.Clean().IsNotEmpty())
+                {
+                    var isExist = CheckOrganizationExists(orgViewModel.OrganizationName.Clean());
+                    if (isExist)
+                        ModelState.AddModelError("OrganizationName", "Organization name '{0}' is already present.".ToFormat(orgViewModel.OrganizationName));
+                }
             }
             if (orgType == (int)OrganizationType.Registered)
             {
@@ -174,16 +197,22 @@ namespace PreScripds.UI.Controllers
                 if (orgViewModel.ReferencedEmail.Clean().IsNotEmpty())
                 {
                     var isPresent = CheckEmailExists(orgViewModel.ReferencedEmail);
-                    if (!isPresent)
+                    if (isPresent)
                         ModelState.AddModelError("ReferencedEmail", "The referenced email you entered does not exist.");
                 }
             }
         }
 
+        private bool CheckOrganizationExists(string orgName)
+        {
+            var organization = _wcfService.InvokeService<IUserService, bool>((svc) => svc.CheckOrganizationExist(orgName));
+            return organization;
+        }
+
         private bool CheckEmailExists(string referencedEmail)
         {
             var user = _wcfService.InvokeService<IUserService, User>((svc) => svc.CheckEmailExists(referencedEmail));
-            if (user != null && user.IsSuperAdmin == 1)
+            if (user != null && user.IsSuperAdmin)
                 return true;
             return false;
         }

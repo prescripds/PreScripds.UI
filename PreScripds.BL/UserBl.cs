@@ -73,5 +73,11 @@ namespace PreScripds.BL
             //TODO:Send Email to Prescripds Super Admin
             return organizations;
         }
+
+        public bool CheckOrganizationExist(string orgName)
+        {
+            var isExist = _userRepository.CheckOrganizationExist(orgName);
+            return isExist;
+        }
     }
 }

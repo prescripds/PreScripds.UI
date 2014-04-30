@@ -19,5 +19,6 @@ namespace PreScripds.DAL.Interface
         bool CheckRoleExists(Role role);
         List<Department> GetDepartment(long organizationId);
         Organization AddOrganization(Organization organization);
+        bool CheckOrganizationExist(string orgName);
     }
 }

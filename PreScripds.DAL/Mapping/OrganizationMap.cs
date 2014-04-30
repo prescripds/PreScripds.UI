@@ -58,6 +58,10 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.IsApproved).HasColumnName("isapproved");
             this.Property(t => t.ApproverId).HasColumnName("approver_id");
             this.Property(t => t.ApprovedDate).HasColumnName("approved_date");
+            this.Property(t => t.IsQuickView).HasColumnName("isquickview");
+            this.Property(t => t.CreatedDate).HasColumnName("created_date");
+            this.Property(t => t.IsQuickViewTime).HasColumnName("isquickview_time");
+            this.Property(t => t.NoOfQuickView).HasColumnName("noofquickview");
         }
     }
 }

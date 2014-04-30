@@ -106,5 +106,13 @@ namespace PreScripds.DAL.Repository
                 return department;
             return null;
         }
+
+        public bool CheckOrganizationExist(string orgName)
+        {
+            var organization = ContextRep.organizations.FirstOrDefault(x => x.OrganizationName == orgName && x.IsActive);
+            if (organization != null)
+                return true;
+            return false;
+        }
     }
 }

@@ -43,5 +43,8 @@ namespace PreScripds.WebServices
         [OperationContract]
         [WebInvoke(UriTemplate = "/GetDepartment", ResponseFormat = WebMessageFormat.Xml)]
         List<Department> GetDepartment(long organizationId);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/OrganizationExist", ResponseFormat = WebMessageFormat.Xml)]
+        bool CheckOrganizationExist(string orgName);
     }
 }

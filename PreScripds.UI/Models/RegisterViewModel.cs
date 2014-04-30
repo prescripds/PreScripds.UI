@@ -86,7 +86,7 @@ namespace PreScripds.UI.Models
         [Display(Name = "Zip Code")]
         [DataType(DataType.PostalCode)]
         public long? PinCode { get; set; }
-        public short IsHomeUrl { get; set; }
+        public bool IsHomeUrl { get; set; }
         public bool Active { get; set; }
 
         public string Message { get; set; }

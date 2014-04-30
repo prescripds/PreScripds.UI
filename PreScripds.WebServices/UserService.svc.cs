@@ -86,5 +86,11 @@ namespace PreScripds.WebServices
             var departmentModel = _userBl.GetDepartment(organizationId);
             return departmentModel;
         }
+
+        public bool CheckOrganizationExist(string orgName)
+        {
+            var isExist = _userBl.CheckOrganizationExist(orgName);
+            return isExist;
+        }
     }
 }
