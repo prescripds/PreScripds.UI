@@ -35,6 +35,7 @@ namespace PreScripds.UI.Models
         public System.DateTime? CreatedDate { get; set; }
         public System.DateTime? IsQuickViewTime { get; set; }
         public long? NoOfQuickView { get; set; }
+        public long MaxQuickViews { get; set; }
         public bool? QuickViewEnd { get; set; }
         public DateTime? QuickViewEndTime { get; set; }
         public bool IsExtendQuickView { get; set; }

@@ -143,9 +143,10 @@ namespace PreScripds.UI.Controllers
             {
                 if (orgViewModel.IsQuickView)
                 {
-                    orgViewModel.IsQuickViewTime = DateTime.Now;
-                    orgViewModel.QuickViewEndTime = DateTime.Now.AddMinutes(15);
-                    //TODO:Quick View Logic
+                    //orgViewModel.IsQuickViewTime = DateTime.Now;
+                   // orgViewModel.QuickViewEndTime = DateTime.Now.AddMinutes(15);
+                    orgViewModel.NoOfQuickView = 1;
+                    orgViewModel.QuickViewEnd = false;
                 }
                 var mappedModel = Mapper.Map<OrganizationViewModel, Organization>(orgViewModel);
                 mappedModel.CreatedDate = DateTime.Now;
