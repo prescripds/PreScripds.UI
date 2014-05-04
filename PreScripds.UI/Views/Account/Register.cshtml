@@ -189,7 +189,7 @@
                 <div class="form-group">
                     <label class="control-label" for="LastName">Captcha*</label>
                     @*@Html.Recaptcha()*@
-                    @ReCaptcha.GetHtml(theme: "Red")
+                    @ReCaptcha.GetHtml(publicKey: System.Configuration.ConfigurationManager.AppSettings["ReCaptchaPublicKey"], theme: "white")
                 </div>
             </div>
         </div>
@@ -219,13 +219,13 @@
     <script src="~/Scripts/PreScripds.Register.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            $('#recaptcha_response_field').on('blur', function () { alert('hi'); });
             $(function () {
                 $('#datepicker').datepicker();
 
                 $('.day').on('click', function () {
                     $('.datepicker-days').hide();
                 });
-
             });
             @Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))
         });

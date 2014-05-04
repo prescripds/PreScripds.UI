@@ -28,7 +28,7 @@ using System.Configuration;
 
 namespace PreScripds.UI.Controllers
 {
-    [PreScripds.UI.Common.Authorize]
+
     public class AccountController : BaseController
     {
         private WcfServiceInvoker _wcfService;
@@ -134,7 +134,7 @@ namespace PreScripds.UI.Controllers
         [AllowAnonymous]
         public ActionResult Register(string ps = null)
         {
-            ReCaptcha.PublicKey = ConfigurationManager.AppSettings["ReCaptchaPublicKey"];
+
             var registerViewModel = new RegisterViewModel()
             {
                 CountryId = 1,
@@ -179,7 +179,7 @@ namespace PreScripds.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            VerifyCaptcha();
+            //VerifyCaptcha();
             if (ModelState.IsValid)
             {
                 model.Active = true;
@@ -206,7 +206,8 @@ namespace PreScripds.UI.Controllers
             return View(new RegisterViewModel { userLoginViewModel = new List<UserLoginViewModel>() });
         }
 
-        private void VerifyCaptcha()
+        [HttpPost]
+        public void VerifyCaptcha()
         {
             if (ReCaptcha.Validate(ConfigurationManager.AppSettings["ReCaptchaPrivateKey"]))
             {
