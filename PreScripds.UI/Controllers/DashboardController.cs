@@ -141,10 +141,10 @@ namespace PreScripds.UI.Controllers
                 ModelState.AddModelError("OrganizationType", "Please select the organization type.");
             if (ModelState.IsValid)
             {
-                if (orgViewModel.IsQuickView)
+                if (orgViewModel.IsQuickView.HasValue)
                 {
                     //orgViewModel.IsQuickViewTime = DateTime.Now;
-                   // orgViewModel.QuickViewEndTime = DateTime.Now.AddMinutes(15);
+                    // orgViewModel.QuickViewEndTime = DateTime.Now.AddMinutes(15);
                     orgViewModel.NoOfQuickView = 1;
                     orgViewModel.QuickViewEnd = false;
                 }

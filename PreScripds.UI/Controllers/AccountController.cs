@@ -20,6 +20,11 @@ using PreScripds.UI.Common;
 using System.Web.Security;
 using System.Security.Principal;
 using PreScripds.Domain.Enums;
+using System.Web.Helpers;
+using Microsoft.Web.Helpers;
+using System.Configuration;
+//using Recaptcha.Web.Mvc;
+//using Recaptcha.Web;
 
 namespace PreScripds.UI.Controllers
 {
@@ -129,6 +134,7 @@ namespace PreScripds.UI.Controllers
         [AllowAnonymous]
         public ActionResult Register(string ps = null)
         {
+            ReCaptcha.PublicKey = ConfigurationManager.AppSettings["ReCaptchaPublicKey"];
             var registerViewModel = new RegisterViewModel()
             {
                 CountryId = 1,
@@ -173,6 +179,7 @@ namespace PreScripds.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            VerifyCaptcha();
             if (ModelState.IsValid)
             {
                 model.Active = true;
@@ -197,6 +204,14 @@ namespace PreScripds.UI.Controllers
 
             }
             return View(new RegisterViewModel { userLoginViewModel = new List<UserLoginViewModel>() });
+        }
+
+        private void VerifyCaptcha()
+        {
+            if (ReCaptcha.Validate(ConfigurationManager.AppSettings["ReCaptchaPrivateKey"]))
+            {
+
+            }
         }
 
         [HttpPost]

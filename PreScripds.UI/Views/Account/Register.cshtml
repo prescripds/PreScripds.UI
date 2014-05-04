@@ -1,9 +1,13 @@
 ﻿@using PreScripds.UI.Common;
 @using PreScripds.Domain;
+@using System.Web.Helpers;
+@using Microsoft.Web.Helpers;
+
 @model PreScripds.UI.Models.RegisterViewModel
 @{
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_OpenLayout.cshtml";
+
 }
 <div class="header_top">
     <h2><span>Register</span></h2>
@@ -180,6 +184,15 @@
                 </div>
             </div>
         }
+        <div class="row">
+            <div class="col-md-4 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label" for="LastName">Captcha*</label>
+                    @*@Html.Recaptcha()*@
+                    @ReCaptcha.GetHtml(theme: "Red")
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-4 col-sm-6">
                 <div class="form-group">
