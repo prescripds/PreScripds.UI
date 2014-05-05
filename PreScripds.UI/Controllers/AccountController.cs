@@ -20,9 +20,10 @@ using PreScripds.UI.Common;
 using System.Web.Security;
 using System.Security.Principal;
 using PreScripds.Domain.Enums;
-using System.Web.Helpers;
-using Microsoft.Web.Helpers;
+//using System.Web.Helpers;
+//using Microsoft.Web.Helpers;
 using System.Configuration;
+using Recaptcha;
 //using Recaptcha.Web.Mvc;
 //using Recaptcha.Web;
 
@@ -177,11 +178,20 @@ namespace PreScripds.UI.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        [RecaptchaControlMvc.CaptchaValidator]
+        public async Task<ActionResult> Register(RegisterViewModel model, bool captchaValid, string captchaErrorMessage)
         {
-            //VerifyCaptcha();
             if (ModelState.IsValid)
             {
+                if (!captchaValid)
+                {
+                    model.CaptchaUserInput = string.Empty;
+                    ModelState.AddModelError("recaptcha", captchaErrorMessage);
+                }
+                else
+                {
+                    model.CaptchaValid = model.CaptchaUserInput;
+                }
                 model.Active = true;
                 if (model.TermsCondition)
                 {
@@ -206,12 +216,12 @@ namespace PreScripds.UI.Controllers
             return View(new RegisterViewModel { userLoginViewModel = new List<UserLoginViewModel>() });
         }
 
-        [HttpPost]
-        public void VerifyCaptcha()
+        public void VerifyCaptcha(bool captchaValid, string error)
         {
-            if (ReCaptcha.Validate(ConfigurationManager.AppSettings["ReCaptchaPrivateKey"]))
+            //ReCaptcha.PrivateKey = ConfigurationManager.AppSettings["ReCaptchaPrivateKey"];
+            if (!captchaValid)
             {
-
+                ModelState.AddModelError("recaptcha", error);
             }
         }
 

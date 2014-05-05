@@ -1,7 +1,7 @@
 ﻿@using PreScripds.UI.Common;
 @using PreScripds.Domain;
-@using System.Web.Helpers;
-@using Microsoft.Web.Helpers;
+@using Recaptcha;
+
 
 @model PreScripds.UI.Models.RegisterViewModel
 @{
@@ -189,7 +189,8 @@
                 <div class="form-group">
                     <label class="control-label" for="LastName">Captcha*</label>
                     @*@Html.Recaptcha()*@
-                    @ReCaptcha.GetHtml(publicKey: System.Configuration.ConfigurationManager.AppSettings["ReCaptchaPublicKey"], theme: "white")
+                    @*@ReCaptcha.GetHtml(publicKey: System.Configuration.ConfigurationManager.AppSettings["ReCaptchaPublicKey"], theme: "white")*@
+                    @Html.Raw(Html.GenerateCaptcha("recaptcha", "white"))
                 </div>
             </div>
         </div>
@@ -209,6 +210,7 @@
             </div>
         </div>
     </div>
+    @Html.TextBoxFor(m => m.CaptchaUserInput, new { @class = "hidden" })
     @Html.MessageDialogRedirect(Model.Message, "Login", "Account", true)
 }
 
@@ -219,7 +221,10 @@
     <script src="~/Scripts/PreScripds.Register.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#recaptcha_response_field').on('blur', function () { alert('hi'); });
+            $(document.body).on('blur', '#recaptcha_response_field', function () {
+                var captchaVal = $(this).val();
+                $('#CaptchaUserInput').val(captchaVal);
+            });
             $(function () {
                 $('#datepicker').datepicker();
 
