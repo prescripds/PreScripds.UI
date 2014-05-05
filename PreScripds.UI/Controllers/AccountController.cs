@@ -208,7 +208,7 @@ namespace PreScripds.UI.Controllers
             return View(new RegisterViewModel { userLoginViewModel = new List<UserLoginViewModel>() });
         }
 
-        public void VerifyCaptcha(RegisterViewModel model, bool captchaValid, string error)
+        public void VerifyCaptcha(RegisterViewModel model, bool captchaValid, string captchaErrorMessage)
         {
             if (!captchaValid)
             {
