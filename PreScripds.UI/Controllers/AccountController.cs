@@ -181,17 +181,9 @@ namespace PreScripds.UI.Controllers
         [RecaptchaControlMvc.CaptchaValidator]
         public async Task<ActionResult> Register(RegisterViewModel model, bool captchaValid, string captchaErrorMessage)
         {
+            VerifyCaptcha(model, captchaValid, captchaErrorMessage);
             if (ModelState.IsValid)
             {
-                if (!captchaValid)
-                {
-                    model.CaptchaUserInput = string.Empty;
-                    ModelState.AddModelError("recaptcha", captchaErrorMessage);
-                }
-                else
-                {
-                    model.CaptchaValid = model.CaptchaUserInput;
-                }
                 model.Active = true;
                 if (model.TermsCondition)
                 {
@@ -216,12 +208,16 @@ namespace PreScripds.UI.Controllers
             return View(new RegisterViewModel { userLoginViewModel = new List<UserLoginViewModel>() });
         }
 
-        public void VerifyCaptcha(bool captchaValid, string error)
+        public void VerifyCaptcha(RegisterViewModel model, bool captchaValid, string error)
         {
-            //ReCaptcha.PrivateKey = ConfigurationManager.AppSettings["ReCaptchaPrivateKey"];
             if (!captchaValid)
             {
-                ModelState.AddModelError("recaptcha", error);
+                model.CaptchaUserInput = string.Empty;
+                ModelState.AddModelError("recaptcha", captchaErrorMessage);
+            }
+            else
+            {
+                model.CaptchaValid = model.CaptchaUserInput;
             }
         }
 
