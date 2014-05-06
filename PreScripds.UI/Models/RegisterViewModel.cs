@@ -116,11 +116,12 @@ namespace PreScripds.UI.Models
 
         public bool CreationSuccessful { get; set; }
         public List<UserLoginViewModel> userLoginViewModel { get; set; }
-
+        public List<UserHistoryViewModel> UserHistoryViewModel { get; set; }
         public long OrganizationId { get; set; }
         public int OrganizationType { get; set; }
         public string CaptchaUserInput { get; set; }
         public string CaptchaValid { get; set; }
         public int? IsOrganization { get; set; }
+        public string IpAddress { get; set; }
     }
 }

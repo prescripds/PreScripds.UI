@@ -89,17 +89,6 @@ namespace PreScripds.UI.Controllers
                 {
                     ModelState.AddModelError("", "Please enter a valid Username/Password");
                 }
-                //var user = await UserManager.FindAsync(model.UserName, model.Password);
-                //if (user != null)
-                //{
-
-                //    await SignInAsync(user, false);
-                //    return RedirectToLocal(returnUrl);
-                //}
-                //else
-                //{
-                //    ModelState.AddModelError("", "Invalid username or password.");
-                //}
             }
 
             // If we got this far, something failed, redisplay form
@@ -217,8 +206,39 @@ namespace PreScripds.UI.Controllers
             }
             else
             {
+                var userHistoryLst = new List<UserHistoryViewModel>();
+                var userHistory = new UserHistoryViewModel();
                 model.CaptchaValid = model.CaptchaUserInput;
+                userHistory.Captcha = model.CaptchaValid;
+                userHistory.CreatedDate = DateTime.Now;
+                if (model.IpAddress.IsNotEmpty())
+                {
+                    userHistory.IpAddress = model.IpAddress;
+                }
+                else
+                {
+                    var ipAddress = GetClientIpAddress();
+                    userHistory.IpAddress = ipAddress;
+                }
+
             }
+        }
+
+        private string GetClientIpAddress()
+        {
+            string clientIp = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_CLUSTER_CLIENT_IP"];
+            string strHostName = System.Net.Dns.GetHostName();
+            string clientIPAddress = System.Net.Dns.GetHostAddresses(strHostName).GetValue(0).ToString();
+            if (!clientIp.IsNotEmpty())
+            {
+                clientIp = (System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] ??
+                   Request.ServerVariables["REMOTE_ADDR"]).Split(',')[0].Trim();
+            }
+            if (clientIp == clientIPAddress)
+                return clientIp;
+            else
+                return clientIp = clientIPAddress;
+            return clientIp;
         }
 
         [HttpPost]

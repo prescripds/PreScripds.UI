@@ -17,6 +17,8 @@ namespace PreScripds.UI.Common.Automapper
                .IgnoreAllNonExisting();
             Mapper.CreateMap<UserLogin, UserLoginViewModel>()
                 .IgnoreAllNonExisting();
+            Mapper.CreateMap<UserHistoryViewModel, UserHistory>().IgnoreAllNonExisting();
+            Mapper.CreateMap<UserHistory, UserHistoryViewModel>().IgnoreAllNonExisting();
             Mapper.CreateMap<RegisterViewModel, User>()
                 .ForMember(d => d.ZipCode, s => s.MapFrom(p => p.PinCode))
                 .ForMember(d => d.TermsCondition, s => s.MapFrom(p => ConvertTermsAndCondition(p.TermsCondition)))
@@ -24,6 +26,11 @@ namespace PreScripds.UI.Common.Automapper
                 {
                     var mappedLoginProfile = Mapper.Map<List<UserLoginViewModel>, List<UserLogin>>(s.userLoginViewModel);
                     d.UserLogin = mappedLoginProfile;
+                })
+                .AfterMap((s, d) =>
+                {
+                    var mappedUserHistory = Mapper.Map<List<UserHistoryViewModel>, List<UserHistory>>(s.UserHistoryViewModel);
+                    d.UserHistory = mappedUserHistory;
                 })
                 .IgnoreAllNonExisting();
 
