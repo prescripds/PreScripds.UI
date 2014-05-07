@@ -50,6 +50,19 @@ namespace PreScripds.Infrastructure.Security
             return hashedPassword;
         }
 
+        public virtual string CreatePasswordCapHash(string password, string saltkey, string captcha, string passwordFormat = "SHA1")
+        {
+            if (String.IsNullOrEmpty(passwordFormat))
+            {
+                passwordFormat = "SHA1";
+            }
+            string saltAndPasswordCap = String.Concat(password, saltkey, captcha);
+            string hashedPassword =
+                FormsAuthentication.HashPasswordForStoringInConfigFile(
+                    saltAndPasswordCap, passwordFormat);
+            return hashedPassword;
+        }
+
         public virtual string EncryptText(string plainText, string encryptionPrivateKey = "")
         {
             if (string.IsNullOrEmpty(plainText))

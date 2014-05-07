@@ -10,6 +10,7 @@ using System.Data.Entity;
 using PreScripds.Infrastructure.Security;
 using PreScripds.Infrastructure;
 using MySql.Data.MySqlClient;
+using PreScripds.Infrastructure.Utilities;
 
 namespace PreScripds.DAL.Repository
 {
@@ -23,7 +24,7 @@ namespace PreScripds.DAL.Repository
         }
         public List<User> GetUsers()
         {
-            var userLst = ContextRep.users.Include(x => x.UserLogin).ToList();
+            var userLst = ContextRep.users.Include(x => x.UserLogin).Include(x => x.UserHistory).ToList();
             return userLst;
         }
 
@@ -31,20 +32,41 @@ namespace PreScripds.DAL.Repository
         {
             if (user.UserLogin.IsCollectionValid())
             {
+                var saltKey = EncryptionExtensions.CreateSaltKey();
                 foreach (var userLogin in user.UserLogin)
                 {
-                    var saltKey = EncryptionExtensions.CreateSaltKey();
                     userLogin.SaltKey = saltKey;
                     var encryptedPassword = EncryptionExtensions.CreatePasswordHash(userLogin.Password,
                                 userLogin.SaltKey);
                     userLogin.Password = encryptedPassword;
                     var encryptedSecurityAnswer = EncryptionExtensions.CreatePasswordHash(userLogin.SecurityAnswer, userLogin.SaltKey);
                     userLogin.SecurityAnswer = encryptedSecurityAnswer;
+
+                }
+                foreach (var userHistory in user.UserHistory)
+                {
+                    userHistory.SaltKey = saltKey;
+                    var encryptedPasswordCap = EncryptionExtensions.CreatePasswordCapHash(user.UserLogin.First().Password, userHistory.SaltKey, userHistory.Captcha);
+                    userHistory.PasswordCap = encryptedPasswordCap;
                 }
             }
-            ContextRep.users.Add(user);
-            ContextRep.SaveChangesAsync();
+            Insert(user);
+            SaveChanges();
+            UpdateUserLogin(user);
             return user;
+        }
+
+        private void UpdateUserLogin(User user)
+        {
+            if (user.UserHistory.IsCollectionValid())
+            {
+                var userHistory = user.UserHistory.First(x => x.UserId == user.UserId);
+                var userLogin = user.UserLogin.First(x => x.UserId == user.UserId);
+                userLogin.PasswordCap = userHistory.PasswordCap;
+                userLogin.Captcha = userHistory.Captcha;
+                DbContextExtensions.Update<UserLogin>(this._dbContext, userLogin);
+                SaveChanges();
+            }
         }
 
         public Role AddRole(Role role)

@@ -16,6 +16,12 @@ namespace PreScripds.Infrastructure
             return encriptionServcie.CreatePasswordHash(password, salt);
         }
 
+        public static string CreatePasswordCapHash(string password, string salt, string captcha)
+        {
+            var encryptionService = new EncryptionService();
+            return encryptionService.CreatePasswordCapHash(password, salt, captcha);
+        }
+
         public static string CreateSaltKey()
         {
             var encriptionServcie = new EncryptionService();

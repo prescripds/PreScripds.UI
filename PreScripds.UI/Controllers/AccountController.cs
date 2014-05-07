@@ -20,12 +20,9 @@ using PreScripds.UI.Common;
 using System.Web.Security;
 using System.Security.Principal;
 using PreScripds.Domain.Enums;
-//using System.Web.Helpers;
-//using Microsoft.Web.Helpers;
 using System.Configuration;
 using Recaptcha;
-//using Recaptcha.Web.Mvc;
-//using Recaptcha.Web;
+using System.Net;
 
 namespace PreScripds.UI.Controllers
 {
@@ -39,8 +36,6 @@ namespace PreScripds.UI.Controllers
             _wcfService = new WcfServiceInvoker();
             _sessionContext = new SessionContext();
         }
-
-        //public UserManager<ApplicationUser> UserManager { get; private set; }
 
         //
         // GET: /Account/Login
@@ -211,34 +206,26 @@ namespace PreScripds.UI.Controllers
                 model.CaptchaValid = model.CaptchaUserInput;
                 userHistory.Captcha = model.CaptchaValid;
                 userHistory.CreatedDate = DateTime.Now;
-                if (model.IpAddress.IsNotEmpty())
-                {
-                    userHistory.IpAddress = model.IpAddress;
-                }
-                else
-                {
-                    var ipAddress = GetClientIpAddress();
-                    userHistory.IpAddress = ipAddress;
-                }
-
+                var ipAddress = GetClientIpAddress();
+                model.IpAddress = userHistory.IpAddress = ipAddress;
+                userHistoryLst.Add(userHistory);
+                model.UserHistoryViewModel = userHistoryLst;
             }
         }
 
         private string GetClientIpAddress()
         {
-            string clientIp = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_CLUSTER_CLIENT_IP"];
-            string strHostName = System.Net.Dns.GetHostName();
-            string clientIPAddress = System.Net.Dns.GetHostAddresses(strHostName).GetValue(0).ToString();
-            if (!clientIp.IsNotEmpty())
+            var ipAddress = string.Empty;
+            var dnsHostName = Dns.GetHostName();
+            IPHostEntry hostEntry = Dns.GetHostEntry(dnsHostName);
+            foreach (var ip in hostEntry.AddressList)
             {
-                clientIp = (System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] ??
-                   Request.ServerVariables["REMOTE_ADDR"]).Split(',')[0].Trim();
+                if (ip.AddressFamily.ToString() == "InterNetwork")
+                {
+                    ipAddress = ip.ToString();
+                }
             }
-            if (clientIp == clientIPAddress)
-                return clientIp;
-            else
-                return clientIp = clientIPAddress;
-            return clientIp;
+            return ipAddress;
         }
 
         [HttpPost]

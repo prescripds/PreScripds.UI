@@ -211,7 +211,6 @@
         </div>
     </div>
     @Html.TextBoxFor(m => m.CaptchaUserInput, new { @class = "hidden" })
-    @Html.TextBoxFor(m => m.IpAddress, new { @class = "hidden" })
     @Html.MessageDialogRedirect(Model.Message, "Login", "Account", true)
 }
 
@@ -223,10 +222,6 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            $.getJSON("http://jsonip.com?callback=?", function (data) {
-                var ipAddr = data.ip;
-                $('#IpAddress').val(ipAddr);
-            });
             $(document.body).on('blur', '#recaptcha_response_field', function () {
                 var captchaVal = $(this).val();
                 $('#CaptchaUserInput').val(captchaVal);

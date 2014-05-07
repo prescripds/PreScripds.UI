@@ -41,6 +41,8 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.SecurityQuestionId).HasColumnName("securityquestion_id");
             this.Property(t => t.SecurityAnswer).HasColumnName("security_answer");
             this.Property(t => t.UserLoginId).HasColumnName("userlogin_id");
+            this.Property(t => t.Captcha).HasColumnName("captcha");
+            this.Property(t => t.PasswordCap).HasColumnName("password_cap");
 
             // Relationships
 
