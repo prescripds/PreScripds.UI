@@ -46,8 +46,10 @@ namespace PreScripds.DAL.Repository
                 foreach (var userHistory in user.UserHistory)
                 {
                     userHistory.SaltKey = saltKey;
-                    var encryptedPasswordCap = EncryptionExtensions.CreatePasswordCapHash(user.UserLogin.First().Password, userHistory.SaltKey, userHistory.Captcha);
+                    var encryptCaptcha = EncryptionExtensions.Encrypt(userHistory.Captcha);
+                    var encryptedPasswordCap = EncryptionExtensions.CreatePasswordCapHash(user.UserLogin.First().Password, userHistory.SaltKey, encryptCaptcha);
                     userHistory.PasswordCap = encryptedPasswordCap;
+                    userHistory.Captcha = encryptCaptcha;
                 }
             }
             Insert(user);
@@ -85,7 +87,7 @@ namespace PreScripds.DAL.Repository
 
         public User GetUserByUsername(string loginName)
         {
-            var users = ContextRep.users.Include(x => x.UserLogin).Where(x => x.Active).ToList();
+            var users = ContextRep.users.Include(x => x.UserLogin).Include(x => x.UserHistory).Where(x => x.Active).ToList();
             if (users.IsCollectionValid())
             {
                 var loginUser = users.Where(x => x.UserLogin.First().UserName == loginName);

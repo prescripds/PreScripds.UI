@@ -1,4 +1,5 @@
 ﻿@model PreScripds.UI.Models.LoginViewModel
+@using Recaptcha;
 
 @{
     ViewBag.Title = "Sign In";
@@ -29,14 +30,14 @@
                         @*@Html.ValidationMessageFor(m => m.Password)*@
                     </div>
                 </div>
-                @*<div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <div class="checkbox">
-                                @Html.CheckBoxFor(m => m.RememberMe)
-                                @Html.LabelFor(m => m.RememberMe)
-                            </div>
+                <div class="form-group" id="divCaptcha" style="display:none">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div>
+                            @Html.LabelFor(m => m.Captcha)
+                            @Html.Raw(Html.GenerateCaptcha("recaptcha", "white"))
                         </div>
-                    </div>*@
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Log in" class="btn btn-warning" />
@@ -56,4 +57,22 @@
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#UserName').on('blur', function () {
+                var userName = $(this).val();
+                ajaxPost('/Account/GetUserDetails', { userName: userName }, function (res) {
+                    if (res == "False") {
+                        $('#divCaptcha').removeAttr('style');
+                    }
+                    if (res == null) {
+                        $('#divCaptcha').attr('style', 'display:none');
+                    }
+                    if (res == "True") {
+                        $('#divCaptcha').attr('style', 'display:none');
+                    }
+                });
+            })
+        });
+    </script>
 }

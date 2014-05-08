@@ -38,6 +38,8 @@ namespace PreScripds.UI.Models
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
+        [Display(Name = "Captcha")]
+        public string Captcha { get; set; }
 
     }
 

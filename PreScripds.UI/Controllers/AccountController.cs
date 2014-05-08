@@ -23,6 +23,8 @@ using PreScripds.Domain.Enums;
 using System.Configuration;
 using Recaptcha;
 using System.Net;
+using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace PreScripds.UI.Controllers
 {
@@ -46,6 +48,42 @@ namespace PreScripds.UI.Controllers
             return View();
         }
 
+        [HttpPost]
+        public string GetUserDetails(string userName)
+        {
+            string isCaptchaDisplay = null;
+            CheckInputType(userName);
+            var user = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername(userName));
+            if (user != null)
+            {
+                var ipAddress = GetClientIpAddress();
+                var userHistory = user.UserHistory.FirstOrDefault(x => x.IpAddress == ipAddress);
+                if (userHistory == null)
+                {
+                    isCaptchaDisplay = "False";
+                    return isCaptchaDisplay;
+                }
+                else
+                {
+                    isCaptchaDisplay = "True";
+                    return isCaptchaDisplay;
+                }
+            }
+            //ModelState.AddModelError("UserName", "The user name is not correct.");
+            return isCaptchaDisplay;
+        }
+
+        private void CheckInputType(string userName)
+        {
+            string MatchEmailPattern = @"^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@"
+                                                    + @"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?
+				                                                [0-9]{1,2}|25[0-5]|2[0-4][0-9])\."
+                                                    + @"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?
+				                                                [0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                                                    + @"([a-zA-Z]+[\w-]+\.)+[a-zA-Z]{2,4})$";
+            var isEmail = Regex.IsMatch(userName, MatchEmailPattern);
+        }
+
         //
         // POST: /Account/Login
         [HttpPost]
@@ -53,6 +91,7 @@ namespace PreScripds.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+
             if (ModelState.IsValid)
             {
                 var user = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername(model.UserName));

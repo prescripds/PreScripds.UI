@@ -13,5 +13,11 @@ namespace PreScripds.UI.Common
             var encriptionServcie = new EncryptionService();
             return encriptionServcie.CreatePasswordHash(password, salt);
         }
+
+        public static string CreatePasswordCapHash(string password, string salt, string captcha)
+        {
+            var encryptionService = new EncryptionService();
+            return encryptionService.CreatePasswordCapHash(password, salt, captcha);
+        }
     }
 }

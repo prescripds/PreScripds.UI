@@ -26,6 +26,7 @@ namespace PreScripds.Infrastructure.Security
 
         #region IEncryptionService Members
 
+       
         public virtual string CreateSaltKey(int size = 16)
         {
             // Generate a cryptographic random number

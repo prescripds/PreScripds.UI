@@ -6,7 +6,7 @@
                 if (data != '' && data == "True") {
                     $('#emailExistsDiv').removeAttr('style');
                     $('#emailExistsDiv').attr('style', 'display:block');
-                    $('#userNameExists').text('User Name already exists.');
+                    $('#userNameExists').text('Email already exists.');
                 }
             });
         }
