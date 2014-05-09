@@ -53,6 +53,7 @@ namespace PreScripds.UI.Controllers
         {
             string isCaptchaDisplay = null;
             var loginType = CheckInputType(userName);
+            var loginViewModel = new LoginViewModel();
             var user = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername(userName, loginType));
             if (user != null)
             {
@@ -61,11 +62,13 @@ namespace PreScripds.UI.Controllers
                 if (userHistory == null)
                 {
                     isCaptchaDisplay = "False";
+                    loginViewModel.IsCaptchaDisplay = isCaptchaDisplay.AsBool();
                     return isCaptchaDisplay;
                 }
                 else
                 {
                     isCaptchaDisplay = "True";
+                    loginViewModel.IsCaptchaDisplay = isCaptchaDisplay.AsBool();
                     return isCaptchaDisplay;
                 }
             }
@@ -96,10 +99,18 @@ namespace PreScripds.UI.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        [RecaptchaControlMvc.CaptchaValidator]
+        public ActionResult Login(LoginViewModel model, string returnUrl, bool captchaValid, string captchaErrorMessage)
         {
             if (ModelState.IsValid)
             {
+                if (model.IsCaptchaDisplay)
+                {
+                    if (captchaValid)
+                    {
+
+                    }
+                }
                 User user = new Domain.User();
                 var loginType = CheckInputType(model.UserName);
                 user = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername(model.UserName, loginType));

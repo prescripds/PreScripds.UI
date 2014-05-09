@@ -23,7 +23,7 @@ namespace PreScripds.WebServices
         User AddUser(User model);
 
         [OperationContract]
-        [WebInvoke(UriTemplate = "/User", ResponseFormat = WebMessageFormat.Xml)]
+        [WebInvoke(UriTemplate = "/User", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
         User GetUserByUsername(string loginName, LoginType loginType);
         [OperationContract]
         [WebInvoke(UriTemplate = "/EmailExist", ResponseFormat = WebMessageFormat.Xml)]

@@ -43,6 +43,7 @@
                         <input type="submit" value="Log in" class="btn btn-warning" />
                     </div>
                 </div>
+                @Html.TextBoxFor(m => m.CaptchaUserInput, new { @class = "hidden" })
                 <p>
                     @Html.ActionLink("Sign Up", "Register", null, new { @class = "registerLink" }) if you don't have an account.
                 </p>
@@ -72,7 +73,12 @@
                         $('#divCaptcha').attr('style', 'display:none');
                     }
                 });
-            })
+            });
+            $(document.body).on('blur', '#recaptcha_response_field', function () {
+                var captchaVal = $(this).val();
+                if (captchaVal != '')
+                    $('#CaptchaUserInput').val(captchaVal);
+            });
         });
     </script>
 }
