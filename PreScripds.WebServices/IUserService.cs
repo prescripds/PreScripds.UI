@@ -7,6 +7,7 @@ using System.ServiceModel.Web;
 using System.Text;
 using System.Threading.Tasks;
 using PreScripds.Domain;
+using PreScripds.Domain.Enums;
 
 namespace PreScripds.WebServices
 {
@@ -23,7 +24,7 @@ namespace PreScripds.WebServices
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/User", ResponseFormat = WebMessageFormat.Xml)]
-        User GetUserByUsername(string loginName);
+        User GetUserByUsername(string loginName, LoginType loginType);
         [OperationContract]
         [WebInvoke(UriTemplate = "/EmailExist", ResponseFormat = WebMessageFormat.Xml)]
         User CheckEmailExists(string email);

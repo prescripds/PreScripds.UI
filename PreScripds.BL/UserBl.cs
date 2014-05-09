@@ -9,6 +9,7 @@ using PreScripds.DAL;
 using PreScripds.DAL.Interface;
 using PreScripds.DAL.Repository;
 using PreScripds.Domain;
+using PreScripds.Domain.Enums;
 
 namespace PreScripds.BL
 {
@@ -40,9 +41,9 @@ namespace PreScripds.BL
             return roleFromDb;
         }
 
-        public User GetUserByUsername(string loginName)
+        public User GetUserByUsername(string loginName, LoginType loginType)
         {
-            var user = _userRepository.GetUserByUsername(loginName);
+            var user = _userRepository.GetUserByUsername(loginName, loginType);
             return user;
         }
 

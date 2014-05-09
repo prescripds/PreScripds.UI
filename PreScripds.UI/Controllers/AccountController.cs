@@ -52,8 +52,8 @@ namespace PreScripds.UI.Controllers
         public string GetUserDetails(string userName)
         {
             string isCaptchaDisplay = null;
-            CheckInputType(userName);
-            var user = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername(userName));
+            var loginType = CheckInputType(userName);
+            var user = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername(userName, loginType));
             if (user != null)
             {
                 var ipAddress = GetClientIpAddress();
@@ -73,7 +73,7 @@ namespace PreScripds.UI.Controllers
             return isCaptchaDisplay;
         }
 
-        private void CheckInputType(string userName)
+        private LoginType CheckInputType(string userName)
         {
             string MatchEmailPattern = @"^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@"
                                                     + @"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?
@@ -82,6 +82,13 @@ namespace PreScripds.UI.Controllers
 				                                                [0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
                                                     + @"([a-zA-Z]+[\w-]+\.)+[a-zA-Z]{2,4})$";
             var isEmail = Regex.IsMatch(userName, MatchEmailPattern);
+            if (isEmail)
+                return LoginType.IsEmail;
+            var mobilePatternMatch = @"^[0-9]+$";
+            var isMobile = Regex.IsMatch(userName, mobilePatternMatch);
+            if (isMobile)
+                return LoginType.IsMobile;
+            return LoginType.IsUserName;
         }
 
         //
@@ -91,16 +98,17 @@ namespace PreScripds.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-
             if (ModelState.IsValid)
             {
-                var user = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername(model.UserName));
+                User user = new Domain.User();
+                var loginType = CheckInputType(model.UserName);
+                user = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername(model.UserName, loginType));
 
                 if (user != null)
                 {
                     var userLogin = user.UserLogin.FirstOrDefault();
                     if (!user.Active)
-                        ModelState.AddModelError("", "Please enter a valid Username/Password");
+                        ModelState.AddModelError("", "Your account has been disabled. Please contact your administrator.");
                     var hashedPassword = Common.Common.CreatePasswordHash(model.Password, userLogin.SaltKey);
                     if (hashedPassword.Equals(userLogin.Password))
                     {

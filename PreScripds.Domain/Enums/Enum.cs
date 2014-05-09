@@ -42,4 +42,14 @@ namespace PreScripds.Domain.Enums
         [DataMember]
         User = 3
     }
+
+    public enum LoginType
+    {
+        [DataMember]
+        IsEmail,
+        [DataMember]
+        IsMobile,
+        [DataMember]
+        IsUserName
+    }
 }

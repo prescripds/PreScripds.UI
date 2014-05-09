@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PreScripds.Domain;
+using PreScripds.Domain.Enums;
 using PreScripds.Infrastructure.Repositories;
 
 namespace PreScripds.DAL.Interface
@@ -13,7 +14,7 @@ namespace PreScripds.DAL.Interface
         List<User> GetUsers();
         User AddUser(User user);
         Role AddRole(Role role);
-        User GetUserByUsername(string loginName);
+        User GetUserByUsername(string loginName, LoginType loginType);
         User CheckEmailExists(string email);
         List<Role> GetRole(long organizationId);
         bool CheckRoleExists(Role role);

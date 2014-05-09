@@ -12,6 +12,7 @@ using PreScripds.BL;
 using PreScripds.DAL;
 using System.Data.Entity;
 using System.Threading.Tasks;
+using PreScripds.Domain.Enums;
 
 namespace PreScripds.WebServices
 {
@@ -57,9 +58,9 @@ namespace PreScripds.WebServices
             var organizationFromDb = _userBl.AddOrganization(organization);
             return organizationFromDb;
         }
-        public User GetUserByUsername(string loginName)
+        public User GetUserByUsername(string loginName, LoginType loginType)
         {
-            var user = _userBl.GetUserByUsername(loginName);
+            var user = _userBl.GetUserByUsername(loginName, loginType);
             return user;
         }
 

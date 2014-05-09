@@ -11,6 +11,7 @@ using PreScripds.Infrastructure.Security;
 using PreScripds.Infrastructure;
 using MySql.Data.MySqlClient;
 using PreScripds.Infrastructure.Utilities;
+using PreScripds.Domain.Enums;
 
 namespace PreScripds.DAL.Repository
 {
@@ -85,18 +86,56 @@ namespace PreScripds.DAL.Repository
             return organization;
         }
 
-        public User GetUserByUsername(string loginName)
+        public User GetUserByUsername(string loginName, LoginType loginType)
         {
             var users = ContextRep.users.Include(x => x.UserLogin).Include(x => x.UserHistory).Where(x => x.Active).ToList();
             if (users.IsCollectionValid())
             {
-                var loginUser = users.Where(x => x.UserLogin.First().UserName == loginName);
+
+                User loginUser;
+                switch (loginType)
+                {
+                    case LoginType.IsUserName:
+                        loginUser = users.FirstOrDefault(x => x.UserLogin.First().UserName == loginName);
+                        return loginUser;
+                        break;
+                    case LoginType.IsMobile:
+                        loginUser = users.FirstOrDefault(x => x.Mobile == loginName.As<long>());
+                        return loginUser;
+                        break;
+                    case LoginType.IsEmail:
+                        loginUser = users.FirstOrDefault(x => x.Email == loginName);
+                        return loginUser;
+                        break;
+                }
+
+            }
+            return null;
+        }
+
+        public User GetUserByEmail(string loginName)
+        {
+            var users = ContextRep.users.Include(x => x.UserLogin).Include(x => x.UserHistory).Where(x => x.Active).ToList();
+            if (users.IsCollectionValid())
+            {
+                var loginUser = users.Where(x => x.Email == loginName);
                 if (loginUser != null)
                     return loginUser.FirstOrDefault();
             }
             return null;
         }
 
+        public User GetUserByMobile(string loginName)
+        {
+            var users = ContextRep.users.Include(x => x.UserLogin).Include(x => x.UserHistory).Where(x => x.Active).ToList();
+            if (users.IsCollectionValid())
+            {
+                var loginUser = users.Where(x => x.Mobile == loginName.As<long>());
+                if (loginUser != null)
+                    return loginUser.FirstOrDefault();
+            }
+            return null;
+        }
         public User CheckEmailExists(string email)
         {
             var users = ContextRep.users.Include(x => x.UserLogin).Where(x => x.Active && x.Email == email).ToList();
