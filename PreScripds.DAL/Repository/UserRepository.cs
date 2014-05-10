@@ -76,7 +76,7 @@ namespace PreScripds.DAL.Repository
         {
             var userHstryFmDb = ContextRep.UserHistory.FirstOrDefault(x => x.Captcha == userHistory.Captcha && x.IpAddress == userHistory.IpAddress);
 
-            if (userHistory == null)
+            if (userHstryFmDb == null)
             {
                 var userHstry = new UserHistory()
                     {

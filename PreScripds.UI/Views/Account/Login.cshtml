@@ -44,6 +44,8 @@
                     </div>
                 </div>
                 @Html.TextBoxFor(m => m.CaptchaUserInput, new { @class = "hidden" })
+                @Html.TextBoxFor(m => m.IsCaptchaDisplay, new { @class = "hidden" })
+
                 <p>
                     @Html.ActionLink("Sign Up", "Register", null, new { @class = "registerLink" }) if you don't have an account.
                 </p>
@@ -62,15 +64,19 @@
         $(document).ready(function () {
             $('#UserName').on('blur', function () {
                 var userName = $(this).val();
+
                 ajaxPost('/Account/GetUserDetails', { userName: userName }, function (res) {
                     if (res == "False") {
                         $('#divCaptcha').removeAttr('style');
+                        $('#IsCaptchaDisplay').val(true);
                     }
                     if (res == null) {
                         $('#divCaptcha').attr('style', 'display:none');
+                        $('#IsCaptchaDisplay').val(false);
                     }
                     if (res == "True") {
                         $('#divCaptcha').attr('style', 'display:none');
+                        $('#IsCaptchaDisplay').val(false);
                     }
                 });
             });

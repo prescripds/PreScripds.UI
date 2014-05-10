@@ -25,6 +25,7 @@ using Recaptcha;
 using System.Net;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using System.Data.SqlClient;
 
 namespace PreScripds.UI.Controllers
 {
@@ -150,7 +151,6 @@ namespace PreScripds.UI.Controllers
                         }
 
                         AuthenticateUser(user, userLogin);
-                        //TODO: Insert userhistory, update userlogin passwordcap with new captcha details
 
                         if (returnUrl != null)
                         {
