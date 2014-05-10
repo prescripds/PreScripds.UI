@@ -93,5 +93,11 @@ namespace PreScripds.WebServices
             var isExist = _userBl.CheckOrganizationExist(orgName);
             return isExist;
         }
+
+        public UserHistory AddUserHistory(UserHistory userHistory)
+        {
+            var userHstry = _userBl.AddUserHistory(userHistory);
+            return userHstry;
+        }
     }
 }

@@ -21,5 +21,6 @@ namespace PreScripds.DAL.Interface
         List<Department> GetDepartment(long organizationId);
         Organization AddOrganization(Organization organization);
         bool CheckOrganizationExist(string orgName);
+        UserHistory AddUserHistory(UserHistory userHistory);
     }
 }

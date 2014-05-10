@@ -55,21 +55,44 @@ namespace PreScripds.DAL.Repository
             }
             Insert(user);
             SaveChanges();
-            UpdateUserLogin(user);
+            var usrHstry = user.UserHistory.First();
+            UpdateUserLogin(usrHstry);
             return user;
         }
 
-        private void UpdateUserLogin(User user)
+        private void UpdateUserLogin(UserHistory userHistory)
         {
-            if (user.UserHistory.IsCollectionValid())
+            if (userHistory != null)
             {
-                var userHistory = user.UserHistory.First(x => x.UserId == user.UserId);
-                var userLogin = user.UserLogin.First(x => x.UserId == user.UserId);
+                var userLogin = ContextRep.user_login.First(x => x.UserId == userHistory.UserId);
                 userLogin.PasswordCap = userHistory.PasswordCap;
                 userLogin.Captcha = userHistory.Captcha;
                 DbContextExtensions.Update<UserLogin>(this._dbContext, userLogin);
                 SaveChanges();
             }
+        }
+
+        public UserHistory AddUserHistory(UserHistory userHistory)
+        {
+            var userHstryFmDb = ContextRep.UserHistory.FirstOrDefault(x => x.Captcha == userHistory.Captcha && x.IpAddress == userHistory.IpAddress);
+
+            if (userHistory == null)
+            {
+                var userHstry = new UserHistory()
+                    {
+                        IpAddress = userHistory.IpAddress,
+                        CreatedDate = DateTime.Now,
+                        Captcha = userHistory.Captcha,
+                        SaltKey = userHistory.SaltKey,
+                        UserId = userHistory.UserId,
+                        PasswordCap = userHistory.PasswordCap
+                    };
+
+                ContextRep.UserHistory.Add(userHstry);
+                ContextRep.SaveChanges();
+                UpdateUserLogin(userHstry);
+            }
+            return userHistory;
         }
 
         public Role AddRole(Role role)

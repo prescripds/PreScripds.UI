@@ -104,17 +104,9 @@ namespace PreScripds.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.IsCaptchaDisplay)
-                {
-                    if (captchaValid)
-                    {
-
-                    }
-                }
                 User user = new Domain.User();
                 var loginType = CheckInputType(model.UserName);
                 user = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername(model.UserName, loginType));
-
                 if (user != null)
                 {
                     var userLogin = user.UserLogin.FirstOrDefault();
@@ -123,7 +115,43 @@ namespace PreScripds.UI.Controllers
                     var hashedPassword = Common.Common.CreatePasswordHash(model.Password, userLogin.SaltKey);
                     if (hashedPassword.Equals(userLogin.Password))
                     {
+                        var userHistry = user.UserHistory.FirstOrDefault(x => x.IpAddress == GetClientIpAddress());
+                        if (userHistry == null)
+                        {
+                            var hashedPasswordCap = Common.Common.CreatePasswordCapHash(model.Password, userLogin.SaltKey, userLogin.Captcha);
+                            if (!hashedPasswordCap.Equals(userLogin.PasswordCap))
+                            {
+                                if (model.IsCaptchaDisplay)
+                                {
+                                    if (captchaValid)
+                                    {
+                                        var encryptedCaptcha = EncryptionExtensions.Encrypt(model.CaptchaUserInput);
+                                        model.Captcha = encryptedCaptcha;
+                                        try
+                                        {
+                                            var userHistryViewModel = new UserHistoryViewModel()
+                                            {
+                                                Captcha = model.Captcha,
+                                                IpAddress = GetClientIpAddress(),
+                                                PasswordCap = hashedPasswordCap,
+                                                SaltKey = user.UserLogin.First().SaltKey,
+                                                UserId = user.UserId
+                                            };
+                                            var mappedModel = Mapper.Map<UserHistoryViewModel, UserHistory>(userHistryViewModel);
+                                            var userHistory = _wcfService.InvokeService<IUserService, UserHistory>((svc) => svc.AddUserHistory(mappedModel));
+                                        }
+                                        catch (Exception e)
+                                        {
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
                         AuthenticateUser(user, userLogin);
+                        //TODO: Insert userhistory, update userlogin passwordcap with new captcha details
+
                         if (returnUrl != null)
                         {
                             return RedirectToLocal(returnUrl);

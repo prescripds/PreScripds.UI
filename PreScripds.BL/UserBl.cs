@@ -80,5 +80,11 @@ namespace PreScripds.BL
             var isExist = _userRepository.CheckOrganizationExist(orgName);
             return isExist;
         }
+
+        public UserHistory AddUserHistory(UserHistory userHistory)
+        {
+            var userHistry = _userRepository.AddUserHistory(userHistory);
+            return userHistry;
+        }
     }
 }

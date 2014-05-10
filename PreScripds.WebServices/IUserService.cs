@@ -39,6 +39,9 @@ namespace PreScripds.WebServices
         [WebInvoke(UriTemplate = "/AddRole", ResponseFormat = WebMessageFormat.Xml)]
         Role AddRole(Role model);
         [OperationContract]
+        [WebInvoke(UriTemplate = "/AddUserHistory", ResponseFormat = WebMessageFormat.Xml)]
+        UserHistory AddUserHistory(UserHistory userHistory);
+        [OperationContract]
         [WebInvoke(UriTemplate = "/AddOrganization", ResponseFormat = WebMessageFormat.Xml)]
         Organization AddOrganization(Organization organization);
         [OperationContract]
