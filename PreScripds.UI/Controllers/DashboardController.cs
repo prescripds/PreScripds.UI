@@ -40,7 +40,7 @@ namespace PreScripds.UI.Controllers
                 {
                     if (user.IsSuperAdmin)
                     {
-                        if (!user.OrganizationId.HasValue)
+                        if (user.OrganizationId == 0)
                         {
                             return RedirectToAction("Organization", "Dashboard");
                         }
