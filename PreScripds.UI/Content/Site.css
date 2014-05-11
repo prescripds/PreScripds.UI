@@ -129,8 +129,43 @@ input[type="checkbox"].input-validation-error {
     color: #ed9c28;
     font-size: 140%;
 }
-.error-page{ padding:20px 0px 20px 0px}
-.error-page div{ color:#fff}
-.oops{ color:#ED6131 !important; font-family:Hobo-std; font-size:38px}
-.message{ font-size:29px; font-weight:normal}
-.error-page  a{  color:#ED6131; }
+
+.error-page {
+    padding: 20px 0px 20px 0px;
+}
+
+    .error-page div {
+        color: #fff;
+    }
+
+.oops {
+    color: #ED6131 !important;
+    font-family: Hobo-std;
+    font-size: 38px;
+}
+
+.message {
+    font-size: 29px;
+    font-weight: normal;
+}
+
+.error-page a {
+    color: #ED6131;
+}
+
+.progress-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.loadingDiv {
+    position: absolute;
+    top: 20%;
+    bottom: 0;
+    background-color: black;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    z-index:-1;
+}

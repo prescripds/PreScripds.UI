@@ -149,6 +149,10 @@ namespace PreScripds.UI.Controllers
                                 }
                             }
                         }
+                        else
+                        {
+
+                        }
 
                         AuthenticateUser(user, userLogin);
 

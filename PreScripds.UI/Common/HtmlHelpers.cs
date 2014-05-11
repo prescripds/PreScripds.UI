@@ -350,11 +350,11 @@ namespace PreScripds.UI.Common
         //    }
         //}
 
-        //public static MvcHtmlString ProgressBar(this HtmlHelper htmlHelper)
-        //{
-        //    var urlHelper = new UrlHelper(htmlHelper.ViewContext.RequestContext);
-        //    return MvcHtmlString.Create(string.Format(@"<div class='loadingDiv' style='display: none;'><img src='{0}' class='progress-img' /></div>", urlHelper.Content("~/Images/ajax-loader.gif")));
-        //}
+        public static MvcHtmlString ProgressBar(this HtmlHelper htmlHelper)
+        {
+            var urlHelper = new UrlHelper(htmlHelper.ViewContext.RequestContext);
+            return MvcHtmlString.Create(string.Format(@"<div class='loadingDiv' style='display: none;'><img src='{0}' class='progress-img' /></div>", urlHelper.Content("~/Images/ajax-loader.gif")));
+        }
     }
 }
 

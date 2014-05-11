@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using PreScripds.UI.Common;
+<!DOCTYPE html>
 <html>
 <head>
     <title>PreScripds</title>
@@ -54,5 +55,8 @@
     @Scripts.Render("~/bundles/bootstrap")
     <script src="~/Scripts/ajax.js"></script>
     @RenderSection("scripts", required: false)
+    @Html.ProgressBar()
+    <script src="~/Scripts/Common.js"></script>
 </body>
+
 </html>

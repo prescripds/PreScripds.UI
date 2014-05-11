@@ -247,6 +247,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\about.jpg" />
+    <Content Include="Images\ajax-loader.gif" />
     <Content Include="Images\arrow-left.png" />
     <Content Include="Images\arrow-right.png" />
     <Content Include="Images\black_bg.fw.png" />
@@ -306,6 +307,7 @@
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\clndr.js" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
+    <Content Include="Scripts\Common.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
     <Content Include="Scripts\jquery-2.1.0.min.map" />
@@ -328,6 +330,7 @@
     <Content Include="Scripts\site.js" />
     <Content Include="Scripts\underscore-min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Scripts\PreScripds.Login.js" />
     <None Include="Service References\MasterServiceReference\MasterService.disco" />
     <None Include="Service References\MasterServiceReference\configuration91.svcinfo" />
     <None Include="Service References\MasterServiceReference\configuration.svcinfo" />

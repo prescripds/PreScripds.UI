@@ -60,11 +60,12 @@
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('#UserName').on('blur', function () {
                 var userName = $(this).val();
-
+                showProgressBar();
                 ajaxPost('/Account/GetUserDetails', { userName: userName }, function (res) {
                     if (res == "False") {
                         $('#divCaptcha').removeAttr('style');
@@ -78,6 +79,7 @@
                         $('#divCaptcha').attr('style', 'display:none');
                         $('#IsCaptchaDisplay').val(false);
                     }
+                    hideProgressBar();
                 });
             });
             $(document.body).on('blur', '#recaptcha_response_field', function () {
