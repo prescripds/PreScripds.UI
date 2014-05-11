@@ -117,41 +117,45 @@ namespace PreScripds.UI.Controllers
                     if (hashedPassword.Equals(userLogin.Password))
                     {
                         var userHistry = user.UserHistory.FirstOrDefault(x => x.IpAddress == GetClientIpAddress());
+                        var hashedPasswordCap = Common.Common.CreatePasswordCapHash(model.Password, userLogin.SaltKey, userLogin.Captcha);
                         if (userHistry == null)
                         {
-                            var hashedPasswordCap = Common.Common.CreatePasswordCapHash(model.Password, userLogin.SaltKey, userLogin.Captcha);
-                            if (!hashedPasswordCap.Equals(userLogin.PasswordCap))
+                            //if (!hashedPasswordCap.Equals(userLogin.PasswordCap))
+                            //{
+                            if (model.IsCaptchaDisplay)
                             {
-                                if (model.IsCaptchaDisplay)
+                                if (captchaValid)
                                 {
-                                    if (captchaValid)
+                                    var encryptedCaptcha = EncryptionExtensions.Encrypt(model.CaptchaUserInput);
+                                    model.Captcha = encryptedCaptcha;
+                                    try
                                     {
-                                        var encryptedCaptcha = EncryptionExtensions.Encrypt(model.CaptchaUserInput);
-                                        model.Captcha = encryptedCaptcha;
-                                        try
+                                        var userHistryViewModel = new UserHistoryViewModel()
                                         {
-                                            var userHistryViewModel = new UserHistoryViewModel()
-                                            {
-                                                Captcha = model.Captcha,
-                                                IpAddress = GetClientIpAddress(),
-                                                PasswordCap = hashedPasswordCap,
-                                                SaltKey = user.UserLogin.First().SaltKey,
-                                                UserId = user.UserId
-                                            };
-                                            var mappedModel = Mapper.Map<UserHistoryViewModel, UserHistory>(userHistryViewModel);
-                                            var userHistory = _wcfService.InvokeService<IUserService, UserHistory>((svc) => svc.AddUserHistory(mappedModel));
-                                        }
-                                        catch (Exception e)
-                                        {
+                                            Captcha = model.Captcha,
+                                            IpAddress = GetClientIpAddress(),
+                                            PasswordCap = hashedPasswordCap,
+                                            SaltKey = user.UserLogin.First().SaltKey,
+                                            UserId = user.UserId
+                                        };
+                                        var mappedModel = Mapper.Map<UserHistoryViewModel, UserHistory>(userHistryViewModel);
+                                        var userHistory = _wcfService.InvokeService<IUserService, UserHistory>((svc) => svc.AddUserHistory(mappedModel));
+                                    }
+                                    catch (Exception e)
+                                    {
 
-                                        }
                                     }
                                 }
                             }
+                            //}
                         }
                         else
                         {
-
+                            var passwordCapFromDb = userHistry.PasswordCap;
+                            if (passwordCapFromDb.Equals(hashedPasswordCap))
+                            {
+                                _wcfService.InvokeService<IUserService>((svc) => svc.UpdateUserLogin(userHistry));
+                            }
                         }
 
                         AuthenticateUser(user, userLogin);

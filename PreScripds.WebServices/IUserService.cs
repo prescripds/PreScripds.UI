@@ -50,5 +50,8 @@ namespace PreScripds.WebServices
         [OperationContract]
         [WebInvoke(UriTemplate = "/OrganizationExist", ResponseFormat = WebMessageFormat.Xml)]
         bool CheckOrganizationExist(string orgName);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/UpdateUserLogin", ResponseFormat = WebMessageFormat.Xml)]
+        void UpdateUserLogin(UserHistory userHistory);
     }
 }

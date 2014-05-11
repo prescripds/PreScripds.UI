@@ -99,5 +99,10 @@ namespace PreScripds.WebServices
             var userHstry = _userBl.AddUserHistory(userHistory);
             return userHstry;
         }
+
+        public void UpdateUserLogin(UserHistory userHistory)
+        {
+            _userBl.UpdateUserLogin(userHistory);
+        }
     }
 }

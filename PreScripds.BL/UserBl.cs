@@ -86,5 +86,10 @@ namespace PreScripds.BL
             var userHistry = _userRepository.AddUserHistory(userHistory);
             return userHistry;
         }
+
+        public void UpdateUserLogin(UserHistory userHistory)
+        {
+            _userRepository.UpdateUserLogin(userHistory);
+        }
     }
 }

@@ -60,7 +60,7 @@ namespace PreScripds.DAL.Repository
             return user;
         }
 
-        private void UpdateUserLogin(UserHistory userHistory)
+        public void UpdateUserLogin(UserHistory userHistory)
         {
             if (userHistory != null)
             {
