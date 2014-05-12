@@ -76,6 +76,14 @@
             <div class="row">
                 <div class="col-md-4 col-sm-6">
                     <div class="form-group">
+                        <label class="control-label" for="FirstName">Self Approval</label>
+                        @Html.TextBoxFor(m => m.IsSelfie, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
                         <label class="control-label" for="FirstName">Date for verification by us</label>
                         @Html.TextBoxFor(m => m.VerificationDate, new { @class = "form-control" })
                     </div>

@@ -40,5 +40,7 @@ namespace PreScripds.UI.Models
         public DateTime? QuickViewEndTime { get; set; }
         public bool IsExtendQuickView { get; set; }
 
+        public bool IsSelfie { get; set; }
+
     }
 }
