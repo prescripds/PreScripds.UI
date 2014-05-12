@@ -47,6 +47,7 @@
     <Compile Include="Master\SecurityQuestion.cs" />
     <Compile Include="Master\State.cs" />
     <Compile Include="Organization.cs" />
+    <Compile Include="OrganizationDoc.cs" />
     <Compile Include="Permission.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="User.cs" />

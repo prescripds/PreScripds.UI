@@ -50,5 +50,11 @@ namespace PreScripds.Domain
         public System.DateTime? IsQuickViewTime { get; set; }
         [DataMember]
         public long? NoOfQuickView { get; set; }
+
+        [DataMember]
+        public bool IsSelfie { get; set; }
+
+        [DataMember]
+        public virtual ICollection<OrganizationDoc> OrganizationDoc { get; set; }
     }
 }
