@@ -77,11 +77,11 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="form-group">
                         <label class="control-label" for="FirstName">Self Approval</label>
-                        @Html.TextBoxFor(m => m.IsSelfie, new { @class = "form-control" })
+                        @Html.CheckBoxFor(m => m.IsSelfie, new { @tooltip = "Selfe" })
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" id="noSelfie">
                 <div class="col-md-4 col-sm-6">
                     <div class="form-group">
                         <label class="control-label" for="FirstName">Date for verification by us</label>
@@ -93,6 +93,13 @@
                         <label class="control-label" for="LastName">Please @Html.ActionLink("Click Here", "CheckList", "Dashboard") to download the check list required during verification by us.</label>
                     </div>
                 </div>
+            </div>
+            <div class="row" id="selfie" style="display:none">
+
+                <div class="form-group">
+                    <p style="border: solid 1px #2FB73F; color: #2FB73F; padding: 5px; margin-right: 8%; margin-left: 1%;">By clicking on Self Approval, You have agreed to Self Approval terms &amp; conditions. Please contact us for further clarifications.</p>
+                </div>
+
             </div>
         </div>
 
@@ -150,6 +157,19 @@
     <script type="text/javascript">
         $(document).ready(function () {
             @*@Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))*@
+            $('#IsSelfie').on('click', function () {
+                var checked = $(this).is(':checked');
+                if (checked) {
+                    $('#noSelfie').attr('style', 'display:none');
+                    $('#selfie').removeAttr('style');
+                }
+                else {
+                    $('#noSelfie').removeAttr('style');
+                    $('#selfie').attr('style', 'display:none');
+                }
+                alert(checked);
+
+            });
             var orgVal = $('#OrganizationType').val();
             if (orgVal == "") {
                 $('#organizationDtlsN').attr('style', 'display:none');

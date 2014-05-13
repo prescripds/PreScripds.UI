@@ -363,6 +363,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Views\Static\PrivacyPolicy.html" />
+    <Content Include="Views\Static\TACSelfApproval.html" />
     <Content Include="Views\Static\TermsAndCondition.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
