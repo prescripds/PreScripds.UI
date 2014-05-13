@@ -279,6 +279,7 @@
     <Content Include="Images\mail-hover.png" />
     <Content Include="Images\mail.png" />
     <Content Include="Images\nav.png" />
+    <Content Include="Images\no.gif" />
     <Content Include="Images\profile_img150x150.jpg" />
     <Content Include="Images\profile_img40x40.jpg" />
     <Content Include="Images\resized_535dc721588b0.jpg" />

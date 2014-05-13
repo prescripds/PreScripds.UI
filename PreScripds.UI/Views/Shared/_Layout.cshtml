@@ -8,6 +8,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -31,10 +32,17 @@
                     <li><a href="#About" title="About"><span class="glyphicon glyphicon-cog" title="About"></span></a></li>
                     <li><a href="#Contact" title="About"><span class="glyphicon glyphicon-earphone" title="Contact"></span></a></li>
                 </ul>
+                <noscript>
+                    <div style="border: solid 1px #2FB73F; background: #FFFCDF; text-align:center;margin-left:30%">
+                        <img src="~/Images/no.gif" width="25" height="25" alt="javascript disabled" />
+                        <b style="font-size:large;color:red">JavaScript is disabled on your computer.</b> For complete view of this page it is necessary to enable JavaScript. Here are the <a href="http://www.enable-javascript.com" target="_blank"> instructions how to enable JavaScript in your web browser.</a>
+                    </div>
+                </noscript>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
+
     <div id="Home">
         <div>
             <div>
