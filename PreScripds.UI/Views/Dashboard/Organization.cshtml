@@ -95,11 +95,13 @@
                 </div>
             </div>
             <div class="row" id="selfie" style="display:none">
-
                 <div class="form-group">
                     <p style="border: solid 1px #2FB73F; color: #2FB73F; padding: 5px; margin-right: 8%; margin-left: 1%;">By clicking on Self Approval, You have agreed to Self Approval terms &amp; conditions. Please contact us for further clarifications.</p>
                 </div>
-
+            </div>
+            <div class="row">
+                @Html.Partial("Partials/_OrganizationDocuments", Model.OrganizationDocumentViewModel)
+                @* add org doc partial here*@
             </div>
         </div>
 
