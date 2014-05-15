@@ -128,8 +128,17 @@ namespace PreScripds.UI.Controllers
         [HttpGet]
         public ActionResult Organization()
         {
-            var organizationViewModel = new OrganizationViewModel();
+            var organizationViewModel = new OrganizationViewModel()
+            {
+                OrganizationDocumentViewModel = new OrganizationDocumentViewModel()
+            };
             return View(organizationViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult AddOrgDoc(OrganizationDocumentViewModel orgDocViewModel)
+        {
+            return View("Organization");
         }
         [PreScripds.UI.Common.Authorize]
         [HttpPost]
