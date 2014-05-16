@@ -6,12 +6,13 @@
     Layout = "~/Views/Shared/_OpenLayout.cshtml";
 }
 
-@using (Html.BeginForm("Organization", "Dashboard", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
 
-    @Html.AntiForgeryToken()
-    <div class="col-md-12 blackBg">
 
+
+<div class="col-md-12 blackBg">
+    @using (Html.BeginForm("Organization", "Dashboard", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
         @Html.ValidationSummary()<br />
         <div class="validation-summary-errors" style="display:none" id="emailExistsDiv">
             <ul>
@@ -100,18 +101,7 @@
                     </div>
                 </div>*@
 
-            @*<div class="row" id="selfie" style="display: none; ">
-                @using (Ajax.BeginForm("AddOrgDoc", "Dashboard", new AjaxOptions() { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "divAddOrgDoc" }, new { id = "frmAddOrgDoc" }))
-                {
-                    <div id="divAddOrgDoc">
-                        @Html.Partial("Partials/_OrganizationDocuments", Model.OrganizationDocumentViewModel)
-                    </div>
-                }
 
-
-
-                @* add org doc partial here*@
-            </div>*@
             <div class="row">
 
             </div>
@@ -164,9 +154,20 @@
                 <button type="reset" class="btn btn-warning pull-right" value="Clear">Clear</button>
             </div>
         </div>
+    }
+    <div class="row" id="selfie" style="display: none; ">
+        @using (Ajax.BeginForm("AddOrgDoc", "Dashboard", null, new AjaxOptions() { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "divAddOrgDoc", OnSuccess = "ajaxFrmSuccess" }, new { id = "frmAddOrgDoc" }))
+        {
+            @Html.Partial("Partials/_OrganizationDocuments", Model.OrganizationDocumentViewModel)
+            <div id="divAddOrgDoc"></div>
+        }
     </div>
-    @Html.MessageDialogRedirect(Model.Message, "AddRole", "Dashboard", true)
-}
+</div>
+@Html.MessageDialogRedirect(Model.Message, "AddRole", "Dashboard", true)
+
+
+
+
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
@@ -186,6 +187,11 @@
                 alert(checked);
 
             });
+            //$(document.body).on('click', '#btnAddOrgDoc', function () {
+            //    var $frm = $('#frmAddOrgDoc');
+            //  //  $frm.submit();
+
+            //});
             var orgVal = $('#OrganizationType').val();
             if (orgVal == "") {
                 $('#organizationDtlsN').attr('style', 'display:none');
@@ -213,6 +219,10 @@
                 }
             });
         });
+
+        window.ajaxFrmSuccess = function (htmlPartial) {
+            alert('success');
+        };
 
     </script>
 }

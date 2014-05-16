@@ -9,7 +9,8 @@
     <meta name="keywords" content="" />
     <noscript>For full functionality of this page it is necessary to enable JavaScript. Here are the <a href="http://www.enable-javascript.com" target="_blank"> instructions how to enable JavaScript in your web browser</a></noscript>
     @Styles.Render("~/Content/css")
-    <script src="~/Scripts/jquery-2.1.0.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @*<script src="~/Scripts/jquery-2.1.0.js"></script>*@
     @Scripts.Render("~/bundles/modernizr")
     <script type="text/javascript">
 
@@ -53,7 +54,7 @@
     </div>
     @Html.Partial("Partials/_Footer")
     @{ Html.RenderAction("AppSettings", "Base"); }
-    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     <script src="~/Scripts/ajax.js"></script>
     @RenderSection("scripts", required: false)

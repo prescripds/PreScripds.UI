@@ -16,7 +16,7 @@ using PreScripds.Domain.Enums;
 
 namespace PreScripds.UI.Controllers
 {
-    [PreScripds.UI.Common.Authorize]
+
     public class DashboardController : BaseController
     {
         private WcfServiceInvoker _wcfService;
@@ -136,10 +136,11 @@ namespace PreScripds.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddOrgDoc(OrganizationDocumentViewModel orgDocViewModel)
+        public ActionResult AddOrgDoc(OrganizationDocumentViewModel orgDocViewModel, string buttonType)
         {
-            return View("Organization");
+            return PartialView("_OrganizationDocuments", orgDocViewModel);
         }
+
         [PreScripds.UI.Common.Authorize]
         [HttpPost]
         public ActionResult Organization(OrganizationViewModel orgViewModel)
