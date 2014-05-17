@@ -43,6 +43,6 @@ namespace PreScripds.UI.Models
         public bool IsSelfie { get; set; }
 
         public OrganizationDocumentViewModel OrganizationDocumentViewModel { get; set; }
-        //public List<OrganizationDocumentViewModel> OrganizationDocumentViewModels { get; set; }
+        public List<OrganizationDocumentViewModel> OrganizationDocumentViewModels { get; set; }
     }
 }
