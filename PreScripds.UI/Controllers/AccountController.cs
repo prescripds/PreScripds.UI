@@ -415,6 +415,7 @@ namespace PreScripds.UI.Controllers
         public ActionResult LogOff()
         {
             SignOut();
+            SessionContext.CurrentUser = null;
             //AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }

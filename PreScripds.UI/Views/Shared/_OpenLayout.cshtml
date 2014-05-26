@@ -45,6 +45,11 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav pull-right">
                     <li><a href="@Url.Action("Index","Home")" title="Home"><span class="glyphicon glyphicon-home" title="Home"></span></a></li>
+                    @if (SessionContext.CurrentUser != null)
+                    {
+                        <li style="color:black">Namaste! @SessionContext.CurrentUser.UserLogin.First().UserName</li>
+                    }
+
                 </ul>
             </div>
         </div>

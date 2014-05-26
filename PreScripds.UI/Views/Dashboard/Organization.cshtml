@@ -1,13 +1,11 @@
 ﻿@model PreScripds.UI.Models.OrganizationViewModel
 @using PreScripds.UI.Common;
 @using PreScripds.Domain;
+@using PreScripds.Infrastructure;
 @{
     ViewBag.Title = "Organization";
     Layout = "~/Views/Shared/_OpenLayout.cshtml";
 }
-
-
-
 
 <div class="col-md-12 blackBg">
     @using (Html.BeginForm("Organization", "Dashboard", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -77,7 +75,7 @@
             <div class="row">
                 <div class="col-md-4 col-sm-6">
                     <div class="form-group">
-                        <label class="control-label" for="FirstName">Self Approval</label>
+                        <label class="control-label" for="FirstName">Self Certification</label>
                         @Html.CheckBoxFor(m => m.IsSelfie, new { @tooltip = "Selfe" })
                     </div>
                 </div>
@@ -85,13 +83,13 @@
             <div class="row" id="noSelfie">
                 <div class="col-md-4 col-sm-6">
                     <div class="form-group">
-                        <label class="control-label" for="FirstName">Date for verification by us</label>
+                        <label class="control-label" for="FirstName">Date for certification by us</label>
                         @Html.TextBoxFor(m => m.VerificationDate, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6">
                     <div class="form-group">
-                        <label class="control-label" for="LastName">Please @Html.ActionLink("Click Here", "CheckList", "Dashboard") to download the check list required during verification by us.</label>
+                        <label class="control-label" for="LastName">Please @Html.ActionLink("Click Here", "CheckList", "Dashboard") to download the check list required during certification by us.</label>
                     </div>
                 </div>
             </div>
@@ -170,17 +168,16 @@
                 <div class="table-container">
                     <div class="table-responsive">
                         <table width="100%" class="custom-table responsive">
-
                             <thead>
                                 <tr class="header-tr">
                                     <th>
-                                        @Html.DisplayNameFor(x => Model.OrganizationDocumentViewModel.OrganizationDocumentName)
+                                        Document Name
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(x => Model.OrganizationDocumentViewModel.DocumentDescription)
+                                        Document Description
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(x => Model.OrganizationDocumentViewModel.Document)
+                                        Document
                                     </th>
                                     <th>@Html.Label("Action")</th>
                                 </tr>
@@ -188,34 +185,34 @@
                             <tbody>
                                 @for (int i = 0; i < Model.OrganizationDocumentViewModels.Count; i++)
                                 {
-                                    <tr>
-                                        <td>
-                                            <div class="ellipsis-div" title="@Model.OrganizationDocumentViewModels[i].OrganizationDocumentName">
-                                                @* @Html.ActionLink(Model.PubSearchResult[i].Id.ToString(), "Pub", new { id = EncryptionExtensions.Encrypt(Model.PubSearchResult[i].Id.ToString()) })*@
-                                                @Html.TextBoxFor(x => Model.OrganizationDocumentViewModels[i].OrganizationDocumentName)
-                                                @Html.TextBoxFor(x => Model.OrganizationDocumentViewModels[i].OrganizationDocumentId, new { @class = "hidden" })
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="ellipsis-div" title="@Model.OrganizationDocumentViewModels[i].DocumentDescription">
-                                                @Html.TextBoxFor(x => Model.OrganizationDocumentViewModels[i].DocumentDescriptionDocumentDescription)
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="ellipsis-div" title="@Model.OrganizationDocumentViewModels[i].Document">
+                                <tr>
+                                    <td>
+                                        <div class="ellipsis-div" title="@Model.OrganizationDocumentViewModels[i].OrganizationDocumentName">
+                                            @* @Html.ActionLink(Model.PubSearchResult[i].Id.ToString(), "Pub", new { id = EncryptionExtensions.Encrypt(Model.PubSearchResult[i].Id.ToString()) })*@
+                                            @Html.TextBoxFor(x => Model.OrganizationDocumentViewModels[i].OrganizationDocumentName)
+                                            @Html.TextBoxFor(x => Model.OrganizationDocumentViewModels[i].OrganizationDocumentId, new { @class = "hidden" })
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ellipsis-div" title="@Model.OrganizationDocumentViewModels[i].DocumentDescription">
+                                            @Html.TextBoxFor(x => Model.OrganizationDocumentViewModels[i].DocumentDescription)
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ellipsis-div" title="@Model.OrganizationDocumentViewModels[i].Document">
 
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="ellipsis-div" title="@Model.OrganizationDocumentViewModels[i].IsActive">
-                                                @Html.TextBoxFor(x => Model.OrganizationDocumentViewModels[i].IsActive)
-                                            </div>
-                                        </td>
-                                        <td class="linkedData">
-                                            <a href="@Url.Action("Pub", "Pub", new { pubId = EncryptionExtensions.Encrypt(Model.PubSearchResult[i].Id.ToString()) })">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ellipsis-div" title="@Model.OrganizationDocumentViewModels[i].IsActive">
+                                            @Html.TextBoxFor(x => Model.OrganizationDocumentViewModels[i].IsActive)
+                                        </div>
+                                    </td>
+                                    <td class="linkedData">
+                                        @*<a href="@Url.Action("Pub", "Pub", new { pubId = EncryptionExtensions.Encrypt(Model.PubSearchResult[i].Id.ToString()) })">
                                                 <div class="edit-icon" title="edit"></div>
-                                            </a>
-                                    </tr>
+                                            </a>*@
+                                </tr>
                                 }
 
 
@@ -223,33 +220,16 @@
                         </table>
                     </div>
                 </div>
-                @Html.TextBoxFor(x => Model.Status, new { @class = "hidden" })
-                @*@Html.Hidden("PrevPageIndex",Model.CurrentPage, new { @class = "hidden" })*@
-                @Html.TextBoxFor(x => Model.RegionId, new { @class = "hidden", name = "txtRegionId" })
-                @Html.TextBoxFor(x => Model.CityId, new { @class = "hidden" })
-                @Html.TextBoxFor(x => Model.CurrentPage, new { @class = "hidden" })
-                @Html.TextBoxFor(x => Model.PubName, new { @class = "hidden" })
-                @Html.TextBoxFor(x => Model.UserId, new { @class = "hidden" })
-                @Html.TextBoxFor(x => Model.UserName, new { @class = "hidden" })
-                @Html.TextBoxFor(x => Model.SortOrder, new { @class = "hidden" })
-                @Html.TextBoxFor(x => Model.SortColumn, new { @class = "hidden" })
-
-
-                @if (Model.HasMoreResults)
-                {
-                    <a id="lnkshowmore">
-                        <div class="showMore" title="SHOW MORE" href="javascript:void(0)">SHOW MORE</div>
-                    </a>
-
-                }
-
-
             </div>
         </div>
     }
 
 </div>
+@* if doc collectionvalid, redirect to timelineorg doc page. with next button which redirects to Addrole page if der is no role added.*@
+@*@if (Model.OrganizationDocumentViewModels.IsCollectionValid())
+    {
 @Html.MessageDialogRedirect(Model.Message, "AddRole", "Dashboard", true)
+}*@
 
 
 
@@ -265,12 +245,13 @@
                     $('#noSelfie').attr('style', 'display:none');
                     $('#selfie').removeAttr('style');
                     $('#selfie').attr('style', 'border:1px solid white;padding:10px;');
+                    $('#buttons').attr('style', 'display:none');
                 }
                 else {
                     $('#noSelfie').removeAttr('style');
                     $('#selfie').attr('style', 'display:none');
+                    $('#buttons').removeAttr('style');
                 }
-                alert(checked);
 
             });
             //$(document.body).on('click', '#btnAddOrgDoc', function () {
@@ -307,7 +288,7 @@
         });
 
         window.ajaxFrmSuccess = function (htmlPartial) {
-            alert('success');
+            //alert('success');
         };
 
     </script>
