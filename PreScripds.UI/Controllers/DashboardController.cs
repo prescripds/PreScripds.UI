@@ -214,6 +214,12 @@ namespace PreScripds.UI.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult OrganizationDocs()
+        {
+            return View();
+        }
+
         private bool CheckOrganizationExists(string orgName)
         {
             var organization = _wcfService.InvokeService<IUserService, bool>((svc) => svc.CheckOrganizationExist(orgName));

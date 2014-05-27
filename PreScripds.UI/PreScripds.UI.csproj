@@ -243,6 +243,8 @@
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\nav.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\Timeline\normalize.css" />
+    <Content Include="Content\Timeline\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -272,6 +274,7 @@
     <Content Include="Images\invites-hover.png" />
     <Content Include="Images\invites.png" />
     <Content Include="Images\likes.png" />
+    <Content Include="Images\loading.png" />
     <Content Include="Images\location.png" />
     <Content Include="Images\lock.png" />
     <Content Include="Images\loginArrow.png" />
@@ -297,6 +300,7 @@
     <Content Include="Images\views.png" />
     <Content Include="Images\waves.gif" />
     <Content Include="Scripts\ajax.js" />
+    <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -414,6 +418,7 @@
     <Content Include="Views\Dashboard\Organization.cshtml" />
     <Content Include="Views\Shared\AccessDenied.cshtml" />
     <Content Include="Views\Dashboard\Partials\_OrganizationDocuments.cshtml" />
+    <Content Include="Views\Dashboard\OrganizationDocs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
