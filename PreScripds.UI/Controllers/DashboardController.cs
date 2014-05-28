@@ -130,7 +130,8 @@ namespace PreScripds.UI.Controllers
         {
             var organizationViewModel = new OrganizationViewModel()
             {
-                OrganizationDocumentViewModel = new OrganizationDocumentViewModel()
+                OrganizationDocumentViewModel = new OrganizationDocumentViewModel(),
+                OrganizationDocumentViewModels = new List<OrganizationDocumentViewModel>()
             };
             return View(organizationViewModel);
         }
@@ -138,6 +139,11 @@ namespace PreScripds.UI.Controllers
         [HttpPost]
         public ActionResult AddOrgDoc(OrganizationDocumentViewModel orgDocViewModel, string buttonType)
         {
+            var file = Request.Files[0];
+            if (orgDocViewModel != null)
+            {
+
+            }
             return PartialView("_OrganizationDocuments", orgDocViewModel);
         }
 
@@ -217,7 +223,8 @@ namespace PreScripds.UI.Controllers
         [HttpGet]
         public ActionResult OrganizationDocs()
         {
-            return View();
+            var orgDocViewModel = new OrganizationDocumentViewModel();
+            return View(orgDocViewModel);
         }
 
         private bool CheckOrganizationExists(string orgName)

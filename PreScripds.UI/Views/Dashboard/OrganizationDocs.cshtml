@@ -11,6 +11,10 @@
             <h2>Organization Address</h2>
         </div>
     </aside>
+    @using (Html.BeginForm("AddOrgDoc", "Dashboard", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+    {
+        @Html.Partial("Partials/_OrganizationDocuments")
+    }
     <div class="content">
         <div class="portfolio-item group first">
             <div class="portfolio-info">

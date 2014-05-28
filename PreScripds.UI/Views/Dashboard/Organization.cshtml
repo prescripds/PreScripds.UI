@@ -153,83 +153,20 @@
             </div>
         </div>
     }
-    <div class="row" id="selfie" style="display: none; ">
-        @using (Ajax.BeginForm("AddOrgDoc", "Dashboard", null, new AjaxOptions() { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "divAddOrgDoc", OnSuccess = "ajaxFrmSuccess" }, new { id = "frmAddOrgDoc" }))
-        {
-            @Html.Partial("Partials/_OrganizationDocuments", Model.OrganizationDocumentViewModel)
-            <div id="divAddOrgDoc">
-            </div>
-        }
-    </div>
-    @if (Model.OrganizationDocumentViewModels.IsCollectionValid())
-    {
-        <div class="row">
-            <div class="col-md-12">
-                <div class="table-container">
-                    <div class="table-responsive">
-                        <table width="100%" class="custom-table responsive">
-                            <thead>
-                                <tr class="header-tr">
-                                    <th>
-                                        Document Name
-                                    </th>
-                                    <th>
-                                        Document Description
-                                    </th>
-                                    <th>
-                                        Document
-                                    </th>
-                                    <th>@Html.Label("Action")</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @for (int i = 0; i < Model.OrganizationDocumentViewModels.Count; i++)
-                                {
-                                <tr>
-                                    <td>
-                                        <div class="ellipsis-div" title="@Model.OrganizationDocumentViewModels[i].OrganizationDocumentName">
-                                            @* @Html.ActionLink(Model.PubSearchResult[i].Id.ToString(), "Pub", new { id = EncryptionExtensions.Encrypt(Model.PubSearchResult[i].Id.ToString()) })*@
-                                            @Html.TextBoxFor(x => Model.OrganizationDocumentViewModels[i].OrganizationDocumentName)
-                                            @Html.TextBoxFor(x => Model.OrganizationDocumentViewModels[i].OrganizationDocumentId, new { @class = "hidden" })
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="ellipsis-div" title="@Model.OrganizationDocumentViewModels[i].DocumentDescription">
-                                            @Html.TextBoxFor(x => Model.OrganizationDocumentViewModels[i].DocumentDescription)
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="ellipsis-div" title="@Model.OrganizationDocumentViewModels[i].Document">
-
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="ellipsis-div" title="@Model.OrganizationDocumentViewModels[i].IsActive">
-                                            @Html.TextBoxFor(x => Model.OrganizationDocumentViewModels[i].IsActive)
-                                        </div>
-                                    </td>
-                                    <td class="linkedData">
-                                        @*<a href="@Url.Action("Pub", "Pub", new { pubId = EncryptionExtensions.Encrypt(Model.PubSearchResult[i].Id.ToString()) })">
-                                                <div class="edit-icon" title="edit"></div>
-                                            </a>*@
-                                </tr>
-                                }
-
-
-                            </tbody>
-                        </table>
-                    </div>
+    @*<div class="row" id="selfie" style="display: none; ">
+            @using (Ajax.BeginForm("AddOrgDoc", "Dashboard", null, new AjaxOptions() { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "divAddOrgDoc", OnSuccess = "ajaxFrmSuccess" }, new { id = "frmAddOrgDoc", enctype = "multipart/form-data" }))
+            {
+                @Html.Partial("Partials/_OrganizationDocuments", Model.OrganizationDocumentViewModel)
+                <div id="divAddOrgDoc">
                 </div>
-            </div>
-        </div>
-    }
-
+            }
+        </div>*@
 </div>
 @* if doc collectionvalid, redirect to timelineorg doc page. with next button which redirects to Addrole page if der is no role added.*@
 @*@if (Model.OrganizationDocumentViewModels.IsCollectionValid())
-    {
-@Html.MessageDialogRedirect(Model.Message, "AddRole", "Dashboard", true)
-}*@
+        {
+    @Html.MessageDialogRedirect(Model.Message, "AddRole", "Dashboard", true)
+    }*@
 
 
 
@@ -239,26 +176,26 @@
         $(document).ready(function () {
 
             @*@Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))*@
-            $('#IsSelfie').on('click', function () {
-                var checked = $(this).is(':checked');
-                if (checked) {
-                    $('#noSelfie').attr('style', 'display:none');
-                    $('#selfie').removeAttr('style');
-                    $('#selfie').attr('style', 'border:1px solid white;padding:10px;');
-                    $('#buttons').attr('style', 'display:none');
-                }
-                else {
-                    $('#noSelfie').removeAttr('style');
-                    $('#selfie').attr('style', 'display:none');
-                    $('#buttons').removeAttr('style');
-                }
-
-            });
+            //$('#IsSelfie').on('click', function () {
+            //    var checked = $(this).is(':checked');
+            //    if (checked) {
+            //        $('#noSelfie').attr('style', 'display:none');
+            //        $('#selfie').removeAttr('style');
+            //        $('#selfie').attr('style', 'border:1px solid white;padding:10px;');
+            //        $('#buttons').attr('style', 'display:none');
+            //    }
+            //    else {
+            //        $('#noSelfie').removeAttr('style');
+            //        $('#selfie').attr('style', 'display:none');
+            //        $('#buttons').removeAttr('style');
+            //    }
+            //});
             //$(document.body).on('click', '#btnAddOrgDoc', function () {
             //    var $frm = $('#frmAddOrgDoc');
             //  //  $frm.submit();
 
             //});
+
             var orgVal = $('#OrganizationType').val();
             if (orgVal == "") {
                 $('#organizationDtlsN').attr('style', 'display:none');
@@ -287,9 +224,9 @@
             });
         });
 
-        window.ajaxFrmSuccess = function (htmlPartial) {
-            //alert('success');
-        };
+        //window.ajaxFrmSuccess = function (htmlPartial) {
+        //    //alert('success');
+        //};
 
     </script>
 }
