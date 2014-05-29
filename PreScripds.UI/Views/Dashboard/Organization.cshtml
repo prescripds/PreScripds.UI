@@ -72,11 +72,11 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" id="isSelfie">
                 <div class="col-md-4 col-sm-6">
                     <div class="form-group">
                         <label class="control-label" for="FirstName">Self Certification</label>
-                        @Html.CheckBoxFor(m => m.IsSelfie, new { @tooltip = "Selfe" })
+                        @Html.CheckBoxFor(m => m.IsSelfie, new { @tooltip = "Selfie" })
                     </div>
                 </div>
             </div>
@@ -84,12 +84,19 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="form-group">
                         <label class="control-label" for="FirstName">Date for certification by us</label>
-                        @Html.TextBoxFor(m => m.VerificationDate, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.VerificationDate, new { @class = "form-control", id = "datepicker", data_date_format = "dd-mm-yyyy" })
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6">
                     <div class="form-group">
                         <label class="control-label" for="LastName">Please @Html.ActionLink("Click Here", "CheckList", "Dashboard") to download the check list required during certification by us.</label>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6" id="isQuickie" style="display:none;">
+                    <div class="form-group">
+                       
+                        @Html.CheckBoxFor(m => m.IsQuickView, new { @tooltip = "quickie" })
+                        <label class="control-label" for="FirstName">Quick View</label>
                     </div>
                 </div>
             </div>
@@ -152,49 +159,33 @@
                 <button type="reset" class="btn btn-warning pull-right" value="Clear">Clear</button>
             </div>
         </div>
+        @Html.MessageDialogRedirect(Model.Message, Html.Iff(Model.IsSelfie, "AddOrgDoc", "AddRole"), "Dashboard", true)
     }
-    @*<div class="row" id="selfie" style="display: none; ">
-            @using (Ajax.BeginForm("AddOrgDoc", "Dashboard", null, new AjaxOptions() { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "divAddOrgDoc", OnSuccess = "ajaxFrmSuccess" }, new { id = "frmAddOrgDoc", enctype = "multipart/form-data" }))
-            {
-                @Html.Partial("Partials/_OrganizationDocuments", Model.OrganizationDocumentViewModel)
-                <div id="divAddOrgDoc">
-                </div>
-            }
-        </div>*@
 </div>
-@* if doc collectionvalid, redirect to timelineorg doc page. with next button which redirects to Addrole page if der is no role added.*@
-@*@if (Model.OrganizationDocumentViewModels.IsCollectionValid())
-        {
-    @Html.MessageDialogRedirect(Model.Message, "AddRole", "Dashboard", true)
-    }*@
-
-
-
 
 @section Scripts{
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <link href="~/Content/datepicker.css" rel="stylesheet" />
     <script type="text/javascript">
         $(document).ready(function () {
+            $(function () {
+                $('#datepicker').datepicker();
 
-            @*@Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))*@
-            //$('#IsSelfie').on('click', function () {
-            //    var checked = $(this).is(':checked');
-            //    if (checked) {
-            //        $('#noSelfie').attr('style', 'display:none');
-            //        $('#selfie').removeAttr('style');
-            //        $('#selfie').attr('style', 'border:1px solid white;padding:10px;');
-            //        $('#buttons').attr('style', 'display:none');
-            //    }
-            //    else {
-            //        $('#noSelfie').removeAttr('style');
-            //        $('#selfie').attr('style', 'display:none');
-            //        $('#buttons').removeAttr('style');
-            //    }
-            //});
-            //$(document.body).on('click', '#btnAddOrgDoc', function () {
-            //    var $frm = $('#frmAddOrgDoc');
-            //  //  $frm.submit();
-
-            //});
+                $('.day').on('click', function () {
+                    $('.datepicker-days').hide();
+                    $('#isSelfie').attr('style', 'display:none');
+                    $('#isQuickie').removeAttr('style');
+                });
+            });
+            $('#IsSelfie').on('click', function () {
+                var checked = $(this).is(':checked');
+                if (checked) {
+                    $('#noSelfie').attr('style', 'display:none');
+                }
+                else {
+                    $('#noSelfie').removeAttr('style');
+                }
+            });
 
             var orgVal = $('#OrganizationType').val();
             if (orgVal == "") {
@@ -208,6 +199,8 @@
             if (orgVal == 2) {
                 $('#organizationDtlsN').attr('style', 'display:none');
             }
+
+
             $('#OrganizationType').on('change', function () {
                 var orgType = $(this).val();
                 $('hdfOrgType').val(orgType);
@@ -222,11 +215,7 @@
                     $('#buttons').removeAttr('style');
                 }
             });
+            @Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))
         });
-
-        //window.ajaxFrmSuccess = function (htmlPartial) {
-        //    //alert('success');
-        //};
-
     </script>
 }

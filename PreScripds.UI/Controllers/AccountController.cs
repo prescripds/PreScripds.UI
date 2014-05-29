@@ -122,7 +122,7 @@ namespace PreScripds.UI.Controllers
                         {
                             //if (!hashedPasswordCap.Equals(userLogin.PasswordCap))
                             //{
-                            if (model.IsCaptchaDisplay)
+                            if (model.IsCaptchaDisplay.HasValue)
                             {
                                 if (captchaValid)
                                 {

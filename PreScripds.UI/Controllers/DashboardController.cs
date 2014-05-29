@@ -157,7 +157,7 @@ namespace PreScripds.UI.Controllers
                 ModelState.AddModelError("OrganizationType", "Please select the organization type.");
             if (ModelState.IsValid)
             {
-                if (orgViewModel.IsQuickView.HasValue)
+                if (orgViewModel.IsQuickView)
                 {
                     //orgViewModel.IsQuickViewTime = DateTime.Now;
                     // orgViewModel.QuickViewEndTime = DateTime.Now.AddMinutes(15);
@@ -194,7 +194,7 @@ namespace PreScripds.UI.Controllers
                     ModelState.AddModelError("OrganizationEmail", "Organization Email is mandatory.");
                 if (!orgViewModel.OrganizationContact.Clean().IsNotEmpty())
                     ModelState.AddModelError("OrganizationContact", "Organization Contact is mandatory.");
-                if (!orgViewModel.VerificationDate.HasValue)
+                if (!orgViewModel.VerificationDate.HasValue && !orgViewModel.IsSelfie)
                     ModelState.AddModelError("VerificationDate", "Verification Date is mandatory.");
                 if (orgViewModel.OrganizationName.Clean().IsNotEmpty())
                 {

@@ -31,7 +31,7 @@ namespace PreScripds.UI.Models
         public List<Department> Department { get; set; }
         public bool CreationSuccessful { get; set; }
         public string Message { get; set; }
-        public bool? IsQuickView { get; set; }
+        public bool IsQuickView { get; set; }
         public System.DateTime? CreatedDate { get; set; }
         public System.DateTime? IsQuickViewTime { get; set; }
         public long? NoOfQuickView { get; set; }
@@ -41,7 +41,7 @@ namespace PreScripds.UI.Models
         public bool IsExtendQuickView { get; set; }
 
         public bool IsSelfie { get; set; }
-
+        
         public OrganizationDocumentViewModel OrganizationDocumentViewModel { get; set; }
         public List<OrganizationDocumentViewModel> OrganizationDocumentViewModels { get; set; }
     }

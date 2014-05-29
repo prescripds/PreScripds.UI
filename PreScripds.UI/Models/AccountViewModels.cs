@@ -40,7 +40,7 @@ namespace PreScripds.UI.Models
         public string Password { get; set; }
         [Display(Name = "Captcha")]
         public string Captcha { get; set; }
-        public bool IsCaptchaDisplay { get; set; }
+        public bool? IsCaptchaDisplay { get; set; }
         public string CaptchaUserInput { get; set; }
         public string CaptchaValid { get; set; }
     }

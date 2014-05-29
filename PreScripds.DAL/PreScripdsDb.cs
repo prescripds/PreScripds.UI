@@ -47,6 +47,7 @@ namespace PreScripds.DAL
             modelBuilder.Configurations.Add(new DepartmentMap());
             modelBuilder.Configurations.Add(new UserDepartmentMap());
             modelBuilder.Configurations.Add(new UserHistoryMap());
+            modelBuilder.Configurations.Add(new OrganizationMap());
         }
 
     }
