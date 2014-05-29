@@ -139,7 +139,7 @@ namespace PreScripds.UI.Controllers
         [HttpPost]
         public ActionResult AddOrgDoc(OrganizationDocumentViewModel orgDocViewModel, string buttonType)
         {
-            var file = Request.Files[0];
+            //ValidateViewModel
             if (orgDocViewModel != null)
             {
 

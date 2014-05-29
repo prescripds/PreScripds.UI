@@ -4,18 +4,22 @@
 }
 
 <main class="wrap group">
-    <aside class="sidebar" style="background-color:black;">
+    <aside class="sidebar" style="background-color:#11171c;border-radius:7%">
         <div class="my-info">
             <img src="images/cj.jpg" alt="Chris Johnson" class="portfolio-image">
             <h1>Organization Name</h1>
             <h2>Organization Address</h2>
         </div>
     </aside>
-    @using (Html.BeginForm("AddOrgDoc", "Dashboard", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
-    {
-        @Html.Partial("Partials/_OrganizationDocuments")
-    }
+    <div style="float:left;width:80%;padding:1%;">
+        @using (Html.BeginForm("AddOrgDoc", "Dashboard", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+        {
+            @Html.Partial("Partials/_OrganizationDocuments")
+        }
+    </div>
+
     <div class="content">
+
         <div class="portfolio-item group first">
             <div class="portfolio-info">
                 <div class="date">7 Nov 2013</div>
@@ -31,8 +35,6 @@
                 <img src="images/portfolio/free-psd-templates.jpg" alt="Free PSD Templates">
             </div>
         </div>
-
-
         <div class="portfolio-item group">
             <div class="portfolio-info">
                 <div class="date">7 Nov 2013</div>

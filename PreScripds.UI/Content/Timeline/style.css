@@ -159,7 +159,7 @@ body {
   @media screen and (min-width: 760px) {
     .content {
       float: left;
-      width: 80%; } }
+      width: 100%; } }
   .content .portfolio-item {
     background: #f7f7f7; }
     .content .portfolio-item:before {
