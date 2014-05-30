@@ -78,6 +78,8 @@ namespace PreScripds.Domain
         [DataMember]
         public DateTime? CreatedDate { get; set; }
         [DataMember]
+        public byte[] DisplayPic { get; set; }
+        [DataMember]
         public virtual ICollection<UserHistory> UserHistory { get; set; }
     }
 }

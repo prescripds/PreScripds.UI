@@ -84,6 +84,7 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.IsOrganization).HasColumnName("isorganization");
             this.Property(t => t.CreatedDate).HasColumnName("created_date");
             this.Property(t => t.IsEmailConfirmed).HasColumnName("isemailconfirmed");
+            this.Property(t => t.DisplayPic).HasColumnName("displaypic");
         }
     }
 }

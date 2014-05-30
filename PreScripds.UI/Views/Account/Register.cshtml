@@ -12,7 +12,7 @@
 <div class="header_top">
     <h2><span>Register</span></h2>
 </div>
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
 {
 
     @Html.AntiForgeryToken()
@@ -130,14 +130,6 @@
                 </div>
             </div>
         </div>
-        @*<div class="row">
-                <div class="col-md-4 col-sm-6">
-                    <div class="form-group">
-                        <label class="control-label" for="MiddleName">Profile Picture</label>
-                        <input type="file" id="postedProfilePic" name="postedProfilePic" />
-                    </div>
-                </div>
-            </div>*@
         <hr />
         <h4><span>Login Details</span><hr /> </h4>
         @for (int i = 0; i < Model.userLoginViewModel.Count; i++)
@@ -188,7 +180,7 @@
             <div class="col-md-4 col-sm-6" id="displayPic" style="display:none">
                 <div class="form-group">
                     <label class="control-label" for="MiddleName" id="dispPic"></label>
-                    <input type="file" id="postedProfilePic" name="postedProfilePic" />
+                    <input type="file" id="DisplayPicture" name="DisplayPicture" />
                 </div>
             </div>
             <div class="col-md-4 col-sm-6">
@@ -199,6 +191,7 @@
                     @Html.Raw(Html.GenerateCaptcha("recaptcha", "white"))
                 </div>
             </div>
+
         </div>
         <div class="row">
             <div class="col-md-4 col-sm-6">

@@ -43,11 +43,9 @@ namespace PreScripds.Domain
         public virtual ICollection<Department> Departments { get; set; }
 
         [DataMember]
-        public bool? IsQuickView { get; set; }
+        public bool IsQuickView { get; set; }
         [DataMember]
         public System.DateTime? CreatedDate { get; set; }
-        [DataMember]
-        public System.DateTime? IsQuickViewTime { get; set; }
         [DataMember]
         public long? NoOfQuickView { get; set; }
 
