@@ -135,7 +135,7 @@ namespace PreScripds.UI.Controllers
             };
             return View(organizationViewModel);
         }
-
+        [PreScripds.UI.Common.Authorize]
         [HttpPost]
         public ActionResult AddOrgDoc(OrganizationDocumentViewModel orgDocViewModel, string buttonType)
         {
