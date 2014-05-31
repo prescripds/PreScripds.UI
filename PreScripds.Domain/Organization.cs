@@ -25,16 +25,16 @@ namespace PreScripds.Domain
         public string OrganizationContact { get; set; }
         [DataMember]
         public DateTime VerificationDate { get; set; }
-        [DataMember]
-        public string ReferencedEmail { get; set; }
+        //[DataMember]
+        //public string ReferencedEmail { get; set; }
         [DataMember]
         public string EmployeeIdOrg { get; set; }
         [DataMember]
-        public DateTime? OrganiztionIncorporation { get; set; }
+        public DateTime? OrganizationIncorporation { get; set; }
         [DataMember]
         public bool IsActive { get; set; }
         [DataMember]
-        public bool? IsApproved { get; set; }
+        public bool IsApproved { get; set; }
         [DataMember]
         public string ApproverId { get; set; }
         [DataMember]
@@ -45,10 +45,15 @@ namespace PreScripds.Domain
         [DataMember]
         public bool IsQuickView { get; set; }
         [DataMember]
-        public System.DateTime? CreatedDate { get; set; }
+        public System.DateTime CreatedDate { get; set; }
         [DataMember]
         public long? NoOfQuickView { get; set; }
-
+        [DataMember]
+        public long MaxQuickViews { get; set; }
+        [DataMember]
+        public System.DateTime IsquickViewEnd { get; set; }
+        [DataMember]
+        public long TotalQuickViewHours { get; set; }
         [DataMember]
         public bool IsSelfie { get; set; }
 
