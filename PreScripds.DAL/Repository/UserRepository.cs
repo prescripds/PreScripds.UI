@@ -56,8 +56,7 @@ namespace PreScripds.DAL.Repository
             Insert(user);
             SaveChanges();
             var usrHstry = user.UserLogins.Select(x => x.UserHistories.FirstOrDefault()).FirstOrDefault();
-            //TODO:Update user history table
-             UpdateUserLogin(usrHstry);
+            UpdateUserLogin(usrHstry);
             return user;
         }
 
