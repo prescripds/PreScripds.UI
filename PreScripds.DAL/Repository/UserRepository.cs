@@ -44,11 +44,11 @@ namespace PreScripds.DAL.Repository
                     userLogin.SecurityAnswer = encryptedSecurityAnswer;
 
                 }
-                foreach (var userHistory in user.UserLogins.Select(x => x.UserHistories))
+                foreach (var userHistory in user.UserLogins.Select(x => x.UserHistories.FirstOrDefault()))
                 {
-                    userHistory.SaltKey = saltKey;
+                    userHistory.saltkey = saltKey;
                     var encryptCaptcha = EncryptionExtensions.Encrypt(userHistory.Captcha);
-                    var encryptedPasswordCap = EncryptionExtensions.CreatePasswordCapHash(user.UserLogins.First().Password, userHistory.SaltKey, encryptCaptcha);
+                    var encryptedPasswordCap = EncryptionExtensions.CreatePasswordCapHash(user.UserLogins.First().Password, userHistory.saltkey, encryptCaptcha);
                     userHistory.PasswordCap = encryptedPasswordCap;
                     userHistory.Captcha = encryptCaptcha;
                 }
@@ -56,7 +56,8 @@ namespace PreScripds.DAL.Repository
             Insert(user);
             SaveChanges();
             var usrHstry = user.UserLogins.Select(x => x.UserHistories).First();
-            UpdateUserLogin(usrHstry);
+            //TODO:Update user history table
+           // UpdateUserLogin(usrHstry);
             return user;
         }
 

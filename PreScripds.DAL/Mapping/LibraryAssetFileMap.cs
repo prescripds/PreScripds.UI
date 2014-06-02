@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace PreScripds.DAL.Mapping
 
             // Properties
             this.Property(t => t.Id)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             this.Property(t => t.Asset)
                 .IsRequired();
