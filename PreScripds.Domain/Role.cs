@@ -25,7 +25,11 @@ namespace PreScripds.Domain
         [DataMember]
         public bool Active { get; set; }
         [DataMember]
+        public long OrganizationId { get; set; }
+        [DataMember]
         public virtual ICollection<RoleInPermission> RoleInPermissions { get; set; }
+        [DataMember]
+        public virtual Organization Organization { get; set; }
         [DataMember]
         public virtual ICollection<UserInRole> UserInRoles { get; set; }
     }

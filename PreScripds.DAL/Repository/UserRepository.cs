@@ -25,37 +25,37 @@ namespace PreScripds.DAL.Repository
         }
         public List<User> GetUsers()
         {
-            var userLst = ContextRep.Users.Include(x => x.UserLogin).Include(x => x.UserHistory).ToList();
+            var userLst = ContextRep.Users.Include(x => x.UserLogins).ToList();
             return userLst;
         }
 
         public User AddUser(User user)
         {
-            if (user.UserLogin.IsCollectionValid())
+            if (user.UserLogins.IsCollectionValid())
             {
                 var saltKey = EncryptionExtensions.CreateSaltKey();
-                foreach (var userLogin in user.UserLogin)
+                foreach (var userLogin in user.UserLogins)
                 {
-                    userLogin.SaltKey = saltKey;
+                    userLogin.saltkey = saltKey;
                     var encryptedPassword = EncryptionExtensions.CreatePasswordHash(userLogin.Password,
-                                userLogin.SaltKey);
+                                userLogin.saltkey);
                     userLogin.Password = encryptedPassword;
-                    var encryptedSecurityAnswer = EncryptionExtensions.CreatePasswordHash(userLogin.SecurityAnswer, userLogin.SaltKey);
+                    var encryptedSecurityAnswer = EncryptionExtensions.CreatePasswordHash(userLogin.SecurityAnswer, userLogin.saltkey);
                     userLogin.SecurityAnswer = encryptedSecurityAnswer;
 
                 }
-                foreach (var userHistory in user.UserHistory)
+                foreach (var userHistory in user.UserLogins.Select(x => x.UserHistories))
                 {
                     userHistory.SaltKey = saltKey;
                     var encryptCaptcha = EncryptionExtensions.Encrypt(userHistory.Captcha);
-                    var encryptedPasswordCap = EncryptionExtensions.CreatePasswordCapHash(user.UserLogin.First().Password, userHistory.SaltKey, encryptCaptcha);
+                    var encryptedPasswordCap = EncryptionExtensions.CreatePasswordCapHash(user.UserLogins.First().Password, userHistory.SaltKey, encryptCaptcha);
                     userHistory.PasswordCap = encryptedPasswordCap;
                     userHistory.Captcha = encryptCaptcha;
                 }
             }
             Insert(user);
             SaveChanges();
-            var usrHstry = user.UserHistory.First();
+            var usrHstry = user.UserLogins.Select(x => x.UserHistories).First();
             UpdateUserLogin(usrHstry);
             return user;
         }
@@ -64,7 +64,7 @@ namespace PreScripds.DAL.Repository
         {
             if (userHistory != null)
             {
-                var userLogin = ContextRep.UserLogins.First(x => x.UserId == userHistory.UserId);
+                var userLogin = ContextRep.UserLogins.First(x => x.Id == userHistory.UserloginId);
                 userLogin.PasswordCap = userHistory.PasswordCap;
                 userLogin.Captcha = userHistory.Captcha;
                 DbContextExtensions.Update<UserLogin>(this._dbContext, userLogin);
@@ -83,8 +83,8 @@ namespace PreScripds.DAL.Repository
                         IpAddress = userHistory.IpAddress,
                         CreatedDate = DateTime.Now,
                         Captcha = userHistory.Captcha,
-                        SaltKey = userHistory.SaltKey,
-                        UserId = userHistory.UserId,
+                        saltkey = userHistory.saltkey,
+                        UserloginId = userHistory.UserloginId,
                         PasswordCap = userHistory.PasswordCap
                     };
 
@@ -111,7 +111,7 @@ namespace PreScripds.DAL.Repository
 
         public User GetUserByUsername(string loginName, LoginType loginType)
         {
-            var users = ContextRep.Users.Include(x => x.UserLogin).Include(x => x.UserHistory).Where(x => x.Active).ToList();
+            var users = ContextRep.Users.Include(x => x.UserLogins).Where(x => x.Active).ToList();
             if (users.IsCollectionValid())
             {
 
@@ -119,7 +119,7 @@ namespace PreScripds.DAL.Repository
                 switch (loginType)
                 {
                     case LoginType.IsUserName:
-                        loginUser = users.FirstOrDefault(x => x.UserLogin.First().UserName == loginName);
+                        loginUser = users.FirstOrDefault(x => x.UserLogins.First().UserName == loginName);
                         return loginUser;
                         break;
                     case LoginType.IsMobile:
@@ -138,7 +138,7 @@ namespace PreScripds.DAL.Repository
 
         public User GetUserByEmail(string loginName)
         {
-            var users = ContextRep.Users.Include(x => x.UserLogin).Include(x => x.UserHistory).Where(x => x.Active).ToList();
+            var users = ContextRep.Users.Include(x => x.UserLogins).Where(x => x.Active).ToList();
             if (users.IsCollectionValid())
             {
                 var loginUser = users.Where(x => x.Email == loginName);
@@ -150,7 +150,7 @@ namespace PreScripds.DAL.Repository
 
         public User GetUserByMobile(string loginName)
         {
-            var users = ContextRep.Users.Include(x => x.UserLogin).Include(x => x.UserHistory).Where(x => x.Active).ToList();
+            var users = ContextRep.Users.Include(x => x.UserLogins).Where(x => x.Active).ToList();
             if (users.IsCollectionValid())
             {
                 var loginUser = users.Where(x => x.Mobile == loginName.As<long>());
@@ -161,7 +161,7 @@ namespace PreScripds.DAL.Repository
         }
         public User CheckEmailExists(string email)
         {
-            var users = ContextRep.Users.Include(x => x.UserLogin).Where(x => x.Active && x.Email == email).ToList();
+            var users = ContextRep.Users.Include(x => x.UserLogins).Where(x => x.Active && x.Email == email).ToList();
             if (users.IsCollectionValid())
             {
                 return users.First();
@@ -179,9 +179,13 @@ namespace PreScripds.DAL.Repository
 
         public List<Role> GetRole(long organizationId)
         {
-            var role = ContextRep.Roles.ToList();
+            //TODO:Get roles for a user from userinrole table.
+            var role = ContextRep.Roles.Include(x => x.Organization).ToList();
             if (role.IsCollectionValid())
-                return role.Where(x => x.OrganizationId == organizationId).ToList();
+            {
+                return role.Where(x => x.Organization.Id == organizationId).ToList();
+            }
+            //
             return null;
         }
 

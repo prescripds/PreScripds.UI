@@ -32,6 +32,11 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.UpdatedBy).HasColumnName("UpdatedBy");
             this.Property(t => t.UpdatedDate).HasColumnName("UpdatedDate");
             this.Property(t => t.Active).HasColumnName("Active");
+            this.Property(t => t.OrganizationId).HasColumnName("OrganizationId");
+            // Relationships
+            this.HasRequired(t => t.Organization)
+                .WithMany(t => t.Roles)
+                .HasForeignKey(d => d.OrganizationId);
         }
     }
 }
