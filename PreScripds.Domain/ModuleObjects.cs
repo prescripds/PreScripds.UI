@@ -5,17 +5,17 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PreScripds.Domain.Master
+namespace PreScripds.Domain
 {
-    public class Country
+    public class ModuleObjects
     {
         [DataMember]
         public long Id { get; set; }
         [DataMember]
-        public string CountryName { get; set; }
+        public string ModuleObjectName { get; set; }
         [DataMember]
-        public virtual ICollection<State> States { get; set; }
+        public long? ModuleId { get; set; }
         [DataMember]
-        public virtual ICollection<User> Users { get; set; }
+        public virtual Module Module { get; set; }
     }
 }

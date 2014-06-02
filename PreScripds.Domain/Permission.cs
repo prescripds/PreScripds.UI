@@ -10,14 +10,16 @@ namespace PreScripds.Domain
     public class Permission
     {
         [DataMember]
-        public long PermissionId { get; set; }
+        public long Id { get; set; }
         [DataMember]
         public string PermissionName { get; set; }
         [DataMember]
-        public string PermissionDesc { get; set; }
+        public bool? Active { get; set; }
         [DataMember]
-        public bool IsActive { get; set; }
+        public virtual ICollection<PermissionInModule> PermissionInModules { get; set; }
         [DataMember]
-        public virtual ICollection<Role> Roles { get; set; }
+        public virtual ICollection<PermissionInSet> PermissionInSets { get; set; }
+        [DataMember]
+        public virtual ICollection<RoleInPermission> RoleInPermissions { get; set; }
     }
 }

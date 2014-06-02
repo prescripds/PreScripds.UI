@@ -21,33 +21,55 @@ namespace PreScripds.DAL
             Configuration.ProxyCreationEnabled = false;
         }
 
-        public DbSet<City> cities { get; set; }
-        public DbSet<Country> countries { get; set; }
-        public DbSet<SecurityQuestion> securtiyquestions { get; set; }
-        public DbSet<State> states { get; set; }
-        public DbSet<User> users { get; set; }
-        public DbSet<UserLogin> user_login { get; set; }
-        public DbSet<Role> role { get; set; }
-        public DbSet<Permission> permissions { get; set; }
-        public DbSet<Department> departments { get; set; }
-        public DbSet<Organization> organizations { get; set; }
-        public DbSet<UserDepartmentMapping> UserDepartment { get; set; }
-        public DbSet<UserHistory> UserHistory { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<DepartmentInOrganization> DepartmentInOrganizations { get; set; }
+        public DbSet<LibraryAsset> LibraryAssets { get; set; }
+        public DbSet<LibraryAssetFile> LibraryAssetFiles { get; set; }
+        public DbSet<LibraryFolder> LibraryFolders { get; set; }
+        public DbSet<Module> Modules { get; set; }
+        public DbSet<ModuleInDepartment> ModuleInDepartments { get; set; }
+        public DbSet<ModuleObjects> ModuleObjects { get; set; }
+        public DbSet<Organization> Organizations { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<PermissionInModule> PermissionInModules { get; set; }
+        public DbSet<PermissionInSet> PermissionInSets { get; set; }
+        public DbSet<PermissionSet> PermissionSets { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<RoleInPermission> RoleInPermissions { get; set; }
+        public DbSet<SecurityQuestion> SecurityQuestions { get; set; }
+        public DbSet<State> States { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserHistory> UserHistories { get; set; }
+        public DbSet<UserInRole> UserInRoles { get; set; }
+        public DbSet<UserLogin> UserLogins { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new CityMap());
             modelBuilder.Configurations.Add(new CountryMap());
+            modelBuilder.Configurations.Add(new DepartmentMap());
+            modelBuilder.Configurations.Add(new DepartmentInOrganizationMap());
+            modelBuilder.Configurations.Add(new LibraryAssetMap());
+            modelBuilder.Configurations.Add(new LibraryAssetFileMap());
+            modelBuilder.Configurations.Add(new LibraryFolderMap());
+            modelBuilder.Configurations.Add(new ModuleMap());
+            modelBuilder.Configurations.Add(new ModuleInDepartmentMap());
+            modelBuilder.Configurations.Add(new ModuleObjectMap());
+            modelBuilder.Configurations.Add(new OrganizationMap());
+            modelBuilder.Configurations.Add(new PermissionMap());
+            modelBuilder.Configurations.Add(new PermissionInModuleMap());
+            modelBuilder.Configurations.Add(new PermissionInSetMap());
+            modelBuilder.Configurations.Add(new PermissionSetMap());
+            modelBuilder.Configurations.Add(new RoleMap());
+            modelBuilder.Configurations.Add(new RoleInPermissionMap());
             modelBuilder.Configurations.Add(new SecurityQuestionMap());
             modelBuilder.Configurations.Add(new StateMap());
             modelBuilder.Configurations.Add(new UserMap());
-            modelBuilder.Configurations.Add(new UserLoginMap());
-            modelBuilder.Configurations.Add(new RoleMap());
-            modelBuilder.Configurations.Add(new PermissionMap());
-            modelBuilder.Configurations.Add(new DepartmentMap());
-            modelBuilder.Configurations.Add(new UserDepartmentMap());
             modelBuilder.Configurations.Add(new UserHistoryMap());
-            modelBuilder.Configurations.Add(new OrganizationMap());
+            modelBuilder.Configurations.Add(new UserInRoleMap());
+            modelBuilder.Configurations.Add(new UserLoginMap());
         }
 
     }

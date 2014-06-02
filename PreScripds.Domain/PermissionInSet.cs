@@ -5,19 +5,19 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PreScripds.Domain.Master
+namespace PreScripds.Domain
 {
-    public class State
+    public class PermissionInSet
     {
         [DataMember]
         public long Id { get; set; }
         [DataMember]
-        public string StateName { get; set; }
+        public long? PermissionId { get; set; }
         [DataMember]
-        public long? CountryId { get; set; }
+        public int? PermissionSetId { get; set; }
         [DataMember]
-        public virtual ICollection<City> Cities { get; set; }
+        public virtual Permission Permission { get; set; }
         [DataMember]
-        public virtual Country Country { get; set; }
+        public virtual PermissionSet PermissionSet { get; set; }
     }
 }

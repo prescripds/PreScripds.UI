@@ -11,18 +11,16 @@ namespace PreScripds.Domain
     public class Department
     {
         [DataMember]
-        public int DepartmentId { get; set; }
+        public long Id { get; set; }
         [DataMember]
         public string DepartmentName { get; set; }
         [DataMember]
-        public long OrganizationId { get; set; }
-        [DataMember]
-        public string DepartmentDesc { get; set; }
-        [DataMember]
         public bool IsActive { get; set; }
-        //[DataMember]
-        //public virtual ICollection<UserDepartmentMapping> UserDepartmentMappings { get; set; }
         [DataMember]
-        public virtual Organization Organization { get; set; }
+        public string DepartmentDescription { get; set; }
+        [DataMember]
+        public virtual ICollection<DepartmentInOrganization> DepartmentInOrganizations { get; set; }
+        [DataMember]
+        public virtual ICollection<ModuleInDepartment> ModuleInDepartments { get; set; }
     }
 }

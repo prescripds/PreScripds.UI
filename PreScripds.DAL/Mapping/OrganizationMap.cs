@@ -14,54 +14,44 @@ namespace PreScripds.DAL.Mapping
         public OrganizationMap()
         {
             // Primary Key
-            this.HasKey(t => t.OrganizationId);
+            this.HasKey(t => t.Id);
 
             // Properties
             this.Property(t => t.OrganizationName)
                 .IsRequired()
-                .HasMaxLength(450);
+                .HasMaxLength(500);
 
             this.Property(t => t.OrganizationAddress)
-                .HasMaxLength(450);
+                .HasMaxLength(500);
 
             this.Property(t => t.OrganizationEmail)
                 .IsRequired()
-                .HasMaxLength(450);
+                .HasMaxLength(500);
 
-            this.Property(t => t.OrganizationContact)
-                .IsRequired()
-                .HasMaxLength(250);
+            this.Property(t => t.ContactPerson)
+                .HasMaxLength(500);
 
-            this.Property(t => t.ReferencedEmail)
-                .HasMaxLength(450);
-
-            this.Property(t => t.EmployeeIdOrg)
-                .HasMaxLength(450);
-
-            this.Property(t => t.ApproverId)
-                .HasMaxLength(450);
+            this.Property(t => t.Org_EmployeeId)
+                .HasMaxLength(50);
 
             // Table & Column Mappings
-            this.ToTable("organization", "turtleinc");
-            this.Property(t => t.OrganizationId).HasColumnName("organization_id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            this.Property(t => t.OrganizationName).HasColumnName("organization_name");
-            this.Property(t => t.OrganizationAddress).HasColumnName("organization_address");
-            this.Property(t => t.OrganizationPhone).HasColumnName("organization_phone");
-            this.Property(t => t.OrganizationMobile).HasColumnName("organization_mobile");
-            this.Property(t => t.OrganizationEmail).HasColumnName("organization_email");
-            this.Property(t => t.OrganizationContact).HasColumnName("organization_contact");
-            this.Property(t => t.VerificationDate).HasColumnName("verification_date");
-            this.Property(t => t.ReferencedEmail).HasColumnName("referenced_email");
-            this.Property(t => t.EmployeeIdOrg).HasColumnName("employee_id_org");
-            this.Property(t => t.OrganiztionIncorporation).HasColumnName("organiztion_incorporation");
-            this.Property(t => t.IsActive).HasColumnName("isactive");
-            this.Property(t => t.IsApproved).HasColumnName("isapproved");
-            this.Property(t => t.ApproverId).HasColumnName("approver_id");
-            this.Property(t => t.ApprovedDate).HasColumnName("approved_date");
-            this.Property(t => t.IsQuickView).HasColumnName("isquickview");
-            this.Property(t => t.CreatedDate).HasColumnName("created_date");
-            this.Property(t => t.NoOfQuickView).HasColumnName("noofquickview");
-            this.Property(t => t.IsSelfie).HasColumnName("isselfie");
+            this.ToTable("Organization");
+            this.Property(t => t.Id).HasColumnName("Id");
+            this.Property(t => t.OrganizationName).HasColumnName("OrganizationName");
+            this.Property(t => t.OrganizationAddress).HasColumnName("OrganizationAddress");
+            this.Property(t => t.OrganizationPhone).HasColumnName("OrganizationPhone");
+            this.Property(t => t.OrganizationMobile).HasColumnName("OrganizationMobile");
+            this.Property(t => t.OrganizationEmail).HasColumnName("OrganizationEmail");
+            this.Property(t => t.ContactPerson).HasColumnName("ContactPerson");
+            this.Property(t => t.VerificationDate).HasColumnName("VerificationDate");
+            this.Property(t => t.Org_EmployeeId).HasColumnName("Org_EmployeeId");
+            this.Property(t => t.OrganizationIncorporation).HasColumnName("OrganizationIncorporation");
+            this.Property(t => t.Active).HasColumnName("Active");
+            this.Property(t => t.Approved).HasColumnName("Approved");
+            this.Property(t => t.ApproverId).HasColumnName("ApproverId");
+            this.Property(t => t.ApprovedDate).HasColumnName("ApprovedDate");
+            this.Property(t => t.IsQuickView).HasColumnName("IsQuickView");
+            this.Property(t => t.IsSelfie).HasColumnName("IsSelfie");
         }
     }
 }

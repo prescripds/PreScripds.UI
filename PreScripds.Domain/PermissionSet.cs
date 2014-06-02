@@ -5,15 +5,15 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PreScripds.Domain.Master
+namespace PreScripds.Domain
 {
-    public class SecurityQuestion
+    public class PermissionSet
     {
         [DataMember]
-        public long Id { get; set; }
+        public int Id { get; set; }
         [DataMember]
-        public string QuestionName { get; set; }
+        public string PermissionSetName { get; set; }
         [DataMember]
-        public virtual ICollection<UserLogin> UserLogins { get; set; }
+        public virtual ICollection<PermissionInSet> PermissionInSets { get; set; }
     }
 }

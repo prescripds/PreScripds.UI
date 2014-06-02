@@ -8,21 +8,27 @@ using PreScripds.Domain.Master;
 
 namespace PreScripds.DAL.Mapping
 {
-    public class CountryMap:EntityTypeConfiguration<Country>
+    public class CityMap : EntityTypeConfiguration<City>
     {
-        public CountryMap()
+        public CityMap()
         {
             // Primary Key
             this.HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.CountryName)
+            this.Property(t => t.CityName)
                 .HasMaxLength(250);
 
             // Table & Column Mappings
-            this.ToTable("Country");
+            this.ToTable("City");
             this.Property(t => t.Id).HasColumnName("Id");
-            this.Property(t => t.CountryName).HasColumnName("CountryName");
+            this.Property(t => t.CityName).HasColumnName("CityName");
+            this.Property(t => t.StateId).HasColumnName("StateId");
+
+            // Relationships
+            this.HasOptional(t => t.State)
+                .WithMany(t => t.Cities)
+                .HasForeignKey(d => d.StateId);
         }
     }
 }

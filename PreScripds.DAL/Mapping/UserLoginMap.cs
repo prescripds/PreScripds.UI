@@ -13,41 +13,30 @@ namespace PreScripds.DAL.Mapping
         public UserLoginMap()
         {
             // Primary Key
-            this.HasKey(t => t.UserLoginId);
+            this.HasKey(t => t.Id);
 
             // Properties
             this.Property(t => t.UserName)
-                .IsRequired()
-                .HasMaxLength(750);
-
-            this.Property(t => t.Password)
-                .IsRequired()
-                .HasMaxLength(1024);
-
-            this.Property(t => t.SaltKey)
-                .IsRequired()
-                .HasMaxLength(1024);
-
-            this.Property(t => t.SecurityAnswer)
-                .IsRequired()
-                .HasMaxLength(450);
+                .HasMaxLength(500);
 
             // Table & Column Mappings
-            this.ToTable("user_login", "turtleinc");
-            this.Property(t => t.UserId).HasColumnName("user_id");
-            this.Property(t => t.UserName).HasColumnName("username");
-            this.Property(t => t.Password).HasColumnName("password");
-            this.Property(t => t.SaltKey).HasColumnName("saltkey");
-            this.Property(t => t.SecurityQuestionId).HasColumnName("securityquestion_id");
-            this.Property(t => t.SecurityAnswer).HasColumnName("security_answer");
-            this.Property(t => t.UserLoginId).HasColumnName("userlogin_id");
-            this.Property(t => t.Captcha).HasColumnName("captcha");
-            this.Property(t => t.PasswordCap).HasColumnName("password_cap");
+            this.ToTable("UserLogin");
+            this.Property(t => t.Id).HasColumnName("Id");
+            this.Property(t => t.UserName).HasColumnName("UserName");
+            this.Property(t => t.Password).HasColumnName("Password");
+            this.Property(t => t.saltkey).HasColumnName("saltkey");
+            this.Property(t => t.SecurityQuestionId).HasColumnName("SecurityQuestionId");
+            this.Property(t => t.SecurityAnswer).HasColumnName("SecurityAnswer");
+            this.Property(t => t.UserId).HasColumnName("UserId");
+            this.Property(t => t.Captcha).HasColumnName("Captcha");
+            this.Property(t => t.PasswordCap).HasColumnName("PasswordCap");
 
             // Relationships
-
-            this.HasRequired(t => t.User)
-                .WithMany(t => t.UserLogin)
+            this.HasOptional(t => t.SecurityQuestion)
+                .WithMany(t => t.UserLogins)
+                .HasForeignKey(d => d.SecurityQuestionId);
+            this.HasOptional(t => t.User)
+                .WithMany(t => t.UserLogins)
                 .HasForeignKey(d => d.UserId);
 
         }

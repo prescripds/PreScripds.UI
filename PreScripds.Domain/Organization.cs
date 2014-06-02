@@ -10,7 +10,7 @@ namespace PreScripds.Domain
     public class Organization
     {
         [DataMember]
-        public long OrganizationId { get; set; }
+        public long Id { get; set; }
         [DataMember]
         public string OrganizationName { get; set; }
         [DataMember]
@@ -22,42 +22,30 @@ namespace PreScripds.Domain
         [DataMember]
         public string OrganizationEmail { get; set; }
         [DataMember]
-        public string OrganizationContact { get; set; }
+        public string ContactPerson { get; set; }
         [DataMember]
-        public DateTime VerificationDate { get; set; }
-        //[DataMember]
-        //public string ReferencedEmail { get; set; }
+        public System.DateTime? VerificationDate { get; set; }
         [DataMember]
-        public string EmployeeIdOrg { get; set; }
+        public string Org_EmployeeId { get; set; }
         [DataMember]
-        public DateTime? OrganizationIncorporation { get; set; }
+        public System.DateTime? OrganizationIncorporation { get; set; }
         [DataMember]
-        public bool IsActive { get; set; }
+        public bool Active { get; set; }
         [DataMember]
-        public bool IsApproved { get; set; }
+        public bool Approved { get; set; }
         [DataMember]
-        public string ApproverId { get; set; }
+        public long? ApproverId { get; set; }
         [DataMember]
-        public DateTime? ApprovedDate { get; set; }
-        [DataMember]
-        public virtual ICollection<Department> Departments { get; set; }
-
+        public System.DateTime? ApprovedDate { get; set; }
         [DataMember]
         public bool IsQuickView { get; set; }
         [DataMember]
-        public System.DateTime CreatedDate { get; set; }
-        [DataMember]
-        public long? NoOfQuickView { get; set; }
-        [DataMember]
-        public long MaxQuickViews { get; set; }
-        [DataMember]
-        public System.DateTime IsquickViewEnd { get; set; }
-        [DataMember]
-        public long TotalQuickViewHours { get; set; }
-        [DataMember]
         public bool IsSelfie { get; set; }
-
         [DataMember]
-        public virtual ICollection<OrganizationDoc> OrganizationDoc { get; set; }
+        public virtual ICollection<DepartmentInOrganization> DepartmentInOrganizations { get; set; }
+        [DataMember]
+        public virtual ICollection<LibraryFolder> LibraryFolders { get; set; }
+        [DataMember]
+        public virtual ICollection<User> Users { get; set; }
     }
 }

@@ -13,39 +13,35 @@ namespace PreScripds.DAL.Mapping
         public UserHistoryMap()
         {
             // Primary Key
-            this.HasKey(t => t.UserHistoryId);
+            this.HasKey(t => t.Id);
 
             // Properties
             this.Property(t => t.Captcha)
-                .IsRequired()
-                .HasMaxLength(1024);
+                .IsRequired();
 
             this.Property(t => t.PasswordCap)
-                .IsRequired()
-                .HasMaxLength(1024);
+                .IsRequired();
 
-            this.Property(t => t.SaltKey)
-                .IsRequired()
-                .HasMaxLength(1024);
+            this.Property(t => t.saltkey)
+                .IsRequired();
 
             this.Property(t => t.IpAddress)
-                .IsRequired()
-                .HasMaxLength(1024);
+                .IsRequired();
 
             // Table & Column Mappings
-            this.ToTable("user_history", "turtleinc");
-            this.Property(t => t.UserHistoryId).HasColumnName("userhistory_id");
-            this.Property(t => t.Captcha).HasColumnName("captcha");
-            this.Property(t => t.PasswordCap).HasColumnName("password_cap");
-            this.Property(t => t.SaltKey).HasColumnName("salt_key");
-            this.Property(t => t.IpAddress).HasColumnName("ip_address");
-            this.Property(t => t.CreatedDate).HasColumnName("created_date");
-            this.Property(t => t.UserId).HasColumnName("user_id");
+            this.ToTable("UserHistory");
+            this.Property(t => t.Id).HasColumnName("Id");
+            this.Property(t => t.Captcha).HasColumnName("Captcha");
+            this.Property(t => t.PasswordCap).HasColumnName("PasswordCap");
+            this.Property(t => t.saltkey).HasColumnName("saltkey");
+            this.Property(t => t.IpAddress).HasColumnName("IpAddress");
+            this.Property(t => t.CreatedDate).HasColumnName("CreatedDate");
+            this.Property(t => t.UserloginId).HasColumnName("UserloginId");
 
             // Relationships
-            this.HasRequired(t => t.User)
-                .WithMany(t => t.UserHistory)
-                .HasForeignKey(d => d.UserId);
+            this.HasRequired(t => t.UserLogin)
+                .WithMany(t => t.UserHistories)
+                .HasForeignKey(d => d.UserloginId);
         }
     }
 }

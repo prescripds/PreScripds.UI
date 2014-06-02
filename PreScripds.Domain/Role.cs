@@ -11,24 +11,22 @@ namespace PreScripds.Domain
     public class Role
     {
         [DataMember]
-        public long RoleId { get; set; }
+        public long Id { get; set; }
         [DataMember]
         public string RoleName { get; set; }
         [DataMember]
-        public string RoleDesc { get; set; }
+        public System.DateTime CreatedDate { get; set; }
         [DataMember]
-        public long PermissionId { get; set; }
+        public long CreatedBy { get; set; }
         [DataMember]
-        public long OrganizationId { get; set; }
+        public long UpdatedBy { get; set; }
         [DataMember]
-        public long? DepartmentId { get; set; }
+        public System.DateTime UpdatedDate { get; set; }
         [DataMember]
-        public DateTime? CreatedDate { get; set; }
+        public bool Active { get; set; }
         [DataMember]
-        public bool IsActive { get; set; }
+        public virtual ICollection<RoleInPermission> RoleInPermissions { get; set; }
         [DataMember]
-        public virtual Permission Permission { get; set; }
-        //[DataMember]
-        //public virtual ICollection<UserDepartmentMapping> UserDepartmentMappings { get; set; }
+        public virtual ICollection<UserInRole> UserInRoles { get; set; }
     }
 }

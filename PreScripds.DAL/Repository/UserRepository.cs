@@ -25,7 +25,7 @@ namespace PreScripds.DAL.Repository
         }
         public List<User> GetUsers()
         {
-            var userLst = ContextRep.users.Include(x => x.UserLogin).Include(x => x.UserHistory).ToList();
+            var userLst = ContextRep.Users.Include(x => x.UserLogin).Include(x => x.UserHistory).ToList();
             return userLst;
         }
 
@@ -64,7 +64,7 @@ namespace PreScripds.DAL.Repository
         {
             if (userHistory != null)
             {
-                var userLogin = ContextRep.user_login.First(x => x.UserId == userHistory.UserId);
+                var userLogin = ContextRep.UserLogins.First(x => x.UserId == userHistory.UserId);
                 userLogin.PasswordCap = userHistory.PasswordCap;
                 userLogin.Captcha = userHistory.Captcha;
                 DbContextExtensions.Update<UserLogin>(this._dbContext, userLogin);
@@ -74,7 +74,7 @@ namespace PreScripds.DAL.Repository
 
         public UserHistory AddUserHistory(UserHistory userHistory)
         {
-            var userHstryFmDb = ContextRep.UserHistory.FirstOrDefault(x => x.Captcha == userHistory.Captcha && x.IpAddress == userHistory.IpAddress);
+            var userHstryFmDb = ContextRep.UserHistories.FirstOrDefault(x => x.Captcha == userHistory.Captcha && x.IpAddress == userHistory.IpAddress);
 
             if (userHstryFmDb == null)
             {
@@ -88,7 +88,7 @@ namespace PreScripds.DAL.Repository
                         PasswordCap = userHistory.PasswordCap
                     };
 
-                ContextRep.UserHistory.Add(userHstry);
+                ContextRep.UserHistories.Add(userHstry);
                 ContextRep.SaveChanges();
                 UpdateUserLogin(userHstry);
             }
@@ -97,21 +97,21 @@ namespace PreScripds.DAL.Repository
 
         public Role AddRole(Role role)
         {
-            ContextRep.role.Add(role);
+            ContextRep.Roles.Add(role);
             ContextRep.SaveChanges();
             return role;
         }
 
         public Organization AddOrganization(Organization organization)
         {
-            ContextRep.organizations.Add(organization);
+            ContextRep.Organizations.Add(organization);
             ContextRep.SaveChanges();
             return organization;
         }
 
         public User GetUserByUsername(string loginName, LoginType loginType)
         {
-            var users = ContextRep.users.Include(x => x.UserLogin).Include(x => x.UserHistory).Where(x => x.Active).ToList();
+            var users = ContextRep.Users.Include(x => x.UserLogin).Include(x => x.UserHistory).Where(x => x.Active).ToList();
             if (users.IsCollectionValid())
             {
 
@@ -138,7 +138,7 @@ namespace PreScripds.DAL.Repository
 
         public User GetUserByEmail(string loginName)
         {
-            var users = ContextRep.users.Include(x => x.UserLogin).Include(x => x.UserHistory).Where(x => x.Active).ToList();
+            var users = ContextRep.Users.Include(x => x.UserLogin).Include(x => x.UserHistory).Where(x => x.Active).ToList();
             if (users.IsCollectionValid())
             {
                 var loginUser = users.Where(x => x.Email == loginName);
@@ -150,7 +150,7 @@ namespace PreScripds.DAL.Repository
 
         public User GetUserByMobile(string loginName)
         {
-            var users = ContextRep.users.Include(x => x.UserLogin).Include(x => x.UserHistory).Where(x => x.Active).ToList();
+            var users = ContextRep.Users.Include(x => x.UserLogin).Include(x => x.UserHistory).Where(x => x.Active).ToList();
             if (users.IsCollectionValid())
             {
                 var loginUser = users.Where(x => x.Mobile == loginName.As<long>());
@@ -161,7 +161,7 @@ namespace PreScripds.DAL.Repository
         }
         public User CheckEmailExists(string email)
         {
-            var users = ContextRep.users.Include(x => x.UserLogin).Where(x => x.Active && x.Email == email).ToList();
+            var users = ContextRep.Users.Include(x => x.UserLogin).Where(x => x.Active && x.Email == email).ToList();
             if (users.IsCollectionValid())
             {
                 return users.First();
@@ -171,7 +171,7 @@ namespace PreScripds.DAL.Repository
 
         public bool CheckRoleExists(Role role)
         {
-            var roleModel = ContextRep.role.FirstOrDefault(x => x.RoleName == role.RoleName);
+            var roleModel = ContextRep.Roles.FirstOrDefault(x => x.RoleName == role.RoleName);
             if (roleModel == null)
                 return false;
             return true;
@@ -179,7 +179,7 @@ namespace PreScripds.DAL.Repository
 
         public List<Role> GetRole(long organizationId)
         {
-            var role = ContextRep.role.ToList();
+            var role = ContextRep.Roles.ToList();
             if (role.IsCollectionValid())
                 return role.Where(x => x.OrganizationId == organizationId).ToList();
             return null;
@@ -187,7 +187,7 @@ namespace PreScripds.DAL.Repository
 
         public List<Department> GetDepartment(long organizationId)
         {
-            var department = ContextRep.departments.Where(x => x.OrganizationId == organizationId).ToList();
+            var department = ContextRep.Departments.Where(x => x.Id == organizationId).ToList();
             if (department.IsCollectionValid())
                 return department;
             return null;
@@ -195,7 +195,7 @@ namespace PreScripds.DAL.Repository
 
         public bool CheckOrganizationExist(string orgName)
         {
-            var organization = ContextRep.organizations.FirstOrDefault(x => x.OrganizationName == orgName && x.IsActive);
+            var organization = ContextRep.Organizations.FirstOrDefault(x => x.OrganizationName == orgName && x.Active);
             if (organization != null)
                 return true;
             return false;

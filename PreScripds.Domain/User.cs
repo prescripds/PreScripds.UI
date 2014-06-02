@@ -12,31 +12,31 @@ namespace PreScripds.Domain
     public class User
     {
         [DataMember]
+        public long Id { get; set; }
+        [DataMember]
         public string FirstName { get; set; }
         [DataMember]
         public string LastName { get; set; }
         [DataMember]
         public string MiddleName { get; set; }
         [DataMember]
-        public short Gender { get; set; }
+        public bool Gender { get; set; }
         [DataMember]
-        public DateTime? Dob { get; set; }
+        public System.DateTime Dob { get; set; }
         [DataMember]
         public long Mobile { get; set; }
         [DataMember]
-        public long? Phone { get; set; }
+        public long Phone { get; set; }
         [DataMember]
         public int? Age { get; set; }
         [DataMember]
         public string Email { get; set; }
         [DataMember]
-        public string AltEmail { get; set; }
+        public string Alt_Email { get; set; }
         [DataMember]
-        public long? AltMobile { get; set; }
+        public long Alt_Mobile { get; set; }
         [DataMember]
         public string Address { get; set; }
-        [DataMember]
-        public long UserId { get; set; }
         [DataMember]
         public long CityId { get; set; }
         [DataMember]
@@ -44,42 +44,36 @@ namespace PreScripds.Domain
         [DataMember]
         public long CountryId { get; set; }
         [DataMember]
-        public string ZipCode { get; set; }
+        public int? Zipcode { get; set; }
         [DataMember]
         public bool Active { get; set; }
         [DataMember]
-        public bool AdminApprove { get; set; }
-        [DataMember]
-        public bool IsSuperAdmin { get; set; }
-        [DataMember]
-        public bool IsAdmin { get; set; }
+        public bool? AdminApprove { get; set; }
         [DataMember]
         public bool IsHomeUrl { get; set; }
         [DataMember]
-        public string CityName { get; set; }
-        [DataMember]
-        public short? UserType { get; set; }
+        public int UserType { get; set; }
         [DataMember]
         public bool TermsCondition { get; set; }
         [DataMember]
-        public long? ReferencedId { get; set; }
+        public long OrganizationId { get; set; }
         [DataMember]
-        public long? OrganizationId { get; set; }
+        public bool IsOrganization { get; set; }
         [DataMember]
-        public string EmployeeId { get; set; }
+        public System.DateTime CreatedDate { get; set; }
         [DataMember]
-        public string Designation { get; set; }
+        public System.DateTime UpdatedDate { get; set; }
         [DataMember]
-        public virtual ICollection<UserLogin> UserLogin { get; set; }
+        public long CreatedBy { get; set; }
         [DataMember]
-        public bool? IsOrganization { get; set; }
+        public long UpdatedBy { get; set; }
         [DataMember]
-        public bool? IsEmailConfirmed { get; set; }
+        public virtual Country Country { get; set; }
         [DataMember]
-        public DateTime? CreatedDate { get; set; }
+        public virtual Organization Organization { get; set; }
         [DataMember]
-        public byte[] DisplayPic { get; set; }
+        public virtual ICollection<UserInRole> UserInRoles { get; set; }
         [DataMember]
-        public virtual ICollection<UserHistory> UserHistory { get; set; }
+        public virtual ICollection<UserLogin> UserLogins { get; set; }
     }
 }

@@ -41,19 +41,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Department.cs" />
+    <Compile Include="DepartmentInOrganization.cs" />
     <Compile Include="Enums\Enum.cs" />
+    <Compile Include="LibraryAsset.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LibraryAssetFile.cs" />
+    <Compile Include="LibraryFolder.cs" />
     <Compile Include="Master\City.cs" />
     <Compile Include="Master\Country.cs" />
     <Compile Include="Master\SecurityQuestion.cs" />
     <Compile Include="Master\State.cs" />
+    <Compile Include="Module.cs" />
+    <Compile Include="ModuleInDepartment.cs" />
+    <Compile Include="ModuleObjects.cs" />
     <Compile Include="Organization.cs" />
-    <Compile Include="OrganizationDoc.cs" />
     <Compile Include="Permission.cs" />
+    <Compile Include="PermissionInModule.cs" />
+    <Compile Include="PermissionInSet.cs" />
+    <Compile Include="PermissionSet.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleInPermission.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="User.cs" />
-    <Compile Include="UserDepartmentMapping.cs" />
     <Compile Include="UserHistory.cs" />
+    <Compile Include="UserInRole.cs" />
     <Compile Include="UserLogin.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,9 +8,9 @@ using PreScripds.Domain;
 
 namespace PreScripds.DAL.Mapping
 {
-    public class RoleMap : EntityTypeConfiguration<Role>
+    public class LibraryAssetFileMap : EntityTypeConfiguration<LibraryAssetFile>
     {
-        public RoleMap()
+        public LibraryAssetFileMap()
         {
             // Primary Key
             this.HasKey(t => t.Id);
@@ -19,19 +19,21 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
-            this.Property(t => t.RoleName)
-                .IsRequired()
-                .HasMaxLength(250);
+            this.Property(t => t.Asset)
+                .IsRequired();
 
             // Table & Column Mappings
-            this.ToTable("Role");
+            this.ToTable("LibraryAssetFile");
             this.Property(t => t.Id).HasColumnName("Id");
-            this.Property(t => t.RoleName).HasColumnName("RoleName");
+            this.Property(t => t.Asset).HasColumnName("Asset");
+            this.Property(t => t.LibraryAssetId).HasColumnName("LibraryAssetId");
             this.Property(t => t.CreatedDate).HasColumnName("CreatedDate");
-            this.Property(t => t.CreatedBy).HasColumnName("CreatedBy");
-            this.Property(t => t.UpdatedBy).HasColumnName("UpdatedBy");
-            this.Property(t => t.UpdatedDate).HasColumnName("UpdatedDate");
-            this.Property(t => t.Active).HasColumnName("Active");
+
+            // Relationships
+            this.HasRequired(t => t.LibraryAsset)
+                .WithMany(t => t.LibraryAssetFiles)
+                .HasForeignKey(d => d.LibraryAssetId);
+
         }
     }
 }

@@ -10,16 +10,12 @@ namespace PreScripds.Domain.Master
     public class City
     {
         [DataMember]
-        public long CityId { get; set; }
+        public long Id { get; set; }
         [DataMember]
         public string CityName { get; set; }
         [DataMember]
-        public string CityCode { get; set; }
-        [DataMember]
-        public long StateId { get; set; }
+        public long? StateId { get; set; }
         [DataMember]
         public virtual State State { get; set; }
-        [DataMember]
-        public virtual ICollection<User> Users { get; set; }
     }
 }

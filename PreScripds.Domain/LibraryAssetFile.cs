@@ -5,19 +5,19 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PreScripds.Domain.Master
+namespace PreScripds.Domain
 {
-    public class State
+    public class LibraryAssetFile
     {
         [DataMember]
         public long Id { get; set; }
         [DataMember]
-        public string StateName { get; set; }
+        public byte[] Asset { get; set; }
         [DataMember]
-        public long? CountryId { get; set; }
+        public long LibraryAssetId { get; set; }
         [DataMember]
-        public virtual ICollection<City> Cities { get; set; }
+        public System.DateTime CreatedDate { get; set; }
         [DataMember]
-        public virtual Country Country { get; set; }
+        public virtual LibraryAsset LibraryAsset { get; set; }
     }
 }

@@ -13,26 +13,20 @@ namespace PreScripds.DAL.Mapping
         public StateMap()
         {
             // Primary Key
-            this.HasKey(t => t.StateId);
+            this.HasKey(t => t.Id);
 
             // Properties
             this.Property(t => t.StateName)
-                .IsRequired()
-                .HasMaxLength(450);
-
-            this.Property(t => t.StateCode)
-                .IsRequired()
-                .HasMaxLength(45);
+                .HasMaxLength(250);
 
             // Table & Column Mappings
-            this.ToTable("state", "turtleinc");
-            this.Property(t => t.StateId).HasColumnName("state_id");
-            this.Property(t => t.StateName).HasColumnName("state_name");
-            this.Property(t => t.StateCode).HasColumnName("state_code");
-            this.Property(t => t.CountryId).HasColumnName("country_id");
+            this.ToTable("State");
+            this.Property(t => t.Id).HasColumnName("Id");
+            this.Property(t => t.StateName).HasColumnName("StateName");
+            this.Property(t => t.CountryId).HasColumnName("CountryId");
 
             // Relationships
-            this.HasRequired(t => t.Country)
+            this.HasOptional(t => t.Country)
                 .WithMany(t => t.States)
                 .HasForeignKey(d => d.CountryId);
 

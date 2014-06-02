@@ -13,17 +13,13 @@ namespace PreScripds.DAL.Mapping
         public SecurityQuestionMap()
         {
             // Primary Key
-            this.HasKey(t => t.SecurityQuestionId);
+            this.HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.SecurityQuestionName)
-                .IsRequired()
-                .HasMaxLength(750);
-
             // Table & Column Mappings
-            this.ToTable("securtiyquestion", "turtleinc");
-            this.Property(t => t.SecurityQuestionId).HasColumnName("securityquestion_id");
-            this.Property(t => t.SecurityQuestionName).HasColumnName("securityquestion_name");
+            this.ToTable("SecurityQuestion");
+            this.Property(t => t.Id).HasColumnName("Id");
+            this.Property(t => t.QuestionName).HasColumnName("QuestionName");
         }
     }
 }

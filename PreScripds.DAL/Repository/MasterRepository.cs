@@ -38,7 +38,7 @@ namespace PreScripds.DAL.Repository
             var permissions = CacheService.Get<ICollection<Permission>>(Constants.CacheKeys.PERMISSION);
             if (permissions == null)
             {
-                var newPermissions = ContextRep.permissions.ToList();
+                var newPermissions = ContextRep.Permissions.ToList();
                 CacheService.Set(Constants.CacheKeys.PERMISSION, newPermissions);
                 return newPermissions;
             }
@@ -53,7 +53,7 @@ namespace PreScripds.DAL.Repository
             var countries = CacheService.Get<ICollection<Country>>(Constants.CacheKeys.COUNTRY);
             if (countries == null)
             {
-                var newCountries = ContextRep.countries.ToList();
+                var newCountries = ContextRep.Countries.ToList();
                 CacheService.Set(Constants.CacheKeys.COUNTRY, newCountries);
                 return newCountries;
             }
@@ -67,7 +67,7 @@ namespace PreScripds.DAL.Repository
             var states = CacheService.Get<ICollection<State>>(Constants.CacheKeys.STATE);
             if (states == null)
             {
-                var newStates = ContextRep.states.ToList();
+                var newStates = ContextRep.States.ToList();
                 CacheService.Set(Constants.CacheKeys.STATE, newStates);
                 return newStates;
             }
@@ -81,7 +81,7 @@ namespace PreScripds.DAL.Repository
             var cities = CacheService.Get<ICollection<City>>(Constants.CacheKeys.CITY);
             if (cities == null)
             {
-                var newCities = ContextRep.cities.ToList();
+                var newCities = ContextRep.Cities.ToList();
                 CacheService.Set(Constants.CacheKeys.CITY, newCities);
                 return newCities;
             }
@@ -95,7 +95,7 @@ namespace PreScripds.DAL.Repository
             var securityQuestions = CacheService.Get<ICollection<SecurityQuestion>>(Constants.CacheKeys.SECURITY_QUESTION);
             if (securityQuestions == null)
             {
-                var newSecurityQuestions = ContextRep.securtiyquestions.ToList();
+                var newSecurityQuestions = ContextRep.SecurityQuestions.ToList();
                 CacheService.Set(Constants.CacheKeys.SECURITY_QUESTION, newSecurityQuestions);
                 return newSecurityQuestions;
             }

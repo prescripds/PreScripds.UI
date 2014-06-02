@@ -8,22 +8,25 @@ using PreScripds.Domain;
 
 namespace PreScripds.DAL.Mapping
 {
-    public class PermissionMap : EntityTypeConfiguration<Permission>
+    public class ModuleMap : EntityTypeConfiguration<Module>
     {
-        public PermissionMap()
+        public ModuleMap()
         {
             // Primary Key
             this.HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.PermissionName)
+            this.Property(t => t.ModuleName)
                 .HasMaxLength(250);
 
+            this.Property(t => t.ModuleDescription)
+                .HasMaxLength(500);
+
             // Table & Column Mappings
-            this.ToTable("Permission");
+            this.ToTable("Module");
             this.Property(t => t.Id).HasColumnName("Id");
-            this.Property(t => t.PermissionName).HasColumnName("PermissionName");
-            this.Property(t => t.Active).HasColumnName("Active");
+            this.Property(t => t.ModuleName).HasColumnName("ModuleName");
+            this.Property(t => t.ModuleDescription).HasColumnName("ModuleDescription");
         }
     }
 }

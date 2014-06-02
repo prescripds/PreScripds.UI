@@ -11,26 +11,28 @@ namespace PreScripds.Domain
     public class UserLogin
     {
         [DataMember]
-        public long UserId { get; set; }
+        public long Id { get; set; }
         [DataMember]
         public string UserName { get; set; }
         [DataMember]
         public string Password { get; set; }
         [DataMember]
-        public string SaltKey { get; set; }
+        public string saltkey { get; set; }
         [DataMember]
-        public long SecurityQuestionId { get; set; }
+        public long? SecurityQuestionId { get; set; }
         [DataMember]
         public string SecurityAnswer { get; set; }
         [DataMember]
-        public long UserLoginId { get; set; }
+        public long? UserId { get; set; }
         [DataMember]
         public string Captcha { get; set; }
         [DataMember]
         public string PasswordCap { get; set; }
         [DataMember]
-        public virtual SecurityQuestion SecurtiyQuestion { get; set; }
+        public virtual SecurityQuestion SecurityQuestion { get; set; }
         [DataMember]
         public virtual User User { get; set; }
+        [DataMember]
+        public virtual ICollection<UserHistory> UserHistories { get; set; }
     }
 }
