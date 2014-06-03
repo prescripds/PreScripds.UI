@@ -43,6 +43,7 @@
     <Compile Include="Department.cs" />
     <Compile Include="DepartmentInOrganization.cs" />
     <Compile Include="Enums\Enum.cs" />
+    <Compile Include="Interfaces\IAuditable.cs" />
     <Compile Include="LibraryAsset.cs">
       <SubType>Code</SubType>
     </Compile>

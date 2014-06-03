@@ -17,7 +17,7 @@ namespace PreScripds.UI.Models
         public SiteSession(User user)
         {
             Email = user.Email;
-            UserName = user.UserLogin.First().UserName;
+            UserName = user.UserLogins.First().UserName;
             //UserRole = user.UserRole.RoleName;            
         }
         public static void LogOff(HttpSessionStateBase httpSession)

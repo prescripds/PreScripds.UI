@@ -4,10 +4,11 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using PreScripds.Domain.Interfaces;
 
 namespace PreScripds.Domain
 {
-    public class Organization
+    public class Organization : IAuditable
     {
         [DataMember]
         public long Id { get; set; }
@@ -49,5 +50,13 @@ namespace PreScripds.Domain
         public virtual ICollection<Role> Roles { get; set; }
         [DataMember]
         public virtual ICollection<User> Users { get; set; }
+        [DataMember]
+        public long CreatedBy { get; set; }
+        [DataMember]
+        public DateTime CreatedDate { get; set; }
+        [DataMember]
+        public long UpdatedBy { get; set; }
+        [DataMember]
+        public DateTime UpdatedDate { get; set; }
     }
 }

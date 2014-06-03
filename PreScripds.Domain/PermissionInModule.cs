@@ -18,6 +18,8 @@ namespace PreScripds.Domain
         [DataMember]
         public virtual Module Module { get; set; }
         [DataMember]
+        public bool Active { get; set; }
+        [DataMember]
         public virtual Permission Permission { get; set; }
     }
 }

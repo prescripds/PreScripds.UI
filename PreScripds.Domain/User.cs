@@ -4,12 +4,13 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using PreScripds.Domain.Interfaces;
 using PreScripds.Domain.Master;
 
 namespace PreScripds.Domain
 {
     [DataContract(IsReference = true)]
-    public class User
+    public class User : IAuditable
     {
         [DataMember]
         public long Id { get; set; }
@@ -75,5 +76,6 @@ namespace PreScripds.Domain
         public virtual ICollection<UserInRole> UserInRoles { get; set; }
         [DataMember]
         public virtual ICollection<UserLogin> UserLogins { get; set; }
+
     }
 }

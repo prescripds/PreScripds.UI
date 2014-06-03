@@ -59,7 +59,7 @@ namespace PreScripds.UI.Controllers
             if (user != null)
             {
                 var ipAddress = GetClientIpAddress();
-                var userHistory = user.UserHistory.FirstOrDefault(x => x.IpAddress == ipAddress);
+                var userHistory = user.UserLogins.Select(x => x.UserHistories.FirstOrDefault(y => y.IpAddress == ipAddress));
                 if (userHistory == null)
                 {
                     isCaptchaDisplay = "False";
@@ -110,14 +110,14 @@ namespace PreScripds.UI.Controllers
                 user = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername(model.UserName, loginType));
                 if (user != null)
                 {
-                    var userLogin = user.UserLogin.FirstOrDefault();
+                    var userLogin = user.UserLogins.FirstOrDefault();
                     if (!user.Active)
                         ModelState.AddModelError("", "Your account has been disabled. Please contact your administrator.");
-                    var hashedPassword = Common.Common.CreatePasswordHash(model.Password, userLogin.SaltKey);
+                    var hashedPassword = Common.Common.CreatePasswordHash(model.Password, userLogin.saltkey);
                     if (hashedPassword.Equals(userLogin.Password))
                     {
-                        var userHistry = user.UserHistory.FirstOrDefault(x => x.IpAddress == GetClientIpAddress());
-                        var hashedPasswordCap = Common.Common.CreatePasswordCapHash(model.Password, userLogin.SaltKey, userLogin.Captcha);
+                        var userHistry = user.UserLogins.Select(x => x.UserHistories.FirstOrDefault(y => y.IpAddress == GetClientIpAddress()));
+                        var hashedPasswordCap = Common.Common.CreatePasswordCapHash(model.Password, userLogin.saltkey, userLogin.Captcha);
                         if (userHistry == null)
                         {
                             //if (!hashedPasswordCap.Equals(userLogin.PasswordCap))
@@ -135,8 +135,8 @@ namespace PreScripds.UI.Controllers
                                             Captcha = model.Captcha,
                                             IpAddress = GetClientIpAddress(),
                                             PasswordCap = hashedPasswordCap,
-                                            SaltKey = user.UserLogin.First().SaltKey,
-                                            UserId = user.UserId
+                                            SaltKey = user.UserLogins.First().saltkey,
+                                            UserId = user.Id
                                         };
                                         var mappedModel = Mapper.Map<UserHistoryViewModel, UserHistory>(userHistryViewModel);
                                         var userHistory = _wcfService.InvokeService<IUserService, UserHistory>((svc) => svc.AddUserHistory(mappedModel));
@@ -151,10 +151,10 @@ namespace PreScripds.UI.Controllers
                         }
                         else
                         {
-                            var passwordCapFromDb = userHistry.PasswordCap;
+                            var passwordCapFromDb = userHistry;
                             if (passwordCapFromDb.Equals(hashedPasswordCap))
                             {
-                                _wcfService.InvokeService<IUserService>((svc) => svc.UpdateUserLogin(userHistry));
+                                //_wcfService.InvokeService<IUserService>((svc) => svc.UpdateUserLogin(userHistry.FirstOrDefault()));
                             }
                         }
 

@@ -52,6 +52,10 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.ApprovedDate).HasColumnName("ApprovedDate");
             this.Property(t => t.IsQuickView).HasColumnName("IsQuickView");
             this.Property(t => t.IsSelfie).HasColumnName("IsSelfie");
+            this.Property(t => t.CreatedDate).HasColumnName("CreatedDate");
+            this.Property(t => t.CreatedBy).HasColumnName("CreatedBy");
+            this.Property(t => t.UpdatedDate).HasColumnName("UpdatedDate");
+            this.Property(t => t.UpdatedBy).HasColumnName("UpdatedBy");
         }
     }
 }

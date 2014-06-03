@@ -30,6 +30,10 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.DepartmentName).HasColumnName("DepartmentName");
             this.Property(t => t.IsActive).HasColumnName("IsActive");
             this.Property(t => t.DepartmentDescription).HasColumnName("DepartmentDescription");
+            this.Property(t => t.CreatedDate).HasColumnName("CreatedDate");
+            this.Property(t => t.CreatedBy).HasColumnName("CreatedBy");
+            this.Property(t => t.UpdatedDate).HasColumnName("UpdatedDate");
+            this.Property(t => t.UpdatedBy).HasColumnName("UpdatedBy");
         }
     }
 }

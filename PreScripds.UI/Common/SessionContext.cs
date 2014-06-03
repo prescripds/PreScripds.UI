@@ -37,6 +37,8 @@ namespace PreScripds.UI.Common
 
         public static User CurrentUser { get; set; }
 
+
+
         public static void LogOff(HttpContextBase httpSession)
         {
             httpSession.Session[Constants.SiteSession] = null;
