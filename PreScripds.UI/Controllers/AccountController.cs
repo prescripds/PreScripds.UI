@@ -238,14 +238,14 @@ namespace PreScripds.UI.Controllers
             var states = _wcfService.InvokeService<IMasterService, List<State>>(svc => svc.GetState());
             var securityQuestions = _wcfService.InvokeService<IMasterService, List<SecurityQuestion>>(svc => svc.GetSecurityQuestion());
             if (countries.IsCollectionValid())
-                registerViewModel.Country = countries;
+                registerViewModel.Countries = countries;
             if (states.IsCollectionValid())
-                registerViewModel.State = states;
+                registerViewModel.States = states;
             if (securityQuestions.IsCollectionValid())
             {
                 registerViewModel.userLoginViewModel = new List<UserLoginViewModel>(){
                     new UserLoginViewModel{
-                        SecurityQuestion = securityQuestions
+                        SecurityQuestions = securityQuestions
                     }
                 };
             }

@@ -25,7 +25,7 @@ namespace PreScripds.UI.Models
         [Compare("Password", ErrorMessage = "The password and confirm password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        public List<SecurityQuestion> SecurityQuestion { get; set; }
+        public List<SecurityQuestion> SecurityQuestions { get; set; }
         [Required(ErrorMessage = "Security Question is required.")]
         [Display(Name = "Security Question")]
         public int SecurityQuestionId { get; set; }

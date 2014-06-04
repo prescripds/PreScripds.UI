@@ -21,7 +21,7 @@ namespace PreScripds.Domain
         [DataMember]
         public string MiddleName { get; set; }
         [DataMember]
-        public bool Gender { get; set; }
+        public int Gender { get; set; }
         [DataMember]
         public System.DateTime Dob { get; set; }
         [DataMember]

@@ -76,10 +76,10 @@ namespace PreScripds.UI.Models
 
         public string CityName { get; set; }
 
-        public List<State> State { get; set; }
+        public List<State> States { get; set; }
         [Required(ErrorMessage = "State is required.")]
         public int StateId { get; set; }
-        public List<Country> Country { get; set; }
+        public List<Country> Countries { get; set; }
         [Required(ErrorMessage = "Country is required.")]
         public int CountryId { get; set; }
 
@@ -118,7 +118,7 @@ namespace PreScripds.UI.Models
         public List<UserLoginViewModel> userLoginViewModel { get; set; }
         public List<UserHistoryViewModel> UserHistoryViewModel { get; set; }
         public long OrganizationId { get; set; }
-        public int OrganizationType { get; set; }
+        //public int OrganizationType { get; set; }
         public string CaptchaUserInput { get; set; }
         public string CaptchaValid { get; set; }
         public int? IsOrganization { get; set; }
