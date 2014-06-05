@@ -105,7 +105,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
     <None Include="Properties\DataSources\PreScripds.Domain.Department.datasource" />
     <None Include="Properties\DataSources\PreScripds.Domain.User.datasource" />
     <None Include="Service References\MasterServiceReference\MasterService.wsdl" />

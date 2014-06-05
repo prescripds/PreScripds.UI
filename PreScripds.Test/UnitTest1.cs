@@ -30,7 +30,7 @@ namespace PreScripds.Test
             //var countries = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername("shreyas"));
             //var users = userRepository.GetUsers();
 
-            //var userLst = _wcfService.InvokeService<IMasterService, List<Department>>((svc => svc.GetDepartments()));
+            var userLst = _wcfService.InvokeService<IMasterService, List<Permission>>((svc => svc.GetPermission()));
         }
 
         [TestMethod]

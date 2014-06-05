@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,12 +10,24 @@ using MySql.Data.Entity;
 using PreScripds.DAL.Mapping;
 using PreScripds.Domain;
 using PreScripds.Domain.Master;
+using PreScripds.Infrastructure;
 
 namespace PreScripds.DAL
 {
-    [DbConfigurationType(typeof(MySqlEFConfiguration))]
+    //[DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class PreScripdsDb : DbContext
     {
+        static PreScripdsDb()
+        {
+            if (ConfigurationManager.AppSettings["CreateDbIfNotExists"].AsBool(false))
+            {
+                Database.SetInitializer(new PreScripdsDbIntializer());
+            }
+            else
+            {
+                Database.SetInitializer<PreScripdsDb>(null);
+            }
+        }
         public PreScripdsDb()
             : base("Name=PreScripdsDb")
         {
@@ -47,6 +61,7 @@ namespace PreScripds.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Configurations.Add(new CityMap());
             modelBuilder.Configurations.Add(new CountryMap());
             modelBuilder.Configurations.Add(new DepartmentMap());

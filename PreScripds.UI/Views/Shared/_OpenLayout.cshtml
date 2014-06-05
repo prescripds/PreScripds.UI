@@ -47,7 +47,7 @@
                     <li><a href="@Url.Action("Index","Home")" title="Home"><span class="glyphicon glyphicon-home" title="Home"></span></a></li>
                     @if (SessionContext.CurrentUser != null)
                     {
-                        <li style="color:black">Namaste! @SessionContext.CurrentUser.UserLogin.First().UserName</li>
+                        <li style="color:black">Namaste! @SessionContext.CurrentUser.UserLogins.First().UserName</li>
                     }
 
                 </ul>
