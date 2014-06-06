@@ -105,7 +105,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="form-group">
                     <label class="control-label" for="LastName">Country*</label>
-                    @Html.DropDownListFor(m => m.CountryId, Model.Country.ToSelectListItems(model => model.CountryId.ToString(), model => model.CountryName), "--Select--", new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.CountryId, Model.Countries.ToSelectListItems(model => model.Id.ToString(), model => model.CountryName), "--Select--", new { @class = "form-control" })
                 </div>
             </div>
 
@@ -114,7 +114,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="form-group">
                     <label class="control-label" for="MiddleName">State*</label>
-                    @Html.DropDownListFor(m => m.StateId, Model.State.ToSelectListItems(model => model.StateId.ToString(), model => model.StateName), "--Select--", new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.StateId, Model.States.ToSelectListItems(model => model.Id.ToString(), model => model.StateName), "--Select--", new { @class = "form-control" })
                 </div>
             </div>
             <div class="col-md-4 col-sm-6">
@@ -158,7 +158,7 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="form-group">
                         <label class="control-label" for="FirstName">Security Question*</label>
-                        @Html.DropDownListFor(m => m.userLoginViewModel[0].SecurityQuestionId, Model.userLoginViewModel[0].SecurityQuestion.ToSelectListItems(model => model.SecurityQuestionId.ToString(), model => model.SecurityQuestionName), "--Select--", new { @class = "form-control" })
+                        @Html.DropDownListFor(m => m.userLoginViewModel[0].SecurityQuestionId, Model.userLoginViewModel[0].SecurityQuestions.ToSelectListItems(model => model.Id.ToString(), model => model.QuestionName), "--Select--", new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6">
