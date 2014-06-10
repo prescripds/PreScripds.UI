@@ -4,10 +4,16 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:1346/MasterService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:1346/MasterService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:1346/MasterService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/PreScripds.Domain.Master" />
-      <xsd:import schemaLocation="http://localhost:1346/MasterService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/PreScripds.Domain" />
+      <xsd:import schemaLocation="http://localhost:1346/MasterService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/PreScripds.Domain" />
+      <xsd:import schemaLocation="http://localhost:1346/MasterService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/PreScripds.Domain.Master" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IMasterService_GetPermission_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPermission" />
+  </wsdl:message>
+  <wsdl:message name="IMasterService_GetPermission_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPermissionResponse" />
+  </wsdl:message>
   <wsdl:message name="IMasterService_GetCountry_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCountry" />
   </wsdl:message>
@@ -20,12 +26,6 @@
   <wsdl:message name="IMasterService_GetState_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetStateResponse" />
   </wsdl:message>
-  <wsdl:message name="IMasterService_GetCity_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetCity" />
-  </wsdl:message>
-  <wsdl:message name="IMasterService_GetCity_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetCityResponse" />
-  </wsdl:message>
   <wsdl:message name="IMasterService_GetSecurityQuestion_InputMessage">
     <wsdl:part name="parameters" element="tns:GetSecurityQuestion" />
   </wsdl:message>
@@ -33,6 +33,10 @@
     <wsdl:part name="parameters" element="tns:GetSecurityQuestionResponse" />
   </wsdl:message>
   <wsdl:portType name="IMasterService">
+    <wsdl:operation name="GetPermission">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMasterService/GetPermission" message="tns:IMasterService_GetPermission_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMasterService/GetPermissionResponse" message="tns:IMasterService_GetPermission_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetCountry">
       <wsdl:input wsaw:Action="http://tempuri.org/IMasterService/GetCountry" message="tns:IMasterService_GetCountry_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMasterService/GetCountryResponse" message="tns:IMasterService_GetCountry_OutputMessage" />
@@ -41,10 +45,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IMasterService/GetState" message="tns:IMasterService_GetState_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMasterService/GetStateResponse" message="tns:IMasterService_GetState_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetCity">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMasterService/GetCity" message="tns:IMasterService_GetCity_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IMasterService/GetCityResponse" message="tns:IMasterService_GetCity_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="GetSecurityQuestion">
       <wsdl:input wsaw:Action="http://tempuri.org/IMasterService/GetSecurityQuestion" message="tns:IMasterService_GetSecurityQuestion_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMasterService/GetSecurityQuestionResponse" message="tns:IMasterService_GetSecurityQuestion_OutputMessage" />
@@ -52,6 +52,15 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IMasterService" type="tns:IMasterService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPermission">
+      <soap:operation soapAction="http://tempuri.org/IMasterService/GetPermission" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetCountry">
       <soap:operation soapAction="http://tempuri.org/IMasterService/GetCountry" style="document" />
       <wsdl:input>
@@ -63,15 +72,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetState">
       <soap:operation soapAction="http://tempuri.org/IMasterService/GetState" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetCity">
-      <soap:operation soapAction="http://tempuri.org/IMasterService/GetCity" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

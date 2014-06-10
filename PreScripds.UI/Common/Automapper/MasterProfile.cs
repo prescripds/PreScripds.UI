@@ -11,9 +11,9 @@ namespace PreScripds.UI.Common.Automapper
     {
         protected override void Configure()
         {
-            Mapper.CreateMap<Country, Country>();
-            Mapper.CreateMap<State, State>();
-            Mapper.CreateMap<City, City>();
+            //Mapper.CreateMap<Country, Country>();
+            //  Mapper.CreateMap<State, State>();
+            //Mapper.CreateMap<City, City>();
         }
     }
 }

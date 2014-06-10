@@ -49,7 +49,6 @@
     </Compile>
     <Compile Include="LibraryAssetFile.cs" />
     <Compile Include="LibraryFolder.cs" />
-    <Compile Include="Master\City.cs" />
     <Compile Include="Master\Country.cs" />
     <Compile Include="Master\SecurityQuestion.cs" />
     <Compile Include="Master\State.cs" />

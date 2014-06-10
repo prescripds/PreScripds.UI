@@ -5,8 +5,10 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace PreScripds.Domain.Master
 {
+    [DataContract(IsReference = true)]
     public class Country
     {
         [DataMember]

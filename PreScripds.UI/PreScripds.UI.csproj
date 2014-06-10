@@ -301,6 +301,12 @@
     <Content Include="Properties\DataSources\PreScripds.Domain.Master.State.datasource" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\clndr.js" />
+    <Content Include="Properties\DataSources\PreScripds.Domain.Permission.datasource" />
+    <Content Include="Properties\DataSources\PreScripds.Domain.Department.datasource" />
+    <Content Include="Properties\DataSources\PreScripds.Domain.Organization.datasource" />
+    <Content Include="Properties\DataSources\PreScripds.Domain.Role.datasource" />
+    <Content Include="Properties\DataSources\PreScripds.Domain.User.datasource" />
+    <Content Include="Properties\DataSources\PreScripds.Domain.UserHistory.datasource" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\Common.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
@@ -335,9 +341,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Service References\UserServiceReference\PreScripds.UI.UserServiceReference.User.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <None Include="Service References\MasterServiceReference\MasterService.wsdl" />
     <None Include="Service References\MasterServiceReference\MasterService.xsd">
       <SubType>Designer</SubType>
@@ -408,6 +411,12 @@
     <Content Include="Views\Shared\AccessDenied.cshtml" />
     <Content Include="Views\Dashboard\Partials\_OrganizationDocuments.cshtml" />
     <Content Include="Views\Dashboard\OrganizationDocs.cshtml" />
+    <None Include="Service References\UserServiceReference\UserService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UserServiceReference\UserService31.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

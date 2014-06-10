@@ -39,7 +39,7 @@ namespace PreScripds.Domain
         [DataMember]
         public string Address { get; set; }
         [DataMember]
-        public long CityId { get; set; }
+        public string CityName { get; set; }
         [DataMember]
         public long StateId { get; set; }
         [DataMember]

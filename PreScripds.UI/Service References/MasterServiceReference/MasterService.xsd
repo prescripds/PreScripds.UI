@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:1346/MasterService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/PreScripds.Domain.Master" />
+  <xs:import schemaLocation="http://localhost:1346/MasterService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/PreScripds.Domain" />
+  <xs:import schemaLocation="http://localhost:1346/MasterService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/PreScripds.Domain.Master" />
+  <xs:element name="GetPermission">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPermissionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/PreScripds.Domain" minOccurs="0" name="GetPermissionResult" nillable="true" type="q1:ArrayOfPermission" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetCountry">
     <xs:complexType>
       <xs:sequence />
@@ -9,7 +22,7 @@
   <xs:element name="GetCountryResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/PreScripds.Domain.Master" minOccurs="0" name="GetCountryResult" nillable="true" type="q1:ArrayOfCountry" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/PreScripds.Domain.Master" minOccurs="0" name="GetCountryResult" nillable="true" type="q2:ArrayOfCountry" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -21,19 +34,7 @@
   <xs:element name="GetStateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/PreScripds.Domain.Master" minOccurs="0" name="GetStateResult" nillable="true" type="q2:ArrayOfState" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetCity">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetCityResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/PreScripds.Domain.Master" minOccurs="0" name="GetCityResult" nillable="true" type="q3:ArrayOfCity" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/PreScripds.Domain.Master" minOccurs="0" name="GetStateResult" nillable="true" type="q3:ArrayOfState" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

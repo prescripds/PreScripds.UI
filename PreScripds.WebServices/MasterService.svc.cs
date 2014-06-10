@@ -45,11 +45,11 @@ namespace PreScripds.WebServices
             return states;
         }
 
-        public List<City> GetCity()
-        {
-            var cities = _masterBl.GetCity().ToList();
-            return cities;
-        }
+        //public List<City> GetCity()
+        //{
+        //    var cities = _masterBl.GetCity().ToList();
+        //    return cities;
+        //}
 
         public List<SecurityQuestion> GetSecurityQuestion()
         {

@@ -35,7 +35,7 @@ namespace PreScripds.DAL
             Configuration.ProxyCreationEnabled = false;
         }
 
-        public DbSet<City> Cities { get; set; }
+        //public DbSet<City> Cities { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<DepartmentInOrganization> DepartmentInOrganizations { get; set; }
@@ -62,7 +62,7 @@ namespace PreScripds.DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            modelBuilder.Configurations.Add(new CityMap());
+          //  modelBuilder.Configurations.Add(new CityMap());
             modelBuilder.Configurations.Add(new CountryMap());
             modelBuilder.Configurations.Add(new DepartmentMap());
             modelBuilder.Configurations.Add(new DepartmentInOrganizationMap());

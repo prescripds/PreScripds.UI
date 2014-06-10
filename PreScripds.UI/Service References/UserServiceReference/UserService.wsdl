@@ -5,6 +5,8 @@
       <xsd:import schemaLocation="http://localhost:1346/UserService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:1346/UserService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:1346/UserService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/PreScripds.Domain" />
+      <xsd:import schemaLocation="http://localhost:1346/UserService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/PreScripds.Domain.Master" />
+      <xsd:import schemaLocation="http://localhost:1346/UserService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/PreScripds.Domain.Enums" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IUserService_GetUsers_InputMessage">
@@ -13,16 +15,225 @@
   <wsdl:message name="IUserService_GetUsers_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUsersResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserService_AddUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUser" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_AddUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetUserByUsername_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByUsername" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetUserByUsername_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByUsernameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_CheckEmailExists_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckEmailExists" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_CheckEmailExists_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckEmailExistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_CheckRoleExists_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckRoleExists" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_CheckRoleExists_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckRoleExistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRole" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_AddRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddRole" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_AddRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_AddUserHistory_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserHistory" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_AddUserHistory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_AddOrganization_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddOrganization" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_AddOrganization_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddOrganizationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetDepartment_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDepartment" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetDepartment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDepartmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_CheckOrganizationExist_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckOrganizationExist" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_CheckOrganizationExist_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckOrganizationExistResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateUserLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserLogin" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateUserLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserLoginResponse" />
+  </wsdl:message>
   <wsdl:portType name="IUserService">
     <wsdl:operation name="GetUsers">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetUsers" message="tns:IUserService_GetUsers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetUsersResponse" message="tns:IUserService_GetUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/AddUser" message="tns:IUserService_AddUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/AddUserResponse" message="tns:IUserService_AddUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByUsername">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetUserByUsername" message="tns:IUserService_GetUserByUsername_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetUserByUsernameResponse" message="tns:IUserService_GetUserByUsername_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckEmailExists">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/CheckEmailExists" message="tns:IUserService_CheckEmailExists_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/CheckEmailExistsResponse" message="tns:IUserService_CheckEmailExists_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckRoleExists">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/CheckRoleExists" message="tns:IUserService_CheckRoleExists_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/CheckRoleExistsResponse" message="tns:IUserService_CheckRoleExists_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetRole" message="tns:IUserService_GetRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetRoleResponse" message="tns:IUserService_GetRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/AddRole" message="tns:IUserService_AddRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/AddRoleResponse" message="tns:IUserService_AddRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserHistory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/AddUserHistory" message="tns:IUserService_AddUserHistory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/AddUserHistoryResponse" message="tns:IUserService_AddUserHistory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddOrganization">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/AddOrganization" message="tns:IUserService_AddOrganization_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/AddOrganizationResponse" message="tns:IUserService_AddOrganization_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetDepartment" message="tns:IUserService_GetDepartment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetDepartmentResponse" message="tns:IUserService_GetDepartment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckOrganizationExist">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/CheckOrganizationExist" message="tns:IUserService_CheckOrganizationExist_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/CheckOrganizationExistResponse" message="tns:IUserService_CheckOrganizationExist_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdateUserLogin" message="tns:IUserService_UpdateUserLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdateUserLoginResponse" message="tns:IUserService_UpdateUserLogin_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IUserService" type="tns:IUserService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetUsers">
       <soap:operation soapAction="http://tempuri.org/IUserService/GetUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <soap:operation soapAction="http://tempuri.org/IUserService/AddUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByUsername">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetUserByUsername" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckEmailExists">
+      <soap:operation soapAction="http://tempuri.org/IUserService/CheckEmailExists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckRoleExists">
+      <soap:operation soapAction="http://tempuri.org/IUserService/CheckRoleExists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRole">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRole">
+      <soap:operation soapAction="http://tempuri.org/IUserService/AddRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserHistory">
+      <soap:operation soapAction="http://tempuri.org/IUserService/AddUserHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddOrganization">
+      <soap:operation soapAction="http://tempuri.org/IUserService/AddOrganization" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartment">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetDepartment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckOrganizationExist">
+      <soap:operation soapAction="http://tempuri.org/IUserService/CheckOrganizationExist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserLogin">
+      <soap:operation soapAction="http://tempuri.org/IUserService/UpdateUserLogin" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

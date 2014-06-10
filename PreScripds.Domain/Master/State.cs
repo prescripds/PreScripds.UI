@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace PreScripds.Domain.Master
 {
+     [DataContract(IsReference = true)]
     public class State
     {
         [DataMember]
@@ -15,8 +16,6 @@ namespace PreScripds.Domain.Master
         public string StateName { get; set; }
         [DataMember]
         public long? CountryId { get; set; }
-        [DataMember]
-        public virtual ICollection<City> Cities { get; set; }
         [DataMember]
         public virtual Country Country { get; set; }
     }

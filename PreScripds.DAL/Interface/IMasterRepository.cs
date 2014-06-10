@@ -15,7 +15,6 @@ namespace PreScripds.DAL.Interface
         ICollection<Permission> GetPermission();
         ICollection<Country> GetCountry();
         ICollection<State> GetState();
-        ICollection<City> GetCity();
         ICollection<SecurityQuestion> GetSecurityQuestion();
     }
 }

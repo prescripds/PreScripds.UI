@@ -75,19 +75,19 @@ namespace PreScripds.DAL.Repository
         }
         #endregion
 
-        #region City Cache
-        public ICollection<City> GetCity()
-        {
-            var cities = CacheService.Get<ICollection<City>>(Constants.CacheKeys.CITY);
-            if (cities == null)
-            {
-                var newCities = ContextRep.Cities.ToList();
-                CacheService.Set(Constants.CacheKeys.CITY, newCities);
-                return newCities;
-            }
-            return cities;
-        }
-        #endregion
+        //#region City Cache
+        //public ICollection<City> GetCity()
+        //{
+        //    var cities = CacheService.Get<ICollection<City>>(Constants.CacheKeys.CITY);
+        //    if (cities == null)
+        //    {
+        //        var newCities = ContextRep.Cities.ToList();
+        //        CacheService.Set(Constants.CacheKeys.CITY, newCities);
+        //        return newCities;
+        //    }
+        //    return cities;
+        //}
+        //#endregion
 
         #region Security Question Cache
         public ICollection<SecurityQuestion> GetSecurityQuestion()

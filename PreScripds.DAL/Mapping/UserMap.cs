@@ -54,7 +54,7 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.Alt_Email).HasColumnName("Alt_Email");
             this.Property(t => t.Alt_Mobile).HasColumnName("Alt_Mobile");
             this.Property(t => t.Address).HasColumnName("Address");
-            this.Property(t => t.CityId).HasColumnName("CityId");
+            this.Property(t => t.CityName).HasColumnName("CityName");
             this.Property(t => t.StateId).HasColumnName("StateId");
             this.Property(t => t.CountryId).HasColumnName("CountryId");
             this.Property(t => t.Zipcode).HasColumnName("Zipcode");
