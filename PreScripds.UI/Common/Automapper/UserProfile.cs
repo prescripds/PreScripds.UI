@@ -14,6 +14,11 @@ namespace PreScripds.UI.Common.Automapper
         protected override void Configure()
         {
             Mapper.CreateMap<UserLoginViewModel, UserLogin>()
+                .AfterMap((s, d) =>
+                {
+                    var mappedUserHistory = Mapper.Map<ICollection<UserHistoryViewModel>, ICollection<UserHistory>>(s.UserHistoryViewModel);
+                    d.UserHistories = mappedUserHistory;
+                })
                .IgnoreAllNonExisting();
             Mapper.CreateMap<UserLogin, UserLoginViewModel>()
                 .IgnoreAllNonExisting();
@@ -27,12 +32,16 @@ namespace PreScripds.UI.Common.Automapper
                     var mappedLoginProfile = Mapper.Map<List<UserLoginViewModel>, List<UserLogin>>(s.userLoginViewModel);
                     d.UserLogins = mappedLoginProfile;
                 })
-                .AfterMap((s, d) =>
-                {
-                    //var mappedUserHistory = Mapper.Map<List<UserHistoryViewModel>, List<UserHistory>>(s.UserHistoryViewModel);
-                    //var userHistory = d.UserLogins.Select(x => x.UserHistories.ToList());
-                    //userHistory = mappedUserHistory;
-                })
+                //.AfterMap((s, d) =>
+                //{
+                //    var mappedUserHistory = Mapper.Map<List<UserHistoryViewModel>, List<UserHistory>>(s.UserHistoryViewModel.ToList());
+
+                //    //var userHistory = d.UserLogins.FirstOrDefault().UserHistories.Add(mappedUserHistory);
+                //    //if (userHistory == null)
+                //    //    userHistory = mappedUserHistory;
+                //    //var userHistory = d.UserLogins.Select(x => x.UserHistories.ToList()).ToList();
+                //    // userHistory = mappedUserHistory;
+                //})
                 .IgnoreAllNonExisting();
 
 

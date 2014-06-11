@@ -36,5 +36,7 @@ namespace PreScripds.UI.Models
 
         public string Captcha { get; set; }
 
+        public ICollection<UserHistoryViewModel> UserHistoryViewModel { get; set; }
+
     }
 }

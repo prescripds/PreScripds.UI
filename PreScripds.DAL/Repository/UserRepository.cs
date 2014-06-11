@@ -51,8 +51,10 @@ namespace PreScripds.DAL.Repository
                     var encryptedPasswordCap = EncryptionExtensions.CreatePasswordCapHash(user.UserLogins.First().Password, userHistory.saltkey, encryptCaptcha);
                     userHistory.PasswordCap = encryptedPasswordCap;
                     userHistory.Captcha = encryptCaptcha;
+                    userHistory.CreatedDate = DateTime.Now;
                 }
             }
+            
             Insert(user);
             SaveChanges();
             var usrHstry = user.UserLogins.Select(x => x.UserHistories.FirstOrDefault()).FirstOrDefault();

@@ -269,7 +269,12 @@ namespace PreScripds.UI.Controllers
                         model.IsOrganization = 0;
                     if (model.UserType == (short)UserType.Organization)
                         model.IsOrganization = 1;
+
                     var mappedUserProfile = Mapper.Map<RegisterViewModel, User>(model);
+                    mappedUserProfile.CreatedDate = DateTime.Now;
+                    mappedUserProfile.CreatedBy = 0;
+                    mappedUserProfile.UpdatedDate = DateTime.Now;
+                    mappedUserProfile.UpdatedBy = 0;
                     var userFromDb = _wcfService.InvokeService<IUserService, User>(svc => svc.AddUser(mappedUserProfile));
                     if (userFromDb != null)
                     {
@@ -283,7 +288,9 @@ namespace PreScripds.UI.Controllers
                 }
 
             }
-            return View(new RegisterViewModel { userLoginViewModel = new List<UserLoginViewModel>() });
+            model.userLoginViewModel = new List<UserLoginViewModel>();
+            BindDropDowns(model);
+            return View(model);
         }
 
         public void VerifyCaptcha(RegisterViewModel model, bool captchaValid, string captchaErrorMessage)
@@ -303,7 +310,8 @@ namespace PreScripds.UI.Controllers
                 var ipAddress = GetClientIpAddress();
                 model.IpAddress = userHistory.IpAddress = ipAddress;
                 userHistoryLst.Add(userHistory);
-                model.UserHistoryViewModel = userHistoryLst;
+                model.userLoginViewModel.FirstOrDefault().Captcha = model.CaptchaUserInput;
+                model.userLoginViewModel.FirstOrDefault().UserHistoryViewModel = model.UserHistoryViewModel = userHistoryLst;
             }
         }
 
@@ -334,6 +342,7 @@ namespace PreScripds.UI.Controllers
             }
             return true;
         }
+
         ////
         //// GET: /Account/Manage
         //public ActionResult Manage(ManageMessageId? message)
