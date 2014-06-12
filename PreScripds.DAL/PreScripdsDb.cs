@@ -62,7 +62,9 @@ namespace PreScripds.DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-          //  modelBuilder.Configurations.Add(new CityMap());
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
+            //  modelBuilder.Configurations.Add(new CityMap());
             modelBuilder.Configurations.Add(new CountryMap());
             modelBuilder.Configurations.Add(new DepartmentMap());
             modelBuilder.Configurations.Add(new DepartmentInOrganizationMap());

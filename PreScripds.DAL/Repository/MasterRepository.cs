@@ -8,13 +8,13 @@ using PreScripds.Domain;
 using PreScripds.Domain.Master;
 using PreScripds.Infrastructure;
 using PreScripds.Infrastructure.Repositories;
+using PreScripds.Infrastructure.UnitOfWork;
 
 namespace PreScripds.DAL.Repository
 {
-    public class MasterRepository : RepositoryBase<Department, PreScripdsDb>, IMasterRepository
+    public class MasterRepository : IMasterRepository
     {
         public MasterRepository(PreScripdsDb context)
-            : base(context)
         {
 
         }
@@ -35,14 +35,19 @@ namespace PreScripds.DAL.Repository
         #region Permission Cache
         public ICollection<Permission> GetPermission()
         {
-            var permissions = CacheService.Get<ICollection<Permission>>(Constants.CacheKeys.PERMISSION);
-            if (permissions == null)
+            using (var uow = new UnitOfWork())
             {
-                var newPermissions = ContextRep.Permissions.ToList();
-                CacheService.Set(Constants.CacheKeys.PERMISSION, newPermissions);
-                return newPermissions;
+
+                var permissions = CacheService.Get<ICollection<Permission>>(Constants.CacheKeys.PERMISSION);
+                if (permissions == null)
+                {
+                    var newPermissions = uow.GetRepository<Permission>().Items.ToList();
+                    CacheService.Set(Constants.CacheKeys.PERMISSION, newPermissions);
+                    return newPermissions;
+                }
+                return permissions;
             }
-            return permissions;
+
         }
 
         #endregion
@@ -50,28 +55,36 @@ namespace PreScripds.DAL.Repository
         #region Country Cache
         public ICollection<Country> GetCountry()
         {
-            var countries = CacheService.Get<ICollection<Country>>(Constants.CacheKeys.COUNTRY);
-            if (countries == null)
+            using (var uow = new UnitOfWork())
             {
-                var newCountries = ContextRep.Countries.ToList();
-                CacheService.Set(Constants.CacheKeys.COUNTRY, newCountries);
-                return newCountries;
+                var countries = CacheService.Get<ICollection<Country>>(Constants.CacheKeys.COUNTRY);
+                if (countries == null)
+                {
+                    var newCountries = uow.GetRepository<Country>().Items.ToList();
+                    CacheService.Set(Constants.CacheKeys.COUNTRY, newCountries);
+                    return newCountries;
+                }
+                return countries;
             }
-            return countries;
+
         }
         #endregion
 
         #region State Cache
         public ICollection<State> GetState()
         {
-            var states = CacheService.Get<ICollection<State>>(Constants.CacheKeys.STATE);
-            if (states == null)
+            using (var uow = new UnitOfWork())
             {
-                var newStates = ContextRep.States.ToList();
-                CacheService.Set(Constants.CacheKeys.STATE, newStates);
-                return newStates;
+
+                var states = CacheService.Get<ICollection<State>>(Constants.CacheKeys.STATE);
+                if (states == null)
+                {
+                    var newStates = uow.GetRepository<State>().Items.ToList();
+                    CacheService.Set(Constants.CacheKeys.STATE, newStates);
+                    return newStates;
+                }
+                return states;
             }
-            return states;
         }
         #endregion
 
@@ -92,14 +105,18 @@ namespace PreScripds.DAL.Repository
         #region Security Question Cache
         public ICollection<SecurityQuestion> GetSecurityQuestion()
         {
-            var securityQuestions = CacheService.Get<ICollection<SecurityQuestion>>(Constants.CacheKeys.SECURITY_QUESTION);
-            if (securityQuestions == null)
+            using (var uow = new UnitOfWork())
             {
-                var newSecurityQuestions = ContextRep.SecurityQuestions.ToList();
-                CacheService.Set(Constants.CacheKeys.SECURITY_QUESTION, newSecurityQuestions);
-                return newSecurityQuestions;
+                var securityQuestions = CacheService.Get<ICollection<SecurityQuestion>>(Constants.CacheKeys.SECURITY_QUESTION);
+                if (securityQuestions == null)
+                {
+                    var newSecurityQuestions = uow.GetRepository<SecurityQuestion>().Items.ToList();
+                    CacheService.Set(Constants.CacheKeys.SECURITY_QUESTION, newSecurityQuestions);
+                    return newSecurityQuestions;
+                }
+                return securityQuestions;
             }
-            return securityQuestions;
+
         }
         #endregion
     }

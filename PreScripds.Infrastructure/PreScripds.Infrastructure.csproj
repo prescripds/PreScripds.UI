@@ -76,6 +76,8 @@
     <Compile Include="Services\ServiceFactory.cs" />
     <Compile Include="Services\ServiceProxyBase.cs" />
     <Compile Include="Services\WcfServiceInvoker.cs" />
+    <Compile Include="UnitOfWork\BaseUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="Utilities\AutomapperExtensions.cs" />
     <Compile Include="Utilities\CacheService.cs" />
     <Compile Include="Utilities\CacheSettings.cs" />

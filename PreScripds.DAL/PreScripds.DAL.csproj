@@ -115,6 +115,7 @@
     <Compile Include="PreScripdsDbIntializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\MasterRepository.cs" />
+    <Compile Include="Repository\UnitOfWork.cs" />
     <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>

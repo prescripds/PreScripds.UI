@@ -9,7 +9,7 @@ using PreScripds.Infrastructure.Repositories;
 
 namespace PreScripds.DAL.Interface
 {
-    public interface IUserRepository : IRepository<User>
+    public interface IUserRepository
     {
         List<User> GetUsers();
         User AddUser(User user);

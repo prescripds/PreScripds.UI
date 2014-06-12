@@ -10,6 +10,16 @@ namespace PreScripds.Infrastructure
 {
     public static class ObjectExtensions
     {
+        public static bool IsNotNull<T>(this T obj) where T : class
+        {
+            return obj != null;
+        }
+
+        public static bool IsNull<T>(this T obj) where T : class
+        {
+            return obj == null;
+        }
+
         public static string GetPropertyName<TSource, TProperty>(this TSource source, Expression<Func<TSource, TProperty>> propertyLambda)
         {
             Type type = typeof(TSource);
