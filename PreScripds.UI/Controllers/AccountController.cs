@@ -275,6 +275,7 @@ namespace PreScripds.UI.Controllers
                     mappedUserProfile.CreatedBy = 0;
                     mappedUserProfile.UpdatedDate = DateTime.Now;
                     mappedUserProfile.UpdatedBy = 0;
+                   // mappedUserProfile.OrganizationId = 1;
                     var userFromDb = _wcfService.InvokeService<IUserService, User>(svc => svc.AddUser(mappedUserProfile));
                     if (userFromDb != null)
                     {

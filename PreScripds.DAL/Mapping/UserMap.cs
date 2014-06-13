@@ -74,9 +74,9 @@ namespace PreScripds.DAL.Mapping
             this.HasRequired(t => t.Country)
                 .WithMany(t => t.Users)
                 .HasForeignKey(d => d.CountryId);
-            this.HasRequired(t => t.Organization)
-                .WithMany(t => t.Users)
-                .HasForeignKey(d => d.OrganizationId);
+            //this.HasRequired(t => t.Organization)
+            //    .WithMany(t => t.Users)
+            //    .HasForeignKey(d => d.OrganizationId);
         }
     }
 }

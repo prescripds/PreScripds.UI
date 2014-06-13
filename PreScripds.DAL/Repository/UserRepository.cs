@@ -60,11 +60,15 @@ namespace PreScripds.DAL.Repository
                         userHistory.CreatedDate = DateTime.Now;
                     }
                 }
-                user.UserLogins.ToList().ForEach((x) =>
-                                                    {
-                                                        uow.GetRepository<UserLogin>().Insert(x);
-                                                    });
 
+                //user.UserLogins.ToList().Select(x => x.UserHistories.ToList()
+                //    .ForEach((s) => { uow.GetRepository<UserHistory>().Insert(s); }))
+                //    .ForEach((p) => { uow.GetRepository<UserLogin>().Insert(p); });
+
+                if (user.UserLogins.IsCollectionValid())
+                {
+                    user.UserLogins.SelectMany(x => x.UserHistories).Each(s => uow.GetRepository<UserHistory>().Items.ToList().Add(s));
+                }
                 uow.GetRepository<User>().Insert(user);
                 uow.SaveChanges();
                 var usrHstry = user.UserLogins.Select(x => x.UserHistories.FirstOrDefault()).FirstOrDefault();
@@ -80,11 +84,11 @@ namespace PreScripds.DAL.Repository
             {
                 if (userHistory != null)
                 {
-                    //var userLogin = uow.GetRepository<UserHistory>().Items.FirstOrDefault(x => x.Id == userHistory.UserloginId);
-                    //userLogin.PasswordCap = userHistory.PasswordCap;
-                    //userLogin.Captcha = userHistory.Captcha;
-                    //uow.GetRepository<UserLogin>().Update(userLogin);
-                    //uow.SaveChanges();
+                    var userLogin = uow.GetRepository<UserLogin>().Items.FirstOrDefault(x => x.Id == userHistory.UserloginId);
+                    userLogin.PasswordCap = userHistory.PasswordCap;
+                    userLogin.Captcha = userHistory.Captcha;
+                    uow.GetRepository<UserLogin>().Update(userLogin);
+                    uow.SaveChanges();
                 }
             }
 

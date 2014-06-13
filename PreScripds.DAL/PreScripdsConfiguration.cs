@@ -13,7 +13,7 @@ namespace PreScripds.DAL
         public PreScripdsConfiguration()
         {
             //SetExecutionStrategy("MySql.Data.MySqlClient", () => new MySqlExecutionStrategy());
-            SetDatabaseInitializer(new CreateDatabaseIfNotExists<PreScripdsDb>());
+            SetDatabaseInitializer(new PreScripdsDbIntializer());
         }
 
     }

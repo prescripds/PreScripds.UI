@@ -38,7 +38,7 @@ namespace PreScripds.UI.Controllers
                     return View("Selfie", "Dashboard");
                 if (user.IsOrganization != null)
                 {
-                    if (user!=null)
+                    if (user != null)
                     {
                         if (user.OrganizationId == 0)
                         {
@@ -46,14 +46,17 @@ namespace PreScripds.UI.Controllers
                         }
                         else
                         {
-                            var organizationId = user.OrganizationId;
-                            var role = _wcfService.InvokeService<IUserService, List<Role>>(svc => svc.GetRole(organizationId));
-                            if (role == null)
-                                return RedirectToAction("AddRole", "Dashboard");
-                            return View("Approvals", "Dashboard");
+                            if (user.OrganizationId.HasValue)
+                            {
+                                var organizationId = user.OrganizationId.Value;
+                                var role = _wcfService.InvokeService<IUserService, List<Role>>(svc => svc.GetRole(organizationId));
+                                if (role == null)
+                                    return RedirectToAction("AddRole", "Dashboard");
+                                return View("Approvals", "Dashboard");
+                            }
                         }
                     }
-                    if (user!=null)
+                    if (user != null)
                     {
                         return View("Approvals", "Dashboard");
                     }
@@ -71,7 +74,8 @@ namespace PreScripds.UI.Controllers
         public ActionResult AddRole()
         {
             var permissions = _wcfService.InvokeService<IMasterService, List<Permission>>((svc) => svc.GetPermission());
-            var orgId = SessionContext.CurrentUser.OrganizationId;
+
+            var orgId = SessionContext.CurrentUser.OrganizationId.Value;
             var departments = _wcfService.InvokeService<IUserService, List<Department>>((svc) => svc.GetDepartment(orgId));
             if (!departments.IsCollectionValid()) departments = new List<Department>();
             if (!permissions.IsCollectionValid()) permissions = new List<Permission>();
@@ -99,7 +103,7 @@ namespace PreScripds.UI.Controllers
                 }
                 else
                 {
-                    roleViewModel.OrganizationId = SessionContext.CurrentUser.OrganizationId;
+                    roleViewModel.OrganizationId = SessionContext.CurrentUser.OrganizationId.Value;
                     roleViewModel.PermissionId = roleViewModel.SelectedPermission;
                     var mappedRoleModel = Mapper.Map<RoleViewModel, Role>(roleViewModel);
                     var roleModel = _wcfService.InvokeService<IUserService, PreScripds.Domain.Role>((svc) => svc.AddRole(mappedRoleModel));

@@ -48,8 +48,8 @@ namespace PreScripds.Domain
         public virtual ICollection<LibraryFolder> LibraryFolders { get; set; }
         [DataMember]
         public virtual ICollection<Role> Roles { get; set; }
-        [DataMember]
-        public virtual ICollection<User> Users { get; set; }
+        //[DataMember]
+        //public virtual ICollection<User> Users { get; set; }
         [DataMember]
         public long CreatedBy { get; set; }
         [DataMember]
