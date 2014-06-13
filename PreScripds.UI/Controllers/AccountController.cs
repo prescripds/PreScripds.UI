@@ -59,7 +59,7 @@ namespace PreScripds.UI.Controllers
             if (user != null)
             {
                 var ipAddress = GetClientIpAddress();
-                var userHistory = user.UserLogins.Select(x => x.UserHistories.FirstOrDefault(y => y.IpAddress == ipAddress));
+                var userHistory = user.UserLogins.Select(x => x.UserHistories.FirstOrDefault(y => y.IpAddress == ipAddress)).ToList();
                 if (userHistory == null)
                 {
                     isCaptchaDisplay = "False";
@@ -116,7 +116,7 @@ namespace PreScripds.UI.Controllers
                     var hashedPassword = Common.Common.CreatePasswordHash(model.Password, userLogin.saltkey);
                     if (hashedPassword.Equals(userLogin.Password))
                     {
-                        var userHistry = user.UserLogins.Select(x => x.UserHistories.FirstOrDefault(y => y.IpAddress == GetClientIpAddress()));
+                        var userHistry = user.UserLogins.Select(x => x.UserHistories.FirstOrDefault(y => y.IpAddress == GetClientIpAddress())).ToList();
                         var hashedPasswordCap = Common.Common.CreatePasswordCapHash(model.Password, userLogin.saltkey, userLogin.Captcha);
                         if (userHistry == null)
                         {
@@ -166,7 +166,7 @@ namespace PreScripds.UI.Controllers
                         }
                         else
                         {
-                            return RedirectToAction("Index", "Dashboard");
+                            return RedirectToAction("Organization", "Dashboard");
                         }
                     }
                     else
@@ -275,7 +275,7 @@ namespace PreScripds.UI.Controllers
                     mappedUserProfile.CreatedBy = 0;
                     mappedUserProfile.UpdatedDate = DateTime.Now;
                     mappedUserProfile.UpdatedBy = 0;
-                   // mappedUserProfile.OrganizationId = 1;
+                    // mappedUserProfile.OrganizationId = 1;
                     var userFromDb = _wcfService.InvokeService<IUserService, User>(svc => svc.AddUser(mappedUserProfile));
                     if (userFromDb != null)
                     {

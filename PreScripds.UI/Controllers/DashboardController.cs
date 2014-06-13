@@ -34,9 +34,9 @@ namespace PreScripds.UI.Controllers
             var user = SessionContext.CurrentUser;
             if (user != null)
             {
-                if (user.IsOrganization != null)
+                if (user.UserType == (int)UserType.Self)
                     return View("Selfie", "Dashboard");
-                if (user.IsOrganization != null)
+                if (user.UserType == (int)UserType.Organization)
                 {
                     if (user != null)
                     {

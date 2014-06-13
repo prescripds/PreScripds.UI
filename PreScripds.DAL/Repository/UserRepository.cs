@@ -146,7 +146,7 @@ namespace PreScripds.DAL.Repository
         {
             using (var uow = new UnitOfWork())
             {
-                var users = uow.GetRepository<User>().Items.Include(x => x.UserLogins.SelectMany(y => y.UserHistories)).Where(x => x.Active).ToList();
+                var users = uow.GetRepository<User>().Items.Include(x => x.UserLogins.Select(y => y.UserHistories)).Where(x => x.Active).ToList();
                 if (users.IsCollectionValid())
                 {
 

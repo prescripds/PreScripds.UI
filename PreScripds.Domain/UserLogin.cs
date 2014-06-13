@@ -8,6 +8,7 @@ using PreScripds.Domain.Master;
 
 namespace PreScripds.Domain
 {
+    [DataContract(IsReference = true)]
     public class UserLogin
     {
         [DataMember]

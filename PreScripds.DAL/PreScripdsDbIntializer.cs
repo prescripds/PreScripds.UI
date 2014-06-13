@@ -23,6 +23,10 @@ namespace PreScripds.DAL
             var securtiyQuestion = new SecurityQuestion() { QuestionName = "What is your age?" };
             context.SecurityQuestions.Add(securtiyQuestion);
             context.SaveChanges();
+
+            var departments = new Department() { DepartmentName = "Registration", IsActive = true, DepartmentDescription = "Registers the patient details." };
+            context.Departments.Add(departments);
+            context.SaveChanges();
         }
 
     }
