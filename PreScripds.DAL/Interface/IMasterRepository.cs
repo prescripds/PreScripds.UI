@@ -10,7 +10,7 @@ namespace PreScripds.DAL.Interface
 {
     public interface IMasterRepository
     {
-        //ICollection<Department> GetDepartments();
+        ICollection<Department> GetDepartments();
 
         ICollection<Permission> GetPermission();
         ICollection<Country> GetCountry();

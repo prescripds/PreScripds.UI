@@ -135,9 +135,21 @@ namespace PreScripds.UI.Controllers
             var organizationViewModel = new OrganizationViewModel()
             {
                 OrganizationDocumentViewModel = new OrganizationDocumentViewModel(),
+                Department = GetDepartment(),
                 OrganizationDocumentViewModels = new List<OrganizationDocumentViewModel>()
             };
             return View(organizationViewModel);
+        }
+
+        private List<Department> GetDepartment()
+        {
+            var department = _wcfService.InvokeService<IMasterService, List<Department>>((svc) => svc.GetDepartment());
+            return department;
+        }
+
+        public ActionResult AddOrgDoc()
+        {
+            return View("OrganizationDocs");
         }
         [PreScripds.UI.Common.Authorize]
         [HttpPost]
@@ -169,7 +181,8 @@ namespace PreScripds.UI.Controllers
                     orgViewModel.QuickViewEnd = false;
                 }
                 var mappedModel = Mapper.Map<OrganizationViewModel, Organization>(orgViewModel);
-                mappedModel.CreatedDate = DateTime.Now;
+                mappedModel.CreatedDate = mappedModel.UpdatedDate = DateTime.Now;
+                mappedModel.CreatedBy = mappedModel.UpdatedBy = SessionContext.CurrentUser.Id;
                 var organizationModel = _wcfService.InvokeService<IUserService, Organization>((svc) => svc.AddOrganization(mappedModel));
                 if (organizationModel != null)
                 {
@@ -211,7 +224,7 @@ namespace PreScripds.UI.Controllers
             {
                 if (!orgViewModel.ReferencedEmail.Clean().IsNotEmpty())
                     ModelState.AddModelError("ReferencedEmail", "Referenced Email is mandatory.");
-                if (!orgViewModel.DepartmentId.HasValue)
+                if (orgViewModel.DepartmentId.HasValue)
                     ModelState.AddModelError("DepartmentId", "Please select a department.");
                 if (!orgViewModel.EmployeeIdOrg.Clean().IsNotEmpty())
                     ModelState.AddModelError("EmployeeIdOrg", "Employee Id is mandatory.");

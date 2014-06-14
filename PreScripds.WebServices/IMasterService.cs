@@ -26,9 +26,9 @@ namespace PreScripds.WebServices
         [WebGet(UriTemplate = "/States", ResponseFormat = WebMessageFormat.Xml)]
         List<State> GetState();
 
-        //[OperationContract]
-        //[WebGet(UriTemplate = "/City", ResponseFormat = WebMessageFormat.Xml)]
-        //List<City> GetCity();
+        [OperationContract]
+        [WebGet(UriTemplate = "/Department", ResponseFormat = WebMessageFormat.Xml)]
+        List<Department> GetDepartment();
 
         [OperationContract]
         [WebGet(UriTemplate = "/SecurityQuestion", ResponseFormat = WebMessageFormat.Xml)]

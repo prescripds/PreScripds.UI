@@ -131,7 +131,7 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="form-group">
                         <label class="control-label" for="MiddleName">Department</label>
-                        @Html.DropDownListFor(m => m.DepartmentId, Model.Department.ToSelectListItems(model => model.DepartmentId.ToString(), model => model.DepartmentName), "--Select--", new { @class = "form-control" })
+                        @Html.DropDownListFor(m => m.DepartmentId, Model.Department.ToSelectListItems(model => model.Id.ToString(), model => model.DepartmentName), "--Select--", new { @class = "form-control" })
 
                     </div>
                 </div>

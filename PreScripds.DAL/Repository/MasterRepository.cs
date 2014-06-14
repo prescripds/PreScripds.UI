@@ -19,17 +19,20 @@ namespace PreScripds.DAL.Repository
 
         }
         #region Department Cache
-        //public ICollection<Department> GetDepartments()
-        //{
-        //    var departments = CacheService.Get<ICollection<Department>>(Constants.CacheKeys.DEPARTMENTS);
-        //    if (departments == null)
-        //    {
-        //        var newDepartments = ContextRep.departments.ToList();
-        //        CacheService.Set(Constants.CacheKeys.DEPARTMENTS, newDepartments);
-        //        return newDepartments;
-        //    }
-        //    return departments;
-        //}
+        public ICollection<Department> GetDepartments()
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var departments = CacheService.Get<ICollection<Department>>(Constants.CacheKeys.DEPARTMENTS);
+                if (departments == null)
+                {
+                    var newDepartments = uow.GetRepository<Department>().Items.ToList();
+                    CacheService.Set(Constants.CacheKeys.DEPARTMENTS, newDepartments);
+                    return newDepartments;
+                }
+                return departments;
+            }
+        }
 
         #endregion
         #region Permission Cache

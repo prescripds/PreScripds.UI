@@ -63,5 +63,10 @@ namespace PreScripds.WebServices
             states = states.Where(x => x.CountryId == countryId).ToList();
             return states;
         }
+        public List<Department> GetDepartment()
+        {
+            var department = _masterBl.GetDepartments().ToList();
+            return department;
+        }
     }
 }
