@@ -147,10 +147,17 @@ namespace PreScripds.UI.Controllers
             return department;
         }
 
+        [PreScripds.UI.Common.Authorize]
+        [HttpGet]
         public ActionResult AddOrgDoc()
         {
-            return View("OrganizationDocs");
+            var organizationViewModel = new OrganizationDocumentViewModel()
+            {
+                OrganizationDocumentViewModels = new List<OrganizationDocumentViewModel>()
+            };
+            return View("OrganizationDocs", organizationViewModel);
         }
+
         [PreScripds.UI.Common.Authorize]
         [HttpPost]
         public ActionResult AddOrgDoc(OrganizationDocumentViewModel orgDocViewModel, string buttonType)
@@ -183,6 +190,8 @@ namespace PreScripds.UI.Controllers
                 var mappedModel = Mapper.Map<OrganizationViewModel, Organization>(orgViewModel);
                 mappedModel.CreatedDate = mappedModel.UpdatedDate = DateTime.Now;
                 mappedModel.CreatedBy = mappedModel.UpdatedBy = SessionContext.CurrentUser.Id;
+                mappedModel.LibraryFolders = new List<LibraryFolder>();
+                mappedModel.Active = true;
                 var organizationModel = _wcfService.InvokeService<IUserService, Organization>((svc) => svc.AddOrganization(mappedModel));
                 if (organizationModel != null)
                 {
@@ -240,7 +249,7 @@ namespace PreScripds.UI.Controllers
         [HttpGet]
         public ActionResult OrganizationDocs()
         {
-            var orgDocViewModel = new OrganizationDocumentViewModel();
+            var orgDocViewModel = new OrganizationDocumentViewModel() { OrganizationDocumentViewModels = new List<OrganizationDocumentViewModel>() };
             return View(orgDocViewModel);
         }
 

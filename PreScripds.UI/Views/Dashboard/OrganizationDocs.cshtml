@@ -1,69 +1,79 @@
-﻿@{
+﻿@model PreScripds.UI.Models.OrganizationDocumentViewModel
+@{
     ViewBag.Title = "OrganizationDocs";
     Layout = "~/Views/Shared/_OpenLayout.cshtml";
 }
 
 <main class="wrap group">
-    <aside class="sidebar" style="background-color:#11171c;border-radius:7%">
-        <div class="my-info">
-            <img src="images/cj.jpg" alt="Chris Johnson" class="portfolio-image">
-            <h1>Organization Name</h1>
-            <h2>Organization Address</h2>
-        </div>
-    </aside>
-    <div style="float:left;width:80%;padding:1%;">
+    @*<aside class="sidebar" style="border-radius:7%">
+            <div class="my-info">
+                <img src="images/cj.jpg" alt="Chris Johnson" class="portfolio-image">
+                <h1>Organization Name</h1>
+                <h2>Organization Address</h2>
+            </div>
+        </aside>*@
+    <div class="blackBg" style="width:100%;padding:1%;">
         @using (Html.BeginForm("AddOrgDoc", "Dashboard", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
         {
-            @Html.Partial("Partials/_OrganizationDocuments")
+            <div>
+                @Html.Partial("Partials/_OrganizationDocuments")
+            </div>
+
         }
     </div>
 
     <div class="content">
-        <div class="portfolio-item group first">
-            <div class="portfolio-info">
-                <div class="date">7 Nov 2013</div>
-                <div class="description">
-                    Free PSD template for startups, small businesses and basically for everyone liking good design.
+
+        @for (int i = 0; i < Model.OrganizationDocumentViewModels.Count; i++)
+        {
+            <div class="portfolio-item group">
+                <div class="portfolio-info">
+                    <div class="date">@Model.OrganizationDocumentViewModels[i].CreatedDate</div>
+                    <div class="description">
+                        @Model.OrganizationDocumentViewModels[i].DocumentDescription
+                    </div>
+                    <div class="meta">
+                        <p><strong>Document Name:</strong> @Model.OrganizationDocumentViewModels[i].OrganizationDocumentName</p>
+                        <p><strong>Action:</strong> <a ><span class="glyphicon glyphicon-trash"></span></a></p>
+                    </div>
                 </div>
-                <div class="meta">
-                    <p><strong>Document Name:</strong> Despreneur</p>
-                    <p><strong>Delete:</strong> Action</p>
-                </div>
-            </div>
-            <div class="portfolio-image">
-                <img src="images/portfolio/free-psd-templates.jpg" alt="Free PSD Templates">
-            </div>
-        </div>
-        <div class="portfolio-item group">
-            <div class="portfolio-info">
-                <div class="date">7 Nov 2013</div>
-                <div class="description">
-                    Free PSD template for startups, small businesses and basically for everyone liking good design.
-                </div>
-                <div class="meta">
-                    <p><strong>Client:</strong> Despreneur</p>
-                    <p><strong>Tags:</strong> Web Design</p>
+                <div class="portfolio-image">
+                    <img src="images/portfolio/moody-shot.jpg" alt="Moody Shot">
                 </div>
             </div>
-            <div class="portfolio-image">
-                <img src="images/portfolio/moody-shot.jpg" alt="Moody Shot">
-            </div>
-        </div>
-        <div class="portfolio-item group">
-            <div class="portfolio-info">
-                <div class="date">7 Nov 2013</div>
-                <div class="description">
-                    Free PSD template for startups, small businesses and basically for everyone liking good design.
+        }
+        @*<div class="portfolio-item group first">
+
+                <div class="portfolio-info">
+                    <div class="date">7 Nov 2013</div>
+                    <div class="description">
+                        Free PSD template for startups, small businesses and basically for everyone liking good design.
+                    </div>
+                    <div class="meta">
+                        <p><strong>Document Name:</strong> Despreneur</p>
+                        <p><strong>Delete:</strong> Action</p>
+                    </div>
                 </div>
-                <div class="meta">
-                    <p><strong>Client:</strong> Despreneur</p>
-                    <p><strong>Tags:</strong> Web Design</p>
+                <div class="portfolio-image">
+                    <img src="images/portfolio/free-psd-templates.jpg" alt="Free PSD Templates">
                 </div>
             </div>
-            <div class="portfolio-image">
-                <img src="images/portfolio/new-york.jpg" alt="New York">
-            </div>
-        </div>
+
+            <div class="portfolio-item group">
+                <div class="portfolio-info">
+                    <div class="date">7 Nov 2013</div>
+                    <div class="description">
+                        Free PSD template for startups, small businesses and basically for everyone liking good design.
+                    </div>
+                    <div class="meta">
+                        <p><strong>Client:</strong> Despreneur</p>
+                        <p><strong>Tags:</strong> Web Design</p>
+                    </div>
+                </div>
+                <div class="portfolio-image">
+                    <img src="images/portfolio/new-york.jpg" alt="New York">
+                </div>
+            </div>*@
 
 
         <div class="portfolio-item group loading-wrap" style="display:none">

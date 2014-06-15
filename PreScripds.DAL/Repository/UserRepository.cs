@@ -135,11 +135,27 @@ namespace PreScripds.DAL.Repository
         {
             using (var uow = new UnitOfWork())
             {
+                organization.LibraryFolders = CreateDefaultFolder();
+                organization.LibraryFolders.Each((x) => { uow.GetRepository<LibraryFolder>().Insert(x); });
                 uow.GetRepository<Organization>().Insert(organization);
                 uow.SaveChanges();
+                CreateFoldersOnDisk(organization.LibraryFolders);
                 return organization;
             }
 
+        }
+
+        private void CreateFoldersOnDisk(ICollection<LibraryFolder> collection)
+        {
+            throw new NotImplementedException();
+        }
+
+        private List<LibraryFolder> CreateDefaultFolder()
+        {
+            var folderlist = new List<LibraryFolder>();
+            folderlist.Add(new LibraryFolder() { FolderName = "Assets", FolderHierarchy = "/", Createdate = DateTime.Now });
+            folderlist.Add(new LibraryFolder() { FolderName = "Documents", FolderHierarchy = "Assets/Documents", Createdate = DateTime.Now, ParentFolderId = 1 });
+            return folderlist;
         }
 
         public User GetUserByUsername(string loginName, LoginType loginType)
@@ -262,7 +278,7 @@ namespace PreScripds.DAL.Repository
         {
             using (var uow = new UnitOfWork())
             {
-                var organization = uow.GetRepository<Organization>().Items.FirstOrDefault(x => x.OrganizationName == orgName && x.Active);
+                var organization = uow.GetRepository<Organization>().Items.FirstOrDefault(x => x.OrganizationName == orgName);
                 if (organization != null)
                     return true;
                 return false;
