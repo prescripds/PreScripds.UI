@@ -132,6 +132,7 @@ namespace PreScripds.UI.Controllers
         [HttpGet]
         public ActionResult Organization()
         {
+            //var baseDir = AppDomain.CurrentDomain.BaseDirectory;
             var organizationViewModel = new OrganizationViewModel()
             {
                 OrganizationDocumentViewModel = new OrganizationDocumentViewModel(),
@@ -151,6 +152,7 @@ namespace PreScripds.UI.Controllers
         [HttpGet]
         public ActionResult AddOrgDoc()
         {
+            
             var organizationViewModel = new OrganizationDocumentViewModel()
             {
                 OrganizationDocumentViewModels = new List<OrganizationDocumentViewModel>()

@@ -13,6 +13,8 @@ using MySql.Data.MySqlClient;
 using PreScripds.Infrastructure.Utilities;
 using PreScripds.Domain.Enums;
 using PreScripds.Infrastructure.UnitOfWork;
+using System.IO;
+using System.Configuration;
 
 namespace PreScripds.DAL.Repository
 {
@@ -139,15 +141,31 @@ namespace PreScripds.DAL.Repository
                 organization.LibraryFolders.Each((x) => { uow.GetRepository<LibraryFolder>().Insert(x); });
                 uow.GetRepository<Organization>().Insert(organization);
                 uow.SaveChanges();
-                CreateFoldersOnDisk(organization.LibraryFolders);
+                CreateFoldersOnDisk(organization);
                 return organization;
             }
 
         }
 
-        private void CreateFoldersOnDisk(ICollection<LibraryFolder> collection)
+        private void CreateFoldersOnDisk(Organization organization)
         {
-            throw new NotImplementedException();
+            using (var uow = new UnitOfWork())
+            {
+                var baseDir = ConfigurationManager.AppSettings["AppAssetPath"];
+                var libraryFolders = uow.GetRepository<LibraryFolder>().Items.Where(x => x.OrganizationId == organization.Id).ToList();
+
+                if (!Directory.Exists(baseDir))
+                {
+                    FileServiceProvider.CreateDirectory(baseDir, organization.Id.ToString());
+                }
+                var baseAppPathForOrg = Path.Combine(baseDir, organization.Id.ToString());
+                foreach (var libraryFolder in libraryFolders)
+                {
+                    var appAssetPath = Path.Combine(baseAppPathForOrg, libraryFolder.FolderName);
+                    FileServiceProvider.CreateDirectory(appAssetPath);
+                }
+            }
+
         }
 
         private List<LibraryFolder> CreateDefaultFolder()
