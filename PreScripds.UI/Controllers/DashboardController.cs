@@ -189,10 +189,13 @@ namespace PreScripds.UI.Controllers
                     orgViewModel.NoOfQuickView = 1;
                     orgViewModel.QuickViewEnd = false;
                 }
+
                 var mappedModel = Mapper.Map<OrganizationViewModel, Organization>(orgViewModel);
                 mappedModel.CreatedDate = mappedModel.UpdatedDate = DateTime.Now;
                 mappedModel.CreatedBy = mappedModel.UpdatedBy = SessionContext.CurrentUser.Id;
                 mappedModel.LibraryFolders = new List<LibraryFolder>();
+                var libAsset = GetLibraryAsset(orgViewModel.DisplayPicture);
+                mappedModel.LibraryFolders.FirstOrDefault().LibraryAssets.Add(libAsset);
                 mappedModel.Active = true;
                 var organizationModel = _wcfService.InvokeService<IUserService, Organization>((svc) => svc.AddOrganization(mappedModel));
                 if (organizationModel != null)
