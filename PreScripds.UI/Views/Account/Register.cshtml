@@ -177,12 +177,12 @@
         </div>
         }
         <div class="row">
-            <div class="col-md-4 col-sm-6" id="displayPic" style="display:none">
+            @*<div class="col-md-4 col-sm-6" id="displayPic" style="display:none">
                 <div class="form-group">
                     <label class="control-label" for="MiddleName" id="dispPic"></label>
                     <input type="file" id="DisplayPicture" name="DisplayPicture" />
                 </div>
-            </div>
+            </div>*@
             <div class="col-md-4 col-sm-6">
                 <div class="form-group">
                     <label class="control-label" for="LastName">Captcha*</label>
@@ -233,20 +233,20 @@
                 });
             });
 
-            $('#UserType').on('change', function () {
-                var selectedType = $(this).val();
-                if (selectedType == 1) {
-                    $('#displayPic').removeAttr('style');
-                    $('#dispPic').html('Logo');
-                }
-                else if (selectedType == 2) {
-                    $('#displayPic').removeAttr('style');
-                    $('#dispPic').html('Profile Picture');
-                }
-                else {
-                    $('#displayPic').attr('style', 'display:none');
-                }
-            });
+            //$('#UserType').on('change', function () {
+            //    var selectedType = $(this).val();
+            //    if (selectedType == 1) {
+            //        $('#displayPic').removeAttr('style');
+            //        $('#dispPic').html('Logo');
+            //    }
+            //    else if (selectedType == 2) {
+            //        $('#displayPic').removeAttr('style');
+            //        $('#dispPic').html('Profile Picture');
+            //    }
+            //    else {
+            //        $('#displayPic').attr('style', 'display:none');
+            //    }
+            //});
             @Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))
         });
 

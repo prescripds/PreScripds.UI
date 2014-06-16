@@ -39,9 +39,9 @@ namespace PreScripds.UI.Models
         public bool? QuickViewEnd { get; set; }
         public DateTime? QuickViewEndTime { get; set; }
         public bool IsExtendQuickView { get; set; }
-
         public bool IsSelfie { get; set; }
-        
+        public HttpPostedFileBase DisplayPicture { get; set; }
+
         public OrganizationDocumentViewModel OrganizationDocumentViewModel { get; set; }
         public List<OrganizationDocumentViewModel> OrganizationDocumentViewModels { get; set; }
     }

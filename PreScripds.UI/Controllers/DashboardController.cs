@@ -152,7 +152,7 @@ namespace PreScripds.UI.Controllers
         [HttpGet]
         public ActionResult AddOrgDoc()
         {
-            
+
             var organizationViewModel = new OrganizationDocumentViewModel()
             {
                 OrganizationDocumentViewModels = new List<OrganizationDocumentViewModel>()

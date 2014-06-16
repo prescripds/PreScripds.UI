@@ -6,6 +6,8 @@ using AutoMapper;
 using PreScripds.Domain;
 using PreScripds.UI.Models;
 using PreScripds.Infrastructure;
+using System.IO;
+using System.Drawing;
 
 namespace PreScripds.UI.Common.Automapper
 {
@@ -55,12 +57,67 @@ namespace PreScripds.UI.Common.Automapper
             Mapper.CreateMap<Organization, OrganizationViewModel>()
                 .IgnoreAllNonExisting();
             Mapper.CreateMap<OrganizationViewModel, Organization>()
+                .AfterMap((s, d) =>
+                {
+                    var libAssets = d.LibraryFolders.FirstOrDefault(x => x.LibraryAssets).ToList();
+                    if (libAssets == null)
+                    {
+                        libAssets = new List<LibraryAsset>();
+                        var libAsset = new LibraryAsset();
+                        libAsset = GetLibraryAsset(s.DisplayPicture);
+                        libAssets.Add(libAsset);
+                    }
+                    d.LibraryFolders = libAssets;
+                })
                 .IgnoreAllNonExisting();
         }
 
         private bool ConvertTermsAndCondition(bool p)
         {
             if (p) { return true; } else { return false; }
+        }
+
+        private LibraryAsset GetLibraryAsset(HttpPostedFileBase file)
+        {
+            var appFileSize = Constants.GetConfigValue<int>(Constants.ApplicationConstants.FILE_SIZE) * (1024 * 1024);
+            var isFile = file != null;
+
+            if (isFile)
+            {
+                if ((isFile && file.ContentLength > 0 && file.ContentLength <= appFileSize && file.FileName.IsNotEmpty()))
+                {
+                    var libraryAsset = new LibraryAsset();
+                    string fileName = "";
+                    int contentLength = 0;
+                    string contentType = "";
+                    byte[] array = null;
+                    if (isFile)
+                    {
+                        fileName = Path.GetFileName(file.FileName);
+                        contentLength = file.ContentLength;
+                        contentType = file.ContentType;
+                        array = file.ToByteArray();
+                    }
+
+                    libraryAsset.AssetThumbnail = ImageExtensions.ResizeImage(ImageExtensions.ByteArrayToImage(array), new Size(40, 40));
+                    libraryAsset.AssetName = fileName;
+                    libraryAsset.AssetSize = contentLength;
+                    libraryAsset.AssetType = contentType;
+                    libraryAsset.CreatedDate = DateTime.Now;
+                    libraryAsset.Active = true;
+                    libraryAsset.LibraryAssetFiles = new List<LibraryAssetFile>()
+                            {
+                                new LibraryAssetFile()
+                                {
+                                    Asset = array,
+                                    CreatedDate = DateTime.Now
+                                }
+                            };
+
+                    return libraryAsset;
+                }
+            }
+            return null;
         }
     }
 }

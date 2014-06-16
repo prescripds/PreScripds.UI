@@ -138,13 +138,36 @@ namespace PreScripds.DAL.Repository
             using (var uow = new UnitOfWork())
             {
                 organization.LibraryFolders = CreateDefaultFolder();
+                organization.LibraryFolders.SelectMany(x => x.LibraryAssets
+                    .SelectMany(y => y.LibraryAssetFiles.Each((s) =>
+                                                                   {
+                                                                       uow.GetRepository<LibraryAssetFile>().Items.ToList().Add(s);
+                                                                   })));
+                organization.LibraryFolders.SelectMany(x => x.LibraryAssets.Each((s) =>
+                                                                                        {
+                                                                                            uow.GetRepository<LibraryAsset>().Items.ToList().Add(s);
+                                                                                        }));
                 organization.LibraryFolders.Each((x) => { uow.GetRepository<LibraryFolder>().Insert(x); });
                 uow.GetRepository<Organization>().Insert(organization);
                 uow.SaveChanges();
+                UpdateOrgInUser(organization);
                 CreateFoldersOnDisk(organization);
+
                 return organization;
             }
 
+        }
+
+        private void UpdateOrgInUser(Organization organization)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var userFromDb = uow.GetRepository<User>().Items.FirstOrDefault(x => x.Id == organization.CreatedBy);
+                userFromDb.OrganizationId = organization.Id;
+                userFromDb.UpdatedBy = organization.CreatedBy;
+                userFromDb.UpdatedDate = DateTime.Now;
+                uow.GetRepository<User>().Update(userFromDb);
+            }
         }
 
         private void CreateFoldersOnDisk(Organization organization)

@@ -200,6 +200,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AppSettingModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LibraryAssetViewModel.cs" />
     <Compile Include="Models\OrganizationDocumentViewModel.cs" />
     <Compile Include="Models\OrganizationViewModel.cs" />
     <Compile Include="Models\PermissionViewModel.cs" />
