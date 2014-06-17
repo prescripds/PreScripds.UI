@@ -52,7 +52,7 @@ namespace PreScripds.UI.Controllers
 
             if (isFile)
             {
-                if ((isFile && file.ContentLength > 0 && file.ContentLength <= appFileSize && file.FileName.IsNotEmpty()))
+                if ((isFile && file.FileName.IsNotEmpty()))
                 {
                     var libraryAsset = new LibraryAsset();
                     string fileName = "";

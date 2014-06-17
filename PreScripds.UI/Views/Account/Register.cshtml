@@ -12,7 +12,7 @@
 <div class="header_top">
     <h2><span>Register</span></h2>
 </div>
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form"}))
 {
 
     @Html.AntiForgeryToken()

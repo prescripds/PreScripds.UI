@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using PreScripds.UI.Models;
 using AutoMapper;
 using PreScripds.Domain.Enums;
+using System.Collections.ObjectModel;
 
 
 namespace PreScripds.UI.Controllers
@@ -194,8 +195,12 @@ namespace PreScripds.UI.Controllers
                 mappedModel.CreatedDate = mappedModel.UpdatedDate = DateTime.Now;
                 mappedModel.CreatedBy = mappedModel.UpdatedBy = SessionContext.CurrentUser.Id;
                 mappedModel.LibraryFolders = new List<LibraryFolder>();
+                var libFolder = new LibraryFolder();
                 var libAsset = GetLibraryAsset(orgViewModel.DisplayPicture);
-                mappedModel.LibraryFolders.FirstOrDefault().LibraryAssets.Add(libAsset);
+                ICollection<LibraryAsset> libAssetsColl = new Collection<LibraryAsset>();
+                libAssetsColl.Add(libAsset);
+                libFolder.LibraryAssets = libAssetsColl;
+                mappedModel.LibraryFolders.Add(libFolder);
                 mappedModel.Active = true;
                 var organizationModel = _wcfService.InvokeService<IUserService, Organization>((svc) => svc.AddOrganization(mappedModel));
                 if (organizationModel != null)
