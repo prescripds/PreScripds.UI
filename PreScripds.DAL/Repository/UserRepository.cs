@@ -142,6 +142,7 @@ namespace PreScripds.DAL.Repository
                 if (organization.LibraryFolders != null)
                 {
                     var libFolders = CreateDefaultFolder(organization.LibraryFolders);
+                    organization.LibraryFolders = libFolders;
                     organization.LibraryFolders.SelectMany(x => x.LibraryAssets)
                         .Each(la => uow.GetRepository<LibraryAsset>().Items.ToList().Add(la));
                     organization.LibraryFolders.SelectMany(x => x.LibraryAssets)
@@ -206,10 +207,34 @@ namespace PreScripds.DAL.Repository
 
         private List<LibraryFolder> CreateDefaultFolder(ICollection<LibraryFolder> libraryFolders)
         {
-            var folderlist = new List<LibraryFolder>();
-            folderlist.Add(new LibraryFolder() { FolderName = "Assets", FolderHierarchy = "/", Createdate = DateTime.Now });
-            folderlist.Add(new LibraryFolder() { FolderName = "Documents", FolderHierarchy = "Assets/Documents", Createdate = DateTime.Now, ParentFolderId = 1 });
-            return folderlist;
+            var libFldrs = libraryFolders.ToList();
+            for (int i = 0; i < libFldrs.Count; i++)
+            {
+                var libraryFolder = new LibraryFolder()
+                {
+                    FolderName = "Assets",
+                    FolderHierarchy = "/",
+                    Createdate = DateTime.Now,
+                    LibraryAssets = libFldrs.FirstOrDefault().LibraryAssets
+                };
+                var libraryDocFolder = new LibraryFolder()
+                {
+                    FolderName = "Documents",
+                    FolderHierarchy = "Assets/Documents",
+                    Createdate = DateTime.Now,
+                    ParentFolderId = 1,
+                    LibraryAssets = new Collection<LibraryAsset>()
+                };
+                if (i == 0)
+                    libFldrs[0] = libraryFolder;
+                if (i == 1)
+                    libFldrs[1] = libraryDocFolder;
+            }
+            //var folderlist = new List<LibraryFolder>();
+            //folderlist.Add(new LibraryFolder() { FolderName = "Assets", FolderHierarchy = "/", Createdate = DateTime.Now });
+            //folderlist.Add(new LibraryFolder() { FolderName = "Documents", FolderHierarchy = "Assets/Documents", Createdate = DateTime.Now, ParentFolderId = 1 });
+            //return folderlist;
+            return libFldrs;
         }
 
         public User GetUserByUsername(string loginName, LoginType loginType)
