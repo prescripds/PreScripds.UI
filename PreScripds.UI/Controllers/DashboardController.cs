@@ -198,7 +198,8 @@ namespace PreScripds.UI.Controllers
                 var libFolder = new LibraryFolder();
                 var libAsset = GetLibraryAsset(orgViewModel.DisplayPicture);
                 ICollection<LibraryAsset> libAssetsColl = new Collection<LibraryAsset>();
-                libAssetsColl.Add(libAsset);
+                if (libAsset != null)
+                    libAssetsColl.Add(libAsset);
                 libFolder.LibraryAssets = libAssetsColl;
                 mappedModel.LibraryFolders.Add(libFolder);
                 mappedModel.Active = true;

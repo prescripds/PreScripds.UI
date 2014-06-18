@@ -15,6 +15,7 @@ using PreScripds.Domain.Enums;
 using PreScripds.Infrastructure.UnitOfWork;
 using System.IO;
 using System.Configuration;
+using System.Collections.ObjectModel;
 
 namespace PreScripds.DAL.Repository
 {
@@ -137,17 +138,29 @@ namespace PreScripds.DAL.Repository
         {
             using (var uow = new UnitOfWork())
             {
-                organization.LibraryFolders = CreateDefaultFolder();
-                organization.LibraryFolders.SelectMany(x => x.LibraryAssets
-                    .SelectMany(y => y.LibraryAssetFiles.Each((s) =>
-                                                                   {
-                                                                       uow.GetRepository<LibraryAssetFile>().Items.ToList().Add(s);
-                                                                   })));
-                organization.LibraryFolders.SelectMany(x => x.LibraryAssets.Each((s) =>
-                                                                                        {
-                                                                                            uow.GetRepository<LibraryAsset>().Items.ToList().Add(s);
-                                                                                        }));
-                organization.LibraryFolders.Each((x) => { uow.GetRepository<LibraryFolder>().Insert(x); });
+
+                if (organization.LibraryFolders != null)
+                {
+                    var libFolders = CreateDefaultFolder(organization.LibraryFolders);
+                    organization.LibraryFolders.SelectMany(x => x.LibraryAssets)
+                        .Each(la => uow.GetRepository<LibraryAsset>().Items.ToList().Add(la));
+                    organization.LibraryFolders.SelectMany(x => x.LibraryAssets)
+                        .SelectMany(lf => lf.LibraryAssetFiles)
+                        .Each(laf => uow.GetRepository<LibraryAssetFile>().Insert(laf));
+                }
+
+
+
+                //organization.LibraryFolders.SelectMany(x => x.LibraryAssets
+                //    .SelectMany(y => y.LibraryAssetFiles.Each((s) =>
+                //                                                   {
+                //                                                       uow.GetRepository<LibraryAssetFile>().Insert(s);
+                //                                                   })));
+                //organization.LibraryFolders.SelectMany(x => x.LibraryAssets.Each((s) =>
+                //                                                                        {
+                //                                                                            uow.GetRepository<LibraryAsset>().Insert(s);
+                //                                                                        }));
+                //organization.LibraryFolders.Each((x) => { uow.GetRepository<LibraryFolder>().Insert(x); });
                 uow.GetRepository<Organization>().Insert(organization);
                 uow.SaveChanges();
                 UpdateOrgInUser(organization);
@@ -191,7 +204,7 @@ namespace PreScripds.DAL.Repository
 
         }
 
-        private List<LibraryFolder> CreateDefaultFolder()
+        private List<LibraryFolder> CreateDefaultFolder(ICollection<LibraryFolder> libraryFolders)
         {
             var folderlist = new List<LibraryFolder>();
             folderlist.Add(new LibraryFolder() { FolderName = "Assets", FolderHierarchy = "/", Createdate = DateTime.Now });
