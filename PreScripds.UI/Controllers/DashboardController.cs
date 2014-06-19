@@ -29,6 +29,7 @@ namespace PreScripds.UI.Controllers
             _wcfService = new WcfServiceInvoker();
             _sessionContext = new SessionContext();
         }
+
         //
         // GET: /Dashboard/
         [PreScripds.UI.Common.Authorize]
@@ -72,6 +73,7 @@ namespace PreScripds.UI.Controllers
             }
             return null;
         }
+
         [PreScripds.UI.Common.Authorize]
         [HttpGet]
         public ActionResult AddRole()
@@ -89,6 +91,7 @@ namespace PreScripds.UI.Controllers
             };
             return View(roleViewModel);
         }
+
         [PreScripds.UI.Common.Authorize]
         [HttpPost]
         public ActionResult AddRole(RoleViewModel roleViewModel)
@@ -122,7 +125,6 @@ namespace PreScripds.UI.Controllers
                 }
             }
             return View(roleViewModel);
-
         }
 
         private bool CheckRoleNameExists(RoleViewModel roleViewModel)
@@ -131,11 +133,11 @@ namespace PreScripds.UI.Controllers
             var roleCheck = _wcfService.InvokeService<IUserService, bool>((svc) => svc.CheckRoleExists(mappedRoleModel));
             return roleCheck;
         }
+
         [PreScripds.UI.Common.Authorize]
         [HttpGet]
         public ActionResult Organization()
         {
-            //var baseDir = AppDomain.CurrentDomain.BaseDirectory;
             var organizationViewModel = new OrganizationViewModel()
             {
                 OrganizationDocumentViewModel = new OrganizationDocumentViewModel(),
@@ -187,8 +189,6 @@ namespace PreScripds.UI.Controllers
             {
                 if (orgViewModel.IsQuickView)
                 {
-                    //orgViewModel.IsQuickViewTime = DateTime.Now;
-                    // orgViewModel.QuickViewEndTime = DateTime.Now.AddMinutes(15);
                     orgViewModel.NoOfQuickView = 1;
                     orgViewModel.QuickViewEnd = false;
                 }
@@ -233,8 +233,6 @@ namespace PreScripds.UI.Controllers
                 httpPostedFileBase.SaveAs(path);
             }
         }
-
-
 
         private void ValidateViewModel(OrganizationViewModel orgViewModel, int orgType)
         {
