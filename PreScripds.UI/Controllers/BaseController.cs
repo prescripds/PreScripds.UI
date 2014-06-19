@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -45,7 +46,7 @@ namespace PreScripds.UI.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public  LibraryAsset GetLibraryAsset(HttpPostedFileBase file)
+        public LibraryAsset GetLibraryAsset(HttpPostedFileBase file)
         {
             var appFileSize = Constants.GetConfigValue<int>(Constants.ApplicationConstants.FILE_SIZE) * (1024 * 1024);
             var isFile = file != null;
@@ -72,6 +73,7 @@ namespace PreScripds.UI.Controllers
                     libraryAsset.AssetSize = contentLength;
                     libraryAsset.AssetType = contentType;
                     libraryAsset.CreatedDate = DateTime.Now;
+                    libraryAsset.AssetPath = ConfigurationManager.AppSettings["AppAssetPath"];
                     libraryAsset.Active = true;
                     libraryAsset.LibraryAssetFiles = new List<LibraryAssetFile>()
                             {

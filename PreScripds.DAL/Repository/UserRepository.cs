@@ -147,21 +147,8 @@ namespace PreScripds.DAL.Repository
                         .Each(la => uow.GetRepository<LibraryAsset>().Items.ToList().Add(la));
                     organization.LibraryFolders.SelectMany(x => x.LibraryAssets)
                         .SelectMany(lf => lf.LibraryAssetFiles)
-                        .Each(laf => uow.GetRepository<LibraryAssetFile>().Insert(laf));
+                        .Each(laf => uow.GetRepository<LibraryAssetFile>().Items.ToList().Add(laf));
                 }
-
-
-
-                //organization.LibraryFolders.SelectMany(x => x.LibraryAssets
-                //    .SelectMany(y => y.LibraryAssetFiles.Each((s) =>
-                //                                                   {
-                //                                                       uow.GetRepository<LibraryAssetFile>().Insert(s);
-                //                                                   })));
-                //organization.LibraryFolders.SelectMany(x => x.LibraryAssets.Each((s) =>
-                //                                                                        {
-                //                                                                            uow.GetRepository<LibraryAsset>().Insert(s);
-                //                                                                        }));
-                //organization.LibraryFolders.Each((x) => { uow.GetRepository<LibraryFolder>().Insert(x); });
                 uow.GetRepository<Organization>().Insert(organization);
                 uow.SaveChanges();
                 UpdateOrgInUser(organization);
@@ -202,38 +189,29 @@ namespace PreScripds.DAL.Repository
                     FileServiceProvider.CreateDirectory(appAssetPath);
                 }
             }
-
         }
 
         private List<LibraryFolder> CreateDefaultFolder(ICollection<LibraryFolder> libraryFolders)
         {
             var libFldrs = libraryFolders.ToList();
-            for (int i = 0; i < libFldrs.Count; i++)
+            var libFldr = libFldrs.FirstOrDefault();
+            libFldr.FolderName = "Assets";
+            libFldr.FolderHierarchy = "/";
+            libFldr.Createdate = DateTime.Now;
+            libFldr.LibraryAssets = libFldrs.FirstOrDefault().LibraryAssets;
+
+            var libraryDocFolder = new LibraryFolder()
             {
-                var libraryFolder = new LibraryFolder()
-                {
-                    FolderName = "Assets",
-                    FolderHierarchy = "/",
-                    Createdate = DateTime.Now,
-                    LibraryAssets = libFldrs.FirstOrDefault().LibraryAssets
-                };
-                var libraryDocFolder = new LibraryFolder()
-                {
-                    FolderName = "Documents",
-                    FolderHierarchy = "Assets/Documents",
-                    Createdate = DateTime.Now,
-                    ParentFolderId = 1,
-                    LibraryAssets = new Collection<LibraryAsset>()
-                };
-                if (i == 0)
-                    libFldrs[0] = libraryFolder;
-                if (i == 1)
-                    libFldrs[1] = libraryDocFolder;
-            }
-            //var folderlist = new List<LibraryFolder>();
-            //folderlist.Add(new LibraryFolder() { FolderName = "Assets", FolderHierarchy = "/", Createdate = DateTime.Now });
-            //folderlist.Add(new LibraryFolder() { FolderName = "Documents", FolderHierarchy = "Assets/Documents", Createdate = DateTime.Now, ParentFolderId = 1 });
-            //return folderlist;
+                FolderName = "Documents",
+                FolderHierarchy = "Assets/Documents",
+                Createdate = DateTime.Now,
+                ParentFolderId = 1,
+                LibraryAssets = new Collection<LibraryAsset>()
+            };
+            //libFldrs.Add(libFldr);
+            libFldrs.Add(libraryDocFolder);
+
+
             return libFldrs;
         }
 
