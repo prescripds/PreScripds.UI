@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace PreScripds.Domain
 {
+    [DataContract(IsReference = true)]
     public class LibraryAssetFile
     {
         [DataMember]

@@ -8,6 +8,7 @@ using PreScripds.Domain.Interfaces;
 
 namespace PreScripds.Domain
 {
+    [DataContract(IsReference = true)]
     public class Organization : IAuditable
     {
         [DataMember]
