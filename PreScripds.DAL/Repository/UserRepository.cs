@@ -168,6 +168,7 @@ namespace PreScripds.DAL.Repository
                 userFromDb.UpdatedBy = organization.CreatedBy;
                 userFromDb.UpdatedDate = DateTime.Now;
                 uow.GetRepository<User>().Update(userFromDb);
+                uow.SaveChanges();
             }
         }
 

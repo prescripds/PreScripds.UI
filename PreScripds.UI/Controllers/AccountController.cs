@@ -166,7 +166,12 @@ namespace PreScripds.UI.Controllers
                         }
                         else
                         {
-                            return RedirectToAction("Organization", "Dashboard");
+                            if (user.OrganizationId == 0)
+                                return RedirectToAction("Organization", "Dashboard");
+                            else
+                            {
+                                //var organization = 
+                            }
                         }
                     }
                     else
@@ -275,6 +280,7 @@ namespace PreScripds.UI.Controllers
                     mappedUserProfile.CreatedBy = 0;
                     mappedUserProfile.UpdatedDate = DateTime.Now;
                     mappedUserProfile.UpdatedBy = 0;
+                    mappedUserProfile.Active = true;
                     // mappedUserProfile.OrganizationId = 1;
                     var userFromDb = _wcfService.InvokeService<IUserService, User>(svc => svc.AddUser(mappedUserProfile));
                     if (userFromDb != null)

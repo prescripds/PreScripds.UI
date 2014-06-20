@@ -24,7 +24,7 @@ namespace PreScripds.DAL
             context.SecurityQuestions.Add(securtiyQuestion);
             context.SaveChanges();
 
-            var departments = new Department() { DepartmentName = "Registration", IsActive = true, DepartmentDescription = "Registers the patient details." };
+            var departments = new Department() { DepartmentName = "Registration", IsActive = true, DepartmentDescription = "Registers the patient details.", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now };
             context.Departments.Add(departments);
             context.SaveChanges();
         }

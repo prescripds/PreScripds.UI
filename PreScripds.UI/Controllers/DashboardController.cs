@@ -167,14 +167,13 @@ namespace PreScripds.UI.Controllers
 
         [PreScripds.UI.Common.Authorize]
         [HttpPost]
-        public ActionResult AddOrgDoc(OrganizationDocumentViewModel orgDocViewModel, string buttonType)
+        public ActionResult AddOrgDoc(OrganizationDocumentViewModel orgDocViewModel)
         {
-
             if (orgDocViewModel != null)
             {
 
             }
-            return PartialView("_OrganizationDocuments", orgDocViewModel);
+            return View("OrganizationDocs", orgDocViewModel);
         }
 
         [PreScripds.UI.Common.Authorize]

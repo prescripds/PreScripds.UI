@@ -52,7 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interface\IMasterBl.cs" />
+    <Compile Include="Interface\IOrganizationBl.cs" />
     <Compile Include="MasterBl.cs" />
+    <Compile Include="OrganizationBl.cs" />
     <Compile Include="UserBl.cs" />
     <Compile Include="Interface\IUserBl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
