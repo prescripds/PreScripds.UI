@@ -170,7 +170,11 @@ namespace PreScripds.UI.Controllers
                                 return RedirectToAction("Organization", "Dashboard");
                             else
                             {
-                                //var organization = 
+                                if (user.OrganizationId.HasValue)
+                                {
+                                    var organization = _wcfService.InvokeService<IOrganizationService, Organization>((svc) => svc.GetOrganizationById(user.OrganizationId.Value));
+
+                                }
                             }
                         }
                     }

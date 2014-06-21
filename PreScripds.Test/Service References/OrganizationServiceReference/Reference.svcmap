@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="fae47a00-889f-4a7e-a130-c0db4ea4222c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:1346/OrganizationService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="OrganizationService.disco" MetadataType="Disco" ID="476deb88-bf85-49ed-8a64-8c7ce2c211d5" SourceId="1" SourceUrl="http://localhost:1346/OrganizationService.svc?disco" />
+    <MetadataFile FileName="OrganizationService.wsdl" MetadataType="Wsdl" ID="b7ef918c-2104-4e0e-b0f0-64ac335422ba" SourceId="1" SourceUrl="http://localhost:1346/OrganizationService.svc?wsdl" />
+    <MetadataFile FileName="OrganizationService.xsd" MetadataType="Schema" ID="841006bd-c4bc-4d0a-ac1b-fd2ee7117170" SourceId="1" SourceUrl="http://localhost:1346/OrganizationService.svc?xsd=xsd0" />
+    <MetadataFile FileName="OrganizationService1.xsd" MetadataType="Schema" ID="b4dcd9dd-5ca5-477a-8e18-32adc7968abb" SourceId="1" SourceUrl="http://localhost:1346/OrganizationService.svc?xsd=xsd1" />
+    <MetadataFile FileName="OrganizationService2.xsd" MetadataType="Schema" ID="e7c9ecbd-e3d9-4741-82cf-dc311239384c" SourceId="1" SourceUrl="http://localhost:1346/OrganizationService.svc?xsd=xsd2" />
+    <MetadataFile FileName="OrganizationService3.xsd" MetadataType="Schema" ID="8ab21290-ad06-44be-b6ca-98da15922015" SourceId="1" SourceUrl="http://localhost:1346/OrganizationService.svc?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

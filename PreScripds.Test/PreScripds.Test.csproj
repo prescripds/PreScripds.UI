@@ -93,6 +93,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\OrganizationServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\UserServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -106,6 +111,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\DataSources\PreScripds.Domain.Department.datasource" />
+    <None Include="Properties\DataSources\PreScripds.Domain.Organization.datasource" />
     <None Include="Properties\DataSources\PreScripds.Domain.User.datasource" />
     <None Include="Service References\MasterServiceReference\MasterService.wsdl" />
     <None Include="Service References\MasterServiceReference\MasterService.xsd">
@@ -115,6 +121,19 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\MasterServiceReference\MasterService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\OrganizationServiceReference\OrganizationService.wsdl" />
+    <None Include="Service References\OrganizationServiceReference\OrganizationService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\OrganizationServiceReference\OrganizationService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\OrganizationServiceReference\OrganizationService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\OrganizationServiceReference\OrganizationService3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\UserServiceReference\UserService.wsdl" />
@@ -133,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\MasterServiceReference\" />
+    <WCFMetadataStorage Include="Service References\OrganizationServiceReference\" />
     <WCFMetadataStorage Include="Service References\UserServiceReference\" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +181,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\UserServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\OrganizationServiceReference\OrganizationService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\OrganizationServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\OrganizationServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\OrganizationServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

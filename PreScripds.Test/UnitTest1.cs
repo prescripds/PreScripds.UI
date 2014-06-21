@@ -27,10 +27,10 @@ namespace PreScripds.Test
         [TestMethod]
         public void TestMethod1()
         {
-            //var countries = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername("shreyas"));
+            var user = _wcfService.InvokeService<IUserService, User>(svc => svc.GetUserByUsername("shreyasbs",Domain.Enums.LoginType.IsUserName));
             //var users = userRepository.GetUsers();
 
-            var userLst = _wcfService.InvokeService<IMasterService, List<Permission>>((svc => svc.GetPermission()));
+            var userLst = _wcfService.InvokeService<IOrganizationService, Organization>((svc => svc.GetOrganizationById(1)));
         }
 
         [TestMethod]
