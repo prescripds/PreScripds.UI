@@ -173,7 +173,11 @@ namespace PreScripds.UI.Controllers
                                 if (user.OrganizationId.HasValue)
                                 {
                                     var organization = _wcfService.InvokeService<IOrganizationService, Organization>((svc) => svc.GetOrganizationById(user.OrganizationId.Value));
-
+                                    var docFolder = organization.LibraryFolders.FirstOrDefault(x => x.FolderName == "Documents");
+                                    if (!docFolder.LibraryAssets.IsCollectionValid())
+                                    {
+                                        return RedirectToAction("OrganizationDocs", "Dashboard");
+                                    }
                                 }
                             }
                         }

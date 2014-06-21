@@ -9,6 +9,8 @@ using PreScripds.Infrastructure.UnitOfWork;
 
 namespace PreScripds.DAL.Repository
 {
+    using System.Data.Entity;
+    using PreScripds.Infrastructure.Utilities;
     public class OrganizationRepository : IOrganizationRepository
     {
         private readonly PreScripdsDb _dbContext;
@@ -20,7 +22,7 @@ namespace PreScripds.DAL.Repository
         {
             using (var uow = new UnitOfWork())
             {
-                var organization = uow.GetRepository<Organization>().Items.FirstOrDefault(x => x.Id == organizationId);
+                var organization = uow.GetRepository<Organization>().Items.Include(s => s.LibraryFolders.Select(y => y.LibraryAssets)).FirstOrDefault(x => x.Id == organizationId);
                 return organization;
             }
 
