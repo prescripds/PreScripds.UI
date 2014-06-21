@@ -154,7 +154,11 @@ namespace PreScripds.UI.Controllers
                             var passwordCapFromDb = userHistry;
                             if (passwordCapFromDb.Equals(hashedPasswordCap))
                             {
-                                //_wcfService.InvokeService<IUserService>((svc) => svc.UpdateUserLogin(userHistry.FirstOrDefault()));
+                                _wcfService.InvokeService<IUserService>((svc) => svc.UpdateUserLogin(userHistry.FirstOrDefault()));
+                            }
+                            else
+                            {
+                                SessionContext.SuspiciousErrorMessage = "NOTE: Please change your password immediately.";
                             }
                         }
 
@@ -289,12 +293,11 @@ namespace PreScripds.UI.Controllers
                     mappedUserProfile.UpdatedDate = DateTime.Now;
                     mappedUserProfile.UpdatedBy = 0;
                     mappedUserProfile.Active = true;
-                    // mappedUserProfile.OrganizationId = 1;
                     var userFromDb = _wcfService.InvokeService<IUserService, User>(svc => svc.AddUser(mappedUserProfile));
                     if (userFromDb != null)
                     {
                         model.CreationSuccessful = true;
-                        model.Message = "Dear {0}. You have been registered successfully and a welcome email has been sent to {1} and a welcome sms is sent to {2}".ToFormat(model.FullName, model.Email, model.Mobile);
+                        model.Message = "Dear '{0}'. You have been registered successfully and a welcome email has been sent to '{1}' and a welcome sms is sent to '{2}'.".ToFormat(model.FullName, model.Email, model.Mobile);
                     }
                 }
                 else

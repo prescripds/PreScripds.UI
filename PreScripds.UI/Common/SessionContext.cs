@@ -37,7 +37,7 @@ namespace PreScripds.UI.Common
 
         public static User CurrentUser { get; set; }
 
-
+        public static string SuspiciousErrorMessage { get; set; }
 
         public static void LogOff(HttpContextBase httpSession)
         {

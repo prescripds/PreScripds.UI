@@ -55,6 +55,11 @@
         </div>
     </div>
     <div class="container body-content" style="margin-top:7%">
+        @if (SessionContext.SuspiciousErrorMessage != null)
+        {
+            <p style="color:red;background-color:white;padding:1%">@SessionContext.SuspiciousErrorMessage</p>
+        }
+
         @RenderBody()
     </div>
     @Html.Partial("Partials/_Footer")
