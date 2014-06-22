@@ -152,7 +152,7 @@ namespace PreScripds.UI.Controllers
                         else
                         {
                             var passwordCapFromDb = userHistry;
-                            if (passwordCapFromDb.Equals(hashedPasswordCap))
+                            if (!passwordCapFromDb.Equals(hashedPasswordCap))
                             {
                                 _wcfService.InvokeService<IUserService>((svc) => svc.UpdateUserLogin(userHistry.FirstOrDefault()));
                             }
@@ -181,6 +181,10 @@ namespace PreScripds.UI.Controllers
                                     if (!docFolder.LibraryAssets.IsCollectionValid())
                                     {
                                         return RedirectToAction("OrganizationDocs", "Dashboard");
+                                    }
+                                    else
+                                    {
+                                        return RedirectToAction("AddRole","Dashboard");
                                     }
                                 }
                             }

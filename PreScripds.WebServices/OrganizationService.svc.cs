@@ -32,5 +32,17 @@ namespace PreScripds.WebServices
             var orgFromDb = _organizationBl.GetOrganizationById(organizationId);
             return orgFromDb;
         }
+
+        public LibraryFolder GetDocLibraryFolder(long organizationId)
+        {
+            var libFldr = _organizationBl.GetDocLibraryFolder(organizationId);
+            return libFldr;
+        }
+
+        public LibraryAsset AddDocLibraryAsset(LibraryAsset libraryAsset)
+        {
+            var libAsst = _organizationBl.AddDocLibraryAsset(libraryAsset);
+            return libAsst;
+        }
     }
 }

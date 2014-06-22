@@ -185,6 +185,7 @@
     <Compile Include="Common\Authorize.cs" />
     <Compile Include="Common\Automapper\Bootstrapper.cs" />
     <Compile Include="Common\Automapper\MasterProfile.cs" />
+    <Compile Include="Common\Automapper\OrganizationProfile.cs" />
     <Compile Include="Common\Automapper\UserProfile.cs" />
     <Compile Include="Common\Common.cs" />
     <Compile Include="Common\HtmlHelpers.cs" />

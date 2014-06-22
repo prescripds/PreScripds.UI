@@ -25,5 +25,16 @@ namespace PreScripds.BL
             var orgFromDb = _organizationRepository.GetOrganizationById(organizationId);
             return orgFromDb;
         }
+        public LibraryFolder GetDocLibraryFolder(long organizationId)
+        {
+            var libFldr = _organizationRepository.GetDocLibraryFolder(organizationId);
+            return libFldr;
+        }
+
+        public LibraryAsset AddDocLibraryAsset(LibraryAsset libraryAsset)
+        {
+            var libAsst = _organizationRepository.AddDocLibraryAsset(libraryAsset);
+            return libAsst;
+        }
     }
 }

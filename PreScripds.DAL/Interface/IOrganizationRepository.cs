@@ -10,5 +10,7 @@ namespace PreScripds.DAL.Interface
     public interface IOrganizationRepository
     {
         Organization GetOrganizationById(long organizationId);
+        LibraryFolder GetDocLibraryFolder(long organizationId);
+        LibraryAsset AddDocLibraryAsset(LibraryAsset libraryAsset);
     }
 }

@@ -13,6 +13,8 @@
             </div>
         </aside>*@
     <div class="blackBg" style="width:100%;padding:3%;">
+
+        @*<h4><span>Please upload your organization documents registered under Government Of India.</span><hr /> </h4>*@
         @using (Html.BeginForm("AddOrgDoc", "Dashboard", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
         {
             <div>
@@ -34,7 +36,7 @@
                     </div>
                     <div class="meta">
                         <p><strong>Document Name:</strong> @Model.OrganizationDocumentViewModels[i].OrganizationDocumentName</p>
-                        <p><strong>Action:</strong> <a ><span class="glyphicon glyphicon-trash"></span></a></p>
+                        <p><strong>Action:</strong> <a><span class="glyphicon glyphicon-trash"></span></a></p>
                     </div>
                 </div>
                 <div class="portfolio-image">

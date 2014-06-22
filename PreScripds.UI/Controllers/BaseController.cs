@@ -46,7 +46,7 @@ namespace PreScripds.UI.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public LibraryAsset GetLibraryAsset(HttpPostedFileBase file)
+        public LibraryAsset GetLibraryAsset(HttpPostedFileBase file, string userfileName = null, string userDesc = null, long? folderId = null)
         {
             var appFileSize = Constants.GetConfigValue<int>(Constants.ApplicationConstants.FILE_SIZE) * (1024 * 1024);
             var isFile = file != null;
@@ -62,7 +62,16 @@ namespace PreScripds.UI.Controllers
                     byte[] array = null;
                     if (isFile)
                     {
-                        fileName = Path.GetFileName(file.FileName);
+                        if (userfileName == null)
+                        {
+                            fileName = Path.GetFileName(file.FileName);
+                        }
+                        else
+                        {
+                            var trimdUserFileName = userfileName.Replace(" ", string.Empty);
+                            fileName = Path.GetFileName(trimdUserFileName);
+                        }
+
                         contentLength = file.ContentLength;
                         contentType = file.ContentType;
                         array = file.ToByteArray();
@@ -73,6 +82,9 @@ namespace PreScripds.UI.Controllers
                     libraryAsset.AssetSize = contentLength;
                     libraryAsset.AssetType = contentType;
                     libraryAsset.CreatedDate = DateTime.Now;
+                    libraryAsset.AssetDescription = userDesc;
+                    if (folderId.HasValue)
+                        libraryAsset.LibraryFolderId = folderId.Value;
                     libraryAsset.AssetPath = ConfigurationManager.AppSettings["AppAssetPath"];
                     libraryAsset.Active = true;
                     libraryAsset.LibraryAssetFiles = new List<LibraryAssetFile>()

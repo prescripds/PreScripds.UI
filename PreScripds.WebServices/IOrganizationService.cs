@@ -17,5 +17,13 @@ namespace PreScripds.WebServices
         [OperationContract]
         [WebInvoke(UriTemplate = "/GetOrganizationById", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
         Organization GetOrganizationById(long organizationId);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/GetDocumentFolder", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        LibraryFolder GetDocLibraryFolder(long organizationId);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/AddDocLibraryAsset", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        LibraryAsset AddDocLibraryAsset(LibraryAsset libraryAsset);
     }
 }

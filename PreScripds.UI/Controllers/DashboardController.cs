@@ -169,11 +169,23 @@ namespace PreScripds.UI.Controllers
         [HttpPost]
         public ActionResult AddOrgDoc(OrganizationDocumentViewModel orgDocViewModel)
         {
-            if (orgDocViewModel != null)
+            ValidateOrgDocViewModel(orgDocViewModel);
+            if (orgDocViewModel != null && ModelState.IsValid)
             {
-
+                var libraryFolder = _wcfService.InvokeService<IOrganizationService, LibraryFolder>((svc) => svc.GetDocLibraryFolder(SessionContext.CurrentUser.OrganizationId.Value));
+                orgDocViewModel.OrganizationDocumentViewModels = new List<OrganizationDocumentViewModel>();
+                var libAsset = GetLibraryAsset(orgDocViewModel.Document, orgDocViewModel.OrganizationDocumentName, orgDocViewModel.DocumentDescription, libraryFolder.Id);
+                var libraryAssetFromDb = _wcfService.InvokeService<IOrganizationService, LibraryAsset>((svc) => svc.AddDocLibraryAsset(libAsset));
+                orgDocViewModel.ImagePath = SaveImageToDisk(libraryFolder, orgDocViewModel.Document);
+                orgDocViewModel.OrganizationDocumentViewModels.Add(orgDocViewModel);
             }
             return View("OrganizationDocs", orgDocViewModel);
+        }
+
+        private void ValidateOrgDocViewModel(OrganizationDocumentViewModel orgDocViewModel)
+        {
+            if (orgDocViewModel.Document == null)
+                ModelState.AddModelError("Document", "Please select a document to upload.");
         }
 
         [PreScripds.UI.Common.Authorize]
@@ -221,16 +233,18 @@ namespace PreScripds.UI.Controllers
             return View(orgViewModel);
         }
 
-        private void SaveImageToDisk(LibraryFolder libFolder, HttpPostedFileBase httpPostedFileBase)
+        private string SaveImageToDisk(LibraryFolder libFolder, HttpPostedFileBase httpPostedFileBase)
         {
             if (httpPostedFileBase.ContentLength > 0)
             {
                 var appBasePath = ConfigurationManager.AppSettings["AppAssetPath"];
-                var assetPath = Path.Combine(appBasePath, libFolder.OrganizationId.ToString(), "Assets");
+                var assetPath = Path.Combine(appBasePath, libFolder.OrganizationId.ToString(), libFolder.FolderName);
                 var fileName = Path.GetFileName(httpPostedFileBase.FileName);
                 var path = Path.Combine(assetPath, fileName);
                 httpPostedFileBase.SaveAs(path);
+                return path;
             }
+            return null;
         }
 
         private void ValidateViewModel(OrganizationViewModel orgViewModel, int orgType)
