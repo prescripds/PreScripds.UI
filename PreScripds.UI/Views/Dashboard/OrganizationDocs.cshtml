@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "OrganizationDocs";
     Layout = "~/Views/Shared/_OpenLayout.cshtml";
+    var baseCntrlr = new PreScripds.UI.Controllers.BaseController();
 }
 
 <main class="wrap group">
@@ -40,7 +41,7 @@
                     </div>
                 </div>
                 <div class="portfolio-image">
-                    <img src="images/portfolio/moody-shot.jpg" alt="Moody Shot">
+                    <img src=@baseCntrlr.EmbedImage(Model.ImagePath) alt="@Model.OrganizationDocumentName">
                 </div>
             </div>
         }
