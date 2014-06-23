@@ -49,6 +49,12 @@
     <Reference Include="ImageResizer">
       <HintPath>..\packages\ImageResizer.3.4.3\lib\ImageResizer.dll</HintPath>
     </Reference>
+    <Reference Include="ImageResizer.FluentExtensions">
+      <HintPath>..\packages\ImageResizer.FluentExtensions.1.0.0.4\lib\ImageResizer.FluentExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.FluentExtensions.Mvc">
+      <HintPath>..\packages\ImageResizer.FluentExtensions.Mvc.1.0.0.4\lib\ImageResizer.FluentExtensions.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="ImageResizer.Mvc">
       <HintPath>..\packages\ImageResizer.Mvc.3.4.3\lib\ImageResizer.Mvc.dll</HintPath>
     </Reference>
@@ -201,6 +207,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageBuilder.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -301,6 +308,7 @@
     <Content Include="Images\user.png" />
     <Content Include="Images\views.png" />
     <Content Include="Images\waves.gif" />
+    <Content Include="ResizedImages\logo_532279_web.jpg" />
     <Content Include="Scripts\ajax.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
@@ -453,7 +461,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="ResizedImages\" />
     <Folder Include="Views\Account\Home\" />
     <Folder Include="Views\Error\" />
   </ItemGroup>

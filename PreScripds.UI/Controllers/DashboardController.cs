@@ -19,7 +19,7 @@ using System.Configuration;
 
 namespace PreScripds.UI.Controllers
 {
-
+    [PreScripds.UI.Common.Authorize]
     public class DashboardController : BaseController
     {
         private WcfServiceInvoker _wcfService;
@@ -176,7 +176,7 @@ namespace PreScripds.UI.Controllers
                 orgDocViewModel.OrganizationDocumentViewModels = new List<OrganizationDocumentViewModel>();
                 var libAsset = GetLibraryAsset(orgDocViewModel.Document, orgDocViewModel.OrganizationDocumentName, orgDocViewModel.DocumentDescription, libraryFolder.Id);
                 var libraryAssetFromDb = _wcfService.InvokeService<IOrganizationService, LibraryAsset>((svc) => svc.AddDocLibraryAsset(libAsset));
-                orgDocViewModel.ImagePath = SaveImageToDisk(libraryFolder, orgDocViewModel.Document);
+                orgDocViewModel.ImagePath = SaveImageToDisk(libraryFolder, orgDocViewModel.Document, libraryAssetFromDb.AssetName);
                 orgDocViewModel.OrganizationDocumentViewModels.Add(orgDocViewModel);
             }
             return View("OrganizationDocs", orgDocViewModel);
@@ -233,16 +233,31 @@ namespace PreScripds.UI.Controllers
             return View(orgViewModel);
         }
 
-        private string SaveImageToDisk(LibraryFolder libFolder, HttpPostedFileBase httpPostedFileBase)
+        private string SaveImageToDisk(LibraryFolder libFolder, HttpPostedFileBase httpPostedFileBase, string userfileName = null)
         {
             if (httpPostedFileBase.ContentLength > 0)
             {
                 var appBasePath = ConfigurationManager.AppSettings["AppAssetPath"];
-                var assetPath = Path.Combine(appBasePath, libFolder.OrganizationId.ToString(), libFolder.FolderName);
-                var fileName = Path.GetFileName(httpPostedFileBase.FileName);
+                var orgPath = Path.Combine(libFolder.OrganizationId.ToString(), libFolder.FolderName);
+                var assetPath = Path.Combine(appBasePath, orgPath);
+                string fileName = null;
+                if (userfileName == null)
+                {
+                    fileName = Path.GetFileName(httpPostedFileBase.FileName);
+                }
+                else
+                {
+                    string[] splitter = { "." };
+                    var name = httpPostedFileBase.FileName.Split(splitter, StringSplitOptions.RemoveEmptyEntries);
+                    var extns = name[1];
+                    fileName = string.Concat(userfileName, ".", extns);
+                }
                 var path = Path.Combine(assetPath, fileName);
                 httpPostedFileBase.SaveAs(path);
-                return path;
+
+                //TODO:Replace appbasepath with ~\ and send the path
+                var servePath = Server.MapPath(@"~\ResizedImages\{0}\{1}".ToFormat(orgPath, fileName));
+                return servePath;
             }
             return null;
         }
@@ -287,6 +302,7 @@ namespace PreScripds.UI.Controllers
             }
         }
 
+        [PreScripds.UI.Common.Authorize]
         [HttpGet]
         public ActionResult OrganizationDocs()
         {
