@@ -238,6 +238,7 @@ namespace PreScripds.UI.Controllers
             if (httpPostedFileBase.ContentLength > 0)
             {
                 var appBasePath = ConfigurationManager.AppSettings["AppAssetPath"];
+                var appVirtuaPath = @"~\ResizedImages";
                 var orgPath = Path.Combine(libFolder.OrganizationId.ToString(), libFolder.FolderName);
                 var assetPath = Path.Combine(appBasePath, orgPath);
                 string fileName = null;
@@ -255,8 +256,7 @@ namespace PreScripds.UI.Controllers
                 var path = Path.Combine(assetPath, fileName);
                 httpPostedFileBase.SaveAs(path);
 
-                //TODO:Replace appbasepath with ~\ and send the path
-                var servePath = Server.MapPath(@"~\ResizedImages\{0}\{1}".ToFormat(orgPath, fileName));
+                var servePath = @"{0}/{1}/{2}".ToFormat(appVirtuaPath, orgPath, fileName);
                 return servePath;
             }
             return null;

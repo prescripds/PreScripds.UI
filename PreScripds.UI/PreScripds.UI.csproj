@@ -461,6 +461,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ResizedImages\1\Documents\" />
     <Folder Include="Views\Account\Home\" />
     <Folder Include="Views\Error\" />
   </ItemGroup>
