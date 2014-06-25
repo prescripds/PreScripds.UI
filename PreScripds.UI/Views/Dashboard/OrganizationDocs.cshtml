@@ -43,7 +43,7 @@
                 </div>
                 <div class="portfolio-image">
                     <div style="width:10%;background-color:whitesmoke">
-                        <img src="@Model.OrganizationDocumentViewModels[i].ImagePath?width=100" alt="@Model.OrganizationDocumentViewModels[i].OrganizationDocumentName" />
+                        <img src="@Model.OrganizationDocumentViewModels[i].ImagePath" alt="@Model.OrganizationDocumentViewModels[i].OrganizationDocumentName" />
                     </div>
                     @*<img src="@baseCntrlr.EmbedImage(Model.ImagePath)" alt="@Model.OrganizationDocumentName" />*@
                     @*@Html.BuildImage(Model.ImagePath, x => x.Resize(img => img.MaxWidth(600)), Model.OrganizationDocumentViewModels[i].OrganizationDocumentName)*@
