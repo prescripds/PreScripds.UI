@@ -177,6 +177,7 @@ namespace PreScripds.UI.Controllers
                 var libAsset = GetLibraryAsset(orgDocViewModel.Document, orgDocViewModel.OrganizationDocumentName, orgDocViewModel.DocumentDescription, libraryFolder.Id);
                 var libraryAssetFromDb = _wcfService.InvokeService<IOrganizationService, LibraryAsset>((svc) => svc.AddDocLibraryAsset(libAsset));
                 orgDocViewModel.ImagePath = SaveImageToDisk(libraryFolder, orgDocViewModel.Document, libraryAssetFromDb.AssetName);
+                orgDocViewModel.CreatedDate = libraryAssetFromDb.CreatedDate;
                 orgDocViewModel.OrganizationDocumentViewModels.Add(orgDocViewModel);
             }
             return View("OrganizationDocs", orgDocViewModel);
@@ -256,7 +257,13 @@ namespace PreScripds.UI.Controllers
                 var path = Path.Combine(assetPath, fileName);
                 httpPostedFileBase.SaveAs(path);
 
-                var servePath = @"{0}/{1}/{2}".ToFormat(appVirtuaPath, orgPath, fileName);
+                var request = System.Web.HttpContext.Current.Request;
+                var urlHelper = new UrlHelper(request.RequestContext);
+                var rootPath = System.Web.HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + urlHelper.Content("~/");
+                var appPath = appVirtuaPath.Replace(@"~\", "");
+                var virtualOrgPath = orgPath.Replace("\\", "/");
+                var servePath = @"{0}{1}/{2}/{3}".ToFormat(rootPath, appPath, virtualOrgPath, fileName);
+
                 return servePath;
             }
             return null;

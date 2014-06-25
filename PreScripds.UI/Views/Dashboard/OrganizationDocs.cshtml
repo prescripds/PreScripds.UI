@@ -1,7 +1,5 @@
 ﻿@model PreScripds.UI.Models.OrganizationDocumentViewModel
 @using ImageResizer;
-@using ImageResizer.FluentExtensions;
-@using ImageResizer.FluentExtensions.Mvc;
 @{
     ViewBag.Title = "OrganizationDocs";
     Layout = "~/Views/Shared/_OpenLayout.cshtml";
@@ -44,9 +42,14 @@
                     </div>
                 </div>
                 <div class="portfolio-image">
-                    @Html.BuildImage(Model.ImagePath, x => x.Resize(img => img.MaxWidth(600)), Model.OrganizationDocumentViewModels[i].OrganizationDocumentName)
+                    <div style="width:10%;background-color:whitesmoke">
+                        <img src="@Model.OrganizationDocumentViewModels[i].ImagePath?width=100" alt="@Model.OrganizationDocumentViewModels[i].OrganizationDocumentName" />
+                    </div>
+                    @*<img src="@baseCntrlr.EmbedImage(Model.ImagePath)" alt="@Model.OrganizationDocumentName" />*@
+                    @*@Html.BuildImage(Model.ImagePath, x => x.Resize(img => img.MaxWidth(600)), Model.OrganizationDocumentViewModels[i].OrganizationDocumentName)*@
+
                 </div>
-                @*<img src="~/ResizedImages/logo_532279_web.jpg" />*@
+
             </div>
         }
         @*<div class="portfolio-item group first">

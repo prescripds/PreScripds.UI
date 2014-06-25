@@ -214,7 +214,6 @@ body {
           width: 70%; } }
       .content .portfolio-item .portfolio-image img {
         width: 100%;
-        max-width: 610px;
         height: auto; }
       .content .portfolio-item .portfolio-image div.loading img {
         width: auto;

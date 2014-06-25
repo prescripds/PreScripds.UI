@@ -102,20 +102,5 @@ namespace PreScripds.UI.Controllers
             }
             return null;
         }
-
-        //public void EmbedImage(string imagePath)
-        //{
-        //    var request = System.Web.HttpContext.Current.Request;
-        //    var urlHelper = new UrlHelper(request.RequestContext);
-        //    var queryWidth = request.QueryString["width"].AsInt();
-        //    var queryHeight = request.QueryString["height"].AsInt();
-        //    //var resizeSetting = new ResizeSettings();
-        //    //resizeSetting.Width = queryWidth;
-        //    //resizeSetting.Height = queryHeight;
-        //    ImageBuilder.Current.Build(imagePath, "~/ResizedImages",
-        //                   new ResizeSettings("width=100&height=200&crop=auto"));
-        //    //return "";
-        //}
-
     }
 }
