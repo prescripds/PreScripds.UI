@@ -42,7 +42,7 @@ namespace PreScripds.DAL.Repository
         {
             using (var uow = new UnitOfWork())
             {
-                var libAsset = uow.GetRepository<LibraryAsset>().Items.FirstOrDefault(x => x.AssetName.EqualsIgnoreCase(docName));
+                var libAsset = uow.GetRepository<LibraryAsset>().Items.FirstOrDefault(x => x.AssetName == docName);
                 return libAsset;
             }
         }
