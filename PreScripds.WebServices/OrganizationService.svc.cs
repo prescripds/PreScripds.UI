@@ -44,5 +44,11 @@ namespace PreScripds.WebServices
             var libAsst = _organizationBl.AddDocLibraryAsset(libraryAsset);
             return libAsst;
         }
+
+        public LibraryAsset CheckDocExists(string docName)
+        {
+            var libAsst = _organizationBl.CheckDocExists(docName);
+            return libAsst;
+        }
     }
 }

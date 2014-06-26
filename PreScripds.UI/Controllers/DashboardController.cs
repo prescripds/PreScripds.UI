@@ -187,6 +187,12 @@ namespace PreScripds.UI.Controllers
         {
             if (orgDocViewModel.Document == null)
                 ModelState.AddModelError("Document", "Please select a document to upload.");
+            if (orgDocViewModel.OrganizationDocumentName.Trim().IsNotNull())
+            {
+                var orgDocName = _wcfService.InvokeService<IOrganizationService, LibraryAsset>((svc) => svc.CheckDocExists(orgDocViewModel.OrganizationDocumentName.Trim()));
+                if (orgDocName.IsNotNull())
+                    ModelState.AddModelError("OrganizationDocumentName", "Document name already exists.");
+            }
         }
 
         [PreScripds.UI.Common.Authorize]

@@ -25,5 +25,9 @@ namespace PreScripds.WebServices
         [OperationContract]
         [WebInvoke(UriTemplate = "/AddDocLibraryAsset", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
         LibraryAsset AddDocLibraryAsset(LibraryAsset libraryAsset);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/CheckDocExists", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        LibraryAsset CheckDocExists(string docName);
     }
 }

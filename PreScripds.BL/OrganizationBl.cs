@@ -36,5 +36,11 @@ namespace PreScripds.BL
             var libAsst = _organizationRepository.AddDocLibraryAsset(libraryAsset);
             return libAsst;
         }
+
+        public LibraryAsset CheckDocExists(string docName)
+        {
+            var libAsst = _organizationRepository.CheckDocExists(docName);
+            return libAsst;
+        }
     }
 }

@@ -1,5 +1,5 @@
 ﻿@model PreScripds.UI.Models.OrganizationDocumentViewModel
-
+@using PreScripds.Infrastructure.Utilities;
 @Html.ValidationSummary() <br />
 <h3>Upload Documents </h3>
 <hr />
@@ -27,6 +27,10 @@
     <div class="col-md-4 col-sm-6">
         <div class="form-group">
             <button type="submit" name="buttonType" style="margin-top:5%" class="btn btn-warning pull-left" value="Add">Add</button>
+            @if (Model.OrganizationDocumentViewModels.IsCollectionValid())
+            {
+                <button type="submit" name="buttonType" style="margin-top:5%" class="btn btn-warning pull-right" value="Next">Next</button>
+            }
         </div>
     </div>
 </div>

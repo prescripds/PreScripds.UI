@@ -1,5 +1,6 @@
 ﻿@model PreScripds.UI.Models.OrganizationDocumentViewModel
 @using ImageResizer;
+@using PreScripds.UI.Common;
 @{
     ViewBag.Title = "OrganizationDocs";
     Layout = "~/Views/Shared/_OpenLayout.cshtml";
@@ -24,13 +25,14 @@
             </div>
 
         }
+
     </div>
 
     <div class="content">
 
         @for (int i = 0; i < Model.OrganizationDocumentViewModels.Count; i++)
         {
-            <div class="portfolio-item group">
+            <div class="portfolio-item group @Html.Iff(i == 0, "first","")">
                 <div class="portfolio-info">
                     <div class="date">@Model.OrganizationDocumentViewModels[i].CreatedDate</div>
                     <div class="description">

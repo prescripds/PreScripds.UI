@@ -12,5 +12,6 @@ namespace PreScripds.BL.Interface
         Organization GetOrganizationById(long organizationId);
         LibraryFolder GetDocLibraryFolder(long organizationId);
         LibraryAsset AddDocLibraryAsset(LibraryAsset libraryAsset);
+        LibraryAsset CheckDocExists(string docName);
     }
 }

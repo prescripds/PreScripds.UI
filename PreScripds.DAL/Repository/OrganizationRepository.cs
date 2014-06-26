@@ -38,6 +38,15 @@ namespace PreScripds.DAL.Repository
             }
         }
 
+        public LibraryAsset CheckDocExists(string docName)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var libAsset = uow.GetRepository<LibraryAsset>().Items.FirstOrDefault(x => x.AssetName.EqualsIgnoreCase(docName));
+                return libAsset;
+            }
+        }
+
         public LibraryAsset AddDocLibraryAsset(LibraryAsset libraryAsset)
         {
             using (var uow = new UnitOfWork())
