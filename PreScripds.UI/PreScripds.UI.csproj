@@ -452,6 +452,7 @@
     <None Include="Service References\UserServiceReference\UserService31.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Views\Dashboard\UserManagement\AddPermission.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

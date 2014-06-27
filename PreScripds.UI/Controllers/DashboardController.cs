@@ -89,7 +89,7 @@ namespace PreScripds.UI.Controllers
                 Permission = permissions,
                 Department = departments
             };
-            return View(roleViewModel);
+            return View("AddRole", roleViewModel);
         }
 
         [PreScripds.UI.Common.Authorize]
@@ -167,20 +167,25 @@ namespace PreScripds.UI.Controllers
 
         [PreScripds.UI.Common.Authorize]
         [HttpPost]
-        public ActionResult AddOrgDoc(OrganizationDocumentViewModel orgDocViewModel)
+        public ActionResult AddOrgDoc(OrganizationDocumentViewModel orgDocViewModel, string buttonType)
         {
-            ValidateOrgDocViewModel(orgDocViewModel);
-            if (orgDocViewModel != null && ModelState.IsValid)
+            if (buttonType.EqualsIgnoreCase("Next"))
+                return RedirectToAction("AddRole", "Dashboard");
+            else
             {
-                var libraryFolder = _wcfService.InvokeService<IOrganizationService, LibraryFolder>((svc) => svc.GetDocLibraryFolder(SessionContext.CurrentUser.OrganizationId.Value));
-                orgDocViewModel.OrganizationDocumentViewModels = new List<OrganizationDocumentViewModel>();
-                var libAsset = GetLibraryAsset(orgDocViewModel.Document, orgDocViewModel.OrganizationDocumentName, orgDocViewModel.DocumentDescription, libraryFolder.Id);
-                var libraryAssetFromDb = _wcfService.InvokeService<IOrganizationService, LibraryAsset>((svc) => svc.AddDocLibraryAsset(libAsset));
-                orgDocViewModel.ImagePath = SaveImageToDisk(libraryFolder, orgDocViewModel.Document, libraryAssetFromDb.AssetName);
-                orgDocViewModel.CreatedDate = libraryAssetFromDb.CreatedDate;
-                orgDocViewModel.OrganizationDocumentViewModels.Add(orgDocViewModel);
+                ValidateOrgDocViewModel(orgDocViewModel);
+                if (orgDocViewModel != null && ModelState.IsValid)
+                {
+                    var libraryFolder = _wcfService.InvokeService<IOrganizationService, LibraryFolder>((svc) => svc.GetDocLibraryFolder(SessionContext.CurrentUser.OrganizationId.Value));
+                    orgDocViewModel.OrganizationDocumentViewModels = new List<OrganizationDocumentViewModel>();
+                    var libAsset = GetLibraryAsset(orgDocViewModel.Document, orgDocViewModel.OrganizationDocumentName, orgDocViewModel.DocumentDescription, libraryFolder.Id);
+                    var libraryAssetFromDb = _wcfService.InvokeService<IOrganizationService, LibraryAsset>((svc) => svc.AddDocLibraryAsset(libAsset));
+                    orgDocViewModel.ImagePath = SaveImageToDisk(libraryFolder, orgDocViewModel.Document, libraryAssetFromDb.AssetName);
+                    orgDocViewModel.CreatedDate = libraryAssetFromDb.CreatedDate;
+                    orgDocViewModel.OrganizationDocumentViewModels.Add(orgDocViewModel);
+                }
+                return View("OrganizationDocs", orgDocViewModel);
             }
-            return View("OrganizationDocs", orgDocViewModel);
         }
 
         private void ValidateOrgDocViewModel(OrganizationDocumentViewModel orgDocViewModel)
