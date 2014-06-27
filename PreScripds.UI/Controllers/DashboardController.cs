@@ -78,16 +78,15 @@ namespace PreScripds.UI.Controllers
         [HttpGet]
         public ActionResult AddRole()
         {
-            var permissions = _wcfService.InvokeService<IMasterService, List<Permission>>((svc) => svc.GetPermission());
+            // var permissions = _wcfService.InvokeService<IMasterService, List<Permission>>((svc) => svc.GetPermission());
 
             var orgId = SessionContext.CurrentUser.OrganizationId.Value;
-            var departments = _wcfService.InvokeService<IUserService, List<Department>>((svc) => svc.GetDepartment(orgId));
-            if (!departments.IsCollectionValid()) departments = new List<Department>();
-            if (!permissions.IsCollectionValid()) permissions = new List<Permission>();
+            // var departments = _wcfService.InvokeService<IUserService, List<Department>>((svc) => svc.GetDepartment(orgId));
+            //  if (!departments.IsCollectionValid()) departments = new List<Department>();
+            //  if (!permissions.IsCollectionValid()) permissions = new List<Permission>();
             var roleViewModel = new RoleViewModel()
             {
-                Permission = permissions,
-                Department = departments
+                RoleViewModels = new List<RoleViewModel>()
             };
             return View("AddRole", roleViewModel);
         }
@@ -96,12 +95,8 @@ namespace PreScripds.UI.Controllers
         [HttpPost]
         public ActionResult AddRole(RoleViewModel roleViewModel)
         {
-            roleViewModel.Permission = _wcfService.InvokeService<IMasterService, List<Permission>>((svc) => svc.GetPermission());
             if (ModelState.IsValid)
             {
-                if (roleViewModel.SelectedPermission == 0)
-                    ModelState.AddModelError("IsPermissionCheckd", "Please choose a permission for the role {0}".ToFormat(roleViewModel.RoleName));
-
                 var checkRoleNameExists = CheckRoleNameExists(roleViewModel);
                 if (checkRoleNameExists)
                 {
@@ -110,7 +105,6 @@ namespace PreScripds.UI.Controllers
                 else
                 {
                     roleViewModel.OrganizationId = SessionContext.CurrentUser.OrganizationId.Value;
-                    roleViewModel.PermissionId = roleViewModel.SelectedPermission;
                     var mappedRoleModel = Mapper.Map<RoleViewModel, Role>(roleViewModel);
                     var roleModel = _wcfService.InvokeService<IUserService, PreScripds.Domain.Role>((svc) => svc.AddRole(mappedRoleModel));
                     if (roleModel.Id != 0)

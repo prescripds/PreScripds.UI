@@ -52,7 +52,6 @@ namespace PreScripds.UI.Common.Automapper
             Mapper.CreateMap<RoleViewModel, Role>()
                 .IgnoreAllNonExisting();
             Mapper.CreateMap<Role, RoleViewModel>()
-                 .ForMember(d => d.Permission, s => s.Ignore())
                 .IgnoreAllNonExisting();
             Mapper.CreateMap<Organization, OrganizationViewModel>()
                 .IgnoreAllNonExisting();

@@ -177,3 +177,13 @@ input[type="checkbox"].input-validation-error {
 .errorMsg {
     color: red;
 }
+
+.ellipsis-div {
+    /*width: 90px;*/
+    overflow: hidden;
+    display: block;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    text-align: left !important;
+}

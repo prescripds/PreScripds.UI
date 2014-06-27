@@ -12,16 +12,12 @@ namespace PreScripds.UI.Models
         public long RoleId { get; set; }
         [Required(ErrorMessage = "Role Name is mandatory.")]
         public string RoleName { get; set; }
+        [Required(ErrorMessage = "Role Description is mandatory.")]
         public string RoleDesc { get; set; }
-        public List<Permission> Permission { get; set; }
-        public long PermissionId { get; set; }
-        [Required(ErrorMessage = "Permission is mandatory.")]
-        public bool IsPermissionCheckd { get; set; }
-        public string Message { get; set; }
-        public bool CreationSuccessful { get; set; }
+        public bool IsActive { get; set; }
         public long OrganizationId { get; set; }
-        public List<Department> Department { get; set; }
-        public long DepartmentId { get; set; }
-        public long SelectedPermission { get; set; }
+        public bool CreationSuccessful { get; set; }
+        public string Message { get; set; }
+        public List<RoleViewModel> RoleViewModels { get; set; }
     }
 }

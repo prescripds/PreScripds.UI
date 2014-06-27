@@ -1,23 +1,25 @@
 ﻿@using PreScripds.UI.Common;
 @using PreScripds.Domain;
+@using PreScripds.Infrastructure;
 @model PreScripds.UI.Models.RoleViewModel
 @{
     ViewBag.Title = "AddRole";
     Layout = "~/Views/Shared/_OpenLayout.cshtml";
 }
-@using (Html.BeginForm("AddRole", "Dashboard", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <div class="col-md-12 blackBg">
+<div class="col-md-12 blackBg">
+    @using (Html.BeginForm("AddRole", "Dashboard", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
         @Html.ValidationSummary()<br />
         <h3><span style="color:white;">Add Role</span><hr /> </h3>
         <div class="row">
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="RoleName">Department</label>
-                    @Html.DropDownListFor(m => m.DepartmentId, Model.Department.ToSelectListItems(model => model.Id.ToString(), model => model.DepartmentName), "--Select--", new { @class = "form-control" })
-                </div>
-            </div>
+            @*<div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="RoleName">Department</label>
+                        @Html.DropDownListFor(m => m.DepartmentId, Model.Department.ToSelectListItems(model => model.Id.ToString(), model => model.DepartmentName), "--Select--", new { @class = "form-control" })
+                    </div>
+                </div>*@
             <div class="col-md-4 col-sm-6">
                 <div class="form-group">
                     <label class="control-label" for="RoleName">User Role Name</label>
@@ -33,18 +35,18 @@
             </div>
         </div>
 
-      
-        @*<h4><span style="color:white;">Permission</span><hr /> </h4>
-        @for (int i = 0; i <= Model.Permission.Count - 1; i++)
-        {
-            <div class="row">
-                <div class="col-md-4 col-sm-6">
-                    @Html.RadioButtonFor(m => m.IsPermissionCheckd, "false", new { @class = "checkPerm", id = string.Format("checkPerm" + i), data_permid = Model.Permission[i].Id }) <span style="color:white;">@Model.Permission[i].PermissionName</span>
 
+        @*<h4><span style="color:white;">Permission</span><hr /> </h4>
+            @for (int i = 0; i <= Model.Permission.Count - 1; i++)
+            {
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        @Html.RadioButtonFor(m => m.IsPermissionCheckd, "false", new { @class = "checkPerm", id = string.Format("checkPerm" + i), data_permid = Model.Permission[i].Id }) <span style="color:white;">@Model.Permission[i].PermissionName</span>
+
+                    </div>
                 </div>
-            </div>
-        }
-        @Html.TextBoxFor(m => m.SelectedPermission, new { @class = "hidden" })*@
+            }
+            @Html.TextBoxFor(m => m.SelectedPermission, new { @class = "hidden" })*@
         <div class="row">
             <div class="col-md-12 buttons">
                 <button type="submit" class="btn btn-warning pull-right" value="Save">Save</button>
@@ -52,9 +54,45 @@
                 <button type="reset" class="btn btn-warning pull-right" value="Clear">Clear</button>
             </div>
         </div>
-        @Html.MessageDialogRedirect(Model.Message, "Index", "Dashboard", true)
-    </div>
-}
+        @Html.MessageDialogRedirect(Model.Message, "AddRole", "Dashboard", true)
+    }
+    @if (Model.RoleViewModels.IsCollectionValid())
+    {
+        <table class="table-responsive table">
+            <tr>
+                <th>Id</th>
+                <th> Role Name</th>
+                <th> Role Description</th>
+                <th> Active</th>
+            </tr>
+            @for (int i = 0; i < Model.RoleViewModels.Count; i++)
+            {
+                <tr>
+                    <td>
+                        <div class="ellipsis-div" title="@Model.RoleViewModels[i].RoleId">
+                            @Html.TextBoxFor(m => m.RoleViewModels[i].RoleId)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ellipsis-div" title="@Model.RoleViewModels[i].RoleName">
+                            @Html.TextBoxFor(m => m.RoleViewModels[i].RoleName)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ellipsis-div" title="@Model.RoleViewModels[i].RoleDesc">
+                            @Html.TextBoxFor(m => m.RoleViewModels[i].RoleDesc)
+                        </div>
+                    </td>
+                    <td>
+                        @Html.CheckBoxFor(m => m.RoleViewModels[i].IsActive, new { data_id = Model.RoleViewModels[i].RoleId })
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+
+</div>
+
 @section Scripts {
 
     <script type="text/javascript">
