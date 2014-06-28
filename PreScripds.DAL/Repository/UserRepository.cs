@@ -309,13 +309,8 @@ namespace PreScripds.DAL.Repository
             //TODO:Get roles for a user from userinrole table.
             using (var uow = new UnitOfWork())
             {
-                var role = uow.GetRepository<UserInRole>().Items.ToList();
-                //if (role.IsCollectionValid())
-                //{
-                //    return role.Where(x => x.Organization.Id == organizationId).ToList();
-                //}
-                //
-                return null;
+                var role = uow.GetRepository<Role>().Items.Where(x => x.OrganizationId == organizationId).ToList();
+                return role;
             }
 
         }

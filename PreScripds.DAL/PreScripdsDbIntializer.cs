@@ -27,6 +27,9 @@ namespace PreScripds.DAL
             var departments = new Department() { DepartmentName = "Registration", IsActive = true, DepartmentDescription = "Registers the patient details.", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now };
             context.Departments.Add(departments);
             context.SaveChanges();
+
+            //TODO:Seed data should by default have a suoer admin from PreScripds to approve the org user/super admin
+
         }
 
     }

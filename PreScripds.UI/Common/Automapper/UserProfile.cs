@@ -50,8 +50,12 @@ namespace PreScripds.UI.Common.Automapper
             Mapper.CreateMap<User, RegisterViewModel>()
                .IgnoreAllNonExisting();
             Mapper.CreateMap<RoleViewModel, Role>()
+                .ForMember(d => d.Id, s => s.MapFrom(p => p.RoleId))
+                .ForMember(d => d.Active, s => s.MapFrom(p => p.IsActive))
                 .IgnoreAllNonExisting();
             Mapper.CreateMap<Role, RoleViewModel>()
+                .ForMember(d => d.RoleId, s => s.MapFrom(p => p.Id))
+                .ForMember(d => d.IsActive, s => s.MapFrom(p => p.Active))
                 .IgnoreAllNonExisting();
             Mapper.CreateMap<Organization, OrganizationViewModel>()
                 .IgnoreAllNonExisting();

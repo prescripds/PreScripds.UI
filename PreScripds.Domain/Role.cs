@@ -15,6 +15,8 @@ namespace PreScripds.Domain
         [DataMember]
         public string RoleName { get; set; }
         [DataMember]
+        public string RoleDescription { get; set; }
+        [DataMember]
         public System.DateTime CreatedDate { get; set; }
         [DataMember]
         public long CreatedBy { get; set; }

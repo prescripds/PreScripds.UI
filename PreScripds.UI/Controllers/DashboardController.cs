@@ -78,16 +78,14 @@ namespace PreScripds.UI.Controllers
         [HttpGet]
         public ActionResult AddRole()
         {
-            // var permissions = _wcfService.InvokeService<IMasterService, List<Permission>>((svc) => svc.GetPermission());
-
             var orgId = SessionContext.CurrentUser.OrganizationId.Value;
-            // var departments = _wcfService.InvokeService<IUserService, List<Department>>((svc) => svc.GetDepartment(orgId));
-            //  if (!departments.IsCollectionValid()) departments = new List<Department>();
-            //  if (!permissions.IsCollectionValid()) permissions = new List<Permission>();
-            var roleViewModel = new RoleViewModel()
+            var roles = _wcfService.InvokeService<IUserService, List<Role>>((svc) => svc.GetRole(orgId));            
+            var mappdRoleViewModel = Mapper.Map<List<Role>, List<RoleViewModel>>(roles);
+            var roleViewModel = new RoleViewModel(){RoleViewModels = new List<RoleViewModel>()};
+            if(mappdRoleViewModel.IsCollectionValid())
             {
-                RoleViewModels = new List<RoleViewModel>()
-            };
+                roleViewModel.RoleViewModels = mappdRoleViewModel;              
+            }
             return View("AddRole", roleViewModel);
         }
 
@@ -105,12 +103,17 @@ namespace PreScripds.UI.Controllers
                 else
                 {
                     roleViewModel.OrganizationId = SessionContext.CurrentUser.OrganizationId.Value;
+                    roleViewModel.RoleViewModels = new List<RoleViewModel>();
                     var mappedRoleModel = Mapper.Map<RoleViewModel, Role>(roleViewModel);
+                    mappedRoleModel.UpdatedDate = mappedRoleModel.CreatedDate = DateTime.Now;
+                    mappedRoleModel.UpdatedBy = mappedRoleModel.CreatedBy = SessionContext.CurrentUser.Id;
+                    mappedRoleModel.Active = true;
                     var roleModel = _wcfService.InvokeService<IUserService, PreScripds.Domain.Role>((svc) => svc.AddRole(mappedRoleModel));
                     if (roleModel.Id != 0)
                     {
                         roleViewModel.CreationSuccessful = true;
                         roleViewModel.Message = "Role {0} has been created successfully.".ToFormat(roleViewModel.RoleName);
+                        roleViewModel.RoleViewModels.Add(roleViewModel);
                     }
                     else
                     {
