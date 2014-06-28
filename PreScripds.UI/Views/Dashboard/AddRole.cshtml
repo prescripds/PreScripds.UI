@@ -14,12 +14,6 @@
         @Html.ValidationSummary()<br />
         <h3><span style="color:white;">Add Role</span><hr /> </h3>
         <div class="row">
-            @*<div class="col-md-4 col-sm-6">
-                    <div class="form-group">
-                        <label class="control-label" for="RoleName">Department</label>
-                        @Html.DropDownListFor(m => m.DepartmentId, Model.Department.ToSelectListItems(model => model.Id.ToString(), model => model.DepartmentName), "--Select--", new { @class = "form-control" })
-                    </div>
-                </div>*@
             <div class="col-md-4 col-sm-6">
                 <div class="form-group">
                     <label class="control-label" for="RoleName">User Role Name</label>
@@ -58,37 +52,43 @@
     }
     @if (Model.RoleViewModels.IsCollectionValid())
     {
-        <table class="table-responsive table">
-            <tr>
-                <th>Id</th>
-                <th> Role Name</th>
-                <th> Role Description</th>
-                <th> Active</th>
-            </tr>
-            @for (int i = 0; i < Model.RoleViewModels.Count; i++)
-            {
-                <tr>
-                    <td>
-                        <div class="ellipsis-div" title="@Model.RoleViewModels[i].RoleId">
-                            @Html.TextBoxFor(m => m.RoleViewModels[i].RoleId)
-                        </div>
-                    </td>
-                    <td>
-                        <div class="ellipsis-div" title="@Model.RoleViewModels[i].RoleName">
-                            @Html.TextBoxFor(m => m.RoleViewModels[i].RoleName)
-                        </div>
-                    </td>
-                    <td>
-                        <div class="ellipsis-div" title="@Model.RoleViewModels[i].RoleDesc">
-                            @Html.TextBoxFor(m => m.RoleViewModels[i].RoleDesc)
-                        </div>
-                    </td>
-                    <td>
-                        @Html.CheckBoxFor(m => m.RoleViewModels[i].IsActive, new { data_id = Model.RoleViewModels[i].RoleId })
-                    </td>
-                </tr>
-            }
-        </table>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th> Role Name</th>
+                        <th> Role Description</th>
+                        <th> Active</th>
+                    </tr>
+                </thead>
+                @for (int i = 0; i < Model.RoleViewModels.Count; i++)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="ellipsis-div" title="@Model.RoleViewModels[i].RoleId">
+                                    @Html.TextBoxFor(m => m.RoleViewModels[i].RoleId)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="ellipsis-div" title="@Model.RoleViewModels[i].RoleName">
+                                    @Html.TextBoxFor(m => m.RoleViewModels[i].RoleName)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="ellipsis-div" title="@Model.RoleViewModels[i].RoleDesc">
+                                    @Html.TextBoxFor(m => m.RoleViewModels[i].RoleDesc)
+                                </div>
+                            </td>
+                            <td>
+                                @Html.CheckBoxFor(m => m.RoleViewModels[i].IsActive, new { data_id = Model.RoleViewModels[i].RoleId })
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
     }
 
 </div>

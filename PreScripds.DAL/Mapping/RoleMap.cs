@@ -28,7 +28,7 @@ namespace PreScripds.DAL.Mapping
             this.ToTable("Role");
             this.Property(t => t.Id).HasColumnName("Id");
             this.Property(t => t.RoleName).HasColumnName("RoleName");
-            this.Property(t => t.RoleDescription).HasColumnName("RoleName");
+            this.Property(t => t.RoleDescription).HasColumnName("RoleDescription");
             this.Property(t => t.CreatedDate).HasColumnName("CreatedDate");
             this.Property(t => t.CreatedBy).HasColumnName("CreatedBy");
             this.Property(t => t.UpdatedBy).HasColumnName("UpdatedBy");

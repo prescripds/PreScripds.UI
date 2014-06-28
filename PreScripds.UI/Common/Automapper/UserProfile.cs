@@ -33,18 +33,7 @@ namespace PreScripds.UI.Common.Automapper
                 {
                     var mappedLoginProfile = Mapper.Map<List<UserLoginViewModel>, List<UserLogin>>(s.userLoginViewModel);
                     d.UserLogins = mappedLoginProfile;
-                })
-                //.AfterMap((s, d) =>
-                //{
-                //    var mappedUserHistory = Mapper.Map<List<UserHistoryViewModel>, List<UserHistory>>(s.UserHistoryViewModel.ToList());
-
-                //    //var userHistory = d.UserLogins.FirstOrDefault().UserHistories.Add(mappedUserHistory);
-                //    //if (userHistory == null)
-                //    //    userHistory = mappedUserHistory;
-                //    //var userHistory = d.UserLogins.Select(x => x.UserHistories.ToList()).ToList();
-                //    // userHistory = mappedUserHistory;
-                //})
-                .IgnoreAllNonExisting();
+                }).IgnoreAllNonExisting();
 
 
             Mapper.CreateMap<User, RegisterViewModel>()
@@ -52,10 +41,12 @@ namespace PreScripds.UI.Common.Automapper
             Mapper.CreateMap<RoleViewModel, Role>()
                 .ForMember(d => d.Id, s => s.MapFrom(p => p.RoleId))
                 .ForMember(d => d.Active, s => s.MapFrom(p => p.IsActive))
+                .ForMember(d => d.RoleDescription, s => s.MapFrom(p => p.RoleDesc))
                 .IgnoreAllNonExisting();
             Mapper.CreateMap<Role, RoleViewModel>()
                 .ForMember(d => d.RoleId, s => s.MapFrom(p => p.Id))
                 .ForMember(d => d.IsActive, s => s.MapFrom(p => p.Active))
+                .ForMember(d => d.RoleDesc, s => s.MapFrom(p => p.RoleDescription))
                 .IgnoreAllNonExisting();
             Mapper.CreateMap<Organization, OrganizationViewModel>()
                 .IgnoreAllNonExisting();
