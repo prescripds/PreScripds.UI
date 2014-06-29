@@ -46,6 +46,11 @@
                 <button type="submit" class="btn btn-warning pull-right" value="Save">Save</button>
 
                 <button type="reset" class="btn btn-warning pull-right" value="Clear">Clear</button>
+
+                @if (Model.RoleViewModels.IsCollectionValid())
+                {
+                    <button type="submit" name="buttonType" class="btn btn-warning pull-right" value="Next">Next</button>
+                }
             </div>
         </div>
         @Html.MessageDialogRedirect(Model.Message, "AddRole", "Dashboard", true)
@@ -103,7 +108,6 @@
                 var permVal = $(this).data('permid');
                 $('#SelectedPermission').val(permVal);
             });
-
             @Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))
         });
 

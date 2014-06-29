@@ -79,20 +79,25 @@ namespace PreScripds.UI.Controllers
         public ActionResult AddRole()
         {
             var orgId = SessionContext.CurrentUser.OrganizationId.Value;
-            var roles = _wcfService.InvokeService<IUserService, List<Role>>((svc) => svc.GetRole(orgId));            
+            var roles = _wcfService.InvokeService<IUserService, List<Role>>((svc) => svc.GetRole(orgId));
             var mappdRoleViewModel = Mapper.Map<List<Role>, List<RoleViewModel>>(roles);
-            var roleViewModel = new RoleViewModel(){RoleViewModels = new List<RoleViewModel>()};
-            if(mappdRoleViewModel.IsCollectionValid())
+            var roleViewModel = new RoleViewModel() { RoleViewModels = new List<RoleViewModel>() };
+            if (mappdRoleViewModel.IsCollectionValid())
             {
-                roleViewModel.RoleViewModels = mappdRoleViewModel;              
+                roleViewModel.RoleViewModels = mappdRoleViewModel;
             }
             return View("AddRole", roleViewModel);
         }
 
         [PreScripds.UI.Common.Authorize]
         [HttpPost]
-        public ActionResult AddRole(RoleViewModel roleViewModel)
+        public ActionResult AddRole(RoleViewModel roleViewModel, string buttonType)
         {
+            if (roleViewModel.RoleViewModels.IsCollectionValid())
+            {
+                if (buttonType == "Next")
+                    return RedirectToAction("Permission", "Dashboard");
+            }
             if (ModelState.IsValid)
             {
                 var checkRoleNameExists = CheckRoleNameExists(roleViewModel);
