@@ -1,8 +1,97 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "AddPermission";
     Layout = "~/Views/Shared/_OpenLayout.cshtml";
 }
 
-<h2>AddPermission</h2>
+<div class="col-md-12 blackBg">
+    @using (Html.BeginForm("Permission", "Dashboard", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary()<br />
+        <h3><span style="color:white;">Permission</span><hr /> </h3>
+        <div class="row">
+            <div class="col-md-4 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label" for="RoleName">Permission Name</label>
+                    @Html.TextBoxFor(m => m.RoleName, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label" for="RoleDesc">Permission Description</label>
+                    @Html.TextAreaFor(m => m.RoleDesc, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+
+        <h4><span style="color:white;">Permission</span><hr /> </h4>
+        @for (int i = 0; i <= Model.Permission.Count - 1; i++)
+        {
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    @Html.RadioButtonFor(m => m.IsPermissionCheckd, "false", new { @class = "checkPerm", id = string.Format("checkPerm" + i), data_permid = Model.Permission[i].Id }) <span style="color:white;">@Model.Permission[i].PermissionName</span>
+
+                </div>
+            </div>
+        }
+        @Html.TextBoxFor(m => m.SelectedPermission, new { @class = "hidden" })
+        <div class="row">
+            <div class="col-md-12 buttons">
+                <button type="submit" class="btn btn-warning pull-right" value="Save">Save</button>
+
+                <button type="reset" class="btn btn-warning pull-right" value="Clear">Clear</button>
+
+                @if (Model.RoleViewModels.IsCollectionValid())
+                {
+                    <button type="submit" name="buttonType" class="btn btn-warning pull-right" value="Next">Next</button>
+                }
+            </div>
+        </div>
+        @Html.MessageDialogRedirect(Model.Message, "AddRole", "Dashboard", true)
+    }
+    @if (Model.RoleViewModels.IsCollectionValid())
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th> Role Name</th>
+                        <th> Role Description</th>
+                        <th> Active</th>
+                    </tr>
+                </thead>
+                @for (int i = 0; i < Model.RoleViewModels.Count; i++)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="ellipsis-div" title="@Model.RoleViewModels[i].RoleId">
+                                    @Html.TextBoxFor(m => m.RoleViewModels[i].RoleId)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="ellipsis-div" title="@Model.RoleViewModels[i].RoleName">
+                                    @Html.TextBoxFor(m => m.RoleViewModels[i].RoleName)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="ellipsis-div" title="@Model.RoleViewModels[i].RoleDesc">
+                                    @Html.TextBoxFor(m => m.RoleViewModels[i].RoleDesc)
+                                </div>
+                            </td>
+                            <td>
+                                @Html.CheckBoxFor(m => m.RoleViewModels[i].IsActive, new { data_id = Model.RoleViewModels[i].RoleId })
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
+    }
+
+</div>
 
