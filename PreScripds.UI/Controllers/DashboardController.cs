@@ -237,6 +237,7 @@ namespace PreScripds.UI.Controllers
                     SaveImageToDisk(lFolder, orgViewModel.DisplayPicture);
                     orgViewModel.CreationSuccessful = true;
                     orgViewModel.Message = "{0} saved successfully.Your account will be activated for use after the approval process is completed by us.".ToFormat(organizationModel.OrganizationName);
+                    SessionContext.CurrentUser.OrganizationId = organizationModel.Id;
                 }
             }
             else
