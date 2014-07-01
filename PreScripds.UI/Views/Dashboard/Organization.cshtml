@@ -67,7 +67,7 @@
                 </div>
                 <div class="col-md-4 col-sm-6">
                     <div class="form-group">
-                        <label class="control-label" for="MiddleName">Contact Person</label>
+                        <label class="control-label" for="MiddleName">Email Of Contact-Person</label>
                         @Html.TextBoxFor(m => m.OrganizationContact, new { @class = "form-control" })
                     </div>
                 </div>
@@ -220,6 +220,22 @@
                     $('#organizationDtlsN').attr('style', 'display:none');
                     $('#buttons').removeAttr('style');
                 }
+            });
+
+            $('#OrganizationContact').on('blur', function () {
+                var userName = $(this).val();
+                showProgressBar();
+                ajaxPost('/Account/GetUserDetails', { userName: userName }, function (res) {
+                    if (res == "False" || res == null) {
+                        $('#emailExistsDiv').removeAttr('style');
+                        $('#userNameExists').html("Please enter a valid user email of the contact person.");
+                        $('#buttons').attr('style', 'display:none');
+                    }
+                    if (res == "True") {
+                        $('#buttons').removeAttr('style');
+                    }
+                    hideProgressBar();
+                });
             });
             @Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))
         });

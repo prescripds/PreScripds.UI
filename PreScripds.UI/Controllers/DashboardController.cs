@@ -295,7 +295,7 @@ namespace PreScripds.UI.Controllers
                 if (!orgViewModel.OrganizationEmail.Clean().IsNotEmpty())
                     ModelState.AddModelError("OrganizationEmail", "Organization Email is mandatory.");
                 if (!orgViewModel.OrganizationContact.Clean().IsNotEmpty())
-                    ModelState.AddModelError("OrganizationContact", "Organization Contact is mandatory.");
+                    ModelState.AddModelError("OrganizationContact", "Email Of Contact-Person is mandatory.");
                 if (!orgViewModel.VerificationDate.HasValue && !orgViewModel.IsSelfie)
                     ModelState.AddModelError("VerificationDate", "Verification Date is mandatory.");
                 if (orgViewModel.OrganizationName.Clean().IsNotEmpty())
