@@ -84,14 +84,14 @@ namespace PreScripds.UI.Controllers
         [HttpGet]
         public ActionResult ModuleInDepartment()
         {
-            return View("UserManagement/ModuleInDepartment", "Dashboard");
+            return View();
         }
 
         [PreScripds.UI.Common.Authorize]
         [HttpGet]
         public ActionResult DepartmentInOrg()
         {
-            return View("UserManagement/DepartmentInOrg", "Dashboard");
+            return View();
         }
 
         [PreScripds.UI.Common.Authorize]

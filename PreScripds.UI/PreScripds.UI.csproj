@@ -457,9 +457,9 @@
     <None Include="Service References\UserServiceReference\UserService31.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Views\Dashboard\UserManagement\AddPermission.cshtml" />
-    <Content Include="Views\Dashboard\UserManagement\ModuleInDepartment.cshtml" />
-    <Content Include="Views\Dashboard\UserManagement\DepartmentInOrg.cshtml" />
+    <Content Include="Views\Dashboard\AddPermission.cshtml" />
+    <Content Include="Views\Dashboard\ModuleInDepartment.cshtml" />
+    <Content Include="Views\Dashboard\DepartmentInOrg.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
