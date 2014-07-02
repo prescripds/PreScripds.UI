@@ -56,6 +56,12 @@ namespace PreScripds.UI.Controllers
                                 var role = _wcfService.InvokeService<IUserService, List<Role>>(svc => svc.GetRole(organizationId));
                                 if (role == null)
                                     return RedirectToAction("AddRole", "Dashboard");
+                                var orgInDept = _wcfService.InvokeService<IOrganizationService, List<DepartmentInOrganization>>((svc) => svc.GetDepartmentInOrganization(user.OrganizationId.Value));
+                                if (!orgInDept.IsCollectionValid())
+                                    return RedirectToAction("DepartmentInOrg", "Dashboard");
+                                var modInDept = _wcfService.InvokeService<IOrganizationService, List<ModuleInDepartment>>((svc) => svc.GetModuleInDepartment());
+                                if (!modInDept.IsCollectionValid())
+                                    return RedirectToAction("ModuleInDepartment", "Dashboard");
                                 return View("Approvals", "Dashboard");
                             }
                         }
@@ -72,6 +78,20 @@ namespace PreScripds.UI.Controllers
                 return CheckSessionContext();
             }
             return null;
+        }
+
+        [PreScripds.UI.Common.Authorize]
+        [HttpGet]
+        public ActionResult ModuleInDepartment()
+        {
+            return View("UserManagement/ModuleInDepartment", "Dashboard");
+        }
+
+        [PreScripds.UI.Common.Authorize]
+        [HttpGet]
+        public ActionResult DepartmentInOrg()
+        {
+            return View("UserManagement/DepartmentInOrg", "Dashboard");
         }
 
         [PreScripds.UI.Common.Authorize]

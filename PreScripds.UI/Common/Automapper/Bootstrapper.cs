@@ -14,6 +14,7 @@ namespace PreScripds.UI.Common.Automapper
             {
                 prof.AddProfile<UserProfile>();
                 prof.AddProfile<MasterProfile>();
+                prof.AddProfile<OrganizationProfile>();
             });
             Mapper.AssertConfigurationIsValid();
         }

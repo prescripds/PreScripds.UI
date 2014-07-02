@@ -50,5 +50,15 @@ namespace PreScripds.WebServices
             var libAsst = _organizationBl.CheckDocExists(docName);
             return libAsst;
         }
+        public List<DepartmentInOrganization> GetDepartmentInOrganization(long organizationId)
+        {
+            var deptInOrg = _organizationBl.GetDepartmentInOrganization(organizationId);
+            return deptInOrg;
+        }
+        public List<ModuleInDepartment> GetModuleInDepartment()
+        {
+            var modInDept = _organizationBl.GetModuleInDepartment();
+            return modInDept;
+        }
     }
 }

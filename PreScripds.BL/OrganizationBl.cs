@@ -42,5 +42,16 @@ namespace PreScripds.BL
             var libAsst = _organizationRepository.CheckDocExists(docName);
             return libAsst;
         }
+
+        public List<DepartmentInOrganization> GetDepartmentInOrganization(long organizationId)
+        {
+            var deptInOrg = _organizationRepository.GetDepartmentInOrganization(organizationId);
+            return deptInOrg;
+        }
+        public List<ModuleInDepartment> GetModuleInDepartment()
+        {
+            var modInDept = _organizationRepository.GetModuleInDepartment();
+            return modInDept;
+        }
     }
 }

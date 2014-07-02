@@ -13,5 +13,7 @@ namespace PreScripds.BL.Interface
         LibraryFolder GetDocLibraryFolder(long organizationId);
         LibraryAsset AddDocLibraryAsset(LibraryAsset libraryAsset);
         LibraryAsset CheckDocExists(string docName);
+        List<DepartmentInOrganization> GetDepartmentInOrganization(long organizationId);
+        List<ModuleInDepartment> GetModuleInDepartment();
     }
 }

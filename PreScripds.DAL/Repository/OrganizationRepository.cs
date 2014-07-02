@@ -62,5 +62,23 @@ namespace PreScripds.DAL.Repository
                 return libraryAsset;
             }
         }
+        public List<DepartmentInOrganization> GetDepartmentInOrganization(long organizationId)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var deptInOrg = uow.GetRepository<DepartmentInOrganization>().Items.Where(x => x.OrganizationId == organizationId).ToList();
+                return deptInOrg;
+            }
+        }
+
+        public List<ModuleInDepartment> GetModuleInDepartment()
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var modInDept = uow.GetRepository<ModuleInDepartment>().Items.ToList();
+                return modInDept;
+            }
+        }
+
     }
 }

@@ -53,6 +53,7 @@
       <HintPath>..\packages\ImageResizer.Mvc.3.4.3\lib\ImageResizer.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualStudio.DebuggerVisualizers, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -103,6 +104,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -209,7 +211,10 @@
     <Compile Include="Models\AppSettingModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LibraryAssetViewModel.cs" />
-    <Compile Include="Models\OrganizationDocumentViewModel.cs" />
+    <Compile Include="Models\ModuleInDepartmentViewModel.cs" />
+    <Compile Include="Models\OrganizationDocumentViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Models\OrganizationViewModel.cs" />
     <Compile Include="Models\PermissionViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
@@ -453,6 +458,8 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Views\Dashboard\UserManagement\AddPermission.cshtml" />
+    <Content Include="Views\Dashboard\UserManagement\ModuleInDepartment.cshtml" />
+    <Content Include="Views\Dashboard\UserManagement\DepartmentInOrg.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
