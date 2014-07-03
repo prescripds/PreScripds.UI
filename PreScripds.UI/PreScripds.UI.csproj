@@ -209,6 +209,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AppSettingModel.cs" />
+    <Compile Include="Models\DepartmentInOrgViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LibraryAssetViewModel.cs" />
     <Compile Include="Models\ModuleInDepartmentViewModel.cs" />

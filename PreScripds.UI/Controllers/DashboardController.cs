@@ -91,6 +91,17 @@ namespace PreScripds.UI.Controllers
         [HttpGet]
         public ActionResult DepartmentInOrg()
         {
+            var deptInOrgViewModel = new DepartmentInOrgViewModel() { Department = new List<Department>() };
+            var departments = _wcfService.InvokeService<IUserService, List<Department>>((svc) => svc.GetDepartment(SessionContext.CurrentUser.OrganizationId.Value));
+            if (departments.IsCollectionValid())
+                deptInOrgViewModel.Department = departments;
+            return View(deptInOrgViewModel);
+        }
+
+        [PreScripds.UI.Common.Authorize]
+        [HttpPost]
+        public ActionResult DepartmentInOrg(DepartmentInOrgViewModel deptInOrgViewModel)
+        {
             return View();
         }
 
