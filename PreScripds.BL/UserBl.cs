@@ -63,9 +63,9 @@ namespace PreScripds.BL
             var roles = _userRepository.GetRole(organizationId);
             return roles;
         }
-        public List<Department> GetDepartment(long organizationId)
+        public List<Department> GetAllDepartment()
         {
-            var departments = _userRepository.GetDepartment(organizationId);
+            var departments = _userRepository.GetAllDepartment();
             return departments;
         }
         public Organization AddOrganization(Organization organization)

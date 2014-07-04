@@ -18,7 +18,7 @@ namespace PreScripds.DAL.Interface
         User CheckEmailExists(string email);
         List<Role> GetRole(long organizationId);
         bool CheckRoleExists(Role role);
-        List<Department> GetDepartment(long organizationId);
+        List<Department> GetAllDepartment();
         Organization AddOrganization(Organization organization);
         bool CheckOrganizationExist(string orgName);
         UserHistory AddUserHistory(UserHistory userHistory);

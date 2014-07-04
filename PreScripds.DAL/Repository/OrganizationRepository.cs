@@ -80,5 +80,18 @@ namespace PreScripds.DAL.Repository
             }
         }
 
+        public void AddDepartmentInOrg(List<DepartmentInOrganization> deptInOrg)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                foreach (var departmentInOrg in deptInOrg)
+                {
+                    uow.GetRepository<DepartmentInOrganization>().Insert(departmentInOrg);
+                   
+                }
+                uow.SaveChanges();
+            }
+        }
+
     }
 }

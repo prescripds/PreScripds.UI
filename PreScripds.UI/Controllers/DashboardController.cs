@@ -91,8 +91,12 @@ namespace PreScripds.UI.Controllers
         [HttpGet]
         public ActionResult DepartmentInOrg()
         {
-            var deptInOrgViewModel = new DepartmentInOrgViewModel() { Department = new List<Department>() };
-            var departments = _wcfService.InvokeService<IUserService, List<Department>>((svc) => svc.GetDepartment(SessionContext.CurrentUser.OrganizationId.Value));
+            var deptInOrgViewModel = new DepartmentInOrgViewModel()
+            {
+                Department = new List<Department>(),
+                DepartmentInOrganizationViewModel = new List<DepartmentInOrganizationViewModel>()
+            };
+            var departments = _wcfService.InvokeService<IUserService, List<Department>>((svc) => svc.GetAllDepartment());
             if (departments.IsCollectionValid())
                 deptInOrgViewModel.Department = departments;
             return View(deptInOrgViewModel);
@@ -102,6 +106,25 @@ namespace PreScripds.UI.Controllers
         [HttpPost]
         public ActionResult DepartmentInOrg(DepartmentInOrgViewModel deptInOrgViewModel)
         {
+            if (ModelState.IsValid)
+            {
+                deptInOrgViewModel.DepartmentInOrganizationViewModel = new List<DepartmentInOrganizationViewModel>();
+                foreach (var department in deptInOrgViewModel.Departments)
+                {
+                    var deptInOrganization = new DepartmentInOrganizationViewModel();
+                    deptInOrganization.DepartmentId = department.As<long>();
+                    deptInOrganization.OrganizationId = SessionContext.CurrentUser.OrganizationId.Value;
+                    deptInOrganization.Active = true;
+                    deptInOrgViewModel.DepartmentInOrganizationViewModel.Add(deptInOrganization);
+                }
+                if (deptInOrgViewModel.DepartmentInOrganizationViewModel.IsCollectionValid())
+                {
+                    var mappedModel = Mapper.Map<List<DepartmentInOrganizationViewModel>, List<DepartmentInOrganization>>(deptInOrgViewModel.DepartmentInOrganizationViewModel);
+                    //TODO:Insert into Department in Organization.
+                    _wcfService.InvokeService<IOrganizationService>((svc) => svc.AddDepartmentInOrg(mappedModel));
+                }
+
+            }
             return View();
         }
 

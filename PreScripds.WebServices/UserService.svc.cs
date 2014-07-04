@@ -82,9 +82,9 @@ namespace PreScripds.WebServices
             return roleModel;
         }
 
-        public List<Department> GetDepartment(long organizationId)
+        public List<Department> GetAllDepartment()
         {
-            var departmentModel = _userBl.GetDepartment(organizationId);
+            var departmentModel = _userBl.GetAllDepartment();
             return departmentModel;
         }
 

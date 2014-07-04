@@ -60,5 +60,10 @@ namespace PreScripds.WebServices
             var modInDept = _organizationBl.GetModuleInDepartment();
             return modInDept;
         }
+
+        public void AddDepartmentInOrg(DepartmentInOrganization deptInOrg)
+        {
+            _organizationBl.AddDepartmentInOrg(deptInOrg);
+        }
     }
 }

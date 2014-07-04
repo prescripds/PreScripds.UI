@@ -53,5 +53,11 @@ namespace PreScripds.BL
             var modInDept = _organizationRepository.GetModuleInDepartment();
             return modInDept;
         }
+
+        public void AddDepartmentInOrg(DepartmentInOrganization deptInOrg)
+        {
+            _organizationRepository.AddDepartmentInOrg(deptInOrg);
+        }
+
     }
 }

@@ -315,11 +315,11 @@ namespace PreScripds.DAL.Repository
 
         }
 
-        public List<Department> GetDepartment(long organizationId)
+        public List<Department> GetAllDepartment()
         {
             using (var uow = new UnitOfWork())
             {
-                var department = uow.GetRepository<Department>().Items.Where(x => x.Id == organizationId).ToList();
+                var department = uow.GetRepository<Department>().Items.ToList();
                 if (department.IsCollectionValid())
                     return department;
                 return null;

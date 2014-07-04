@@ -15,5 +15,6 @@ namespace PreScripds.DAL.Interface
         LibraryAsset CheckDocExists(string docName);
         List<DepartmentInOrganization> GetDepartmentInOrganization(long organizationId);
         List<ModuleInDepartment> GetModuleInDepartment();
+        void AddDepartmentInOrg(List<DepartmentInOrganization> deptInOrg);
     }
 }
