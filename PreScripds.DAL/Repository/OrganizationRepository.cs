@@ -87,7 +87,6 @@ namespace PreScripds.DAL.Repository
                 foreach (var departmentInOrg in deptInOrg)
                 {
                     uow.GetRepository<DepartmentInOrganization>().Insert(departmentInOrg);
-                   
                 }
                 uow.SaveChanges();
             }

@@ -28,7 +28,16 @@
                 <button type="submit" class="btn btn-warning pull-right" value="Save">Save</button>
             </div>
         </div>
-        @*@Html.MessageDialogRedirect(Model.Message, "AddRole", "Dashboard", true)*@
+        @Html.MessageDialogRedirect(Model.Message, "ModuleInDepartment", "Dashboard", true)
     }
 
 </div>
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            @Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))
+        });
+
+    </script>
+}

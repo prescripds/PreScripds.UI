@@ -22,5 +22,9 @@ namespace PreScripds.Domain
         public virtual ICollection<ModuleObjects> ModuleObjects { get; set; }
         [DataMember]
         public virtual ICollection<PermissionInModule> PermissionInModules { get; set; }
+        [DataMember]
+        public long? DepartmentId { get; set; }
+        [DataMember]
+        public virtual Department Department { get; set; }
     }
 }

@@ -31,5 +31,8 @@ namespace PreScripds.Domain
         public long UpdatedBy { get; set; }
         [DataMember]
         public DateTime UpdatedDate { get; set; }
+        [DataMember]
+        public virtual ICollection<Module> Modules { get; set; }
+
     }
 }

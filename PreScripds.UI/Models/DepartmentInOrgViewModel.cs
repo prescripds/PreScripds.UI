@@ -15,6 +15,9 @@ namespace PreScripds.UI.Models
         public IEnumerable<string> Departments { get; set; }
 
         public List<DepartmentInOrganizationViewModel> DepartmentInOrganizationViewModel { get; set; }
+
+        public bool CreationSuccessful { get; set; }
+        public string Message { get; set; }
     }
 
     public class DepartmentInOrganizationViewModel

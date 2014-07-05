@@ -38,6 +38,6 @@ namespace PreScripds.WebServices
         List<ModuleInDepartment> GetModuleInDepartment();
         [OperationContract]
         [WebInvoke(UriTemplate = "/AddDepartmentInOrg", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
-        void AddDepartmentInOrg(DepartmentInOrganization deptInOrg);
+        void AddDepartmentInOrg(List<DepartmentInOrganization> deptInOrg);
     }
 }
