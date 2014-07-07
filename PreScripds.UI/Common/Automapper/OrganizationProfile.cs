@@ -13,9 +13,18 @@ namespace PreScripds.UI.Common.Automapper
     {
         protected override void Configure()
         {
+            Mapper.CreateMap<Department, DepartmentViewModel>().IgnoreAllNonExisting();
+            Mapper.CreateMap<DepartmentViewModel, Department>().IgnoreAllNonExisting();
+
+            Mapper.CreateMap<ModuleViewModel, Module>()
+                .ForMember(d => d.Id, s => s.MapFrom(p => p.ModuleId))
+                .ForMember(d => d.DepartmentId, s => s.MapFrom(p => p.DepartmentInOrgId))
+                .ForMember(d => d.Active, s => s.MapFrom(p => p.IsActive))
+                .IgnoreAllNonExisting();
+
             Mapper.CreateMap<ModuleInDepartment, ModuleInDepartmentViewModel>()
                 .ForMember(d => d.Department, s => s.Ignore())
-                .ForMember(d => d.Module, s => s.Ignore())
+                // .ForMember(d => d.ModuleName, s => s.MapFrom(p=>p.)
                 .IgnoreAllNonExisting();
             Mapper.CreateMap<ModuleInDepartmentViewModel, ModuleInDepartment>()
                 .ForMember(d => d.Department, s => s.Ignore())

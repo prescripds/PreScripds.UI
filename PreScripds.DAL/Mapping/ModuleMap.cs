@@ -28,7 +28,7 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.ModuleName).HasColumnName("ModuleName");
             this.Property(t => t.ModuleDescription).HasColumnName("ModuleDescription");
             this.Property(t => t.DepartmentId).HasColumnName("DepartmentId");
-
+            this.Property(t => t.Active).HasColumnName("Active");
             // Relationships
             this.HasOptional(t => t.Department)
                 .WithMany(t => t.Modules)

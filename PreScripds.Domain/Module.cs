@@ -26,5 +26,7 @@ namespace PreScripds.Domain
         public long? DepartmentId { get; set; }
         [DataMember]
         public virtual Department Department { get; set; }
+        [DataMember]
+        public bool Active { get; set; }
     }
 }

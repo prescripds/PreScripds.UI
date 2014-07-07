@@ -82,11 +82,32 @@ namespace PreScripds.UI.Controllers
 
         [PreScripds.UI.Common.Authorize]
         [HttpGet]
-        public ActionResult ModuleInDepartment()
+        public ActionResult AddModule()
         {
-            //TODO: Get departments based on organization
+            var moduleViewModel = new ModuleViewModel();
+            var departmentInOrgId = _wcfService.InvokeService<IOrganizationService, List<DepartmentInOrganization>>((svc) => svc.GetDepartmentInOrganization(SessionContext.CurrentUser.OrganizationId.Value));
+            moduleViewModel.DepartmentInOrg = departmentInOrgId;
+            return View(moduleViewModel);
+        }
+
+        [PreScripds.UI.Common.Authorize]
+        [HttpPost]
+        public ActionResult AddModule(ModuleViewModel moduleViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
             return View();
         }
+
+        [PreScripds.UI.Common.Authorize]
+        [HttpGet]
+        public ActionResult AddDepartment()
+        {
+            return View();
+        }
+
 
         [PreScripds.UI.Common.Authorize]
         [HttpGet]
@@ -105,10 +126,13 @@ namespace PreScripds.UI.Controllers
 
         [PreScripds.UI.Common.Authorize]
         [HttpPost]
-        public ActionResult DepartmentInOrg(DepartmentInOrgViewModel deptInOrgViewModel)
+        public ActionResult DepartmentInOrg(DepartmentInOrgViewModel deptInOrgViewModel, string buttonType)
         {
             if (ModelState.IsValid)
             {
+                if (buttonType == "Add")
+                    return RedirectToAction("AddDepartment", "Dashboard");
+
                 deptInOrgViewModel.DepartmentInOrganizationViewModel = new List<DepartmentInOrganizationViewModel>();
                 foreach (var department in deptInOrgViewModel.Departments)
                 {

@@ -25,7 +25,9 @@
         </div>
         <div class="row">
             <div class="col-md-12 buttons">
-                <button type="submit" class="btn btn-warning pull-right" value="Save">Save</button>
+                <button type="submit" name="buttonType" class="btn btn-warning pull-right" value="Save">Save</button>
+
+                <button type="submit" name="buttonType" class="btn btn-warning pull-right" value="Add">Add</button>
             </div>
         </div>
         @Html.MessageDialogRedirect(Model.Message, "ModuleInDepartment", "Dashboard", true)

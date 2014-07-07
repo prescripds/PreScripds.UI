@@ -210,9 +210,11 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AppSettingModel.cs" />
     <Compile Include="Models\DepartmentInOrgViewModel.cs" />
+    <Compile Include="Models\DepartmentViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LibraryAssetViewModel.cs" />
     <Compile Include="Models\ModuleInDepartmentViewModel.cs" />
+    <Compile Include="Models\ModuleViewModel.cs" />
     <Compile Include="Models\OrganizationDocumentViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -461,6 +463,8 @@
     <Content Include="Views\Dashboard\AddPermission.cshtml" />
     <Content Include="Views\Dashboard\ModuleInDepartment.cshtml" />
     <Content Include="Views\Dashboard\DepartmentInOrg.cshtml" />
+    <Content Include="Views\Dashboard\AddModule.cshtml" />
+    <Content Include="Views\Dashboard\AddDepartment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

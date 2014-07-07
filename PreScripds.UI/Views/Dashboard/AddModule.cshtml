@@ -1,24 +1,29 @@
-﻿@model PreScripds.UI.Models.ModuleInDepartmentViewModel
+﻿@model PreScripds.UI.Models.ModuleViewModel
 @{
-    ViewBag.Title = "Department-Module";
+    ViewBag.Title = "Module";
     Layout = "~/Views/Shared/_OpenLayout.cshtml";
 }
 
 <div class="col-md-12 blackBg">
-    @using (Html.BeginForm("Permission", "Dashboard", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    @using (Html.BeginForm("AddModule", "Dashboard", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
 
         @Html.ValidationSummary()<br />
-        <h3><span style="color:white;">Department-Module</span><hr /> </h3>
+        <h3><span style="color:white;">Module</span><hr /> </h3>
         <div class="row">
             <div class="col-md-4 col-sm-6">
                 <div class="form-group">
-                    <label class="control-label" for="RoleDesc">Module</label>
+                    <label class="control-label" for="RoleDesc">Module Name</label>
                     @Html.TextBoxFor(m => m.ModuleName, new { @class = "form-control" })
                 </div>
             </div>
-
+            <div class="col-md-4 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label" for="RoleDesc">Module Description</label>
+                    @Html.TextAreaFor(m => m.ModuleDesc, new { @class = "form-control" })
+                </div>
+            </div>
             <div class="col-md-4 col-sm-6">
                 <div class="form-group">
                     <label class="control-label" for="RoleName">Department</label>
