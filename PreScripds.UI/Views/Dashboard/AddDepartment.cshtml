@@ -1,4 +1,7 @@
 ﻿@model PreScripds.UI.Models.DepartmentViewModel
+@using PreScripds.UI.Common;
+@using PreScripds.Domain;
+@using PreScripds.Infrastructure;
 @{
     ViewBag.Title = "AddDepartment";
     Layout = "~/Views/Shared/_OpenLayout.cshtml";
@@ -33,14 +36,24 @@
 
                 <button type="reset" class="btn btn-warning pull-right" value="Clear">Clear</button>
 
-                @if (Model.RoleViewModels.IsCollectionValid())
+                @if (Model.DepartmentViewModels.IsCollectionValid())
                 {
                     <button type="submit" name="buttonType" class="btn btn-warning pull-right" value="Next">Next</button>
                 }
+
             </div>
         </div>
-        @Html.MessageDialogRedirect(Model.Message, "AddPermission", "Dashboard", true)
+        @Html.MessageDialogRedirect(Model.Message, "AddDepartment", "Dashboard", true)
     }
 
 </div>
+@section Scripts {
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            @Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))
+        });
+
+    </script>
+}

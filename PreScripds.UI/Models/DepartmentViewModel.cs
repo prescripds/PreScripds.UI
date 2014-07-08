@@ -26,5 +26,8 @@ namespace PreScripds.UI.Models
         public DateTime UpdatedDate { get; set; }
 
         public List<DepartmentViewModel> DepartmentViewModels { get; set; }
+
+        public bool CreationSuccessful { get; set; }
+        public string Message { get; set; }
     }
 }

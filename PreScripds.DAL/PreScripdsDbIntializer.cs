@@ -25,9 +25,16 @@ namespace PreScripds.DAL
             context.SaveChanges();
 
             var departments = new Department() { DepartmentName = "Registration", IsActive = true, DepartmentDescription = "Registers the patient details.", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now };
+            var department1 = new Department() { DepartmentName = "Lab", IsActive = true, DepartmentDescription = "Lab related screens", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now };
             context.Departments.Add(departments);
+            context.Departments.Add(department1);
             context.SaveChanges();
 
+            var module = new Module() { ModuleName = "X-Ray", ModuleDescription = "X-Ray related module", Active = true };
+            var module1 = new Module() { ModuleName = "Blood Test", ModuleDescription = "Blood test relateed module", Active = true };
+            context.Modules.Add(module);
+            context.Modules.Add(module1);
+            context.SaveChanges();
             //TODO:Seed data should by default have a suoer admin from PreScripds to approve the org user/super admin
 
         }

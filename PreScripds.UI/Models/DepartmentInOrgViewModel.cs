@@ -11,7 +11,6 @@ namespace PreScripds.UI.Models
     {
         public List<Department> Department { get; set; }
 
-        [Required(ErrorMessage = "Please select the Departments you would like to include for your Organization.")]
         public IEnumerable<string> Departments { get; set; }
 
         public List<DepartmentInOrganizationViewModel> DepartmentInOrganizationViewModel { get; set; }

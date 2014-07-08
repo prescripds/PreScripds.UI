@@ -143,11 +143,11 @@ namespace PreScripds.UI.Controllers
         [HttpPost]
         public ActionResult DepartmentInOrg(DepartmentInOrgViewModel deptInOrgViewModel, string buttonType)
         {
+            if (buttonType == "Add")
+                return RedirectToAction("AddDepartment", "Dashboard");
+            ValidateDepartInOrgViewModel(deptInOrgViewModel);
             if (ModelState.IsValid)
             {
-                if (buttonType == "Add")
-                    return RedirectToAction("AddDepartment", "Dashboard");
-
                 deptInOrgViewModel.DepartmentInOrganizationViewModel = new List<DepartmentInOrganizationViewModel>();
                 foreach (var department in deptInOrgViewModel.Departments)
                 {
@@ -169,6 +169,12 @@ namespace PreScripds.UI.Controllers
             return View(deptInOrgViewModel);
         }
 
+        private void ValidateDepartInOrgViewModel(DepartmentInOrgViewModel deptInOrgViewModel)
+        {
+            if (!deptInOrgViewModel.Departments.IsCollectionValid())
+                ModelState.AddModelError("", " Please select the Departments you would like to include for your Organization.");
+        }
+
         [PreScripds.UI.Common.Authorize]
         [HttpGet]
         public ActionResult AddRole()
@@ -188,12 +194,10 @@ namespace PreScripds.UI.Controllers
         [HttpPost]
         public ActionResult AddRole(RoleViewModel roleViewModel, string buttonType)
         {
+            if (buttonType == "Next")
+                return RedirectToAction("DepartmentInOrg", "Dashboard");
+
             ValidateRoleViewModel(roleViewModel);
-            if (roleViewModel.RoleViewModels.IsCollectionValid())
-            {
-                if (buttonType == "Next")
-                    return RedirectToAction("DepartmentInOrg", "Dashboard");
-            }
             if (ModelState.IsValid)
             {
                 var checkRoleNameExists = CheckRoleNameExists(roleViewModel);
@@ -227,9 +231,9 @@ namespace PreScripds.UI.Controllers
 
         private void ValidateRoleViewModel(RoleViewModel roleViewModel)
         {
-            if (roleViewModel.RoleName.Trim().IsEmpty())
+            if (roleViewModel.RoleName.Trim().IsEmpty() || roleViewModel.RoleName.Trim().IsNull())
                 ModelState.AddModelError("RoleName", "Role Name is mandatory.");
-            if (roleViewModel.RoleDesc.Trim().IsEmpty())
+            if (roleViewModel.RoleDesc.Trim().IsEmpty() || roleViewModel.RoleDesc.Trim().IsNull())
                 ModelState.AddModelError("RoleDesc", "Role Description is mandatory.");
         }
 
