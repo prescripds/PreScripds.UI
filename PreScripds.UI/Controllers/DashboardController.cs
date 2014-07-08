@@ -42,35 +42,28 @@ namespace PreScripds.UI.Controllers
                     return View("Selfie", "Dashboard");
                 if (user.UserType == (int)UserType.Organization)
                 {
-                    if (user != null)
+                    if (user.OrganizationId == 0)
                     {
-                        if (user.OrganizationId == 0)
+                        return RedirectToAction("Organization", "Dashboard");
+                    }
+                    else
+                    {
+                        if (user.OrganizationId.HasValue)
                         {
-                            return RedirectToAction("Organization", "Dashboard");
-                        }
-                        else
-                        {
-                            if (user.OrganizationId.HasValue)
-                            {
-                                var organizationId = user.OrganizationId.Value;
-                                var role = _wcfService.InvokeService<IUserService, List<Role>>(svc => svc.GetRole(organizationId));
-                                if (role == null)
-                                    return RedirectToAction("AddRole", "Dashboard");
-                                var orgInDept = _wcfService.InvokeService<IOrganizationService, List<DepartmentInOrganization>>((svc) => svc.GetDepartmentInOrganization(user.OrganizationId.Value));
-                                if (!orgInDept.IsCollectionValid())
-                                    return RedirectToAction("DepartmentInOrg", "Dashboard");
-                                var modInDept = _wcfService.InvokeService<IOrganizationService, List<ModuleInDepartment>>((svc) => svc.GetModuleInDepartment());
-                                if (!modInDept.IsCollectionValid())
-                                    return RedirectToAction("ModuleInDepartment", "Dashboard");
-                                return View("Approvals", "Dashboard");
-                            }
+                            var organizationId = user.OrganizationId.Value;
+                            var role = _wcfService.InvokeService<IUserService, List<Role>>(svc => svc.GetRole(organizationId));
+                            if (role == null)
+                                return RedirectToAction("AddRole", "Dashboard");
+                            var orgInDept = _wcfService.InvokeService<IOrganizationService, List<DepartmentInOrganization>>((svc) => svc.GetDepartmentInOrganization(user.OrganizationId.Value));
+                            if (!orgInDept.IsCollectionValid())
+                                return RedirectToAction("DepartmentInOrg", "Dashboard");
+                            var modInDept = _wcfService.InvokeService<IOrganizationService, List<ModuleInDepartment>>((svc) => svc.GetModuleInDepartment());
+                            if (!modInDept.IsCollectionValid())
+                                return RedirectToAction("ModuleInDepartment", "Dashboard");
+                            return View("Approvals", "Dashboard");
                         }
                     }
-                    if (user != null)
-                    {
-                        return View("Approvals", "Dashboard");
-                    }
-                    return RedirectToAction("Organization", "Dashboard");
+                    return RedirectToAction("Index", "Dashboard");
                 }
             }
             else
@@ -115,13 +108,24 @@ namespace PreScripds.UI.Controllers
 
         [PreScripds.UI.Common.Authorize]
         [HttpPost]
-        public ActionResult AddDepartment(DepartmentViewModel departmentViewModel)
+        public ActionResult AddDepartment(DepartmentViewModel departmentViewModel, string buttonType)
         {
+            if (buttonType == "Next")
+                return RedirectToAction("AddPermission", "Dashboard");
+            ValidateDepartmentViewModel(departmentViewModel);
             if (ModelState.IsValid)
             {
 
             }
             return View();
+        }
+
+        private void ValidateDepartmentViewModel(DepartmentViewModel departmentViewModel)
+        {
+            if (departmentViewModel.DepartmentName.Trim().IsEmpty() || departmentViewModel.DepartmentName.IsNull)
+                ModelState.AddModelError("DepartmentName", "Department Name is mandatory.");
+            if (departmentViewModel.DepartmentDescription.Trim().IsEmpty() || departmentViewModel.DepartmentDescription.IsNull())
+                ModelState.AddModelError("DepartmentDescription", "Department Description is mandatory.");
         }
 
         [PreScripds.UI.Common.Authorize]
