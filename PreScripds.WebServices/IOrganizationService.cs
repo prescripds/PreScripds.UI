@@ -39,5 +39,8 @@ namespace PreScripds.WebServices
         [OperationContract]
         [WebInvoke(UriTemplate = "/AddDepartmentInOrg", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
         void AddDepartmentInOrg(List<DepartmentInOrganization> deptInOrg);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/GetDepartmentInOrg", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        List<Department> GetDepartmentInOrg(long organizationId);
     }
 }

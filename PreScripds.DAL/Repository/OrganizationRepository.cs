@@ -92,5 +92,18 @@ namespace PreScripds.DAL.Repository
             }
         }
 
+        public List<Department> GetDepartmentInOrg(long organizationId)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var deptInOrgs = GetDepartmentInOrganization(organizationId);
+                foreach (var deptInOrg in deptInOrgs)
+                {
+                    var depts = uow.GetRepository<Department>().Items.Where(x => x.Id == deptInOrg.DepartmentId).ToList();
+                    return depts;
+                }
+                return new List<Department>();
+            }
+        }
     }
 }

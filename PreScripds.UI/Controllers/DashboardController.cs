@@ -105,9 +105,24 @@ namespace PreScripds.UI.Controllers
         [HttpGet]
         public ActionResult AddDepartment()
         {
-            return View();
+            var departmentViewModel = new DepartmentViewModel() { DepartmentViewModels = new List<DepartmentViewModel>() };
+            var departmentInOrg = _wcfService.InvokeService<IOrganizationService, List<Department>>((svc) => svc.GetDepartmentInOrg(SessionContext.CurrentUser.OrganizationId.Value));
+            var mappedDepartmentVM = Mapper.Map<List<Department>, List<DepartmentViewModel>>(departmentInOrg);
+            if (departmentInOrg.IsCollectionValid())
+                departmentViewModel.DepartmentViewModels = mappedDepartmentVM;
+            return View(departmentViewModel);
         }
 
+        [PreScripds.UI.Common.Authorize]
+        [HttpPost]
+        public ActionResult AddDepartment(DepartmentViewModel departmentViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
+            return View();
+        }
 
         [PreScripds.UI.Common.Authorize]
         [HttpGet]

@@ -16,5 +16,6 @@ namespace PreScripds.DAL.Interface
         List<DepartmentInOrganization> GetDepartmentInOrganization(long organizationId);
         List<ModuleInDepartment> GetModuleInDepartment();
         void AddDepartmentInOrg(List<DepartmentInOrganization> deptInOrg);
+        List<Department> GetDepartmentInOrg(long organizationId);
     }
 }

@@ -65,5 +65,11 @@ namespace PreScripds.WebServices
         {
             _organizationBl.AddDepartmentInOrg(deptInOrg);
         }
+
+        public List<Department> GetDepartmentInOrg(long organizationId)
+        {
+            var depts = _organizationBl.GetDepartmentInOrg(organizationId);
+            return depts;
+        }
     }
 }
