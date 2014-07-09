@@ -111,7 +111,7 @@ namespace PreScripds.UI.Controllers
         public ActionResult AddDepartment(DepartmentViewModel departmentViewModel, string buttonType)
         {
             if (buttonType == "Next")
-                return RedirectToAction("AddPermission", "Dashboard");
+                return RedirectToAction("AddModule", "Dashboard");
             ValidateDepartmentViewModel(departmentViewModel);
             if (ModelState.IsValid)
             {
@@ -121,12 +121,17 @@ namespace PreScripds.UI.Controllers
                 departmentViewModel.IsActive = true;
                 departmentViewModel.CreatedBy = departmentViewModel.UpdatedBy = SessionContext.CurrentUser.Id;
                 departmentViewModel.CreatedDate = departmentViewModel.UpdatedDate = DateTime.Now;
+                departmentViewModel.DepartmentViewModels = new List<DepartmentViewModel>();
 
                 var mappedDepartModel = Mapper.Map<DepartmentViewModel, Department>(departmentViewModel);
                 _wcfService.InvokeService<IOrganizationService>((svc) => svc.AddDepartment(mappedDepartModel));
+
                 var departmentsInOrg = _wcfService.InvokeService<IOrganizationService, List<Department>>((svc) => svc.GetDepartmentInOrg(SessionContext.CurrentUser.OrganizationId.Value));
                 var mappedDeptInOrg = Mapper.Map<List<Department>, List<DepartmentViewModel>>(departmentsInOrg);
-                departmentViewModel.DepartmentViewModels = mappedDeptInOrg;
+
+                if (mappedDeptInOrg.IsCollectionValid())
+                    departmentViewModel.DepartmentViewModels = mappedDeptInOrg;
+
                 departmentViewModel.CreationSuccessful = true;
                 departmentViewModel.Message = "The Department '{0}' is saved successfully.".ToFormat(departmentViewModel.DepartmentName);
             }
