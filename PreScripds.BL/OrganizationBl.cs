@@ -64,5 +64,10 @@ namespace PreScripds.BL
             var depts = _organizationRepository.GetDepartmentInOrg(organizationId);
             return depts;
         }
+
+        public void AddDepartment(Department department)
+        {
+            _organizationRepository.AddDepartment(department);
+        }
     }
 }

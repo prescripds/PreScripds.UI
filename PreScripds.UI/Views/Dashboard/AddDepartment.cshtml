@@ -45,6 +45,46 @@
         </div>
         @Html.MessageDialogRedirect(Model.Message, "AddDepartment", "Dashboard", true)
     }
+    @if (Model.DepartmentViewModels.IsCollectionValid())
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th> Department Name</th>
+                        <th> Department Description</th>
+                        <th> Active</th>
+                    </tr>
+                </thead>
+                @for (int i = 0; i < Model.DepartmentViewModels.Count; i++)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="ellipsis-div" title="@Model.DepartmentViewModels[i].Id">
+                                    @Html.TextBoxFor(m => m.DepartmentViewModels[i].Id)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="ellipsis-div" title="@Model.DepartmentViewModels[i].DepartmentName">
+                                    @Html.TextBoxFor(m => m.DepartmentViewModels[i].DepartmentName)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="ellipsis-div" title="@Model.DepartmentViewModels[i].DepartmentDescription">
+                                    @Html.TextBoxFor(m => m.DepartmentViewModels[i].DepartmentDescription)
+                                </div>
+                            </td>
+                            <td>
+                                @Html.CheckBoxFor(m => m.DepartmentViewModels[i].IsActive, new { data_id = Model.DepartmentViewModels[i].Id })
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
+    }
 
 </div>
 @section Scripts {

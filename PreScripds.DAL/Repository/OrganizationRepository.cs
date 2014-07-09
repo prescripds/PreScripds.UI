@@ -105,5 +105,15 @@ namespace PreScripds.DAL.Repository
                 return new List<Department>();
             }
         }
+
+        public void AddDepartment(Department department)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                uow.GetRepository<Department>().Items.SelectMany(x => x.DepartmentInOrganizations).Each(s => uow.GetRepository<DepartmentInOrganization>().Items.ToList().Add(s));
+                uow.GetRepository<Department>().Insert(department);
+                uow.SaveChanges();
+            }
+        }
     }
 }

@@ -29,5 +29,7 @@ namespace PreScripds.UI.Models
 
         public bool CreationSuccessful { get; set; }
         public string Message { get; set; }
+
+        public List<DepartmentInOrganizationViewModel> DepartmentInOrganizationViewModels { get; set; }
     }
 }

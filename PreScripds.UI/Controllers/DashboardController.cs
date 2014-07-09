@@ -115,14 +115,27 @@ namespace PreScripds.UI.Controllers
             ValidateDepartmentViewModel(departmentViewModel);
             if (ModelState.IsValid)
             {
+                departmentViewModel.DepartmentInOrganizationViewModels = new List<DepartmentInOrganizationViewModel>();
+                var departmentInOrg = new DepartmentInOrganizationViewModel() { OrganizationId = SessionContext.CurrentUser.OrganizationId.Value, Active = true };
+                departmentViewModel.DepartmentInOrganizationViewModels.Add(departmentInOrg);
+                departmentViewModel.IsActive = true;
+                departmentViewModel.CreatedBy = departmentViewModel.UpdatedBy = SessionContext.CurrentUser.Id;
+                departmentViewModel.CreatedDate = departmentViewModel.UpdatedDate = DateTime.Now;
 
+                var mappedDepartModel = Mapper.Map<DepartmentViewModel, Department>(departmentViewModel);
+                _wcfService.InvokeService<IOrganizationService>((svc) => svc.AddDepartment(mappedDepartModel));
+                var departmentsInOrg = _wcfService.InvokeService<IOrganizationService, List<Department>>((svc) => svc.GetDepartmentInOrg(SessionContext.CurrentUser.OrganizationId.Value));
+                var mappedDeptInOrg = Mapper.Map<List<Department>, List<DepartmentViewModel>>(departmentsInOrg);
+                departmentViewModel.DepartmentViewModels = mappedDeptInOrg;
+                departmentViewModel.CreationSuccessful = true;
+                departmentViewModel.Message = "The Department '{0}' is saved successfully.".ToFormat(departmentViewModel.DepartmentName);
             }
-            return View();
+            return View(departmentViewModel);
         }
 
         private void ValidateDepartmentViewModel(DepartmentViewModel departmentViewModel)
         {
-            if (departmentViewModel.DepartmentName.Trim().IsEmpty() || departmentViewModel.DepartmentName.IsNull)
+            if (departmentViewModel.DepartmentName.Trim().IsEmpty() || departmentViewModel.DepartmentName.IsNull())
                 ModelState.AddModelError("DepartmentName", "Department Name is mandatory.");
             if (departmentViewModel.DepartmentDescription.Trim().IsEmpty() || departmentViewModel.DepartmentDescription.IsNull())
                 ModelState.AddModelError("DepartmentDescription", "Department Description is mandatory.");
