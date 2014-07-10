@@ -115,5 +115,42 @@ namespace PreScripds.DAL.Repository
                 uow.SaveChanges();
             }
         }
+
+        public Department GetDepartmentById(long departmentId)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var department = uow.GetRepository<Department>().Items.FirstOrDefault(x => x.Id == departmentId);
+                return department;
+            }
+        }
+
+        public void AddModule(Module module)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                uow.GetRepository<Module>().Items.SelectMany(x => x.ModuleInDepartments).Each(s => uow.GetRepository<ModuleInDepartment>().Items.ToList().Add(s));
+                uow.GetRepository<Module>().Insert(module);
+                uow.SaveChanges();
+            }
+        }
+
+        public List<ModuleInDepartment> GetModuleInDepartment(long departmentId)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var modInDept = uow.GetRepository<ModuleInDepartment>().Items.Where(x => x.DepartmentId == departmentId && x.Active).ToList();
+                return modInDept;
+            }
+        }
+
+        public Module GetModuleById(long moduleId)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var module = uow.GetRepository<Module>().Items.FirstOrDefault(x => x.Id == moduleId);
+                return module;
+            }
+        }
     }
 }

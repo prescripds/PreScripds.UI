@@ -57,7 +57,7 @@ namespace PreScripds.UI.Controllers
                             var orgInDept = _wcfService.InvokeService<IOrganizationService, List<DepartmentInOrganization>>((svc) => svc.GetDepartmentInOrganization(user.OrganizationId.Value));
                             if (!orgInDept.IsCollectionValid())
                                 return RedirectToAction("DepartmentInOrg", "Dashboard");
-                            var modInDept = _wcfService.InvokeService<IOrganizationService, List<ModuleInDepartment>>((svc) => svc.GetModuleInDepartment());
+                            var modInDept = _wcfService.InvokeService<IOrganizationService, List<ModuleInDepartment>>((svc) => svc.GetAllModuleInDepartment());
                             if (!modInDept.IsCollectionValid())
                                 return RedirectToAction("ModuleInDepartment", "Dashboard");
                             return View("Approvals", "Dashboard");
@@ -77,9 +77,15 @@ namespace PreScripds.UI.Controllers
         [HttpGet]
         public ActionResult AddModule()
         {
-            var moduleViewModel = new ModuleViewModel();
+            var moduleViewModel = new ModuleViewModel() { ModuleViewModels = new List<ModuleViewModel>() };
             var departmentInOrgId = _wcfService.InvokeService<IOrganizationService, List<DepartmentInOrganization>>((svc) => svc.GetDepartmentInOrganization(SessionContext.CurrentUser.OrganizationId.Value));
             moduleViewModel.DepartmentInOrg = departmentInOrgId;
+            moduleViewModel.Departments = new List<Department>();
+            foreach (var department in departmentInOrgId)
+            {
+                var departmentFromDb = _wcfService.InvokeService<IOrganizationService, Department>((svc) => svc.GetDepartmentById(department.DepartmentId.Value));
+                moduleViewModel.Departments.Add(departmentFromDb);
+            }
             return View(moduleViewModel);
         }
 
@@ -87,10 +93,56 @@ namespace PreScripds.UI.Controllers
         [HttpPost]
         public ActionResult AddModule(ModuleViewModel moduleViewModel)
         {
+            ValidateModuleViewModel(moduleViewModel);
             if (ModelState.IsValid)
             {
-
+                moduleViewModel.ModuleInDepartments = new List<ModuleInDepartment>();
+                moduleViewModel.ModuleViewModels = new List<ModuleViewModel>();
+                var deptInOrg = new ModuleInDepartment()
+                {
+                    DepartmentId = moduleViewModel.DepartmentInOrgId,
+                    Active = true
+                };
+                moduleViewModel.ModuleInDepartments.Add(deptInOrg);
+                moduleViewModel.IsActive = true;
+                var mappedModule = Mapper.Map<ModuleViewModel, Module>(moduleViewModel);
+                _wcfService.InvokeService<IOrganizationService>((svc) => svc.AddModule(mappedModule));
+                moduleViewModel.CreationSuccessful = true;
+                moduleViewModel.Message = "The Module '{0}' is saved successfully.".ToFormat(moduleViewModel.ModuleName);
+                var moduleInDept = _wcfService.InvokeService<IOrganizationService, List<ModuleInDepartment>>((svc) => svc.GetModuleInDepartment(moduleViewModel.DepartmentInOrgId));
+                foreach (var mod in moduleInDept)
+                {
+                    var module = _wcfService.InvokeService<IOrganizationService, Module>((svc) => svc.GetModuleById(mod.Id));
+                    var mappedModuleViewModel = Mapper.Map<Module, ModuleViewModel>(module);
+                    moduleViewModel.ModuleViewModels.Add(mappedModuleViewModel);
+                }
             }
+            return View(moduleViewModel);
+        }
+
+        private void ValidateModuleViewModel(ModuleViewModel moduleViewModel)
+        {
+            if (moduleViewModel.DepartmentInOrgId == 0)
+                ModelState.AddModelError("", "Please select a department.");
+            if (moduleViewModel.ModuleName.IsEmpty() || moduleViewModel.ModuleName.IsNull())
+                ModelState.AddModelError("ModuleName", "Module Name is mandatory.");
+            if (moduleViewModel.ModuleDesc.IsEmpty() || moduleViewModel.ModuleDesc.IsNull())
+                ModelState.AddModelError("ModuleDesc", "Module Description is mandatory.");
+        }
+
+        [PreScripds.UI.Common.Authorize]
+        [HttpGet]
+        public ActionResult ModuleInDepartment()
+        {
+            return View();
+        }
+
+        [PreScripds.UI.Common.Authorize]
+        [HttpPost]
+        public ActionResult ModuleInDepartment(ModuleInDepartmentViewModel moduleInDeptViewModel, string buttonType)
+        {
+            if (buttonType == "Add")
+                return RedirectToAction("AddModule", "Dashboard");
             return View();
         }
 

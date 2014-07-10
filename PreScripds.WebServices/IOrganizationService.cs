@@ -34,8 +34,8 @@ namespace PreScripds.WebServices
         List<DepartmentInOrganization> GetDepartmentInOrganization(long organizationId);
 
         [OperationContract]
-        [WebInvoke(UriTemplate = "/GetModuleInDepartment", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
-        List<ModuleInDepartment> GetModuleInDepartment();
+        [WebInvoke(UriTemplate = "/GetAllModuleInDepartment", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        List<ModuleInDepartment> GetAllModuleInDepartment();
         [OperationContract]
         [WebInvoke(UriTemplate = "/AddDepartmentInOrg", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
         void AddDepartmentInOrg(List<DepartmentInOrganization> deptInOrg);
@@ -45,5 +45,17 @@ namespace PreScripds.WebServices
         [OperationContract]
         [WebInvoke(UriTemplate = "/AddDepartment", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
         void AddDepartment(Department department);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/GetDepartmentById", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        Department GetDepartmentById(long departmentId);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/AddModule", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        void AddModule(Module module);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/GetModuleInDepartment", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        List<ModuleInDepartment> GetModuleInDepartment(long departmentId);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/GetModuleById", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        Module GetModuleById(long moduleId);
     }
 }

@@ -69,5 +69,26 @@ namespace PreScripds.BL
         {
             _organizationRepository.AddDepartment(department);
         }
+
+        public Department GetDepartmentById(long departmentId)
+        {
+            var department = _organizationRepository.GetDepartmentById(departmentId);
+            return department;
+        }
+        public void AddModule(Module module)
+        {
+            _organizationRepository.AddModule(module);
+        }
+        public List<ModuleInDepartment> GetModuleInDepartment(long departmentId)
+        {
+            var modInDept = _organizationRepository.GetModuleInDepartment(departmentId);
+            return modInDept;
+        }
+
+        public Module GetModuleById(long moduleId)
+        {
+            var module = _organizationRepository.GetModuleById(moduleId);
+            return module;
+        }
     }
 }

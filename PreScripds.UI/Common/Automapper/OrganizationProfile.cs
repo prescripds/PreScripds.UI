@@ -27,6 +27,8 @@ namespace PreScripds.UI.Common.Automapper
                 .ForMember(d => d.Id, s => s.MapFrom(p => p.ModuleId))
                 .ForMember(d => d.DepartmentId, s => s.MapFrom(p => p.DepartmentInOrgId))
                 .ForMember(d => d.Active, s => s.MapFrom(p => p.IsActive))
+                .ForMember(d => d.ModuleDescription, s => s.MapFrom(p => p.ModuleDesc))
+                .ForMember(d => d.ModuleInDepartments, s => s.MapFrom(p => p.ModuleInDepartments))
                 .IgnoreAllNonExisting();
 
             Mapper.CreateMap<ModuleInDepartment, ModuleInDepartmentViewModel>()

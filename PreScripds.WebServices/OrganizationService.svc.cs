@@ -55,7 +55,7 @@ namespace PreScripds.WebServices
             var deptInOrg = _organizationBl.GetDepartmentInOrganization(organizationId);
             return deptInOrg;
         }
-        public List<ModuleInDepartment> GetModuleInDepartment()
+        public List<ModuleInDepartment> GetAllModuleInDepartment()
         {
             var modInDept = _organizationBl.GetModuleInDepartment();
             return modInDept;
@@ -75,6 +75,29 @@ namespace PreScripds.WebServices
         public void AddDepartment(Department department)
         {
             _organizationBl.AddDepartment(department);
+        }
+
+        public Department GetDepartmentById(long departmentId)
+        {
+            var department = _organizationBl.GetDepartmentById(departmentId);
+            return department;
+        }
+
+        public void AddModule(Module module)
+        {
+            _organizationBl.AddModule(module);
+        }
+
+        public List<ModuleInDepartment> GetModuleInDepartment(long departmentId)
+        {
+            var modInDept = _organizationBl.GetModuleInDepartment(departmentId);
+            return modInDept;
+        }
+
+        public Module GetModuleById(long moduleId)
+        {
+            var module = _organizationBl.GetModuleById(moduleId);
+            return module;
         }
     }
 }
