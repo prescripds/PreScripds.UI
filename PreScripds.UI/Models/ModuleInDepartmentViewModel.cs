@@ -11,6 +11,8 @@ namespace PreScripds.UI.Models
         public long DepartmentId { get; set; }
         public string ModuleName { get; set; }
         public List<Department> Department { get; set; }
+        public List<Module> Module { get; set; }
+        public IEnumerable<string> Modules { get; set; }
         public bool IsActive { get; set; }
     }
 }

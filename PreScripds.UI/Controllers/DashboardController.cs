@@ -141,6 +141,7 @@ namespace PreScripds.UI.Controllers
         [HttpGet]
         public ActionResult ModuleInDepartment()
         {
+            //TODO: Get department based on org.
             return View();
         }
 
