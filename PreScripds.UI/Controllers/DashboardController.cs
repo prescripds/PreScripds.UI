@@ -85,6 +85,13 @@ namespace PreScripds.UI.Controllers
             {
                 var departmentFromDb = _wcfService.InvokeService<IOrganizationService, Department>((svc) => svc.GetDepartmentById(department.DepartmentId.Value));
                 moduleViewModel.Departments.Add(departmentFromDb);
+                moduleViewModel.ModuleInDepartments = departmentFromDb.ModuleInDepartments.ToList();
+                foreach (var mod in moduleViewModel.ModuleInDepartments)
+                {
+                    var module = _wcfService.InvokeService<IOrganizationService, Module>((svc) => svc.GetModuleById(mod.ModuleId.Value));
+                    var mappedModule = Mapper.Map<Module, ModuleViewModel>(module);
+                    moduleViewModel.ModuleViewModels.Add(mappedModule);
+                }
             }
             return View(moduleViewModel);
         }
@@ -112,7 +119,7 @@ namespace PreScripds.UI.Controllers
                 var moduleInDept = _wcfService.InvokeService<IOrganizationService, List<ModuleInDepartment>>((svc) => svc.GetModuleInDepartment(moduleViewModel.DepartmentInOrgId));
                 foreach (var mod in moduleInDept)
                 {
-                    var module = _wcfService.InvokeService<IOrganizationService, Module>((svc) => svc.GetModuleById(mod.Id));
+                    var module = _wcfService.InvokeService<IOrganizationService, Module>((svc) => svc.GetModuleById(mod.ModuleId.Value));
                     var mappedModuleViewModel = Mapper.Map<Module, ModuleViewModel>(module);
                     moduleViewModel.ModuleViewModels.Add(mappedModuleViewModel);
                 }

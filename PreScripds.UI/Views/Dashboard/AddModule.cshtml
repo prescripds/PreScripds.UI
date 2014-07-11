@@ -41,14 +41,62 @@
 
                 <button type="reset" class="btn btn-warning pull-right" value="Clear">Clear</button>
 
-                @*@if (Model.RoleViewModels.IsCollectionValid())
-                    {
-                        <button type="submit" name="buttonType" class="btn btn-warning pull-right" value="Next">Next</button>
-                    }*@
+                @if (Model.ModuleViewModels.IsCollectionValid())
+                {
+                    <button type="submit" name="buttonType" class="btn btn-warning pull-right" value="Next">Next</button>
+                }
             </div>
         </div>
-        @*@Html.MessageDialogRedirect(Model.Message, "AddPermission", "Dashboard", true)*@
+        @Html.MessageDialogRedirect(Model.Message, "AddPermission", "Dashboard", true)
+    }
+    @if (Model.ModuleViewModels.IsCollectionValid())
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th> Module Name</th>
+                        <th> Module Description</th>
+                        <th> Active</th>
+                    </tr>
+                </thead>
+                @for (int i = 0; i < Model.ModuleViewModels.Count; i++)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="ellipsis-div" title="@Model.ModuleViewModels[i].ModuleId">
+                                    @Html.TextBoxFor(m => m.ModuleViewModels[i].ModuleId)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="ellipsis-div" title="@Model.ModuleViewModels[i].ModuleName">
+                                    @Html.TextBoxFor(m => m.ModuleViewModels[i].ModuleName)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="ellipsis-div" title="@Model.ModuleViewModels[i].ModuleDesc">
+                                    @Html.TextBoxFor(m => m.ModuleViewModels[i].ModuleDesc)
+                                </div>
+                            </td>
+                            <td>
+                                @Html.CheckBoxFor(m => m.ModuleViewModels[i].IsActive, new { data_id = Model.ModuleViewModels[i].ModuleId })
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
     }
 
 </div>
+@section Scripts {
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            @Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))
+        });
+
+    </script>
+}

@@ -120,7 +120,7 @@ namespace PreScripds.DAL.Repository
         {
             using (var uow = new UnitOfWork())
             {
-                var department = uow.GetRepository<Department>().Items.FirstOrDefault(x => x.Id == departmentId);
+                var department = uow.GetRepository<Department>().Items.Include(x => x.ModuleInDepartments).FirstOrDefault(x => x.Id == departmentId);
                 return department;
             }
         }
