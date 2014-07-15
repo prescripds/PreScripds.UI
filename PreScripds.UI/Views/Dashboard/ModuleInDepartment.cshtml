@@ -1,4 +1,7 @@
 ﻿@model PreScripds.UI.Models.ModuleInDepartmentViewModel
+@using PreScripds.UI.Common;
+@using PreScripds.Domain;
+@using PreScripds.Infrastructure;
 @{
     ViewBag.Title = "Department-Module";
     Layout = "~/Views/Shared/_OpenLayout.cshtml";
@@ -43,8 +46,24 @@
                     }*@
             </div>
         </div>
-        @Html.MessageDialogRedirect(Model.Message, "AddPermission", "Dashboard", true)
+        @*@Html.MessageDialogRedirect(Model.Message, "AddPermission", "Dashboard", true)*@
     }
 
 </div>
+@section Scripts {
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var ddlValue = $('#DepartmentId').val();
+            if (ddlValue != 0)
+            {
+                $($('#DepartmentId')).on('change', function () {
+                    //TODO: ajax call to get list of modules for this dept.
+                });
+            }
+            
+            @*@Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))*@
+        });
+
+    </script>
+}

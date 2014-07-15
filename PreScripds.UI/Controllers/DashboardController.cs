@@ -142,7 +142,11 @@ namespace PreScripds.UI.Controllers
         public ActionResult ModuleInDepartment()
         {
             //TODO: Get department based on org.
-            return View();
+            var moduleInDept = new ModuleInDepartmentViewModel();
+            var deptInOrg = _wcfService.InvokeService<IOrganizationService, List<Department>>((svc) => svc.GetDepartmentInOrg(SessionContext.CurrentUser.OrganizationId.Value));
+            moduleInDept.Department = deptInOrg;
+            moduleInDept.Module = new List<Module>();
+            return View(moduleInDept);
         }
 
         [PreScripds.UI.Common.Authorize]
@@ -216,8 +220,12 @@ namespace PreScripds.UI.Controllers
                 DepartmentInOrganizationViewModel = new List<DepartmentInOrganizationViewModel>()
             };
             var departments = _wcfService.InvokeService<IUserService, List<Department>>((svc) => svc.GetAllDepartment());
+            var deptInOrg = _wcfService.InvokeService<IOrganizationService, List<DepartmentInOrganization>>((svc) => svc.GetDepartmentInOrganization(SessionContext.CurrentUser.OrganizationId.Value));
+            var mappedDeptInOrg = Mapper.Map<List<DepartmentInOrganization>, List<DepartmentInOrganizationViewModel>>(deptInOrg);
             if (departments.IsCollectionValid())
                 deptInOrgViewModel.Department = departments;
+            if (deptInOrg.IsCollectionValid())
+                deptInOrgViewModel.DepartmentInOrganizationViewModel = mappedDeptInOrg;
             return View(deptInOrgViewModel);
         }
 
@@ -242,6 +250,7 @@ namespace PreScripds.UI.Controllers
                 if (deptInOrgViewModel.DepartmentInOrganizationViewModel.IsCollectionValid())
                 {
                     var mappedModel = Mapper.Map<List<DepartmentInOrganizationViewModel>, List<DepartmentInOrganization>>(deptInOrgViewModel.DepartmentInOrganizationViewModel);
+                    //var checkDeptExists
                     _wcfService.InvokeService<IOrganizationService>((svc) => svc.AddDepartmentInOrg(mappedModel));
                     deptInOrgViewModel.CreationSuccessful = true;
                     deptInOrgViewModel.Message = "Thank you for choosing the Departments.";

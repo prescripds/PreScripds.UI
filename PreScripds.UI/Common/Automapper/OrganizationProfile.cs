@@ -38,6 +38,7 @@ namespace PreScripds.UI.Common.Automapper
 
             Mapper.CreateMap<ModuleInDepartment, ModuleInDepartmentViewModel>()
                 .ForMember(d => d.Department, s => s.Ignore())
+                .ForMember(d => d.Module, s => s.Ignore())
                 // .ForMember(d => d.ModuleName, s => s.MapFrom(p=>p.)
                 .IgnoreAllNonExisting();
             Mapper.CreateMap<ModuleInDepartmentViewModel, ModuleInDepartment>()
@@ -50,6 +51,8 @@ namespace PreScripds.UI.Common.Automapper
                 .ForMember(d => d.DepartmentId, s => s.MapFrom(p => p.DepartmentId))
                 .ForMember(d => d.Active, s => s.MapFrom(p => p.Active))
                 .IgnoreAllNonExisting();
+
+            Mapper.CreateMap<DepartmentInOrganization, DepartmentInOrganizationViewModel>().IgnoreAllNonExisting();
         }
     }
 }

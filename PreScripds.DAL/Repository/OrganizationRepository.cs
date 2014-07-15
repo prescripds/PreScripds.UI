@@ -86,7 +86,11 @@ namespace PreScripds.DAL.Repository
             {
                 foreach (var departmentInOrg in deptInOrg)
                 {
-                    uow.GetRepository<DepartmentInOrganization>().Insert(departmentInOrg);
+                    var checkDeptExists = uow.GetRepository<DepartmentInOrganization>().Items.FirstOrDefault(x => x.DepartmentId == departmentInOrg.DepartmentId);
+                    if (checkDeptExists.IsNull())
+                    {
+                        uow.GetRepository<DepartmentInOrganization>().Insert(departmentInOrg);
+                    }
                 }
                 uow.SaveChanges();
             }
@@ -97,12 +101,13 @@ namespace PreScripds.DAL.Repository
             using (var uow = new UnitOfWork())
             {
                 var deptInOrgs = GetDepartmentInOrganization(organizationId);
+                var depts = new List<Department>();
                 foreach (var deptInOrg in deptInOrgs)
                 {
-                    var depts = uow.GetRepository<Department>().Items.Where(x => x.Id == deptInOrg.DepartmentId).ToList();
-                    return depts;
+                    var depmts = uow.GetRepository<Department>().Items.FirstOrDefault(x => x.Id == deptInOrg.DepartmentId);
+                    depts.Add(depmts);
                 }
-                return new List<Department>();
+                return depts;
             }
         }
 
