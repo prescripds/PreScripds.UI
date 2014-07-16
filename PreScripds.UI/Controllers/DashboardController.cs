@@ -545,20 +545,20 @@ namespace PreScripds.UI.Controllers
         }
 
 
-        //public JsonResult GetModules(long departmentId)
-        //{
-        //    var modules = _wcfService.InvokeService<IOrganizationService, List<Module>>((svc) => svc.GetAllModule(departmentId));
-        //    var moduleInVmLst = new List<ModuleInDeptVM>();
-        //    if (modules.IsCollectionValid())
-        //    {
-        //        foreach (var module in modules)
-        //        {
-        //            var moduleInVm = new ModuleInDeptVM() { Id = module.Id, ModuleName = module.ModuleName };
-        //            moduleInVmLst.Add(moduleInVm);
-        //        }
-        //        return moduleInVmLst.ToJson();
-        //    }
-        //    return moduleInVmLst.ToJson();
-        //}
+        public JsonResult GetModules(long departmentId)
+        {
+            var modules = _wcfService.InvokeService<IOrganizationService, List<Module>>((svc) => svc.GetAllModule(departmentId));
+            var moduleInVmLst = new List<ModuleInDeptVM>();
+            if (modules.IsCollectionValid())
+            {
+                foreach (var module in modules)
+                {
+                    var moduleInVm = new ModuleInDeptVM() { Id = module.Id, ModuleName = module.ModuleName };
+                    moduleInVmLst.Add(moduleInVm);
+                }
+                return Json(moduleInVmLst, JsonRequestBehavior.AllowGet);
+            }
+            return Json(moduleInVmLst, JsonRequestBehavior.AllowGet);
+        }
     }
 }

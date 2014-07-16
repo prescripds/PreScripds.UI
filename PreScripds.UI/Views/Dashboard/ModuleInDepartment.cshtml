@@ -67,22 +67,22 @@
                     //TODO: ajax call to get list of modules for this dept.
                     departmentId = $(this).val();
                     alert(departmentId);
-                    //ajaxPost('/Dashboard/GetModules', { departmentId: departmentId }, function (res) {
-                    //    //alert(res);
-                    //    if (res.length > 0) {
-                    //        //alert(res.length);
-                    //        //for (i = 0 ; i < res.Length; i++) {
-                    //        //    $('#Modules').append('<option value="' + data[i].Id + '">' + data[i].ModuleName + '</option>');
+                    ajaxPost('/Dashboard/GetModules', { departmentId: departmentId }, function (res) {
+                        //alert(res);
+                        if (res.length > 0) {
+                            //alert(res.length);
+                            for (i = 0 ; i < res.length; i++) {
+                                $('#Modules').append('<option value="' + res[i].Id + '">' + res[i].ModuleName + '</option>');
 
-                    //        //}
-                    //        $.each(res, function (index, value) {
-                    //            $('#Modules').append($('<option>').text(value).val(index));
-                    //        });
-                    //    }
-                    //    else {
-                    //        $('#userNameExists').html('<p> Please contact us for module implementation.</p>');
-                    //    }
-                    //});
+                            }
+                            //$.each(res, function (index, value) {
+                            //    $('#Modules').append($('<option>').text(value).val(index));
+                            //});
+                        }
+                        else {
+                            $('#userNameExists').html('<p> Please contact us for module implementation.</p>');
+                        }
+                    });
                 });
             }
 
