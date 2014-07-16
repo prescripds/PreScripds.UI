@@ -157,5 +157,23 @@ namespace PreScripds.DAL.Repository
                 return module;
             }
         }
+
+        public List<Module> GetAllModule(long departmentId)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var moduleList = new List<Module>();
+                if (departmentId != 0)
+                {
+                    moduleList = uow.GetRepository<Module>().Items.Where(x => x.DepartmentId == departmentId).ToList();
+                }
+                var modules = uow.GetRepository<Module>().Items.Where(x => x.DepartmentId == null).ToList();
+                foreach (var mod in modules)
+                {
+                    moduleList.Add(mod);
+                }
+                return moduleList;
+            }
+        }
     }
 }

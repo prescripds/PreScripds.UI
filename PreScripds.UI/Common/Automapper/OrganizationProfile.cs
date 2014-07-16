@@ -38,7 +38,7 @@ namespace PreScripds.UI.Common.Automapper
 
             Mapper.CreateMap<ModuleInDepartment, ModuleInDepartmentViewModel>()
                 .ForMember(d => d.Department, s => s.Ignore())
-                .ForMember(d => d.Module, s => s.Ignore())
+                .ForMember(d => d.ModuleVm, s => s.Ignore())
                 // .ForMember(d => d.ModuleName, s => s.MapFrom(p=>p.)
                 .IgnoreAllNonExisting();
             Mapper.CreateMap<ModuleInDepartmentViewModel, ModuleInDepartment>()

@@ -22,5 +22,6 @@ namespace PreScripds.BL.Interface
         void AddModule(Module module);
         List<ModuleInDepartment> GetModuleInDepartment(long departmentId);
         Module GetModuleById(long moduleId);
+        List<Module> GetAllModule(long departmentId);
     }
 }

@@ -145,7 +145,7 @@ namespace PreScripds.UI.Controllers
             var moduleInDept = new ModuleInDepartmentViewModel();
             var deptInOrg = _wcfService.InvokeService<IOrganizationService, List<Department>>((svc) => svc.GetDepartmentInOrg(SessionContext.CurrentUser.OrganizationId.Value));
             moduleInDept.Department = deptInOrg;
-            moduleInDept.Module = new List<Module>();
+            moduleInDept.ModuleVm = new List<ModuleInDeptVM>();
             return View(moduleInDept);
         }
 
@@ -543,5 +543,22 @@ namespace PreScripds.UI.Controllers
                 return true;
             return false;
         }
+
+
+        //public JsonResult GetModules(long departmentId)
+        //{
+        //    var modules = _wcfService.InvokeService<IOrganizationService, List<Module>>((svc) => svc.GetAllModule(departmentId));
+        //    var moduleInVmLst = new List<ModuleInDeptVM>();
+        //    if (modules.IsCollectionValid())
+        //    {
+        //        foreach (var module in modules)
+        //        {
+        //            var moduleInVm = new ModuleInDeptVM() { Id = module.Id, ModuleName = module.ModuleName };
+        //            moduleInVmLst.Add(moduleInVm);
+        //        }
+        //        return moduleInVmLst.ToJson();
+        //    }
+        //    return moduleInVmLst.ToJson();
+        //}
     }
 }

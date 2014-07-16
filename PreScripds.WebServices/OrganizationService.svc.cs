@@ -99,5 +99,11 @@ namespace PreScripds.WebServices
             var module = _organizationBl.GetModuleById(moduleId);
             return module;
         }
+
+        public List<Module> GetAllModule(long departmentId)
+        {
+            var modules = _organizationBl.GetAllModule(departmentId);
+            return modules;
+        }
     }
 }
