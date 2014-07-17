@@ -96,5 +96,10 @@ namespace PreScripds.BL
             var modules = _organizationRepository.GetAllModule(departmentId);
             return modules;
         }
+
+        public void AddModuleInDepartment(List<ModuleInDepartment> moduleInDepartment)
+        {
+            _organizationRepository.AddModuleInDepartment(moduleInDepartment);
+        }
     }
 }

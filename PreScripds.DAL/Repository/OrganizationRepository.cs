@@ -175,5 +175,20 @@ namespace PreScripds.DAL.Repository
                 return moduleList;
             }
         }
+
+        public void AddModuleInDepartment(List<ModuleInDepartment> moduleInDepartment)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                if (moduleInDepartment.IsCollectionValid())
+                {//TODO:CHECK IF MODULES EXISTS
+                    moduleInDepartment.Each(x =>
+                    {
+                        uow.GetRepository<ModuleInDepartment>().Insert(x);
+                    });
+                    uow.SaveChanges();
+                }
+            }
+        }
     }
 }

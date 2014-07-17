@@ -59,30 +59,29 @@
 @section Scripts {
 
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function (departmentId) {
+            var getModules = function () {
+                ajaxPost('/Dashboard/GetModules', { departmentId: departmentId }, function (res) {
+                    if (res.length > 0) {
+                        for (i = 0 ; i < res.length; i++) {
+                            $('#Modules').append('<option value="' + res[i].Id + '">' + res[i].ModuleName + '</option>');
+                        }
+
+                    }
+                    else {
+                        $('#userNameExists').html('<p> Please contact us for module implementation.</p>');
+                    }
+                });
+            }
+
             var departmentId = $('#DepartmentId').val();
             //  alert(departmentId);
             if (departmentId != 0) {
+                getModules(departmentId);
                 $('#DepartmentId').on('change', function () {
                     //TODO: ajax call to get list of modules for this dept.
                     departmentId = $(this).val();
-                    alert(departmentId);
-                    ajaxPost('/Dashboard/GetModules', { departmentId: departmentId }, function (res) {
-                        //alert(res);
-                        if (res.length > 0) {
-                            //alert(res.length);
-                            for (i = 0 ; i < res.length; i++) {
-                                $('#Modules').append('<option value="' + res[i].Id + '">' + res[i].ModuleName + '</option>');
-
-                            }
-                            //$.each(res, function (index, value) {
-                            //    $('#Modules').append($('<option>').text(value).val(index));
-                            //});
-                        }
-                        else {
-                            $('#userNameExists').html('<p> Please contact us for module implementation.</p>');
-                        }
-                    });
+                    getModules(departmentId);
                 });
             }
 

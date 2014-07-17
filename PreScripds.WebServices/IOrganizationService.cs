@@ -60,5 +60,8 @@ namespace PreScripds.WebServices
         [OperationContract]
         [WebInvoke(UriTemplate = "/GetAllModule", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
         List<Module> GetAllModule(long departmentId);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/AddModuleInDepartment", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        void AddModuleInDepartment(List<ModuleInDepartment> moduleInDepartment);
     }
 }

@@ -141,7 +141,6 @@ namespace PreScripds.UI.Controllers
         [HttpGet]
         public ActionResult ModuleInDepartment()
         {
-            //TODO: Get department based on org.
             var moduleInDept = new ModuleInDepartmentViewModel();
             var deptInOrg = _wcfService.InvokeService<IOrganizationService, List<Department>>((svc) => svc.GetDepartmentInOrg(SessionContext.CurrentUser.OrganizationId.Value));
             moduleInDept.Department = deptInOrg;
@@ -155,7 +154,39 @@ namespace PreScripds.UI.Controllers
         {
             if (buttonType == "Add")
                 return RedirectToAction("AddModule", "Dashboard");
-            return View();
+            ValidateModuleInDepartmentVM(moduleInDeptViewModel);
+            if (ModelState.IsValid)
+            {
+                var modInDeptLst = new List<ModuleInDepartment>();
+                var modulesInDept = _wcfService.InvokeService<IOrganizationService, List<ModuleInDepartment>>((svc) => svc.GetModuleInDepartment(moduleInDeptViewModel.DepartmentId));
+                if (modulesInDept.IsCollectionValid())
+                {
+                    var mappedVM = Mapper.Map<List<ModuleInDepartment>, List<ModuleInDepartmentViewModel>>(modulesInDept);
+                    //TODO:Check if modules already exist.
+                    var res = mappedVM.Contains(moduleInDeptViewModel);
+                }
+                foreach (var mod in moduleInDeptViewModel.Modules)
+                {
+                    var modInDept = new ModuleInDepartment()
+                    {
+                        DepartmentId = moduleInDeptViewModel.DepartmentId,
+                        ModuleId = mod.As<long>(),
+                        Active = true
+                    };
+                    modInDeptLst.Add(modInDept);
+                }
+                _wcfService.InvokeService<IOrganizationService>((svc) => svc.AddModuleInDepartment(modInDeptLst));
+            }
+            return View(moduleInDeptViewModel);
+        }
+
+        private void ValidateModuleInDepartmentVM(ModuleInDepartmentViewModel moduleInDeptViewModel)
+        {
+            if (moduleInDeptViewModel.DepartmentId == 0)
+                ModelState.AddModelError("DepartmentId", "Please slect a Department.");
+            if (!moduleInDeptViewModel.Modules.IsCollectionValid())
+                ModelState.AddModelError("Modules", "Please select a Module.");
+
         }
 
         [PreScripds.UI.Common.Authorize]

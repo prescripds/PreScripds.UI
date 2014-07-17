@@ -105,5 +105,10 @@ namespace PreScripds.WebServices
             var modules = _organizationBl.GetAllModule(departmentId);
             return modules;
         }
+
+        public void AddModuleInDepartment(List<ModuleInDepartment> moduleInDepartment)
+        {
+            _organizationBl.AddModuleInDepartment(moduleInDepartment);
+        }
     }
 }
