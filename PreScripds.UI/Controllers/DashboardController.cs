@@ -158,13 +158,7 @@ namespace PreScripds.UI.Controllers
             if (ModelState.IsValid)
             {
                 var modInDeptLst = new List<ModuleInDepartment>();
-                var modulesInDept = _wcfService.InvokeService<IOrganizationService, List<ModuleInDepartment>>((svc) => svc.GetModuleInDepartment(moduleInDeptViewModel.DepartmentId));
-                if (modulesInDept.IsCollectionValid())
-                {
-                    var mappedVM = Mapper.Map<List<ModuleInDepartment>, List<ModuleInDepartmentViewModel>>(modulesInDept);
-                    //TODO:Check if modules already exist.
-                    var res = mappedVM.Contains(moduleInDeptViewModel);
-                }
+
                 foreach (var mod in moduleInDeptViewModel.Modules)
                 {
                     var modInDept = new ModuleInDepartment()

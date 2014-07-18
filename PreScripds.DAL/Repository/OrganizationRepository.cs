@@ -166,12 +166,16 @@ namespace PreScripds.DAL.Repository
                 if (departmentId != 0)
                 {
                     moduleList = uow.GetRepository<Module>().Items.Where(x => x.DepartmentId == departmentId).ToList();
+                    if (!moduleList.IsCollectionValid())
+                    {
+                        var modules = uow.GetRepository<Module>().Items.Where(x => x.DepartmentId == null).ToList();
+                        foreach (var mod in modules)
+                        {
+                            moduleList.Add(mod);
+                        }
+                    }
                 }
-                var modules = uow.GetRepository<Module>().Items.Where(x => x.DepartmentId == null).ToList();
-                foreach (var mod in modules)
-                {
-                    moduleList.Add(mod);
-                }
+
                 return moduleList;
             }
         }
@@ -181,10 +185,12 @@ namespace PreScripds.DAL.Repository
             using (var uow = new UnitOfWork())
             {
                 if (moduleInDepartment.IsCollectionValid())
-                {//TODO:CHECK IF MODULES EXISTS
+                {
                     moduleInDepartment.Each(x =>
                     {
-                        uow.GetRepository<ModuleInDepartment>().Insert(x);
+                        var moduleInDept = uow.GetRepository<ModuleInDepartment>().Items.Where(y => y.ModuleId == x.ModuleId).ToList();
+                        if (!moduleInDept.IsCollectionValid())
+                            uow.GetRepository<ModuleInDepartment>().Insert(x);
                     });
                     uow.SaveChanges();
                 }
