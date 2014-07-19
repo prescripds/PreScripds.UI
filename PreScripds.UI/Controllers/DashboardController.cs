@@ -170,6 +170,8 @@ namespace PreScripds.UI.Controllers
                     modInDeptLst.Add(modInDept);
                 }
                 _wcfService.InvokeService<IOrganizationService>((svc) => svc.AddModuleInDepartment(modInDeptLst));
+                moduleInDeptViewModel.Message = "Thank you for choosing the modules.";
+                moduleInDeptViewModel.CreationSuccessful = true;
             }
             return View(moduleInDeptViewModel);
         }

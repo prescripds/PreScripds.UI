@@ -14,6 +14,8 @@ namespace PreScripds.UI.Models
         public List<ModuleInDeptVM> ModuleVm { get; set; }
         public IEnumerable<string> Modules { get; set; }
         public bool IsActive { get; set; }
+        public bool CreationSuccessful { get; set; }
+        public string Message { get; set; }
     }
 
     public class ModuleInDeptVM

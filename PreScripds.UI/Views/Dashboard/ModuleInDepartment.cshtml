@@ -52,7 +52,7 @@
                     }*@
             </div>
         </div>
-        @*@Html.MessageDialogRedirect(Model.Message, "AddPermission", "Dashboard", true)*@
+        @Html.MessageDialogRedirect(Model.Message, "AddPermission", "Dashboard", true)
     }
 
 </div>
@@ -87,7 +87,7 @@
                 });
             }
 
-            @*@Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))*@
+            @Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))
         });
 
     </script>
