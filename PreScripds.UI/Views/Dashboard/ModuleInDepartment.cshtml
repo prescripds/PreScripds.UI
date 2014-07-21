@@ -59,12 +59,11 @@
 @section Scripts {
 
     <script type="text/javascript">
-        $(document).ready(function (departmentId) {
-            var getModules = function () {
+        $(document).ready(function () {
+            var getModules = function (departmentId) {
                 ajaxPost('/Dashboard/GetModules', { departmentId: departmentId }, function (res) {
                     if (res.length > 0) {
                         for (i = 0 ; i < res.length; i++) {
-                            //$('#Modules').empty();
                             $('#Modules').append('<option value="' + res[i].Id + '">' + res[i].ModuleName + '</option>');
                         }
 
@@ -76,11 +75,9 @@
             }
 
             var departmentId = $('#DepartmentId').val();
-            //  alert(departmentId);
             if (departmentId != 0) {
                 getModules(departmentId);
                 $('#DepartmentId').on('change', function () {
-                    //TODO: ajax call to get list of modules for this dept.
                     $('#Modules').empty();
                     departmentId = $(this).val();
                     getModules(departmentId);
