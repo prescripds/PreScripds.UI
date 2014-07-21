@@ -35,6 +35,18 @@ namespace PreScripds.DAL
             context.Modules.Add(module);
             context.Modules.Add(module1);
             context.SaveChanges();
+
+            //var permissionLst = new List<Permission>()
+            //{
+            //    new Permission() { PermissionName="CanCreate", Active = true},
+            //    new Permission() { PermissionName = "CanAdd", Active = true },
+            //    new Permission() { PermissionName = "CanEdit", Active = true },
+            //    new Permission() { PermissionName = "CanDelete", Active = true },
+            //    new Permission() { PermissionName = "CanView", Active = true },
+            //    new Permission() { PermissionName = "CanExport", Active = true },
+            //};
+            //context.Permissions.Add(permissionLst.ForEach(x));
+            //context.SaveChanges();
             //TODO:Seed data should by default have a suoer admin from PreScripds to approve the org user/super admin
 
         }

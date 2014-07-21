@@ -571,7 +571,6 @@ namespace PreScripds.UI.Controllers
             return false;
         }
 
-
         public JsonResult GetModules(long departmentId)
         {
             var modules = _wcfService.InvokeService<IOrganizationService, List<Module>>((svc) => svc.GetAllModule(departmentId));
@@ -587,5 +586,14 @@ namespace PreScripds.UI.Controllers
             }
             return Json(moduleInVmLst, JsonRequestBehavior.AllowGet);
         }
+
+        [PreScripds.UI.Common.Authorize]
+        [HttpGet]
+        public ActionResult AddPermission()
+        {
+            var permissionViewModel = new PermissionSetViewModel();
+            return View(permissionViewModel);
+        }
+
     }
 }

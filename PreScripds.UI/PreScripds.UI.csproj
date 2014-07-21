@@ -218,7 +218,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\OrganizationViewModel.cs" />
-    <Compile Include="Models\PermissionViewModel.cs" />
+    <Compile Include="Models\PermissionSetViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\SiteSession.cs" />
