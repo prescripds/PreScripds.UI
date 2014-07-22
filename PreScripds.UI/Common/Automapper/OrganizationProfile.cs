@@ -53,6 +53,8 @@ namespace PreScripds.UI.Common.Automapper
                 .IgnoreAllNonExisting();
 
             Mapper.CreateMap<DepartmentInOrganization, DepartmentInOrganizationViewModel>().IgnoreAllNonExisting();
+            Mapper.CreateMap<PermissionSet, PermissionSetViewModel>().IgnoreAllNonExisting();
+            Mapper.CreateMap<PermissionSetViewModel, PermissionSet>().IgnoreAllNonExisting();
         }
     }
 }

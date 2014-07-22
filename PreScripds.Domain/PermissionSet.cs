@@ -15,6 +15,16 @@ namespace PreScripds.Domain
         [DataMember]
         public string PermissionSetName { get; set; }
         [DataMember]
+        public string PermissionSetDescription { get; set; }
+        [DataMember]
+        public long? DepartmentId { get; set; }
+        [DataMember]
+        public long? ModuleId { get; set; }
+        [DataMember]
+        public bool? Active { get; set; }
+        [DataMember]
+        public virtual Department Department { get; set; }
+        [DataMember]
         public virtual ICollection<PermissionInSet> PermissionInSets { get; set; }
     }
 }

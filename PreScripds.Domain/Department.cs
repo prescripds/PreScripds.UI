@@ -33,6 +33,8 @@ namespace PreScripds.Domain
         public DateTime UpdatedDate { get; set; }
         [DataMember]
         public virtual ICollection<Module> Modules { get; set; }
+        [DataMember]
+        public virtual ICollection<PermissionSet> PermissionSets { get; set; }
 
     }
 }

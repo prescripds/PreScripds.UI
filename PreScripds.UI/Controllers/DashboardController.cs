@@ -591,9 +591,53 @@ namespace PreScripds.UI.Controllers
         [HttpGet]
         public ActionResult AddPermission()
         {
-            var permissionViewModel = new PermissionSetViewModel();
+            var permissionViewModel = new PermissionSetViewModel() { Department = new List<Department>(), Permission = new List<Permission>(), Module = new List<Module>() };
+            var department = _wcfService.InvokeService<IOrganizationService, List<DepartmentInOrganization>>((svc) => svc.GetDepartmentInOrganization(SessionContext.CurrentUser.OrganizationId.Value));
+            if (department.IsCollectionValid())
+            {
+                foreach (var dept in department)
+                {
+                    var departmentInOrg = _wcfService.InvokeService<IOrganizationService, Department>((svc) => svc.GetDepartmentById(dept.DepartmentId.Value));
+                    permissionViewModel.Department.Add(departmentInOrg);
+                }
+            }
+            var permission = _wcfService.InvokeService<IMasterService, List<Permission>>((svc) => svc.GetPermission());
+            if (permission.IsCollectionValid())
+                permissionViewModel.Permission = permission;
             return View(permissionViewModel);
         }
 
+        [PreScripds.UI.Common.Authorize]
+        [HttpPost]
+        public ActionResult AddPermission(PermissionSetViewModel permissionViewModel, string buttonType)
+        {
+            if (buttonType == "Next")
+                return RedirectToAction("RoleInPermission", "Dashboard");
+            ValidatePermissionSetViewModel(permissionViewModel);
+            if (ModelState.IsValid)
+            {
+
+            }
+            return View(permissionViewModel);
+        }
+
+        private void ValidatePermissionSetViewModel(PermissionSetViewModel permissionViewModel)
+        {
+            if (permissionViewModel.PermissionName.Trim().IsEmpty() || permissionViewModel.PermissionName.Trim().IsNull())
+                ModelState.AddModelError("PermissionName", "Permission Name is mandatory.");
+            if (permissionViewModel.DepartmentId == 0)
+                ModelState.AddModelError("DepartmentId", "Please select a Department.");
+            if (permissionViewModel.ModuleId == 0)
+                ModelState.AddModelError("ModuleId", "Please select a Module.");
+            if (!permissionViewModel.PermissionSelected.IsCollectionValid())
+                ModelState.AddModelError("PermissionSelected", "Please select a Permission.");
+        }
+
+        [PreScripds.UI.Common.Authorize]
+        [HttpGet]
+        public ActionResult RoleInPermission()
+        {
+            return View();
+        }
     }
 }
