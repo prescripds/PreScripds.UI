@@ -616,7 +616,8 @@ namespace PreScripds.UI.Controllers
             ValidatePermissionSetViewModel(permissionViewModel);
             if (ModelState.IsValid)
             {
-
+                var mappedPermissionSetModel = Mapper.Map<PermissionSetViewModel, PermissionSet>(permissionViewModel);
+                //  _wcfService.InvokeService<IOrganizationService>((svc) => svc.AddPermission(mappedPermissionSetModel));
             }
             return View(permissionViewModel);
         }

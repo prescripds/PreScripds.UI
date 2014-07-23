@@ -63,5 +63,8 @@ namespace PreScripds.WebServices
         [OperationContract]
         [WebInvoke(UriTemplate = "/AddModuleInDepartment", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
         void AddModuleInDepartment(List<ModuleInDepartment> moduleInDepartment);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/AddPermission", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        void AddPermission(PermissionSet permissionSet);
     }
 }

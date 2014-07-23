@@ -110,5 +110,10 @@ namespace PreScripds.WebServices
         {
             _organizationBl.AddModuleInDepartment(moduleInDepartment);
         }
+
+        public void AddPermission(PermissionSet permissionSet)
+        {
+            _organizationBl.AddPermission(permissionSet);
+        }
     }
 }

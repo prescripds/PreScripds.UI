@@ -101,5 +101,10 @@ namespace PreScripds.BL
         {
             _organizationRepository.AddModuleInDepartment(moduleInDepartment);
         }
+
+        public void AddPermission(PermissionSet permissionSet)
+        {
+            _organizationRepository.AddPermission(permissionSet);
+        }
     }
 }

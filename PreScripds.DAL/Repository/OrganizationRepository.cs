@@ -196,5 +196,20 @@ namespace PreScripds.DAL.Repository
                 }
             }
         }
+        public void AddPermission(PermissionSet permissionSet)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                if (permissionSet.PermissionInSets.IsCollectionValid())
+                {
+                    foreach (var permissionInSet in permissionSet.PermissionInSets)
+                    {
+                        uow.GetRepository<PermissionInSet>().Items.ToList().Add(permissionInSet);
+                    }
+                }
+                uow.GetRepository<PermissionSet>().Insert(permissionSet);
+                uow.SaveChanges();
+            }
+        }
     }
 }
