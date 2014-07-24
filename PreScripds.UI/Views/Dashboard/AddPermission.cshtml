@@ -1,125 +1,127 @@
 ﻿@model PreScripds.UI.Models.PermissionSetViewModel
-@{
+@using PreScripds.UI.Common;
+@using PreScripds.Infrastructure;
+    @{
     ViewBag.Title = "Permission";
     Layout = "~/Views/Shared/_OpenLayout.cshtml";
-}
-
-<div class="col-md-12 blackBg">
-    @using (Html.BeginForm("AddPermission", "Dashboard", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-    {
-        @Html.AntiForgeryToken()
-
-        @Html.ValidationSummary()<br />
-        <h3><span style="color:white;">Permission</span><hr /> </h3>
-        <div class="row">
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="RoleName">PermissionSet Name</label>
-                    @Html.TextBoxFor(m => m.PermissionName, new { @class = "form-control" })
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="RoleDesc">PermissionSet Description</label>
-                    @Html.TextAreaFor(m => m.PermissionDesc, new { @class = "form-control" })
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="RoleName">Department</label>
-                    @Html.DropDownListFor(x => Model.DepartmentId, Model.Department.ToSelectListItems(model => model.Id.ToString(), model => model.DepartmentName), new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="RoleName">Module</label>
-                    @Html.DropDownListFor(x => Model.ModuleId, Model.Module.ToSelectListItems(model => model.Id.ToString(), model => model.ModuleName), new { @class = "form-control" })
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="RoleName">Permission</label>
-                    @Html.ListBoxFor(x => x.PermissionSelected, Model.Permission.ToSelectListItems(model => model.Id.ToString(), model => model.PermissionName), new { @class = "form-control" })
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 buttons">
-                <button type="submit" class="btn btn-warning pull-right" value="Save">Save</button>
-
-                <button type="reset" class="btn btn-warning pull-right" value="Clear">Clear</button>
-
-                @if (Model.PermissionSetViewModels.IsCollectionValid())
-                {
-                    <button type="submit" name="buttonType" class="btn btn-warning pull-right" value="Next">Next</button>
-                }
-            </div>
-        </div>
-        @*@Html.MessageDialogRedirect(Model.Message, "AddRole", "Dashboard", true)*@
     }
-    @if (Model.PermissionSetViewModels.IsCollectionValid())
+
+    <div class="col-md-12 blackBg">
+        @using (Html.BeginForm("AddPermission", "Dashboard", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th> PermissionSet Name</th>
-                        <th> PermissionSet Description</th>
-                        <th> Department</th>
-                        <th> Module</th>
-                        <th> Permission</th>
-                        <th> Active</th>
-                    </tr>
-                </thead>
-                @for (int i = 0; i < Model.PermissionSetViewModels.Count; i++)
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary()<br />
+            <h3><span style="color:white;">Permission</span><hr /> </h3>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="RoleName">PermissionSet Name</label>
+                        @Html.TextBoxFor(m => m.PermissionSetName, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="RoleDesc">PermissionSet Description</label>
+                        @Html.TextAreaFor(m => m.PermissionSetDescription, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="RoleName">Department</label>
+                        @Html.DropDownListFor(x => Model.DepartmentId, Model.Department.ToSelectListItems(model => model.Id.ToString(), model => model.DepartmentName), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="RoleName">Module</label>
+                        @Html.DropDownListFor(x => Model.ModuleId, Model.Module.ToSelectListItems(model => model.Id.ToString(), model => model.ModuleName), new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="RoleName">Permission</label>
+                        @Html.ListBoxFor(x => x.PermissionSelected, Model.Permission.ToSelectListItems(model => model.Id.ToString(), model => model.PermissionName), new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 buttons">
+                    <button type="submit" class="btn btn-warning pull-right" value="Save">Save</button>
+
+                    <button type="reset" class="btn btn-warning pull-right" value="Clear">Clear</button>
+
+                    @if (Model.PermissionSetViewModels.IsCollectionValid())
                 {
-                    <tbody>
+                        <button type="submit" name="buttonType" class="btn btn-warning pull-right" value="Next">Next</button>
+                }
+                </div>
+            </div>
+            @*@Html.MessageDialogRedirect(Model.Message, "AddRole", "Dashboard", true)*@
+    }
+        @if (Model.PermissionSetViewModels.IsCollectionValid())
+    {
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
                         <tr>
-                            <td>
-                                <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].PermissionSetId">
-                                    @Html.TextBoxFor(m => m.PermissionSetViewModels[i].PermissionSetId)
-                                </div>
-                            </td>
-                            <td>
-                                <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].PermissionSetName">
-                                    @Html.TextBoxFor(m => m.PermissionSetViewModels[i].PermissionSetName)
-                                </div>
-                            </td>
-                            <td>
-                                <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].PermissionSetDescription">
-                                    @Html.TextBoxFor(m => m.PermissionSetViewModels[i].PermissionSetDescription)
-                                </div>
-                            </td>
-                            <td>
-                                <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].DepartmentName">
-                                    @Html.TextBoxFor(m => m.PermissionSetViewModels[i].DepartmentName)
-                                </div>
-                            </td>
-                            <td>
-                                <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].ModuleName">
-                                    @Html.TextBoxFor(m => m.PermissionSetViewModels[i].ModuleName)
-                                </div>
-                            </td>
-                            <td>
-                                <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].PermissionName">
-                                    @Html.TextBoxFor(m => m.PermissionSetViewModels[i].PermissionName)
-                                </div>
-                            </td>
-                            <td>
-                                @Html.CheckBoxFor(m => m.PermissionSetViewModels[i].IsActive, new { data_id = Model.PermissionSetViewModels[i].PermissionSetId })
-                            </td>
+                            <th>Id</th>
+                            <th> PermissionSet Name</th>
+                            <th> PermissionSet Description</th>
+                            <th> Department</th>
+                            <th> Module</th>
+                            <th> Permission</th>
+                            <th> Active</th>
                         </tr>
-                    </tbody>
+                    </thead>
+                    @for (int i = 0; i < Model.PermissionSetViewModels.Count; i++)
+                {
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].PermissionSetId">
+                                        @Html.TextBoxFor(m => m.PermissionSetViewModels[i].PermissionSetId)
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].PermissionSetName">
+                                        @Html.TextBoxFor(m => m.PermissionSetViewModels[i].PermissionSetName)
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].PermissionSetDescription">
+                                        @Html.TextBoxFor(m => m.PermissionSetViewModels[i].PermissionSetDescription)
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].DepartmentName">
+                                        @Html.TextBoxFor(m => m.PermissionSetViewModels[i].DepartmentName)
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].ModuleName">
+                                        @Html.TextBoxFor(m => m.PermissionSetViewModels[i].ModuleName)
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].PermissionName">
+                                        @Html.TextBoxFor(m => m.PermissionSetViewModels[i].PermissionName)
+                                    </div>
+                                </td>
+                                <td>
+                                    @Html.CheckBoxFor(m => m.PermissionSetViewModels[i].IsActive, new { data_id = Model.PermissionSetViewModels[i].PermissionSetId })
+                                </td>
+                            </tr>
+                        </tbody>
                 }
-            </table>
-        </div>
+                </table>
+            </div>
     }
 
-</div>
+    </div>

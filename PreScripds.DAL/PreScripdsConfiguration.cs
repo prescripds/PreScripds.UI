@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.Entity;
+using PreScripds.Infrastructure;
 
 namespace PreScripds.DAL
 {
@@ -13,7 +15,10 @@ namespace PreScripds.DAL
         public PreScripdsConfiguration()
         {
             //SetExecutionStrategy("MySql.Data.MySqlClient", () => new MySqlExecutionStrategy());
-            SetDatabaseInitializer(new PreScripdsDbIntializer());
+            if (ConfigurationManager.AppSettings["CreateDbIfNotExists"].AsBool(false))
+            {
+                SetDatabaseInitializer(new PreScripdsDbIntializer());
+            }
         }
 
     }

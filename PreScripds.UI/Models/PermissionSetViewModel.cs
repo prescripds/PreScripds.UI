@@ -15,8 +15,8 @@ namespace PreScripds.UI.Models
         public IEnumerable<string> PermissionSelected { get; set; }
         public List<Department> Department { get; set; }
         public List<Module> Module { get; set; }
-        public long DepartmentId { get; set; }
-        public long ModuleId { get; set; }
+        public long? DepartmentId { get; set; }
+        public long? ModuleId { get; set; }
         public string ModuleName { get; set; }
         public string DepartmentName { get; set; }
         public string PermissionName { get; set; }

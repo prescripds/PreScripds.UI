@@ -624,7 +624,7 @@ namespace PreScripds.UI.Controllers
 
         private void ValidatePermissionSetViewModel(PermissionSetViewModel permissionViewModel)
         {
-            if (permissionViewModel.PermissionName.Trim().IsEmpty() || permissionViewModel.PermissionName.Trim().IsNull())
+            if (permissionViewModel.PermissionSetName.Trim().IsEmpty() || permissionViewModel.PermissionSetName.Trim().IsNull())
                 ModelState.AddModelError("PermissionName", "Permission Name is mandatory.");
             if (permissionViewModel.DepartmentId == 0)
                 ModelState.AddModelError("DepartmentId", "Please select a Department.");
