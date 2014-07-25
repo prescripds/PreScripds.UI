@@ -616,10 +616,17 @@ namespace PreScripds.UI.Controllers
             ValidatePermissionSetViewModel(permissionViewModel);
             if (ModelState.IsValid)
             {
+                permissionViewModel.IsActive = true;
                 var mappedPermissionSetModel = Mapper.Map<PermissionSetViewModel, PermissionSet>(permissionViewModel);
-                //  _wcfService.InvokeService<IOrganizationService>((svc) => svc.AddPermission(mappedPermissionSetModel));
+                var permInSets = _wcfService.InvokeService<IOrganizationService, List<PermissionSet>>((svc) =>
+                    svc.GetAllPermissionSet(SessionContext.CurrentUser.OrganizationId.Value));
+
+                //_wcfService.InvokeService<IOrganizationService>((svc) => svc.AddPermission(mappedPermissionSetModel));
+                //TODO:Fetch all permissionSet and permissionInSet from Db and populate to list
+                permissionViewModel.CreationSuccessful = true;
+                permissionViewModel.Message = "The permission set '{0}' is saved successfully.".ToFormat(permissionViewModel.PermissionSetName);
             }
-            return View(permissionViewModel);
+            return View();
         }
 
         private void ValidatePermissionSetViewModel(PermissionSetViewModel permissionViewModel)

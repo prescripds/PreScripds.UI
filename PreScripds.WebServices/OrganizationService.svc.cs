@@ -115,5 +115,11 @@ namespace PreScripds.WebServices
         {
             _organizationBl.AddPermission(permissionSet);
         }
+
+        public List<PermissionSet> GetAllPermissionSet(long organizationId)
+        {
+            var permInSets = _organizationBl.GetAllPermissionSet(organizationId);
+            return permInSets;
+        }
     }
 }

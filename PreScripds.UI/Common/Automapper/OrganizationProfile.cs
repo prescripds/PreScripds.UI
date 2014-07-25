@@ -54,12 +54,25 @@ namespace PreScripds.UI.Common.Automapper
 
             Mapper.CreateMap<DepartmentInOrganization, DepartmentInOrganizationViewModel>().IgnoreAllNonExisting();
             Mapper.CreateMap<PermissionSet, PermissionSetViewModel>()
-                .ForMember(d => d.Department,s=>s.Ignore())
+                .ForMember(d => d.Department, s => s.Ignore())
                 .ForMember(d => d.PermissionSetViewModels, s => s.Ignore())
                 .IgnoreAllNonExisting();
             Mapper.CreateMap<PermissionSetViewModel, PermissionSet>()
                 .ForMember(d => d.PermissionInSets, s => s.Ignore())
-                .ForMember(d=>d.Department,s=>s.Ignore())
+                .ForMember(d => d.Department, s => s.Ignore())
+                .ForMember(d => d.Active, s => s.MapFrom(p => p.IsActive))
+                .AfterMap((s, d) =>
+                {
+                    List<PermissionInSet> permInSets = new List<PermissionInSet>();
+
+                    s.PermissionSelected.ToList().ForEach(x =>
+                    {
+                        var permInSet = new PermissionInSet();
+                        permInSet.PermissionId = x.As<long>();
+                        permInSets.Add(permInSet);
+                    });
+                    d.PermissionInSets = permInSets;
+                })
                 .IgnoreAllNonExisting();
         }
     }

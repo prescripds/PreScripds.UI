@@ -22,6 +22,8 @@ namespace PreScripds.UI.Models
         public string PermissionName { get; set; }
         public bool IsActive { get; set; }
         public List<PermissionSetViewModel> PermissionSetViewModels { get; set; }
+        public bool CreationSuccessful { get; set; }
+        public string Message { get; set; }
 
     }
 }

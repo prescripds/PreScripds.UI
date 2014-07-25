@@ -211,5 +211,23 @@ namespace PreScripds.DAL.Repository
                 uow.SaveChanges();
             }
         }
+
+        public List<PermissionSet> GetAllPermissionSet(long organizationId)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var depts = uow.GetRepository<DepartmentInOrganization>().Items.Where(x => x.OrganizationId == organizationId).ToList();
+                List<PermissionSet> permissionSets = new List<PermissionSet>();
+                if (depts.IsCollectionValid())
+                {
+                    depts.ForEach(x =>
+                    {
+                        var permSets = uow.GetRepository<PermissionSet>().Items.Include(s => s.PermissionInSets).FirstOrDefault(y => y.DepartmentId == x.DepartmentId);
+                        permissionSets.Add(permSets);
+                    });
+                }
+                return permissionSets;
+            }
+        }
     }
 }

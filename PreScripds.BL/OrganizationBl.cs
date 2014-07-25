@@ -106,5 +106,11 @@ namespace PreScripds.BL
         {
             _organizationRepository.AddPermission(permissionSet);
         }
+
+        public List<PermissionSet> GetAllPermissionSet(long organizationId)
+        {
+            var permInSets = _organizationRepository.GetAllPermissionSet(organizationId);
+            return permInSets;
+        }
     }
 }
