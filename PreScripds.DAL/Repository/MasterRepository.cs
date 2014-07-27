@@ -35,6 +35,25 @@ namespace PreScripds.DAL.Repository
         }
 
         #endregion
+
+        #region Module Cache
+        public ICollection<Module> GetModule()
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var modules = CacheService.Get<ICollection<Module>>(Constants.CacheKeys.MODULE);
+                if (modules == null)
+                {
+                    var newModules = uow.GetRepository<Module>().Items.ToList();
+                    CacheService.Set(Constants.CacheKeys.MODULE, newModules);
+                    return newModules;
+                }
+                return modules;
+            }
+        }
+
+        #endregion
+
         #region Permission Cache
         public ICollection<Permission> GetPermission()
         {

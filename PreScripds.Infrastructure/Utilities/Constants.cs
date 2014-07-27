@@ -10,15 +10,10 @@ namespace PreScripds.Infrastructure
     public static class Constants
     {
         public static string SiteSession = "SiteSession"; // Session Key
-        public static string CurrentPubID = "CurrentPubID"; // Selected Pub Id
         public const string ERRORFILE = "ErrorFile";
         public const string TEMP_FILE_REPOSITORY_PATH = "~/Assets/ImageUpload"; //Temporary file uplaod path
 
-        public static class SessionKeys
-        {
-            public const string PUB_CAMPAIGNS = "PubCampaigns";
-            public const string TEMP_FILE_PATHS = "TempFiles";
-        }
+       
 
         public const string UserPubs = "UserPubs";
         public static class CacheKeys
@@ -28,7 +23,7 @@ namespace PreScripds.Infrastructure
             public static string COUNTRY = "Country";
             public static string STATE = "State";
             public static string CITY = "City";
-            public static string LOCALE = "Locale";
+            public static string MODULE = "Module";
             public static string CODE_VALUE = "CodeValue";
             public static string SECURITY_QUESTION = "SecurityQuestions";
             public static string PUB_MEMBERSHIP = "PubMembership";

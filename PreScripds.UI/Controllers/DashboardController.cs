@@ -601,9 +601,32 @@ namespace PreScripds.UI.Controllers
                     permissionViewModel.Department.Add(departmentInOrg);
                 }
             }
+            var module = _wcfService.InvokeService<IMasterService, List<Module>>((svc) => svc.GetModule());
             var permission = _wcfService.InvokeService<IMasterService, List<Permission>>((svc) => svc.GetPermission());
             if (permission.IsCollectionValid())
                 permissionViewModel.Permission = permission;
+            var permInSets = _wcfService.InvokeService<IOrganizationService, List<PermissionSet>>((svc) =>
+                   svc.GetAllPermissionSet(SessionContext.CurrentUser.OrganizationId.Value));
+            if (permInSets.IsCollectionValid())
+            {
+                foreach (var perSet in permInSets)
+                {
+                    var departmentName = permissionViewModel.Department.FirstOrDefault(x => x.Id == perSet.DepartmentId.Value).DepartmentName;
+                    var moduleName = permissionViewModel.Module.FirstOrDefault(x => x.Id == perSet.ModuleId.Value).ModuleName;
+                    List<long> permIds = new List<long>();
+                    List<string> perNames = new List<string>();
+                    foreach (var permId in perSet.PermissionInSets)
+                    {
+                        permIds.Add(permId.PermissionId.Value);
+                        foreach (var id in permIds)
+                        {
+                            var permissionName = permission.FirstOrDefault(x => x.Id == id).PermissionName;
+                            perNames.Add(permissionName);
+                        }
+                        permissionViewModel.PermissionName = string.Join(",", perNames.ToArray());
+                    }
+                }
+            }
             return View(permissionViewModel);
         }
 
@@ -618,8 +641,6 @@ namespace PreScripds.UI.Controllers
             {
                 permissionViewModel.IsActive = true;
                 var mappedPermissionSetModel = Mapper.Map<PermissionSetViewModel, PermissionSet>(permissionViewModel);
-                var permInSets = _wcfService.InvokeService<IOrganizationService, List<PermissionSet>>((svc) =>
-                    svc.GetAllPermissionSet(SessionContext.CurrentUser.OrganizationId.Value));
 
                 //_wcfService.InvokeService<IOrganizationService>((svc) => svc.AddPermission(mappedPermissionSetModel));
                 //TODO:Fetch all permissionSet and permissionInSet from Db and populate to list

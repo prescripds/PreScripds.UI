@@ -223,7 +223,8 @@ namespace PreScripds.DAL.Repository
                     depts.ForEach(x =>
                     {
                         var permSets = uow.GetRepository<PermissionSet>().Items.Include(s => s.PermissionInSets).FirstOrDefault(y => y.DepartmentId == x.DepartmentId);
-                        permissionSets.Add(permSets);
+                        if (permSets.IsNotNull())
+                            permissionSets.Add(permSets);
                     });
                 }
                 return permissionSets;
