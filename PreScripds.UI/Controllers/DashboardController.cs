@@ -617,7 +617,7 @@ namespace PreScripds.UI.Controllers
                     List<string> perNames = new List<string>();
                     foreach (var permId in perSet.PermissionInSets)
                     {
-                        permIds.Add(permId.PermissionId.Value);                       
+                        permIds.Add(permId.PermissionId.Value);
                     }
                     foreach (var id in permIds)
                     {
@@ -625,6 +625,7 @@ namespace PreScripds.UI.Controllers
                         perNames.Add(permissionName);
                     }
                     permissionViewModel.PermissionName = string.Join(",", perNames.ToArray());
+                    permissionViewModel.PermissionSetViewModels.Add(permissionViewModel);
                 }
             }
             return View(permissionViewModel);
