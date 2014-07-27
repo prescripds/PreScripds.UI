@@ -612,19 +612,19 @@ namespace PreScripds.UI.Controllers
                 foreach (var perSet in permInSets)
                 {
                     var departmentName = permissionViewModel.Department.FirstOrDefault(x => x.Id == perSet.DepartmentId.Value).DepartmentName;
-                    var moduleName = permissionViewModel.Module.FirstOrDefault(x => x.Id == perSet.ModuleId.Value).ModuleName;
+                    var moduleName = module.FirstOrDefault(x => x.Id == perSet.ModuleId.Value).ModuleName;
                     List<long> permIds = new List<long>();
                     List<string> perNames = new List<string>();
                     foreach (var permId in perSet.PermissionInSets)
                     {
-                        permIds.Add(permId.PermissionId.Value);
-                        foreach (var id in permIds)
-                        {
-                            var permissionName = permission.FirstOrDefault(x => x.Id == id).PermissionName;
-                            perNames.Add(permissionName);
-                        }
-                        permissionViewModel.PermissionName = string.Join(",", perNames.ToArray());
+                        permIds.Add(permId.PermissionId.Value);                       
                     }
+                    foreach (var id in permIds)
+                    {
+                        var permissionName = permission.FirstOrDefault(x => x.Id == id).PermissionName;
+                        perNames.Add(permissionName);
+                    }
+                    permissionViewModel.PermissionName = string.Join(",", perNames.ToArray());
                 }
             }
             return View(permissionViewModel);
