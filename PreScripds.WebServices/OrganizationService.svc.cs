@@ -121,5 +121,10 @@ namespace PreScripds.WebServices
             var permInSets = _organizationBl.GetAllPermissionSet(organizationId);
             return permInSets;
         }
+
+        public List<RoleInPermission> GetAllRoleInPermission()
+        {
+            return _organizationBl.GetAllRoleInPermission();
+        }
     }
 }

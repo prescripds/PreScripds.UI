@@ -1,8 +1,63 @@
-﻿
+﻿@model PreScripds.UI.Models.RoleInPermissionViewModel
+@using PreScripds.UI.Common;
+@using PreScripds.Domain;
+@using PreScripds.Infrastructure;
 @{
     ViewBag.Title = "RoleInPermission";
     Layout = "~/Views/Shared/_OpenLayout.cshtml";
 }
 
-<h2>RoleInPermission</h2>
+<div class="col-md-12 blackBg">
+    @using (Html.BeginForm("RoleInPermission", "Dashboard", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary()<br />
+
+        <h3><span style="color:white;">Role-Permission</span><hr /> </h3>
+        <div class="row">
+            <div class="col-md-4 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label" for="RoleName">Role</label>
+                    @Html.DropDownListFor(x => x.RoleId, Model.Roles.ToSelectListItems(model => model.Id.ToString(), model => model.RoleName), new { @class = "form-control" })
+
+
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label" for="RoleName">Permission</label>
+                    <div class="list-group">
+                        @Html.DropDownListFor(x => x.PermissionSetId, Model.PermissionSets.ToSelectListItems(model => model.Id.ToString(), model => model.PermissionSetName), new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 buttons">
+                <button type="submit" class="btn btn-warning pull-right" value="Save">Save</button>
+
+                @if (Model.RoleInPermissionViewModels.IsCollectionValid())
+                {
+                    <button type="submit" name="buttonType" class="btn btn-warning pull-right" value="Next">Next</button>
+                }
+            </div>
+        </div>
+        @*@Html.MessageDialogRedirect(Model.Message, "AddPermission", "Dashboard", true)*@
+    }
+
+</div>
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            @*@Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))*@
+        });
+
+    </script>
+}
+
 

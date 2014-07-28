@@ -112,5 +112,10 @@ namespace PreScripds.BL
             var permInSets = _organizationRepository.GetAllPermissionSet(organizationId);
             return permInSets;
         }
+
+        public List<RoleInPermission> GetAllRoleInPermission()
+        {
+            return _organizationRepository.GetAllRoleInPermission();
+        }
     }
 }

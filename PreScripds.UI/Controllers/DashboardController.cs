@@ -702,6 +702,58 @@ namespace PreScripds.UI.Controllers
         [HttpGet]
         public ActionResult RoleInPermission()
         {
+            var roleInPermissionVM = new RoleInPermissionViewModel()
+            {
+                RoleInPermissionViewModels = new List<RoleInPermissionViewModel>(),
+                Roles = new List<Role>(),
+                PermissionSets = new List<PermissionSet>()
+            };
+            var role = _wcfService.InvokeService<IUserService, List<Role>>((svc) => svc.GetRole(SessionContext.CurrentUser.OrganizationId.Value));
+            var permissionSet = _wcfService.InvokeService<IOrganizationService, List<PermissionSet>>((svc) => svc.GetAllPermissionSet(SessionContext.CurrentUser.OrganizationId.Value));
+            var roleInPermissions = _wcfService.InvokeService<IOrganizationService, List<RoleInPermission>>((svc) => svc.GetAllRoleInPermission());
+            if (roleInPermissions.IsCollectionValid())
+            {
+                var rolPerms = roleInPermissions.Where(x => x.Role.OrganizationId == SessionContext.CurrentUser.OrganizationId.Value).ToList();
+                //roleInPermissionVM.RoleInPermissionViewModels = roleInPermissions;
+            }
+            roleInPermissionVM.PermissionSets = permissionSet;
+            roleInPermissionVM.Roles = role;
+            return View(roleInPermissionVM);
+        }
+
+        [PreScripds.UI.Common.Authorize]
+        [HttpPost]
+        public ActionResult RoleInPermission(RoleInPermissionViewModel roleInPermVm, string buttonType)
+        {
+            if (buttonType == "Next")
+                return RedirectToAction("UserInRole", "Dashboard");
+            ValidateRoleInPermissionVM(roleInPermVm);
+            if (ModelState.IsValid)
+            {
+                //TODO:ADD TO DB
+            }
+            return View(roleInPermVm);
+        }
+
+        private void ValidateRoleInPermissionVM(RoleInPermissionViewModel roleInPermVm)
+        {
+            if (roleInPermVm.RoleId == 0)
+                ModelState.AddModelError("RoleId", "Please select a Role.");
+            if (roleInPermVm.PermissionSetId == 0)
+                ModelState.AddModelError("PermissionSetId", "Please select a Permission.");
+            var roleInPermissionFromDb = _wcfService.InvokeService<IOrganizationService, List<RoleInPermission>>((svc) => svc.GetAllRoleInPermission());
+            if (roleInPermissionFromDb.IsCollectionValid())
+            {
+                var roleInPermExist = roleInPermissionFromDb.Where(x => x.RoleId.Value.Equals(roleInPermVm.RoleId) && x.PermissionId.Value.Equals(roleInPermVm.PermissionSetId)).ToList();
+                if (roleInPermExist.IsCollectionValid())
+                    ModelState.AddModelError("", "Role and Permission already exists.");
+            }
+        }
+
+        [PreScripds.UI.Common.Authorize]
+        [HttpGet]
+        public ActionResult UserInRole()
+        {
             return View();
         }
     }

@@ -69,5 +69,8 @@ namespace PreScripds.WebServices
         [OperationContract]
         [WebInvoke(UriTemplate = "/GetAllPermissionSet", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
         List<PermissionSet> GetAllPermissionSet(long organizationId);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/GetAllRoleInPermission", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        List<RoleInPermission> GetAllRoleInPermission();
     }
 }

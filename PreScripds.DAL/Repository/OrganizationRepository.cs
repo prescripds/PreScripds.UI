@@ -230,5 +230,16 @@ namespace PreScripds.DAL.Repository
                 return permissionSets;
             }
         }
+
+        public List<RoleInPermission> GetAllRoleInPermission()
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var roleInPerm = uow.GetRepository<RoleInPermission>().Items.Include(x => x.Role).ToList();
+                return roleInPerm;
+            }
+        }
+
+        //public 
     }
 }

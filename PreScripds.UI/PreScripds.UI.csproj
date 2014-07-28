@@ -220,6 +220,7 @@
     <Compile Include="Models\OrganizationViewModel.cs" />
     <Compile Include="Models\PermissionSetViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
+    <Compile Include="Models\RoleInPermissionViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\SiteSession.cs" />
     <Compile Include="Models\UserHistoryViewModel.cs" />
@@ -465,6 +466,7 @@
     <Content Include="Views\Dashboard\AddModule.cshtml" />
     <Content Include="Views\Dashboard\AddDepartment.cshtml" />
     <Content Include="Views\Dashboard\RoleInPermission.cshtml" />
+    <Content Include="Views\Dashboard\UserInRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
