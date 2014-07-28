@@ -117,5 +117,10 @@ namespace PreScripds.BL
         {
             return _organizationRepository.GetAllRoleInPermission();
         }
+
+        public void AddRoleInPermission(RoleInPermission roleInPermission)
+        {
+            _organizationRepository.AddRoleInPermission(roleInPermission);
+        }
     }
 }

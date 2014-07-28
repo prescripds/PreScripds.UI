@@ -21,6 +21,7 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.Id).HasColumnName("Id");
             this.Property(t => t.RoleId).HasColumnName("RoleId");
             this.Property(t => t.PermissionId).HasColumnName("PermissionId");
+            this.Property(t => t.Active).HasColumnName("Active");
 
             // Relationships
             this.HasOptional(t => t.Permission)

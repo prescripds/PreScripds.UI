@@ -714,7 +714,13 @@ namespace PreScripds.UI.Controllers
             if (roleInPermissions.IsCollectionValid())
             {
                 var rolPerms = roleInPermissions.Where(x => x.Role.OrganizationId == SessionContext.CurrentUser.OrganizationId.Value).ToList();
-                //roleInPermissionVM.RoleInPermissionViewModels = roleInPermissions;
+                var mappedRolePermVm = Mapper.Map<List<RoleInPermissionViewModel>>(rolPerms);
+                foreach (var roleInPerms in mappedRolePermVm)
+                {
+                    roleInPerms.PermissionSetName = permissionSet.FirstOrDefault(x => x.Id == roleInPerms.PermissionSetId).PermissionSetName;
+                    roleInPerms.RoleName = role.FirstOrDefault(x => x.Id == roleInPerms.RoleId).RoleName;
+                }
+                roleInPermissionVM.RoleInPermissionViewModels = mappedRolePermVm;
             }
             roleInPermissionVM.PermissionSets = permissionSet;
             roleInPermissionVM.Roles = role;
@@ -730,7 +736,10 @@ namespace PreScripds.UI.Controllers
             ValidateRoleInPermissionVM(roleInPermVm);
             if (ModelState.IsValid)
             {
-                //TODO:ADD TO DB
+                var mappedModel = Mapper.Map<RoleInPermissionViewModel, RoleInPermission>(roleInPermVm);
+                _wcfService.InvokeService<IOrganizationService>((svc) => svc.AddRoleInPermission(mappedModel));
+                roleInPermVm.CreationSuccessful = true;
+                roleInPermVm.Message = "Thank you for choosing Role-Permission Mapping.";
             }
             return View(roleInPermVm);
         }
@@ -744,7 +753,8 @@ namespace PreScripds.UI.Controllers
             var roleInPermissionFromDb = _wcfService.InvokeService<IOrganizationService, List<RoleInPermission>>((svc) => svc.GetAllRoleInPermission());
             if (roleInPermissionFromDb.IsCollectionValid())
             {
-                var roleInPermExist = roleInPermissionFromDb.Where(x => x.RoleId.Value.Equals(roleInPermVm.RoleId) && x.PermissionId.Value.Equals(roleInPermVm.PermissionSetId)).ToList();
+                var roleInPermByOrg = roleInPermissionFromDb.Where(x => x.Role.OrganizationId == SessionContext.CurrentUser.OrganizationId.Value).ToList();
+                var roleInPermExist = roleInPermByOrg.Where(x => x.RoleId.Value.Equals(roleInPermVm.RoleId) && x.PermissionId.Value.Equals(roleInPermVm.PermissionSetId)).ToList();
                 if (roleInPermExist.IsCollectionValid())
                     ModelState.AddModelError("", "Role and Permission already exists.");
             }

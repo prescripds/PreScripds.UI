@@ -126,5 +126,9 @@ namespace PreScripds.WebServices
         {
             return _organizationBl.GetAllRoleInPermission();
         }
+        public void AddRoleInPermission(RoleInPermission roleInPermission)
+        {
+            _organizationBl.AddRoleInPermission(roleInPermission);
+        }
     }
 }

@@ -240,6 +240,13 @@ namespace PreScripds.DAL.Repository
             }
         }
 
-        //public 
+        public void AddRoleInPermission(RoleInPermission roleInPermission)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                uow.GetRepository<RoleInPermission>().Insert(roleInPermission);
+                uow.SaveChanges();
+            }
+        }
     }
 }

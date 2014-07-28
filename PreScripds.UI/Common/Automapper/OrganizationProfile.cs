@@ -6,6 +6,8 @@ using AutoMapper;
 using PreScripds.Domain;
 using PreScripds.UI.Models;
 using PreScripds.Infrastructure;
+using PreScripds.Infrastructure.Services;
+using PreScripds.UI.OrganizationServiceReference;
 
 namespace PreScripds.UI.Common.Automapper
 {
@@ -19,7 +21,6 @@ namespace PreScripds.UI.Common.Automapper
                 {
                     var mappedDocInOrg = Mapper.Map<List<DepartmentInOrganizationViewModel>, List<DepartmentInOrganization>>(s.DepartmentInOrganizationViewModels);
                     d.DepartmentInOrganizations = mappedDocInOrg;
-
                 })
                 .IgnoreAllNonExisting();
 
@@ -74,6 +75,16 @@ namespace PreScripds.UI.Common.Automapper
                     d.PermissionInSets = permInSets;
                 })
                 .IgnoreAllNonExisting();
+            Mapper.CreateMap<RoleInPermissionViewModel, RoleInPermission>()
+                .ForMember(d => d.PermissionId, s => s.MapFrom(p => p.PermissionSetId))
+                .ForMember(d => d.Active, s => s.MapFrom(p => p.IsActive)).IgnoreAllNonExisting();
+
+            Mapper.CreateMap<RoleInPermission, RoleInPermissionViewModel>()
+                .ForMember(d => d.IsActive, s => s.MapFrom(p => p.Active))
+                .ForMember(d => d.PermissionSetId, s => s.MapFrom(p => p.PermissionId))
+                .IgnoreAllNonExisting();
         }
+
+
     }
 }

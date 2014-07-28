@@ -27,5 +27,6 @@ namespace PreScripds.DAL.Interface
         void AddPermission(PermissionSet permissionSet);
         List<PermissionSet> GetAllPermissionSet(long organizationId);
         List<RoleInPermission> GetAllRoleInPermission();
+        void AddRoleInPermission(RoleInPermission roleInPermission);
     }
 }
