@@ -591,7 +591,19 @@ namespace PreScripds.UI.Controllers
         [HttpGet]
         public ActionResult AddPermission()
         {
-            var permissionViewModel = new PermissionSetViewModel() { Department = new List<Department>(), Permission = new List<Permission>(), Module = new List<Module>() };
+            var permissionViewModel = new PermissionSetViewModel()
+            {
+                Department = new List<Department>(),
+                Permission = new List<Permission>(),
+                Module = new List<Module>(),
+                PermissionSetViewModels = new List<PermissionSetViewModel>()
+            };
+            AssignPermissionViewModel(permissionViewModel);
+            return View(permissionViewModel);
+        }
+
+        private void AssignPermissionViewModel(PermissionSetViewModel permissionViewModel)
+        {
             var department = _wcfService.InvokeService<IOrganizationService, List<DepartmentInOrganization>>((svc) => svc.GetDepartmentInOrganization(SessionContext.CurrentUser.OrganizationId.Value));
             if (department.IsCollectionValid())
             {
@@ -611,8 +623,11 @@ namespace PreScripds.UI.Controllers
             {
                 foreach (var perSet in permInSets)
                 {
-                    var departmentName = permissionViewModel.Department.FirstOrDefault(x => x.Id == perSet.DepartmentId.Value).DepartmentName;
-                    var moduleName = module.FirstOrDefault(x => x.Id == perSet.ModuleId.Value).ModuleName;
+                    permissionViewModel.PermissionSetName = perSet.PermissionSetName;
+                    permissionViewModel.PermissionSetId = perSet.Id;
+                    permissionViewModel.PermissionSetDescription = perSet.PermissionSetDescription;
+                    permissionViewModel.DepartmentName = permissionViewModel.Department.FirstOrDefault(x => x.Id == perSet.DepartmentId.Value).DepartmentName;
+                    permissionViewModel.ModuleName = module.FirstOrDefault(x => x.Id == perSet.ModuleId.Value).ModuleName;
                     List<long> permIds = new List<long>();
                     List<string> perNames = new List<string>();
                     foreach (var permId in perSet.PermissionInSets)
@@ -625,10 +640,10 @@ namespace PreScripds.UI.Controllers
                         perNames.Add(permissionName);
                     }
                     permissionViewModel.PermissionName = string.Join(",", perNames.ToArray());
+                    permissionViewModel.IsActive = perSet.Active.Value;
                     permissionViewModel.PermissionSetViewModels.Add(permissionViewModel);
                 }
             }
-            return View(permissionViewModel);
         }
 
         [PreScripds.UI.Common.Authorize]
@@ -641,14 +656,34 @@ namespace PreScripds.UI.Controllers
             if (ModelState.IsValid)
             {
                 permissionViewModel.IsActive = true;
-                var mappedPermissionSetModel = Mapper.Map<PermissionSetViewModel, PermissionSet>(permissionViewModel);
-
-                //_wcfService.InvokeService<IOrganizationService>((svc) => svc.AddPermission(mappedPermissionSetModel));
-                //TODO:Fetch all permissionSet and permissionInSet from Db and populate to list
-                permissionViewModel.CreationSuccessful = true;
-                permissionViewModel.Message = "The permission set '{0}' is saved successfully.".ToFormat(permissionViewModel.PermissionSetName);
+                permissionViewModel.Department = new List<Department>();
+                permissionViewModel.Module = new List<Module>();
+                permissionViewModel.PermissionSetViewModels = new List<PermissionSetViewModel>();
+                AssignPermissionViewModel(permissionViewModel);
+                ValidateInputPermissionSet(permissionViewModel);
+                if (ModelState.IsValid)
+                {
+                    var mappedPermissionSetModel = Mapper.Map<PermissionSetViewModel, PermissionSet>(permissionViewModel);
+                    _wcfService.InvokeService<IOrganizationService>((svc) => svc.AddPermission(mappedPermissionSetModel));
+                    permissionViewModel.CreationSuccessful = true;
+                    permissionViewModel.Message = "The permission set '{0}' is saved successfully.".ToFormat(permissionViewModel.PermissionSetName);
+                }
             }
-            return View();
+            return View(permissionViewModel);
+        }
+
+        private void ValidateInputPermissionSet(PermissionSetViewModel permissionViewModel)
+        {
+            foreach (var permSet in permissionViewModel.PermissionSetViewModels)
+            {
+                if (permissionViewModel.PermissionSetName.Equals(permSet.PermissionSetName))
+                    ModelState.AddModelError("PermissionSetName", "Permission Set Name '{0}' already exists.".ToFormat(permissionViewModel.PermissionSetName));
+                var permInSet = permissionViewModel.PermissionSetViewModels
+                    .Where(x => x.DepartmentId == permissionViewModel.DepartmentId && x.ModuleId == permissionViewModel.ModuleId
+                    && x.IsActive && x.PermissionSetName == permissionViewModel.PermissionSetName).ToList();
+                if (permInSet.IsCollectionValid())
+                    ModelState.AddModelError("", "The permission set name '{0}' with the same department and module already exists.".ToFormat(permissionViewModel.PermissionSetName));
+            }
         }
 
         private void ValidatePermissionSetViewModel(PermissionSetViewModel permissionViewModel)

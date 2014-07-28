@@ -50,6 +50,7 @@
                     @Html.ListBoxFor(x => x.PermissionSelected, Model.Permission.ToSelectListItems(model => model.Id.ToString(), model => model.PermissionName), new { @class = "form-control" })
                 </div>
             </div>
+            @*@Html.TextBoxFor(m => m.PermissionSetViewModels, new { @class = "hidden" })*@
         </div>
         <div class="row">
             <div class="col-md-12 buttons">
@@ -63,64 +64,68 @@
                 }
             </div>
         </div>
-        @*@Html.MessageDialogRedirect(Model.Message, "AddRole", "Dashboard", true)*@
+        @Html.MessageDialogRedirect(Model.Message, "AddPermission", "Dashboard", true)
     }
     @if (Model.PermissionSetViewModels.IsCollectionValid())
     {
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th> PermissionSet Name</th>
-                        <th> PermissionSet Description</th>
-                        <th> Department</th>
-                        <th> Module</th>
-                        <th> Permission</th>
-                        <th> Active</th>
-                    </tr>
-                </thead>
-                @for (int i = 0; i < Model.PermissionSetViewModels.Count; i++)
-                {
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].PermissionSetId">
-                                    @Html.TextBoxFor(m => m.PermissionSetViewModels[i].PermissionSetId)
-                                </div>
-                            </td>
-                            <td>
-                                <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].PermissionSetName">
-                                    @Html.TextBoxFor(m => m.PermissionSetViewModels[i].PermissionSetName)
-                                </div>
-                            </td>
-                            <td>
-                                <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].PermissionSetDescription">
-                                    @Html.TextBoxFor(m => m.PermissionSetViewModels[i].PermissionSetDescription)
-                                </div>
-                            </td>
-                            <td>
-                                <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].DepartmentName">
-                                    @Html.TextBoxFor(m => m.PermissionSetViewModels[i].DepartmentName)
-                                </div>
-                            </td>
-                            <td>
-                                <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].ModuleName">
-                                    @Html.TextBoxFor(m => m.PermissionSetViewModels[i].ModuleName)
-                                </div>
-                            </td>
-                            <td>
-                                <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].PermissionName">
-                                    @Html.TextBoxFor(m => m.PermissionSetViewModels[i].PermissionName)
-                                </div>
-                            </td>
-                            <td>
-                                @Html.CheckBoxFor(m => m.PermissionSetViewModels[i].IsActive, new { data_id = Model.PermissionSetViewModels[i].PermissionSetId })
-                            </td>
-                        </tr>
-                    </tbody>
-                }
-            </table>
+        <div class="row">
+            <div class="col-md-4 col-sm-6">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th> PermissionSet Name</th>
+                                <th> PermissionSet Description</th>
+                                <th> Department</th>
+                                <th> Module</th>
+                                <th> Permission</th>
+                                <th> Active</th>
+                            </tr>
+                        </thead>
+                        @for (int i = 0; i < Model.PermissionSetViewModels.Count; i++)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].PermissionSetId">
+                                            @Html.TextBoxFor(m => m.PermissionSetViewModels[i].PermissionSetId)
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].PermissionSetName">
+                                            @Html.TextBoxFor(m => m.PermissionSetViewModels[i].PermissionSetName)
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].PermissionSetDescription">
+                                            @Html.TextBoxFor(m => m.PermissionSetViewModels[i].PermissionSetDescription)
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].DepartmentName">
+                                            @Html.TextBoxFor(m => m.PermissionSetViewModels[i].DepartmentName)
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].ModuleName">
+                                            @Html.TextBoxFor(m => m.PermissionSetViewModels[i].ModuleName)
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ellipsis-div" title="@Model.PermissionSetViewModels[i].PermissionName">
+                                            @Html.TextBoxFor(m => m.PermissionSetViewModels[i].PermissionName)
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @Html.CheckBoxFor(m => m.PermissionSetViewModels[i].IsActive, new { data_id = Model.PermissionSetViewModels[i].PermissionSetId })
+                                    </td>
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
+                </div>
+            </div>
         </div>
     }
 
@@ -129,6 +134,8 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            $('#PermissionSetName').val('');
+            $('#PermissionSetDescription').val('');
             var getModules = function (departmentId) {
                 ajaxPost('/Dashboard/GetModules', { departmentId: departmentId }, function (res) {
                     if (res.length > 0) {
@@ -136,7 +143,7 @@
                             $('#ModuleId').append('<option value="' + res[i].Id + '">' + res[i].ModuleName + '</option>');
                         }
 
-                    }                   
+                    }
                 });
             }
 
@@ -150,7 +157,7 @@
                 });
             }
 
-            @*@Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))*@
+            @Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))
         });
 
     </script>
