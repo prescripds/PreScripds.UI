@@ -102,12 +102,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            var permissionId = $('.checkPerm:checked').data('permid');
-            $('#SelectedPermission').val(permissionId);
-            $('.checkPerm').on('click', function () {
-                var permVal = $(this).data('permid');
-                $('#SelectedPermission').val(permVal);
-            });
+           
             @Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))
         });
 

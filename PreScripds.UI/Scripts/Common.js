@@ -11,3 +11,4 @@ function showProgressBar() {
 function hideProgressBar() {
     $('.loadingDiv').hide();
 }
+

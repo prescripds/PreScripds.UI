@@ -8,6 +8,7 @@ namespace PreScripds.UI.Models
 {
     public class RoleInPermissionViewModel
     {
+        public long Id { get; set; }
         public long RoleId { get; set; }
         public List<Role> Roles { get; set; }
         public long PermissionSetId { get; set; }

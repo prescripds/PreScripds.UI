@@ -80,6 +80,7 @@ namespace PreScripds.UI.Common.Automapper
                 .ForMember(d => d.Active, s => s.MapFrom(p => p.IsActive)).IgnoreAllNonExisting();
 
             Mapper.CreateMap<RoleInPermission, RoleInPermissionViewModel>()
+                .ForMember(d => d.Id, s => s.MapFrom(p => p.Id))
                 .ForMember(d => d.IsActive, s => s.MapFrom(p => p.Active))
                 .ForMember(d => d.PermissionSetId, s => s.MapFrom(p => p.PermissionId))
                 .IgnoreAllNonExisting();

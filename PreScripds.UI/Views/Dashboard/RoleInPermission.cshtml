@@ -45,16 +45,62 @@
                 }
             </div>
         </div>
-        @*@Html.MessageDialogRedirect(Model.Message, "AddPermission", "Dashboard", true)*@
+        @Html.MessageDialogRedirect(Model.Message, "AddPermission", "Dashboard", true)
     }
-
+    @if (Model.RoleInPermissionViewModels.IsCollectionValid())
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th> Role Name</th>
+                        <th> Permission Name</th>
+                        <th> Active</th>
+                    </tr>
+                </thead>
+                @for (int i = 0; i < Model.RoleInPermissionViewModels.Count; i++)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="ellipsis-div" title="@Model.RoleInPermissionViewModels[i].Id">
+                                    @Html.TextBoxFor(m => m.RoleInPermissionViewModels[i].Id)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="ellipsis-div" title="@Model.RoleInPermissionViewModels[i].RoleName">
+                                    @Html.TextBoxFor(m => m.RoleInPermissionViewModels[i].RoleName)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="ellipsis-div" title="@Model.RoleInPermissionViewModels[i].PermissionSetName">
+                                    @Html.TextBoxFor(m => m.RoleInPermissionViewModels[i].PermissionSetName)
+                                </div>
+                            </td>
+                            <td>
+                                @Html.CheckBoxFor(m => m.RoleInPermissionViewModels[i].IsActive, new { data_id = Model.RoleInPermissionViewModels[i].Id })
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
+    }
 </div>
 @section Scripts {
 
     <script type="text/javascript">
         $(document).ready(function () {
+            var permissionId = $('.checkPerm:checked').data('permid');
+            $('#SelectedPermission').val(permissionId);
+            $('.checkPerm').on('click', function () {
+                var permVal = $(this).data('permid');
+                alert(permVal);
+                $('#SelectedPermission').val(permVal);
+            });
 
-            @*@Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))*@
+            @Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))
         });
 
     </script>

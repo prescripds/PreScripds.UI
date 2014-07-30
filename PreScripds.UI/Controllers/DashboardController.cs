@@ -737,6 +737,7 @@ namespace PreScripds.UI.Controllers
             if (ModelState.IsValid)
             {
                 var mappedModel = Mapper.Map<RoleInPermissionViewModel, RoleInPermission>(roleInPermVm);
+                mappedModel.Active = true;
                 _wcfService.InvokeService<IOrganizationService>((svc) => svc.AddRoleInPermission(mappedModel));
                 roleInPermVm.CreationSuccessful = true;
                 roleInPermVm.Message = "Thank you for choosing Role-Permission Mapping.";
@@ -757,6 +758,7 @@ namespace PreScripds.UI.Controllers
                 var roleInPermExist = roleInPermByOrg.Where(x => x.RoleId.Value.Equals(roleInPermVm.RoleId) && x.PermissionId.Value.Equals(roleInPermVm.PermissionSetId)).ToList();
                 if (roleInPermExist.IsCollectionValid())
                     ModelState.AddModelError("", "Role and Permission already exists.");
+                //roleInPermVm.RoleName = r
             }
         }
 
@@ -764,7 +766,16 @@ namespace PreScripds.UI.Controllers
         [HttpGet]
         public ActionResult UserInRole()
         {
-            return View();
+            var userInRoleVM = new UserInRoleViewModel() { Users = new List<User>(), Roles = new List<Role>(), UserInRoleViewModels = new List<UserInRoleViewModel>() };
+            var roles = _wcfService.InvokeService<IUserService, List<Role>>((svc) => svc.GetRole(SessionContext.CurrentUser.OrganizationId.Value));
+            var usersFrmDb = _wcfService.InvokeService<IUserService, List<User>>((svc) => svc.GetUsers());
+            if (usersFrmDb.IsCollectionValid())
+            {
+                var users = usersFrmDb.Where(x => x.OrganizationId == SessionContext.CurrentUser.OrganizationId.Value).ToList();
+                userInRoleVM.Roles = roles;
+                userInRoleVM.Users = users;
+            }
+            return View(userInRoleVM);
         }
     }
 }
