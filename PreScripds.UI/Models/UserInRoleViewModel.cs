@@ -8,6 +8,7 @@ namespace PreScripds.UI.Models
 {
     public class UserInRoleViewModel
     {
+        public long Id { get; set; }
         public long RoleId { get; set; }
         public List<Role> Roles { get; set; }
         public IEnumerable<string> UsersSelected { get; set; }

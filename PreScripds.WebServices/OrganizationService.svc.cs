@@ -130,5 +130,14 @@ namespace PreScripds.WebServices
         {
             _organizationBl.AddRoleInPermission(roleInPermission);
         }
+        public void AddUserInRole(UserInRole userInRole)
+        {
+            _organizationBl.AddUserInRole(userInRole);
+        }
+        public List<UserInRole> GetUserInRole(long organizationId)
+        {
+            var userInRole = _organizationBl.GetUserInRole(organizationId);
+            return userInRole;
+        }
     }
 }

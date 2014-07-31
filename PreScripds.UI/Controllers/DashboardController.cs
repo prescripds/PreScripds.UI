@@ -708,6 +708,12 @@ namespace PreScripds.UI.Controllers
                 Roles = new List<Role>(),
                 PermissionSets = new List<PermissionSet>()
             };
+            GetRoleInPermissionFromDb(roleInPermissionVM);
+            return View(roleInPermissionVM);
+        }
+
+        private void GetRoleInPermissionFromDb(RoleInPermissionViewModel roleInPermissionVM)
+        {
             var role = _wcfService.InvokeService<IUserService, List<Role>>((svc) => svc.GetRole(SessionContext.CurrentUser.OrganizationId.Value));
             var permissionSet = _wcfService.InvokeService<IOrganizationService, List<PermissionSet>>((svc) => svc.GetAllPermissionSet(SessionContext.CurrentUser.OrganizationId.Value));
             var roleInPermissions = _wcfService.InvokeService<IOrganizationService, List<RoleInPermission>>((svc) => svc.GetAllRoleInPermission());
@@ -724,7 +730,6 @@ namespace PreScripds.UI.Controllers
             }
             roleInPermissionVM.PermissionSets = permissionSet;
             roleInPermissionVM.Roles = role;
-            return View(roleInPermissionVM);
         }
 
         [PreScripds.UI.Common.Authorize]
@@ -741,6 +746,7 @@ namespace PreScripds.UI.Controllers
                 _wcfService.InvokeService<IOrganizationService>((svc) => svc.AddRoleInPermission(mappedModel));
                 roleInPermVm.CreationSuccessful = true;
                 roleInPermVm.Message = "Thank you for choosing Role-Permission Mapping.";
+                GetRoleInPermissionFromDb(roleInPermVm);
             }
             return View(roleInPermVm);
         }
@@ -758,7 +764,6 @@ namespace PreScripds.UI.Controllers
                 var roleInPermExist = roleInPermByOrg.Where(x => x.RoleId.Value.Equals(roleInPermVm.RoleId) && x.PermissionId.Value.Equals(roleInPermVm.PermissionSetId)).ToList();
                 if (roleInPermExist.IsCollectionValid())
                     ModelState.AddModelError("", "Role and Permission already exists.");
-                //roleInPermVm.RoleName = r
             }
         }
 
@@ -766,16 +771,54 @@ namespace PreScripds.UI.Controllers
         [HttpGet]
         public ActionResult UserInRole()
         {
-            var userInRoleVM = new UserInRoleViewModel() { Users = new List<User>(), Roles = new List<Role>(), UserInRoleViewModels = new List<UserInRoleViewModel>() };
-            var roles = _wcfService.InvokeService<IUserService, List<Role>>((svc) => svc.GetRole(SessionContext.CurrentUser.OrganizationId.Value));
-            var usersFrmDb = _wcfService.InvokeService<IUserService, List<User>>((svc) => svc.GetUsers());
-            if (usersFrmDb.IsCollectionValid())
+            var userInRoleVM = new UserInRoleViewModel()
             {
-                var users = usersFrmDb.Where(x => x.OrganizationId == SessionContext.CurrentUser.OrganizationId.Value).ToList();
-                userInRoleVM.Roles = roles;
-                userInRoleVM.Users = users;
-            }
+                Users = new List<User>(),
+                Roles = new List<Role>(),
+                UserInRoleViewModels = new List<UserInRoleViewModel>()
+            };
+            GetUserInRoleFromDb(userInRoleVM);
             return View(userInRoleVM);
         }
+
+        private void GetUserInRoleFromDb(UserInRoleViewModel userInRoleVM)
+        {
+            var roles = _wcfService.InvokeService<IUserService, List<Role>>((svc) => svc.GetRole(SessionContext.CurrentUser.OrganizationId.Value));
+            var usersFrmDb = _wcfService.InvokeService<IUserService, List<User>>((svc) => svc.GetUsers());
+            var users = new List<User>();
+            if (usersFrmDb.IsCollectionValid())
+            {
+                users = usersFrmDb.Where(x => x.OrganizationId == SessionContext.CurrentUser.OrganizationId.Value).ToList();
+                userInRoleVM.Users = users;
+            }
+            userInRoleVM.Roles = roles;
+            var userInRoleFrmDb = _wcfService.InvokeService<IOrganizationService, List<UserInRole>>((svc) => svc.GetUserInRole(SessionContext.CurrentUser.OrganizationId.Value));
+            if (userInRoleFrmDb.IsCollectionValid())
+            {
+                foreach (var userInRole in userInRoleFrmDb)
+                {
+                    var user = users.FirstOrDefault(x => x.Id == userInRole.UserId.Value);
+                    var firstName = (user.FirstName.IsNotNull()) ? user.FirstName : string.Empty;
+                    var lastName = (user.LastName.IsNotNull()) ? user.LastName : string.Empty;
+                    var middleName = (user.MiddleName.IsNotNull()) ? user.MiddleName : string.Empty;
+                    var userName = "{0} .{1}{2}".ToFormat(firstName, middleName, lastName);
+                    userInRoleVM.UserName = userName;
+                    userInRoleVM.RoleName = roles.FirstOrDefault(x => x.Id == userInRole.RoleId.Value).RoleName;
+                    userInRoleVM.Id = userInRole.Id;
+                    userInRoleVM.UserInRoleViewModels.Add(userInRoleVM);
+                }
+
+            }
+        }
+
+        [PreScripds.UI.Common.Authorize]
+        [HttpPost]
+        public ActionResult UserInRole(UserInRoleViewModel userInRoleVM, string buttonType)
+        {
+            if (buttonType == "Next")
+                return RedirectToAction("Index", "Dashboard");
+            return View(userInRoleVM);
+        }
+
     }
 }

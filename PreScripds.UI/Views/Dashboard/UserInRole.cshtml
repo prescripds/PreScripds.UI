@@ -1,4 +1,7 @@
 ﻿@model PreScripds.UI.Models.UserInRoleViewModel
+@using PreScripds.UI.Common;
+@using PreScripds.Domain;
+@using PreScripds.Infrastructure;
 @{
     ViewBag.Title = "UserInRole";
     Layout = "~/Views/Shared/_OpenLayout.cshtml";
@@ -30,7 +33,8 @@
                 <div class="form-group">
                     <label class="control-label" for="RoleName">Module</label>
                     <div class="list-group">
-                        @Html.ListBoxFor(x => x.UsersSelected, Model.Users.ToSelectListItems(model => model.Id.ToString(), model => model.UserName), new { @class = "form-control" })
+
+                        @Html.ListBoxFor(x => x.UsersSelected, Model.Users.ToSelectListItems(model => model.Id.ToString(), model => ("{0} .{1}{2}".ToFormat(model.FirstName, model.MiddleName, model.LastName))), new { @class = "form-control" })
                     </div>
                 </div>
             </div>

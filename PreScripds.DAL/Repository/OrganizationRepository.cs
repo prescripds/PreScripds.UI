@@ -248,5 +248,21 @@ namespace PreScripds.DAL.Repository
                 uow.SaveChanges();
             }
         }
+        public List<UserInRole> GetUserInRole(long organizationId)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var userInRoles = uow.GetRepository<UserInRole>().Items.Include(x => x.Role).Where(x => x.Role.OrganizationId == organizationId).ToList();
+                return userInRoles;
+            }
+        }
+        public void AddUserInRole(UserInRole userInRole)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                uow.GetRepository<UserInRole>().Insert(userInRole);
+                uow.SaveChanges();
+            }
+        }
     }
 }

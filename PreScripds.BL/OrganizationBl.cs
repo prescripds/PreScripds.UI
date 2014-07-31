@@ -122,5 +122,16 @@ namespace PreScripds.BL
         {
             _organizationRepository.AddRoleInPermission(roleInPermission);
         }
+
+        public void AddUserInRole(UserInRole userInRole)
+        {
+            _organizationRepository.AddUserInRole(userInRole);
+        }
+
+        public List<UserInRole> GetUserInRole(long organizationId)
+        {
+            var userInRoles = _organizationRepository.GetUserInRole(organizationId);
+            return userInRoles;
+        }
     }
 }

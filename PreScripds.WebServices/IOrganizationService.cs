@@ -75,5 +75,11 @@ namespace PreScripds.WebServices
         [OperationContract]
         [WebInvoke(UriTemplate = "/AddRoleInPermission", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
         void AddRoleInPermission(RoleInPermission roleInPermission);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/GetUserInRole", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        List<UserInRole> GetUserInRole(long organizationId);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/AddUserInRole", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        void AddUserInRole(UserInRole userInRole);
     }
 }
