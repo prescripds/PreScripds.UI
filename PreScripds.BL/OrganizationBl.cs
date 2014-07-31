@@ -123,7 +123,7 @@ namespace PreScripds.BL
             _organizationRepository.AddRoleInPermission(roleInPermission);
         }
 
-        public void AddUserInRole(UserInRole userInRole)
+        public void AddUserInRole(List<UserInRole> userInRole)
         {
             _organizationRepository.AddUserInRole(userInRole);
         }

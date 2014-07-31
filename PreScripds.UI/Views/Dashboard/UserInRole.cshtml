@@ -50,7 +50,18 @@
                 }
             </div>
         </div>
-        @*@Html.MessageDialogRedirect(Model.Message, "AddPermission", "Dashboard", true)*@
-    }
+        @Html.TextBoxFor(m => m.RoleName, new { @class = "hidden" })
+        @Html.MessageDialogRedirect(Model.Message, "UserInRole", "Dashboard", true)
 
+    }
 </div>
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            @Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))
+        });
+
+    </script>
+}

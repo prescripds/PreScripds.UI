@@ -256,11 +256,16 @@ namespace PreScripds.DAL.Repository
                 return userInRoles;
             }
         }
-        public void AddUserInRole(UserInRole userInRole)
+        public void AddUserInRole(List<UserInRole> userInRoles)
         {
             using (var uow = new UnitOfWork())
             {
-                uow.GetRepository<UserInRole>().Insert(userInRole);
+                foreach (var usr in userInRoles)
+                {
+                    var userInRole = uow.GetRepository<UserInRole>().Items.Where(x => x.RoleId == usr.RoleId && x.UserId == usr.UserId).ToList();
+                    if (!userInRole.IsCollectionValid())
+                        uow.GetRepository<UserInRole>().Insert(usr);
+                }
                 uow.SaveChanges();
             }
         }

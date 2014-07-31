@@ -130,7 +130,7 @@ namespace PreScripds.WebServices
         {
             _organizationBl.AddRoleInPermission(roleInPermission);
         }
-        public void AddUserInRole(UserInRole userInRole)
+        public void AddUserInRole(List<UserInRole> userInRole)
         {
             _organizationBl.AddUserInRole(userInRole);
         }

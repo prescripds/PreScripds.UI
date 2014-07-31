@@ -80,6 +80,7 @@ namespace PreScripds.WebServices
         List<UserInRole> GetUserInRole(long organizationId);
         [OperationContract]
         [WebInvoke(UriTemplate = "/AddUserInRole", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
-        void AddUserInRole(UserInRole userInRole);
+        void AddUserInRole(List<UserInRole> userInRole);
+
     }
 }

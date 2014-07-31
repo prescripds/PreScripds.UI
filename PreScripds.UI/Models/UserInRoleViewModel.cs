@@ -17,5 +17,7 @@ namespace PreScripds.UI.Models
         public string RoleName { get; set; }
         public string UserName { get; set; }
         public List<UserInRoleViewModel> UserInRoleViewModels { get; set; }
+        public bool CreationSuccessful { get; set; }
+        public string Message { get; set; }
     }
 }

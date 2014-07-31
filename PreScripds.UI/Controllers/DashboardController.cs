@@ -817,7 +817,33 @@ namespace PreScripds.UI.Controllers
         {
             if (buttonType == "Next")
                 return RedirectToAction("Index", "Dashboard");
+            ValidateUserInRoleVM(userInRoleVM);
+            List<UserInRole> userInRoleLst = new List<UserInRole>();
+            if (ModelState.IsValid)
+            {
+                foreach (var userId in userInRoleVM.UsersSelected)
+                {
+                    var userInRole = new UserInRole()
+                    {
+                        RoleId = userInRoleVM.RoleId,
+                        UserId = userId.As<long>(),
+                        Active = true
+                    };
+                    userInRoleLst.Add(userInRole);
+                }
+                _wcfService.InvokeService<IOrganizationService>((svc) => svc.AddUserInRole(userInRoleLst));
+                userInRoleVM.CreationSuccessful = true;
+                userInRoleVM.Message = "Thank you for choosing the user(s) for the role '{0}'".ToFormat(userInRoleVM.RoleName);
+            }
             return View(userInRoleVM);
+        }
+
+        private void ValidateUserInRoleVM(UserInRoleViewModel userInRoleVM)
+        {
+            if (userInRoleVM.RoleId == 0)
+                ModelState.AddModelError("RoleId", "Please select a Role.");
+            if (!userInRoleVM.UsersSelected.IsCollectionValid())
+                ModelState.AddModelError("UsersSelected", "Please select the User.");
         }
 
     }
