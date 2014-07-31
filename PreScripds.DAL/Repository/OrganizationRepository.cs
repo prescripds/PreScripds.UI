@@ -24,7 +24,11 @@ namespace PreScripds.DAL.Repository
         {
             using (var uow = new UnitOfWork())
             {
-                var organization = uow.GetRepository<Organization>().Items.Include(s => s.LibraryFolders.Select(y => y.LibraryAssets)).FirstOrDefault(x => x.Id == organizationId);
+                var organization = uow.GetRepository<Organization>().Items.
+                    Include(z => z.Roles.Select(s => s.UserInRoles)).
+                    Include(z => z.Roles.Select(s => s.RoleInPermissions)).
+                    Include(s => s.LibraryFolders.Select(y => y.LibraryAssets))
+                    .FirstOrDefault(x => x.Id == organizationId);
                 return organization;
             }
         }

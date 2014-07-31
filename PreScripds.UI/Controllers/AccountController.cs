@@ -182,9 +182,13 @@ namespace PreScripds.UI.Controllers
                                     {
                                         return RedirectToAction("OrganizationDocs", "Dashboard");
                                     }
+                                    else if (!organization.Roles.IsCollectionValid())
+                                    {
+                                        return RedirectToAction("AddRole", "Dashboard");
+                                    }
                                     else
                                     {
-                                        return RedirectToAction("AddRole","Dashboard");
+                                        return RedirectToAction("Index", "Dashboard");
                                     }
                                 }
                             }

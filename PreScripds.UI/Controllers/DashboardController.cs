@@ -805,6 +805,7 @@ namespace PreScripds.UI.Controllers
                     userInRoleVM.UserName = userName;
                     userInRoleVM.RoleName = roles.FirstOrDefault(x => x.Id == userInRole.RoleId.Value).RoleName;
                     userInRoleVM.Id = userInRole.Id;
+                    userInRoleVM.IsActive = userInRole.Active.Value;
                     userInRoleVM.UserInRoleViewModels.Add(userInRoleVM);
                 }
 
@@ -846,5 +847,11 @@ namespace PreScripds.UI.Controllers
                 ModelState.AddModelError("UsersSelected", "Please select the User.");
         }
 
+        [PreScripds.UI.Common.Authorize]
+        [HttpGet]
+        public ActionResult Approvals()
+        {
+            return View();
+        }
     }
 }

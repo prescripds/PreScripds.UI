@@ -52,7 +52,46 @@
         </div>
         @Html.TextBoxFor(m => m.RoleName, new { @class = "hidden" })
         @Html.MessageDialogRedirect(Model.Message, "UserInRole", "Dashboard", true)
-
+        if (Model.UserInRoleViewModels.IsCollectionValid())
+        {
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th> Role Name</th>
+                            <th> User Name</th>
+                            <th> Active</th>
+                        </tr>
+                    </thead>
+                    @for (int i = 0; i < Model.UserInRoleViewModels.Count; i++)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="ellipsis-div" title="@Model.UserInRoleViewModels[i].Id">
+                                        @Html.TextBoxFor(m => m.UserInRoleViewModels[i].Id)
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="ellipsis-div" title="@Model.UserInRoleViewModels[i].RoleName">
+                                        @Html.TextBoxFor(m => m.UserInRoleViewModels[i].RoleName)
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="ellipsis-div" title="@Model.UserInRoleViewModels[i].UserName">
+                                        @Html.TextBoxFor(m => m.UserInRoleViewModels[i].UserName)
+                                    </div>
+                                </td>
+                                <td>
+                                    @Html.CheckBoxFor(m => m.UserInRoleViewModels[i].IsActive, new { data_id = Model.UserInRoleViewModels[i].Id })
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+            </div>
+        }
     }
 </div>
 @section Scripts {
