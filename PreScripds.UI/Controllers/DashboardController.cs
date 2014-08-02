@@ -60,10 +60,10 @@ namespace PreScripds.UI.Controllers
                             var modInDept = _wcfService.InvokeService<IOrganizationService, List<ModuleInDepartment>>((svc) => svc.GetAllModuleInDepartment());
                             if (!modInDept.IsCollectionValid())
                                 return RedirectToAction("ModuleInDepartment", "Dashboard");
-                            return View("Approvals", "Dashboard");
+                            return RedirectToAction("Approvals", "Dashboard");
                         }
                     }
-                    return RedirectToAction("Index", "Dashboard");
+                    // return RedirectToAction("Index", "Dashboard");
                 }
             }
             else
@@ -847,7 +847,7 @@ namespace PreScripds.UI.Controllers
                 ModelState.AddModelError("UsersSelected", "Please select the User.");
         }
 
-        [PreScripds.UI.Common.Authorize]
+        //[PreScripds.UI.Common.Authorize]
         [HttpGet]
         public ActionResult Approvals()
         {
