@@ -20,5 +20,7 @@ namespace PreScripds.Domain
         public virtual Permission Permission { get; set; }
         [DataMember]
         public virtual PermissionSet PermissionSet { get; set; }
+        [DataMember]
+        public virtual ICollection<PermissionInModule> PermissionInModules { get; set; }
     }
 }

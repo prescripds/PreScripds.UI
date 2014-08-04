@@ -24,7 +24,7 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.Active).HasColumnName("Active");
 
             // Relationships
-            this.HasOptional(t => t.Permission)
+            this.HasOptional(t => t.PermissionSet)
                 .WithMany(t => t.RoleInPermissions)
                 .HasForeignKey(d => d.PermissionId);
             this.HasOptional(t => t.Role)

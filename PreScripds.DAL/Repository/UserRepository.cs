@@ -220,7 +220,10 @@ namespace PreScripds.DAL.Repository
         {
             using (var uow = new UnitOfWork())
             {
-                var users = uow.GetRepository<User>().Items.Include(x => x.UserLogins.Select(y => y.UserHistories)).Where(x => x.Active).ToList();
+                var users = uow.GetRepository<User>().Items.Include(x => x.UserLogins.Select(y => y.UserHistories))
+                    .Include(x => x.UserInRoles
+                        .Select(y => y.Role.RoleInPermissions.Select(z => z.PermissionSet)))
+                        .Where(x => x.Active).ToList();
                 if (users.IsCollectionValid())
                 {
 

@@ -26,7 +26,7 @@ namespace PreScripds.DAL.Mapping
             this.HasOptional(t => t.Module)
                 .WithMany(t => t.PermissionInModules)
                 .HasForeignKey(d => d.ModuleId);
-            this.HasOptional(t => t.Permission)
+            this.HasOptional(t => t.PermissionInSet)
                 .WithMany(t => t.PermissionInModules)
                 .HasForeignKey(d => d.PermissionId);
 

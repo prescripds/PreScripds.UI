@@ -17,10 +17,7 @@ namespace PreScripds.Domain
         [DataMember]
         public bool? Active { get; set; }
         [DataMember]
-        public virtual ICollection<PermissionInModule> PermissionInModules { get; set; }
-        [DataMember]
         public virtual ICollection<PermissionInSet> PermissionInSets { get; set; }
-        [DataMember]
-        public virtual ICollection<RoleInPermission> RoleInPermissions { get; set; }
+
     }
 }

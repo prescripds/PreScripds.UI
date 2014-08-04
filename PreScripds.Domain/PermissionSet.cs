@@ -26,5 +26,7 @@ namespace PreScripds.Domain
         public virtual Department Department { get; set; }
         [DataMember]
         public virtual ICollection<PermissionInSet> PermissionInSets { get; set; }
+        [DataMember]
+        public virtual ICollection<RoleInPermission> RoleInPermissions { get; set; }
     }
 }

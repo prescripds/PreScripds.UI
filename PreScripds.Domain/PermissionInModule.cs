@@ -21,6 +21,6 @@ namespace PreScripds.Domain
         [DataMember]
         public bool Active { get; set; }
         [DataMember]
-        public virtual Permission Permission { get; set; }
+        public virtual PermissionInSet PermissionInSet { get; set; }
     }
 }
