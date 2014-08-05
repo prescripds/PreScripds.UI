@@ -119,6 +119,12 @@ input[type="checkbox"].input-validation-error {
     border-radius: 25px;
 }
 
+.whiteBg {
+    background: whitesmoke;
+    padding: 3%;
+    border-radius: 25px;
+}
+
 .buttons button {
     display: block;
     margin-bottom: 1%;

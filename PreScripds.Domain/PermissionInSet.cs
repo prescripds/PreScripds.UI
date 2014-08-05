@@ -15,7 +15,7 @@ namespace PreScripds.Domain
         [DataMember]
         public long? PermissionId { get; set; }
         [DataMember]
-        public int? PermissionSetId { get; set; }
+        public long? PermissionSetId { get; set; }
         [DataMember]
         public virtual Permission Permission { get; set; }
         [DataMember]
