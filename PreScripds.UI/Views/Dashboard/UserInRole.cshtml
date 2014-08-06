@@ -31,7 +31,7 @@
 
             <div class="col-md-4 col-sm-6">
                 <div class="form-group">
-                    <label class="control-label" for="RoleName">Module</label>
+                    <label class="control-label" for="RoleName">User</label>
                     <div class="list-group">
 
                         @Html.ListBoxFor(x => x.UsersSelected, Model.Users.ToSelectListItems(model => model.Id.ToString(), model => ("{0} .{1}{2}".ToFormat(model.FirstName, model.MiddleName, model.LastName))), new { @class = "form-control" })

@@ -70,8 +70,8 @@ namespace PreScripds.Domain
         public long UpdatedBy { get; set; }
         [DataMember]
         public virtual Country Country { get; set; }
-        //[DataMember]
-        //public virtual Organization Organization { get; set; }
+        [DataMember]
+        public bool? IsOrgSuperAdmin { get; set; }
         [DataMember]
         public virtual ICollection<UserInRole> UserInRoles { get; set; }
         [DataMember]
