@@ -11,7 +11,7 @@ namespace PreScripds.DAL.Interface
 {
     public interface IUserRepository
     {
-        List<User> GetUsers();
+        List<User> GetUsers(long organzationId);
         User AddUser(User user);
         Role AddRole(Role role);
         User GetUserByUsername(string loginName, LoginType loginType);

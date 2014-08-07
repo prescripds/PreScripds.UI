@@ -16,8 +16,8 @@ namespace PreScripds.WebServices
     public interface IUserService
     {
         [OperationContract]
-        [WebGet(UriTemplate = "/Users", ResponseFormat = WebMessageFormat.Xml)]
-        List<User> GetUsers();
+        [WebInvoke(UriTemplate = "/Users", ResponseFormat = WebMessageFormat.Xml)]
+        List<User> GetUsers(long organzationId);
         [OperationContract]
         [WebInvoke(UriTemplate = "/AddUser", ResponseFormat = WebMessageFormat.Xml)]
         User AddUser(User model);

@@ -36,9 +36,9 @@ namespace PreScripds.WebServices
             _context = new PreScripdsDb();
             _userBl = new UserBl(_context);
         }
-        public List<User> GetUsers()
+        public List<User> GetUsers(long organzationId)
         {
-            var users = _userBl.GetUsers();
+            var users = _userBl.GetUsers(organzationId);
             return users;
         }
 

@@ -26,11 +26,11 @@ namespace PreScripds.DAL.Repository
         {
             _dbContext = context;
         }
-        public List<User> GetUsers()
+        public List<User> GetUsers(long organzationId)
         {
             using (var uow = new UnitOfWork())
             {
-                var userLst = uow.GetRepository<User>().Items.Include(x => x.UserLogins.Select(y => y.UserHistories)).ToList();
+                var userLst = uow.GetRepository<User>().Items.Include(x => x.UserLogins.Select(y => y.UserHistories)).Where(x => x.OrganizationId == organzationId).ToList();
                 return userLst;
             }
 
@@ -167,6 +167,8 @@ namespace PreScripds.DAL.Repository
                 userFromDb.OrganizationId = organization.Id;
                 userFromDb.UpdatedBy = organization.CreatedBy;
                 userFromDb.UpdatedDate = DateTime.Now;
+                userFromDb.IsOrgSuperAdmin = true;
+                userFromDb.AdminApprove = true;
                 uow.GetRepository<User>().Update(userFromDb);
                 uow.SaveChanges();
             }

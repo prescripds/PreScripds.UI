@@ -784,12 +784,10 @@ namespace PreScripds.UI.Controllers
         private void GetUserInRoleFromDb(UserInRoleViewModel userInRoleVM)
         {
             var roles = _wcfService.InvokeService<IUserService, List<Role>>((svc) => svc.GetRole(SessionContext.CurrentUser.OrganizationId.Value));
-            var usersFrmDb = _wcfService.InvokeService<IUserService, List<User>>((svc) => svc.GetUsers());
-            var users = new List<User>();
+            var usersFrmDb = _wcfService.InvokeService<IUserService, List<User>>((svc) => svc.GetUsers(SessionContext.CurrentUser.OrganizationId.Value));
             if (usersFrmDb.IsCollectionValid())
             {
-                users = usersFrmDb.Where(x => x.OrganizationId == SessionContext.CurrentUser.OrganizationId.Value).ToList();
-                userInRoleVM.Users = users;
+                userInRoleVM.Users = usersFrmDb;
             }
             userInRoleVM.Roles = roles;
             var userInRoleFrmDb = _wcfService.InvokeService<IOrganizationService, List<UserInRole>>((svc) => svc.GetUserInRole(SessionContext.CurrentUser.OrganizationId.Value));
@@ -797,7 +795,7 @@ namespace PreScripds.UI.Controllers
             {
                 foreach (var userInRole in userInRoleFrmDb)
                 {
-                    var user = users.FirstOrDefault(x => x.Id == userInRole.UserId.Value);
+                    var user = usersFrmDb.FirstOrDefault(x => x.Id == userInRole.UserId.Value);
                     var firstName = (user.FirstName.IsNotNull()) ? user.FirstName : string.Empty;
                     var lastName = (user.LastName.IsNotNull()) ? user.LastName : string.Empty;
                     var middleName = (user.MiddleName.IsNotNull()) ? user.MiddleName : string.Empty;
@@ -847,11 +845,17 @@ namespace PreScripds.UI.Controllers
                 ModelState.AddModelError("UsersSelected", "Please select the User.");
         }
 
-        //[PreScripds.UI.Common.Authorize]
+        [PreScripds.UI.Common.Authorize]
         [HttpGet]
         public ActionResult Approvals()
         {
-            return View();
+            var ApprovalViewModel = new ApprovalViewModel()
+            {
+                UserApprovalViewModel = new List<UserApprovalViewModel>()
+            };
+            var users = _wcfService.InvokeService<IUserService, List<User>>((svc) => svc.GetUsers(SessionContext.CurrentUser.OrganizationId.Value));
+
+            return View(ApprovalViewModel);
         }
     }
 }

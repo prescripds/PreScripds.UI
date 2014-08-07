@@ -22,9 +22,9 @@ namespace PreScripds.BL
             _userRepository = new UserRepository(context);
         }
 
-        public List<User> GetUsers()
+       public List<User> GetUsers(long organzationId)
         {
-            var users = _userRepository.GetUsers();
+            var users = _userRepository.GetUsers(organzationId);
             return users;
         }
 

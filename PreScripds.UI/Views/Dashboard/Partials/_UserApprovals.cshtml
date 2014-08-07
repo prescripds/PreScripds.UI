@@ -1,0 +1,61 @@
+﻿@model List<PreScripds.UI.Models.UserApprovalViewModel>
+@using PreScripds.UI.Common;
+@using PreScripds.Domain;
+@using PreScripds.Infrastructure;
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                User Approvals
+            </a><i class="indicator glyphicon glyphicon-user  pull-right"></i>
+        </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+        <div class="panel-body">
+            @if (Model.IsCollectionValid())
+            {
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th> User Name</th>
+                                <th> Role</th>
+                                <th> Approved</th>
+                            </tr>
+                        </thead>
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="ellipsis-div" title="@Model[i].UserId">
+                                        @Html.TextBoxFor(m => m[i].UserId)
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="ellipsis-div" title="@Model[i].UserName">
+                                        @Html.TextBoxFor(m => m[i].UserName)
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="ellipsis-div">
+                                        @Html.DropDownListFor(x => x[i].RoleId, Model[i].Role.ToSelectListItems(model => model.Id.ToString(), model => model.RoleName), new { @class = "form-control" })
+                                    </div>
+                                </td>
+                                <td>
+                                    @Html.CheckBoxFor(m => m[i].IsApproved, new { data_id = Model[i].UserId })
+                                </td>
+                            </tr>
+                        </tbody>
+                        }
+                    </table>
+                </div>
+            }
+            else
+            {
+                <p> No Records Found.</p>
+            }
+        </div>
+    </div>
+</div>

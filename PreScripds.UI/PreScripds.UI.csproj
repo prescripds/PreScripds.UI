@@ -469,6 +469,7 @@
     <Content Include="Views\Dashboard\AddDepartment.cshtml" />
     <Content Include="Views\Dashboard\RoleInPermission.cshtml" />
     <Content Include="Views\Dashboard\UserInRole.cshtml" />
+    <Content Include="Views\Dashboard\Partials\_UserApprovals.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,79 +1,46 @@
-﻿@{
+﻿@model PreScripds.UI.Models.ApprovalViewModel
+@{
     ViewBag.Title = "Approvals";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 <div class="whiteBg">
     @*<h3><span style="color:black;">Approvals</span><hr /> </h3>*@
     <div class="panel-group" id="accordion">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a class="accordion-toggle" >
-                        User Approvals
-                    </a><i class="indicator glyphicon glyphicon-user  pull-right"></i>
-                </h4>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse in">
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th> User Name</th>
-                                    <th> Role</th>
-                                    <th> Approved</th>
-                                </tr>
-                            </thead>
-                            @*@for (int i = 0; i < Model.RoleViewModels.Count; i++)
-                                {
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="ellipsis-div" title="@Model.RoleViewModels[i].RoleId">
-                                                    @Html.TextBoxFor(m => m.RoleViewModels[i].RoleId)
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="ellipsis-div" title="@Model.RoleViewModels[i].RoleName">
-                                                    @Html.TextBoxFor(m => m.RoleViewModels[i].RoleName)
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="ellipsis-div" title="@Model.RoleViewModels[i].RoleDesc">
-                                                    @Html.TextBoxFor(m => m.RoleViewModels[i].RoleDesc)
-                                                </div>
-                                            </td>
-                                            <td>
-                                                @Html.CheckBoxFor(m => m.RoleViewModels[i].IsActive, new { data_id = Model.RoleViewModels[i].RoleId })
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                }*@
-                        </table>
+
+        @Html.Partial("Partials/_UserApprovals", Model.UserApprovalViewModel)
+
+        @*<div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                            Collapsible Group Item #1
+                        </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                     </div>
                 </div>
-            </div>
-        </div>
+            </div>*@
     </div>
-</div>
-@section Scripts {
+    @section Scripts {
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            //$('#accordion').on('click', function () {
-            //    alert("accordion clicked.");
-            //    var hasClas = $('#collapseOne').hasClass('in');
-            //    alert(hasClas);
-            //    if (hasClas) {
-            //        $('#collapseOne').removeClass('in');
-            //    } else {
-            //        $('#collapseOne').addClass('in');
-            //    }
+        <script type="text/javascript">
+            $(document).ready(function () {
+                //$('#accordion').on('click', function () {
+                //    alert("accordion clicked.");
+                //    var hasClas = $('#collapseOne').hasClass('in');
+                //    alert(hasClas);
+                //    if (hasClas) {
+                //        $('#collapseOne').removeClass('in');
+                //    } else {
+                //        $('#collapseOne').addClass('in');
+                //    }
 
-            //});
+                //});
 
-        });
+            });
 
-    </script>
-}
+        </script>
+    }
