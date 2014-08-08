@@ -853,8 +853,22 @@ namespace PreScripds.UI.Controllers
             {
                 UserApprovalViewModel = new List<UserApprovalViewModel>()
             };
-            var users = _wcfService.InvokeService<IUserService, List<User>>((svc) => svc.GetUsers(SessionContext.CurrentUser.OrganizationId.Value));
+            var userApprovedVM = new UserApprovalViewModel() { Role = new List<Role>() };
+            var users = _wcfService.InvokeService<IUserService, List<User>>((svc) => svc.GetUsers(SessionContext.CurrentUser.OrganizationId.Value).Where(x => (!x.AdminApprove.HasValue)).ToList());
+            var roles = _wcfService.InvokeService<IUserService, List<Role>>((svc) => svc.GetRole(SessionContext.CurrentUser.OrganizationId.Value));
 
+            foreach (var user in users)
+            {
+                userApprovedVM = new UserApprovalViewModel();
+                userApprovedVM.UserId = user.Id;
+                var middleName = string.Empty;
+                if (!user.MiddleName.IsNull())
+                    middleName = user.MiddleName;
+                userApprovedVM.UserName = string.Format("{0} {1}.{2}".ToFormat(user.FirstName, middleName, user.LastName));
+                userApprovedVM.IsApproved = (user.AdminApprove.HasValue) ? user.AdminApprove.Value : false;
+                userApprovedVM.Role = roles;
+                ApprovalViewModel.UserApprovalViewModel.Add(userApprovedVM);
+            }
             return View(ApprovalViewModel);
         }
     }

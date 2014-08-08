@@ -4,20 +4,25 @@
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
-        <a href="@Url.Action("Index","Dashboard")">
-            <span title="Dashboard" style="margin-top:7%" class="glyphicon glyphicon-book"></span>
-        </a>
-        <div class="btn-group">
-            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                Welcome,  @User.Identity.GetUserName() <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="@Url.Action("Manage","Account")">Profile</a></li>
-                <li><a href="#">Help</a></li>
-                <li class="divider"></li>
-                <li><a href="javascript:document.getElementById('logoutForm').submit()">Sign out</a></li>
-            </ul>
-        </div>
+        @*<ul class="nav navbar-nav navbar-right">
+            <li>*@
+                <a href="@Url.Action("Index","Dashboard")">
+                    <span title="Dashboard" class="glyphicon glyphicon-book"></span>
+                </a>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                        Welcome,  @User.Identity.GetUserName() <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="@Url.Action("Manage","Account")">Profile</a></li>
+                        <li><a href="#">Help</a></li>
+                        <li class="divider"></li>
+                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Sign out</a></li>
+                    </ul>
+                </div>
+            @*</li>
+        </ul>*@
+
         @*<ul class="nav navbar-nav navbar-right">
                 <li>
                     @Html.ActionLink("Welcome " + User.Identity.GetUserName(), "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Profile" })

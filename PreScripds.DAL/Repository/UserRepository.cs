@@ -30,7 +30,10 @@ namespace PreScripds.DAL.Repository
         {
             using (var uow = new UnitOfWork())
             {
-                var userLst = uow.GetRepository<User>().Items.Include(x => x.UserLogins.Select(y => y.UserHistories)).Where(x => x.OrganizationId == organzationId).ToList();
+                var userLst = uow.GetRepository<User>().Items
+                    .Include(x => x.UserLogins.Select(y => y.UserHistories))
+                    .Include(y => y.UserInRoles.Select(z => z.Role))
+                    .Where(x => x.OrganizationId == organzationId).ToList();
                 return userLst;
             }
 
