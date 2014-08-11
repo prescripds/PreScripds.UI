@@ -4,10 +4,10 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 <div class="whiteBg">
-    @*<h3><span style="color:black;">Approvals</span><hr /> </h3>*@
+    @*<h2><span style="color:black;">Approvals</span><hr /> </h2>*@
     <div class="panel-group" id="accordion">
 
-        @Html.Partial("Partials/_UserApprovals", Model.UserApprovalViewModel)
+        @Html.Partial("Partials/_UserApprovals", Model)
 
         @*<div class="panel panel-default">
                 <div class="panel-heading">
@@ -28,18 +28,7 @@
 
         <script type="text/javascript">
             $(document).ready(function () {
-                //$('#accordion').on('click', function () {
-                //    alert("accordion clicked.");
-                //    var hasClas = $('#collapseOne').hasClass('in');
-                //    alert(hasClas);
-                //    if (hasClas) {
-                //        $('#collapseOne').removeClass('in');
-                //    } else {
-                //        $('#collapseOne').addClass('in');
-                //    }
-
-                //});
-
+              
             });
 
         </script>

@@ -871,5 +871,13 @@ namespace PreScripds.UI.Controllers
             }
             return View(ApprovalViewModel);
         }
+
+        [PreScripds.UI.Common.Authorize]
+        [HttpPost]
+        public ActionResult Approvals(long id, bool isActive, long roleId = 0)
+        {
+            var aprovalVM = new ApprovalViewModel();
+            return View(aprovalVM);
+        }
     }
 }

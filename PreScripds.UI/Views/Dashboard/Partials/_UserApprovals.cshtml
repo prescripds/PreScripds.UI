@@ -1,4 +1,4 @@
-﻿@model List<PreScripds.UI.Models.UserApprovalViewModel>
+﻿@model PreScripds.UI.Models.ApprovalViewModel
 @using PreScripds.UI.Common;
 @using PreScripds.Domain;
 @using PreScripds.Infrastructure;
@@ -12,7 +12,7 @@
     </div>
     <div id="collapseOne" class="panel-collapse collapse in">
         <div class="panel-body">
-            @if (Model.IsCollectionValid())
+            @if (Model.UserApprovalViewModel.IsCollectionValid())
             {
                 <div class="table-responsive">
                     <table class="table table-bordered">
@@ -24,30 +24,30 @@
                                 <th> Approved</th>
                             </tr>
                         </thead>
-                        @for (int i = 0; i < Model.Count; i++)
+                        @for (int i = 0; i < Model.UserApprovalViewModel.Count; i++)
                         {
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="ellipsis-div" title="@Model[i].UserId">
-                                        @Html.TextBoxFor(m => m[i].UserId)
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="ellipsis-div" title="@Model[i].UserName">
-                                        @Html.TextBoxFor(m => m[i].UserName)
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="ellipsis-div">
-                                        @Html.DropDownListFor(x => x[i].RoleId, Model[i].Role.ToSelectListItems(model => model.Id.ToString(), model => model.RoleName), new { @class = "form-control" })
-                                    </div>
-                                </td>
-                                <td>
-                                    @Html.CheckBoxFor(m => m[i].IsApproved, new { data_id = Model[i].UserId })
-                                </td>
-                            </tr>
-                        </tbody>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="ellipsis-div" title="@Model.UserApprovalViewModel[i].UserId">
+                                            @Html.TextBoxFor(m => m.UserApprovalViewModel[i].UserId)
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ellipsis-div" title="@Model.UserApprovalViewModel[i].UserName">
+                                            @Html.TextBoxFor(m => m.UserApprovalViewModel[i].UserName)
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ellipsis-div">
+                                            @Html.DropDownListFor(x => x.UserApprovalViewModel[i].RoleId, Model.UserApprovalViewModel[i].Role.ToSelectListItems(model => model.Id.ToString(), model => model.RoleName), new { @class = "form-control" })
+                                        </div>
+                                    </td>
+                                    <td class="approvedCheck" data-rowid="@i">
+                                        @Html.CheckBoxFor(m => m.UserApprovalViewModel[i].IsApproved, new { data_id = Model.UserApprovalViewModel[i].UserId, data_roleid = Model.UserApprovalViewModel[i].RoleId, data_rowId = i })
+                                    </td>
+                                </tr>
+                            </tbody>
                         }
                     </table>
                 </div>
