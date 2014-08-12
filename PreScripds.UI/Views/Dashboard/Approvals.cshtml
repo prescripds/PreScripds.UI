@@ -28,7 +28,13 @@
 
         <script type="text/javascript">
             $(document).ready(function () {
-              
+                $('.user-status').on('click', function () {
+                    var rowId = $(this).data('rowid');
+                    var userId = $(this).data('id');
+                    var roleId = $(this).data('roleid');
+                    var status = $(this).is(':checked');
+
+                });
             });
 
         </script>

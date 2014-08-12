@@ -27,7 +27,7 @@
                         @for (int i = 0; i < Model.UserApprovalViewModel.Count; i++)
                         {
                             <tbody>
-                                <tr>
+                                <tr id="userApprovalRow_@i">
                                     <td>
                                         <div class="ellipsis-div" title="@Model.UserApprovalViewModel[i].UserId">
                                             @Html.TextBoxFor(m => m.UserApprovalViewModel[i].UserId)
@@ -44,7 +44,7 @@
                                         </div>
                                     </td>
                                     <td class="approvedCheck" data-rowid="@i">
-                                        @Html.CheckBoxFor(m => m.UserApprovalViewModel[i].IsApproved, new { data_id = Model.UserApprovalViewModel[i].UserId, data_roleid = Model.UserApprovalViewModel[i].RoleId, data_rowId = i })
+                                        @Html.CheckBoxFor(m => m.UserApprovalViewModel[i].IsApproved, new { data_id = Model.UserApprovalViewModel[i].UserId, data_roleid = Model.UserApprovalViewModel[i].RoleId, data_rowid = i,@class="user-status" })
                                     </td>
                                 </tr>
                             </tbody>
