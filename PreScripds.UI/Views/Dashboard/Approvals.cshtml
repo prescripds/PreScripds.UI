@@ -33,7 +33,9 @@
                     var userId = $(this).data('id');
                     var roleId = $(this).data('roleid');
                     var status = $(this).is(':checked');
-
+                    ajaxPost('/Dashboard/UserApprovals', { id: userId, isActive: status, roleId: roleId }, function (res) {
+                        alert("Inside ajax post");
+                    });
                 });
             });
 

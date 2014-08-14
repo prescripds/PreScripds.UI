@@ -22,7 +22,7 @@ namespace PreScripds.BL
             _userRepository = new UserRepository(context);
         }
 
-       public List<User> GetUsers(long organzationId)
+        public List<User> GetUsers(long organzationId)
         {
             var users = _userRepository.GetUsers(organzationId);
             return users;
@@ -90,6 +90,11 @@ namespace PreScripds.BL
         public void UpdateUserLogin(UserHistory userHistory)
         {
             _userRepository.UpdateUserLogin(userHistory);
+        }
+
+        public void UpdateUserByAdmin(long id, bool isActive)
+        {
+            _userRepository.UpdateUserByAdmin(id, isActive);
         }
     }
 }

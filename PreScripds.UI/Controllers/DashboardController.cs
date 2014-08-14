@@ -874,10 +874,18 @@ namespace PreScripds.UI.Controllers
 
         [PreScripds.UI.Common.Authorize]
         [HttpPost]
-        public ActionResult Approvals(long id, bool isActive, long roleId = 0)
+        public void UserApprovals(long id, bool isActive, long roleId = 0)
         {
-            var aprovalVM = new ApprovalViewModel();
-            return View(aprovalVM);
+            if (roleId != 0)
+            {
+                //TODO:Insert into User in role table
+                _wcfService.InvokeService<IOrganizationService>((svc) => svc.UpdateUserInRole(id, roleId));
+            }
+            if (id != 0)
+            {
+                _wcfService.InvokeService<IUserService>((svc) => svc.UpdateUserByAdmin(id, isActive));
+            }
+
         }
     }
 }

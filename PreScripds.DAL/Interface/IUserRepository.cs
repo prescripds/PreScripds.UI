@@ -23,5 +23,6 @@ namespace PreScripds.DAL.Interface
         bool CheckOrganizationExist(string orgName);
         UserHistory AddUserHistory(UserHistory userHistory);
         void UpdateUserLogin(UserHistory userHistory);
+        void UpdateUserByAdmin(long id, bool isActive);
     }
 }

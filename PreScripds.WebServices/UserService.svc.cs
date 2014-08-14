@@ -104,5 +104,10 @@ namespace PreScripds.WebServices
         {
             _userBl.UpdateUserLogin(userHistory);
         }
+
+        public void UpdateUserByAdmin(long id, bool isActive)
+        {
+            _userBl.UpdateUserByAdmin(id, isActive);
+        }
     }
 }

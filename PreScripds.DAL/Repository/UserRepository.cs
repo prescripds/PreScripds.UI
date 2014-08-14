@@ -346,5 +346,16 @@ namespace PreScripds.DAL.Repository
             }
 
         }
+
+        public void UpdateUserByAdmin(long id, bool isActive)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var user = uow.GetRepository<User>().Items.FirstOrDefault(x => x.Id == id);
+                user.AdminApprove = isActive;
+                uow.GetRepository<User>().Update(user);
+                uow.SaveChanges();
+            }
+        }
     }
 }

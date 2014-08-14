@@ -273,5 +273,25 @@ namespace PreScripds.DAL.Repository
                 uow.SaveChanges();
             }
         }
+
+        public void UpdateUserInRole(long id, long roleId)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                List<UserInRole> userInRoles = new List<UserInRole>();
+                var userInRole = uow.GetRepository<UserInRole>().Items.Where(x => x.UserId == id).ToList();
+                if (userInRole.IsCollectionValid())
+                {
+                    var userRoleExists = userInRole.FirstOrDefault(x => x.RoleId == roleId);
+                    if (userRoleExists.IsNotNull())
+                        return;
+                    else
+                    {
+                        
+                        
+                    }
+                }
+            }
+        }
     }
 }
