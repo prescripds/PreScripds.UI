@@ -28,8 +28,10 @@
 
         <script type="text/javascript">
             $(document).ready(function () {
+                var elementName = "";
+                var rowId = 0;
                 $('.user-status').on('click', function () {
-                    var rowId = $(this).data('rowid');
+                    rowId = $(this).data('rowid');
                     var userId = $(this).data('id');
                     var roleId = $(this).data('roleid');
                     var status = $(this).is(':checked');
@@ -37,6 +39,21 @@
                         alert("Inside ajax post");
                     });
                 });
+                //$('.ddlRole').on('click', function () {
+                //    elementName = $(this).children().attr("id");
+                //    alert(rowId);
+                //});
+                $('#UserApprovalViewModel_' + rowId + '__RoleId').on('change', function () {
+                    alert(rowId);
+                });
+
+                //$('.ddlRow').on('click', function () {
+                //    var elementName = $(this).children().attr("id");
+                //    alert(elementName);
+                //    $('#' + elementName).on('change', function () {
+                //        alert('hi');
+                //    });
+                //});
             });
 
         </script>

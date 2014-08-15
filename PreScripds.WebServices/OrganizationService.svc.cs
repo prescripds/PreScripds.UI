@@ -139,5 +139,10 @@ namespace PreScripds.WebServices
             var userInRole = _organizationBl.GetUserInRole(organizationId);
             return userInRole;
         }
+
+        public void UpdateUserInRole(long id, long roleId)
+        {
+            _organizationBl.UpdateUserInRole(id, roleId);
+        }
     }
 }

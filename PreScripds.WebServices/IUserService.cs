@@ -54,7 +54,7 @@ namespace PreScripds.WebServices
         [WebInvoke(UriTemplate = "/UpdateUserLogin", ResponseFormat = WebMessageFormat.Xml)]
         void UpdateUserLogin(UserHistory userHistory);
         [OperationContract]
-        [WebInvoke(UriTemplate = "/UpdateUserByAdmin", ResponseFormat = WebMessageFormat.Xml)]
+        [WebInvoke(UriTemplate = "/UpdateUserByAdmin", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
         void UpdateUserByAdmin(long id, bool isActive);
     }
 }

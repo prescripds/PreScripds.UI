@@ -878,14 +878,12 @@ namespace PreScripds.UI.Controllers
         {
             if (roleId != 0)
             {
-                //TODO:Insert into User in role table
                 _wcfService.InvokeService<IOrganizationService>((svc) => svc.UpdateUserInRole(id, roleId));
             }
             if (id != 0)
             {
                 _wcfService.InvokeService<IUserService>((svc) => svc.UpdateUserByAdmin(id, isActive));
             }
-
         }
     }
 }

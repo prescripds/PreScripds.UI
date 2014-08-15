@@ -30,5 +30,6 @@ namespace PreScripds.BL.Interface
         void AddRoleInPermission(RoleInPermission roleInPermission);
         List<UserInRole> GetUserInRole(long organizationId);
         void AddUserInRole(List<UserInRole> userInRole);
+        void UpdateUserInRole(long id, long roleId);
     }
 }

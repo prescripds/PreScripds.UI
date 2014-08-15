@@ -133,5 +133,10 @@ namespace PreScripds.BL
             var userInRoles = _organizationRepository.GetUserInRole(organizationId);
             return userInRoles;
         }
+
+        public void UpdateUserInRole(long id, long roleId)
+        {
+            _organizationRepository.UpdateUserInRole(id, roleId);
+        }
     }
 }

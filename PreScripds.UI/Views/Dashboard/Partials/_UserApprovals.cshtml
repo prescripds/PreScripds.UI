@@ -39,12 +39,12 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="ellipsis-div">
+                                        <div class="ellipsis-div ddlRole">
                                             @Html.DropDownListFor(x => x.UserApprovalViewModel[i].RoleId, Model.UserApprovalViewModel[i].Role.ToSelectListItems(model => model.Id.ToString(), model => model.RoleName), new { @class = "form-control" })
                                         </div>
                                     </td>
                                     <td class="approvedCheck" data-rowid="@i">
-                                        @Html.CheckBoxFor(m => m.UserApprovalViewModel[i].IsApproved, new { data_id = Model.UserApprovalViewModel[i].UserId, data_roleid = Model.UserApprovalViewModel[i].RoleId, data_rowid = i,@class="user-status" })
+                                        @Html.CheckBoxFor(m => m.UserApprovalViewModel[i].IsApproved, new { data_id = Model.UserApprovalViewModel[i].UserId, data_roleid = Model.UserApprovalViewModel[i].RoleId, data_rowid = i, @class = "user-status" })
                                     </td>
                                 </tr>
                             </tbody>

@@ -287,8 +287,14 @@ namespace PreScripds.DAL.Repository
                         return;
                     else
                     {
-                        
-                        
+                        var userInRoleModel = new UserInRole()
+                        {
+                            RoleId = roleId,
+                            UserId = id,
+                            Active = true
+                        };
+                        userInRoles.Add(userInRoleModel);
+                        AddUserInRole(userInRoles);
                     }
                 }
             }
