@@ -874,15 +874,21 @@ namespace PreScripds.UI.Controllers
 
         [PreScripds.UI.Common.Authorize]
         [HttpPost]
-        public void UserApprovals(long id, bool isActive, long roleId = 0)
+        public void UserApprovals(long id, bool isActive)
+        {
+            if (id != 0)
+            {
+                _wcfService.InvokeService<IUserService>((svc) => svc.UpdateUserByAdmin(id, isActive));
+            }
+        }
+
+        [PreScripds.UI.Common.Authorize]
+        [HttpPost]
+        public void UserRoleApproval(long id, long roleId)
         {
             if (roleId != 0)
             {
                 _wcfService.InvokeService<IOrganizationService>((svc) => svc.UpdateUserInRole(id, roleId));
-            }
-            if (id != 0)
-            {
-                _wcfService.InvokeService<IUserService>((svc) => svc.UpdateUserByAdmin(id, isActive));
             }
         }
     }

@@ -279,23 +279,23 @@ namespace PreScripds.DAL.Repository
             using (var uow = new UnitOfWork())
             {
                 List<UserInRole> userInRoles = new List<UserInRole>();
-                var userInRole = uow.GetRepository<UserInRole>().Items.Where(x => x.UserId == id).ToList();
-                if (userInRole.IsCollectionValid())
+                var userInRole = uow.GetRepository<UserInRole>().Items.FirstOrDefault(x => x.UserId == id);
+                if (userInRole.IsNotNull())
                 {
-                    var userRoleExists = userInRole.FirstOrDefault(x => x.RoleId == roleId);
-                    if (userRoleExists.IsNotNull())
-                        return;
-                    else
+                    userInRole.RoleId = roleId;
+                    uow.GetRepository<UserInRole>().Update(userInRole);
+                    uow.SaveChanges();
+                }
+                else
+                {
+                    var userInRoleModel = new UserInRole()
                     {
-                        var userInRoleModel = new UserInRole()
-                        {
-                            RoleId = roleId,
-                            UserId = id,
-                            Active = true
-                        };
-                        userInRoles.Add(userInRoleModel);
-                        AddUserInRole(userInRoles);
-                    }
+                        UserId = id,
+                        RoleId = roleId,
+                        Active = true
+                    };
+                    userInRoles.Add(userInRoleModel);
+                    AddUserInRole(userInRoles);
                 }
             }
         }

@@ -33,27 +33,15 @@
                 $('.user-status').on('click', function () {
                     rowId = $(this).data('rowid');
                     var userId = $(this).data('id');
-                    var roleId = $(this).data('roleid');
                     var status = $(this).is(':checked');
-                    ajaxPost('/Dashboard/UserApprovals', { id: userId, isActive: status, roleId: roleId }, function (res) {
-                        alert("Inside ajax post");
-                    });
-                });
-                //$('.ddlRole').on('click', function () {
-                //    elementName = $(this).children().attr("id");
-                //    alert(rowId);
-                //});
-                $('#UserApprovalViewModel_' + rowId + '__RoleId').on('change', function () {
-                    alert(rowId);
+                    ajaxPost('/Dashboard/UserApprovals', { id: userId, isActive: status }, null);
                 });
 
-                //$('.ddlRow').on('click', function () {
-                //    var elementName = $(this).children().attr("id");
-                //    alert(elementName);
-                //    $('#' + elementName).on('change', function () {
-                //        alert('hi');
-                //    });
-                //});
+                $('.ddlRole').on('change', function () {
+                    var selectedVal = $(this).val();
+                    var userId = $(this).data("id");
+                    ajaxPost('/Dashboard/UserRoleApproval', { id: userId, roleId: selectedVal }, null);
+                });
             });
 
         </script>
