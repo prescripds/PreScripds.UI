@@ -4790,6 +4790,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
         .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
             color: #000000;
             background-color: darkgrey;
+            border:1px solid black;
         }
 
     .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a,
