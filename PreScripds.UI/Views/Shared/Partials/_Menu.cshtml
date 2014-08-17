@@ -2,14 +2,17 @@
 <div class="menu">
     <a class="toggleMenu" href="#"><img src="~/Images/nav.png" alt="" /></a>
     <ul class="nav">
-        <li><a href="#"><i><img src="~/Images/settings.png" alt="" /></i>Settings</a></li>
+        <li>
+            <a href="#"><i><img src="~/Images/settings.png" alt="" /></i>Settings</a>
+        </li>
         <li class="active"><a href="#"><i><img src="~/Images/user.png" alt="" /></i>Account</a></li>
         <li><a href="#"><i><img src="~/Images/mail.png" alt="" /></i>Messages <span class="messages">5</span></a></li>
         <li><a href="#"><i><img src="~/Images/favourite.png" alt="" /></i>Favorites</a></li>
+
         @*@if (PreScripds.UI.Common.SessionContext.CurrentUser != null && PreScripds.UI.Common.SessionContext.CurrentUser.IsAdmin == 1)
-        {
-            <li><a href="#"><i><img src="~/Images/favourite.png" alt="" /></i>Admin</a></li>
-        }*@
+            {
+                <li><a href="#"><i><img src="~/Images/favourite.png" alt="" /></i>Admin</a></li>
+            }*@
 
         <div class="clear"></div>
     </ul>

@@ -4788,8 +4788,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
         .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
         .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
-            color: #ffffff;
-            background-color: transparent;
+            color: #000000;
+            background-color: darkgrey;
         }
 
     .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a,

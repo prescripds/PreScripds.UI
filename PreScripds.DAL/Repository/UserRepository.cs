@@ -314,10 +314,11 @@ namespace PreScripds.DAL.Repository
 
         public List<Role> GetRole(long organizationId)
         {
-            //TODO:Get roles for a user from userinrole table.
             using (var uow = new UnitOfWork())
             {
-                var role = uow.GetRepository<Role>().Items.Where(x => x.OrganizationId == organizationId).ToList();
+                var role = uow.GetRepository<Role>().Items
+                    .Include(x => x.RoleInPermissions.Select(z => z.PermissionSet))
+                    .Include(x => x.UserInRoles).Where(x => x.OrganizationId == organizationId).ToList();
                 return role;
             }
 

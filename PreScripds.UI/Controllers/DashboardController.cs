@@ -891,5 +891,12 @@ namespace PreScripds.UI.Controllers
                 _wcfService.InvokeService<IOrganizationService>((svc) => svc.UpdateUserInRole(id, roleId));
             }
         }
+
+        //[PreScripds.UI.Common.Authorize]
+        //[HttpPost]
+        //public ActionResult OrganizationApproval()
+        //{
+
+        //}
     }
 }
