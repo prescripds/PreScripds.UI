@@ -112,7 +112,7 @@ body {
 }
 
 .wrap {
-    width: 80%;
+    width: 73%;
     margin: 0 auto;
     transition: all .2s linear;
     -moz-transition: all .2s linear; /* firefox */

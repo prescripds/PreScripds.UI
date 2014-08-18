@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="~/Content/clndr.css" type="text/css" />
 
 </head>
-<body>
+<body class="openHtmlBg">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -36,18 +36,29 @@
             </div>
         </div>
     </div>
-    <div class="wrap" style="margin-top:8%;">
-        <div class="header">
-            <div class="header_top">
-                @Html.Partial("Partials/_Menu")
-                <div class="clear"></div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 col-sm-3 col-xs-3">
+                @*<div class="wrap" style="margin-top:7%;">
+                    <div class="header">
+                        <div class="header_top">*@
+                <div class="sidebar-nav">
+                    @Html.Partial("Partials/_Menu")
+                    <div class="clear"></div>
+                </div>
+                @*<  </div>*@
+            </div>
+            <div class="main">
+                <div class="wrap">
+                    @RenderBody()
+                </div>
             </div>
         </div>
+
     </div>
-    <div class="main">
-        <div class="wrap">
-            @RenderBody()
-        </div>
+
+
     </div>
     @Html.Partial("Partials/_Footer")
 
