@@ -335,6 +335,24 @@ namespace PreScripds.DAL.Repository
             }
 
         }
+        public List<Department> GetDepartmentInOrganization(long organizationId)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var departments = new List<Department>();
+                var deptInOrg = uow.GetRepository<DepartmentInOrganization>().Items.Where(x => x.OrganizationId == organizationId).ToList();
+                if (deptInOrg.IsCollectionValid())
+                {
+                    foreach (var dept in deptInOrg)
+                    {
+                        var department = uow.GetRepository<Department>().Items.FirstOrDefault(x => x.Id == dept.DepartmentId.Value);
+                        departments.Add(department);
+                    }
+                    return departments;
+                }
+                return departments;
+            }
+        }
 
         public bool CheckOrganizationExist(string orgName)
         {

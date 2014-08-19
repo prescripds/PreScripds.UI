@@ -18,19 +18,10 @@ namespace PreScripds.UI.Models
         public long RoleId { get; set; }
         public List<Role> Role { get; set; }
         public bool IsApproved { get; set; }
-
-    }
-
-    public class UserDepartmentRoleViewModel
-    {
-        public long UserId { get; set; }
-        public string UserName { get; set; }
-        public long DepartmentId { get; set; }
         public List<Department> Department { get; set; }
-        public long RoleId { get; set; }
-        public List<Role> Role { get; set; }
-
+        public long DepartmentId { get; set; }
     }
+
 
     public class OrganizationApprovalViewModel
     {
@@ -44,6 +35,6 @@ namespace PreScripds.UI.Models
     {
         public long UserId { get; set; }
         public string UserName { get; set; }
-        
+
     }
 }

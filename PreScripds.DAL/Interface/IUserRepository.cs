@@ -24,5 +24,6 @@ namespace PreScripds.DAL.Interface
         UserHistory AddUserHistory(UserHistory userHistory);
         void UpdateUserLogin(UserHistory userHistory);
         void UpdateUserByAdmin(long id, bool isActive);
+        List<Department> GetDepartmentInOrganization(long organizationId);
     }
 }

@@ -109,5 +109,11 @@ namespace PreScripds.WebServices
         {
             _userBl.UpdateUserByAdmin(id, isActive);
         }
+
+        public List<Department> GetDepartmentInOrganization(long organizationId)
+        {
+            var departments = _userBl.GetDepartmentInOrganization(organizationId);
+            return departments;
+        }
     }
 }

@@ -56,5 +56,8 @@ namespace PreScripds.WebServices
         [OperationContract]
         [WebInvoke(UriTemplate = "/UpdateUserByAdmin", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
         void UpdateUserByAdmin(long id, bool isActive);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/GetDepartmentInOrganization", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        List<Department> GetDepartmentInOrganization(long organizationId);
     }
 }

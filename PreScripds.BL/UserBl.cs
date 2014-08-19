@@ -96,5 +96,11 @@ namespace PreScripds.BL
         {
             _userRepository.UpdateUserByAdmin(id, isActive);
         }
+
+        public List<Department> GetDepartmentInOrganization(long organizationId)
+        {
+            var departments = _userRepository.GetDepartmentInOrganization(organizationId);
+            return departments;
+        }
     }
 }

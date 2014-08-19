@@ -853,10 +853,10 @@ namespace PreScripds.UI.Controllers
             {
                 UserApprovalViewModel = new List<UserApprovalViewModel>()
             };
-            var userApprovedVM = new UserApprovalViewModel() { Role = new List<Role>() };
-            var users = _wcfService.InvokeService<IUserService, List<User>>((svc) => svc.GetUsers(SessionContext.CurrentUser.OrganizationId.Value).Where(x => (!x.AdminApprove.HasValue)).ToList());
+            var userApprovedVM = new UserApprovalViewModel() { Role = new List<Role>(), Department = new List<Department>() };
+            var users = _wcfService.InvokeService<IUserService, List<User>>((svc) => svc.GetUsers(SessionContext.CurrentUser.OrganizationId.Value));
             var roles = _wcfService.InvokeService<IUserService, List<Role>>((svc) => svc.GetRole(SessionContext.CurrentUser.OrganizationId.Value));
-
+            var departments = _wcfService.InvokeService<IUserService, List<Department>>((svc) => svc.GetDepartmentInOrganization(SessionContext.CurrentUser.OrganizationId.Value));
             foreach (var user in users)
             {
                 userApprovedVM = new UserApprovalViewModel();
@@ -867,6 +867,7 @@ namespace PreScripds.UI.Controllers
                 userApprovedVM.UserName = string.Format("{0} {1}.{2}".ToFormat(user.FirstName, middleName, user.LastName));
                 userApprovedVM.IsApproved = (user.AdminApprove.HasValue) ? user.AdminApprove.Value : false;
                 userApprovedVM.Role = roles;
+                userApprovedVM.Department = departments;
                 ApprovalViewModel.UserApprovalViewModel.Add(userApprovedVM);
             }
             return View(ApprovalViewModel);

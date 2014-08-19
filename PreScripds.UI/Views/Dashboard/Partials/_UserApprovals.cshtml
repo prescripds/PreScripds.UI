@@ -21,6 +21,7 @@
                                 <th>Id</th>
                                 <th> User Name</th>
                                 <th> Role</th>
+                                <th>Department</th>
                                 <th> Approved</th>
                             </tr>
                         </thead>
@@ -41,6 +42,11 @@
                                     <td>
                                         <div class="ellipsis-div">
                                             @Html.DropDownListFor(x => x.UserApprovalViewModel[i].RoleId, Model.UserApprovalViewModel[i].Role.ToSelectListItems(model => model.Id.ToString(), model => model.RoleName), new { @class = "form-control ddlRole", data_id = Model.UserApprovalViewModel[i].UserId })
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ellipsis-div">
+                                            @Html.DropDownListFor(x => x.UserApprovalViewModel[i].DepartmentId, Model.UserApprovalViewModel[i].Department.ToSelectListItems(model => model.Id.ToString(), model => model.DepartmentName), new { @class = "form-control ddlRole", data_id = Model.UserApprovalViewModel[i].UserId })
                                         </div>
                                     </td>
                                     <td class="approvedCheck" data-rowid="@i">
