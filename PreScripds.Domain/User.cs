@@ -76,6 +76,7 @@ namespace PreScripds.Domain
         public virtual ICollection<UserInRole> UserInRoles { get; set; }
         [DataMember]
         public virtual ICollection<UserLogin> UserLogins { get; set; }
-
+        [DataMember]
+        public virtual ICollection<UserRoleDepartment> UserRoleDepartments { get; set; }
     }
 }

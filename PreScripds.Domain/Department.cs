@@ -35,6 +35,7 @@ namespace PreScripds.Domain
         public virtual ICollection<Module> Modules { get; set; }
         [DataMember]
         public virtual ICollection<PermissionSet> PermissionSets { get; set; }
-
+        [DataMember]
+        public virtual ICollection<UserRoleDepartment> UserRoleDepartments { get; set; }
     }
 }

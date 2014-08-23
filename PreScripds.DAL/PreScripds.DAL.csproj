@@ -111,6 +111,7 @@
     <Compile Include="Mapping\UserInRoleMap.cs" />
     <Compile Include="Mapping\UserLoginMap.cs" />
     <Compile Include="Mapping\UserMap.cs" />
+    <Compile Include="Mapping\UserRoleDepartmentMap.cs" />
     <Compile Include="PreScripdsConfiguration.cs" />
     <Compile Include="PreScripdsDb.cs" />
     <Compile Include="PreScripdsDbIntializer.cs" />

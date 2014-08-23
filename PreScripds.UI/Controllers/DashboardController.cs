@@ -893,11 +893,11 @@ namespace PreScripds.UI.Controllers
             }
         }
 
-        //[PreScripds.UI.Common.Authorize]
-        //[HttpPost]
-        //public ActionResult OrganizationApproval()
-        //{
+        [PreScripds.UI.Common.Authorize]
+        [HttpPost]
+        public void UserRoleDepartment(long id, long roleId, long departmentId)
+        {
 
-        //}
+        }
     }
 }

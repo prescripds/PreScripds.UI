@@ -34,5 +34,7 @@ namespace PreScripds.Domain
         public virtual Organization Organization { get; set; }
         [DataMember]
         public virtual ICollection<UserInRole> UserInRoles { get; set; }
+        [DataMember]
+        public virtual ICollection<UserRoleDepartment> UserRoleDepartments { get; set; }
     }
 }
