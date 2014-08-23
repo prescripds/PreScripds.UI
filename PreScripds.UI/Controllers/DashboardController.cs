@@ -897,7 +897,7 @@ namespace PreScripds.UI.Controllers
         [HttpPost]
         public void UserRoleDepartment(long id, long roleId, long departmentId)
         {
-
+            
         }
     }
 }

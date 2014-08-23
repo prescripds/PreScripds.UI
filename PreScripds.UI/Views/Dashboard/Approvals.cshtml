@@ -30,6 +30,7 @@
             $(document).ready(function () {
                 var elementName = "";
                 var rowId = 0;
+                var roleIdOnLoad = $('.ddlRole').val();
                 $('.user-status').on('click', function () {
                     rowId = $(this).data('rowid');
                     var userId = $(this).data('id');
@@ -41,6 +42,12 @@
                     var selectedVal = $(this).val();
                     var userId = $(this).data("id");
                     ajaxPost('/Dashboard/UserRoleApproval', { id: userId, roleId: selectedVal }, null);
+                });
+                $('.ddlDepartment').on('change', function () {
+                    var selectedVal = $(this).val();
+                    var userId = $(this).data("id");
+                    var roleId = roleIdOnLoad;
+                    ajaxPost('/Dashboard/UserRoleDepartment', { id: userId, roleId: roleId, departmentId: selectedVal }, null);
                 });
             });
 
