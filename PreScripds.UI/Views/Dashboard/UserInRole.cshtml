@@ -23,7 +23,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="form-group">
                     <label class="control-label" for="RoleName">Role</label>
-                    @Html.DropDownListFor(x => x.RoleId, Model.Roles.ToSelectListItems(model => model.Id.ToString(), model => model.RoleName), new { @class = "form-control" })
+                    @Html.DropDownListFor(x => x.RoleId, Model.Roles.ToSelectListItems(model => model.Id.ToString(), model => model.RoleName),"--Select--", new { @class = "form-control" })
 
 
                 </div>

@@ -41,12 +41,12 @@
                                     </td>
                                     <td>
                                         <div class="ellipsis-div">
-                                            @Html.DropDownListFor(x => x.UserApprovalViewModel[i].RoleId, Model.UserApprovalViewModel[i].Role.ToSelectListItems(model => model.Id.ToString(), model => model.RoleName), new { @class = "form-control ddlRole", data_id = Model.UserApprovalViewModel[i].UserId })
+                                            @Html.DropDownListFor(x => x.UserApprovalViewModel[i].RoleId, Model.UserApprovalViewModel[i].Role.ToSelectListItems(model => model.Id.ToString(), model => model.RoleName),"--Select--", new { @class = "form-control ddlRole", data_id = Model.UserApprovalViewModel[i].UserId })
                                         </div>
                                     </td>
                                     <td>
                                         <div class="ellipsis-div">
-                                            @Html.DropDownListFor(x => x.UserApprovalViewModel[i].DepartmentId, Model.UserApprovalViewModel[i].Department.ToSelectListItems(model => model.Id.ToString(), model => model.DepartmentName), new { @class = "form-control ddlDepartment", data_id = Model.UserApprovalViewModel[i].UserId, data_roleid = Model.UserApprovalViewModel[i].RoleId })
+                                            @Html.DropDownListFor(x => x.UserApprovalViewModel[i].DepartmentId, Model.UserApprovalViewModel[i].Department.ToSelectListItems(model => model.Id.ToString(), model => model.DepartmentName),"--Select--", new { @class = "form-control ddlDepartment", data_id = Model.UserApprovalViewModel[i].UserId, data_roleid = Model.UserApprovalViewModel[i].RoleId })
                                         </div>
                                     </td>
                                     <td class="approvedCheck" data-rowid="@i">

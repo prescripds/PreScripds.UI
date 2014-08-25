@@ -32,7 +32,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="form-group">
                     <label class="control-label" for="RoleName">Department</label>
-                    @Html.DropDownListFor(x => Model.DepartmentId, Model.Department.ToSelectListItems(model => model.Id.ToString(), model => model.DepartmentName), new { @class = "form-control" })
+                    @Html.DropDownListFor(x => Model.DepartmentId, Model.Department.ToSelectListItems(model => model.Id.ToString(), model => model.DepartmentName),"--Select--", new { @class = "form-control" })
                 </div>
             </div>
             <div class="col-md-4 col-sm-6">
