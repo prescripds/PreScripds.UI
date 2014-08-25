@@ -897,7 +897,10 @@ namespace PreScripds.UI.Controllers
         [HttpPost]
         public void UserRoleDepartment(long id, long roleId, long departmentId)
         {
-            
+            if (departmentId != 0)
+            {
+                var userRoleDept = _wcfService.InvokeService<IOrganizationService, bool>((svc) => svc.AddUserRoleDepartment(id, roleId, departmentId));
+            }
         }
     }
 }

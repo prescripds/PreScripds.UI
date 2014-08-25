@@ -138,5 +138,11 @@ namespace PreScripds.BL
         {
             _organizationRepository.UpdateUserInRole(id, roleId);
         }
+
+        public bool AddUserRoleDepartment(long id, long roleId, long departmentId)
+        {
+            var userRoleDept = _organizationRepository.AddUserRoleDepartment(id, roleId, departmentId);
+            return userRoleDept;
+        }
     }
 }

@@ -31,5 +31,6 @@ namespace PreScripds.DAL.Interface
         List<UserInRole> GetUserInRole(long organizationId);
         void AddUserInRole(List<UserInRole> userInRole);
         void UpdateUserInRole(long id, long roleId);
+        bool AddUserRoleDepartment(long id, long roleId, long departmentId);
     }
 }

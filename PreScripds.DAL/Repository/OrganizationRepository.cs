@@ -293,5 +293,27 @@ namespace PreScripds.DAL.Repository
 
             }
         }
+
+        public bool AddUserRoleDepartment(long id, long roleId, long departmentId)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var userRoleDeptFrmDb = uow.GetRepository<UserRoleDepartment>().Items
+                    .Where(x => x.UserId == id && x.RoleId == roleId && x.DepartmentId == departmentId).ToList();
+                if (!userRoleDeptFrmDb.IsCollectionValid())
+                {
+                    var userRoleDeptEntity = new UserRoleDepartment()
+                    {
+                        DepartmentId = departmentId,
+                        RoleId = roleId,
+                        UserId = id
+                    };
+                    uow.GetRepository<UserRoleDepartment>().Insert(userRoleDeptEntity);
+                    uow.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+        }
     }
 }

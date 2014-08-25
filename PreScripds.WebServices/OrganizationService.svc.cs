@@ -144,5 +144,11 @@ namespace PreScripds.WebServices
         {
             _organizationBl.UpdateUserInRole(id, roleId);
         }
+
+        public bool AddUserRoleDepartment(long id, long roleId, long departmentId)
+        {
+            var userRoleDept = _organizationBl.AddUserRoleDepartment(id, roleId, departmentId);
+            return userRoleDept;
+        }
     }
 }
