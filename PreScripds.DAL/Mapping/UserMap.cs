@@ -70,6 +70,7 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.CreatedBy).HasColumnName("CreatedBy");
             this.Property(t => t.UpdatedBy).HasColumnName("UpdatedBy");
             this.Property(t => t.IsOrgSuperAdmin).HasColumnName("IsOrgSuperAdmin");
+            this.Property(t => t.IsHomeSuperAdmin).HasColumnName("IsHomeSuperAdmin");
             // Relationships
             this.HasRequired(t => t.Country)
                 .WithMany(t => t.Users)

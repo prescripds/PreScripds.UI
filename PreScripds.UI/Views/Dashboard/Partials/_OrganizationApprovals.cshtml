@@ -1,0 +1,62 @@
+﻿@model PreScripds.UI.Models.ApprovalViewModel
+@using PreScripds.UI.Common;
+@using PreScripds.Domain;
+@using PreScripds.Infrastructure;
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                Organization Approvals
+            </a><i class="indicator glyphicon glyphicon-user  pull-right"></i>
+        </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse in">
+        <div class="panel-body">
+            @if (Model.OrganizationApprovalViewModel.IsCollectionValid())
+            {
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th> Organization</th>
+                                <th> User Name</th>
+                                <th> Approved</th>
+                            </tr>
+                        </thead>
+                        @for (int i = 0; i < Model.OrganizationApprovalViewModel.Count; i++)
+                        {
+                            <tbody>
+                                <tr id="userApprovalRow_@i">
+                                    <td>
+                                        <div class="ellipsis-div" title="@Model.OrganizationApprovalViewModel[i].OrganizationId">
+                                            @Html.TextBoxFor(m => m.OrganizationApprovalViewModel[i].OrganizationId)
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ellipsis-div" title="@Model.OrganizationApprovalViewModel[i].OrganizationName">
+                                            @Html.TextBoxFor(m => m.OrganizationApprovalViewModel[i].OrganizationName)
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ellipsis-div" title="@Model.OrganizationApprovalViewModel[i].UserName">
+                                            @Html.TextBoxFor(m => m.OrganizationApprovalViewModel[i].UserName)
+                                        </div>
+                                    </td>
+                                    <td class="approvedCheck" data-rowid="@i">
+                                        @Html.CheckBoxFor(m => m.OrganizationApprovalViewModel[i].IsApproved, new { data_id = Model.OrganizationApprovalViewModel[i].OrganizationId, data_rowid = i, @class = "user-status" })
+                                    </td>
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
+                </div>
+            }
+            else
+            {
+                <p> No Records Found.</p>
+            }
+        </div>
+    </div>
+</div>

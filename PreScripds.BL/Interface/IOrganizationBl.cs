@@ -32,5 +32,6 @@ namespace PreScripds.BL.Interface
         void AddUserInRole(List<UserInRole> userInRole);
         void UpdateUserInRole(long id, long roleId);
         bool AddUserRoleDepartment(long id, long roleId, long departmentId);
+        List<Organization> GetOrganizations();
     }
 }

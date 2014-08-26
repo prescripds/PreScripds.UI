@@ -56,6 +56,7 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.CreatedBy).HasColumnName("CreatedBy");
             this.Property(t => t.UpdatedDate).HasColumnName("UpdatedDate");
             this.Property(t => t.UpdatedBy).HasColumnName("UpdatedBy");
+            this.Property(t => t.IsHomeOrg).HasColumnName("IsHomeOrg");
         }
     }
 }

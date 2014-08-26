@@ -87,6 +87,9 @@ namespace PreScripds.WebServices
         [OperationContract]
         [WebInvoke(UriTemplate = "/AddUserRoleDepartment", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
         bool AddUserRoleDepartment(long id, long roleId, long departmentId);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/GetOrganizations", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        List<Organization> GetOrganizations();
 
     }
 }

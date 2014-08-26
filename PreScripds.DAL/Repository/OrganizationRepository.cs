@@ -315,5 +315,14 @@ namespace PreScripds.DAL.Repository
                 return false;
             }
         }
+
+        public List<Organization> GetOrganizations()
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var organizations = uow.GetRepository<Organization>().Items.Where(x => x.IsHomeOrg.Value == false).ToList();
+                return organizations;
+            }
+        }
     }
 }

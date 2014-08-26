@@ -150,5 +150,10 @@ namespace PreScripds.WebServices
             var userRoleDept = _organizationBl.AddUserRoleDepartment(id, roleId, departmentId);
             return userRoleDept;
         }
+        public List<Organization> GetOrganizations()
+        {
+            var orgaizations = _organizationBl.GetOrganizations();
+            return orgaizations;
+        }
     }
 }

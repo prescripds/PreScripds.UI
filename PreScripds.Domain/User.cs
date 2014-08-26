@@ -73,6 +73,8 @@ namespace PreScripds.Domain
         [DataMember]
         public bool? IsOrgSuperAdmin { get; set; }
         [DataMember]
+        public bool? IsHomeSuperAdmin { get; set; }
+        [DataMember]
         public virtual ICollection<UserInRole> UserInRoles { get; set; }
         [DataMember]
         public virtual ICollection<UserLogin> UserLogins { get; set; }

@@ -59,5 +59,7 @@ namespace PreScripds.Domain
         public long UpdatedBy { get; set; }
         [DataMember]
         public DateTime UpdatedDate { get; set; }
+        [DataMember]
+        public bool? IsHomeOrg { get; set; }
     }
 }

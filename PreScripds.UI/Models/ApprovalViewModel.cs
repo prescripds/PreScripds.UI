@@ -9,6 +9,7 @@ namespace PreScripds.UI.Models
     public class ApprovalViewModel
     {
         public List<UserApprovalViewModel> UserApprovalViewModel { get; set; }
+        public List<OrganizationApprovalViewModel> OrganizationApprovalViewModel { get; set; }
     }
 
     public class UserApprovalViewModel
@@ -27,14 +28,9 @@ namespace PreScripds.UI.Models
     {
         public long OrganizationId { get; set; }
         public string OrganizationName { get; set; }
-        public bool IsApproved { get; set; }
-
-    }
-
-    public class OrganizationUserViewModel
-    {
         public long UserId { get; set; }
         public string UserName { get; set; }
+        public bool IsApproved { get; set; }
 
     }
 }

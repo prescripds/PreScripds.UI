@@ -1,4 +1,5 @@
 ﻿@model PreScripds.UI.Models.ApprovalViewModel
+@using PreScripds.UI.Common
 @{
     ViewBag.Title = "Approvals";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
@@ -8,6 +9,11 @@
 <div class="panel-group" id="accordion">
 
     @Html.Partial("Partials/_UserApprovals", Model)
+
+    @if (SessionContext.CurrentUser.IsHomeUrl && SessionContext.CurrentUser.IsHomeSuperAdmin.Value == true)
+    {
+        @Html.Partial("Partials/_OrganizationApprovals", Model)
+    }
 
     @*<div class="panel panel-default">
             <div class="panel-heading">

@@ -144,5 +144,11 @@ namespace PreScripds.BL
             var userRoleDept = _organizationRepository.AddUserRoleDepartment(id, roleId, departmentId);
             return userRoleDept;
         }
+        public List<Organization> GetOrganizations()
+        {
+            var organizations = _organizationRepository.GetOrganizations();
+            return organizations;
+        }
+
     }
 }

@@ -446,6 +446,7 @@ namespace PreScripds.UI.Controllers
 
                 var mappedModel = Mapper.Map<OrganizationViewModel, Organization>(orgViewModel);
                 mappedModel.CreatedDate = mappedModel.UpdatedDate = DateTime.Now;
+                mappedModel.IsHomeOrg = false;
                 mappedModel.CreatedBy = mappedModel.UpdatedBy = SessionContext.CurrentUser.Id;
                 mappedModel.LibraryFolders = new List<LibraryFolder>();
                 var libFolder = new LibraryFolder();
@@ -851,26 +852,53 @@ namespace PreScripds.UI.Controllers
         {
             var ApprovalViewModel = new ApprovalViewModel()
             {
-                UserApprovalViewModel = new List<UserApprovalViewModel>()
+                UserApprovalViewModel = new List<UserApprovalViewModel>(),
+                OrganizationApprovalViewModel = new List<OrganizationApprovalViewModel>()
             };
+
             var userApprovedVM = new UserApprovalViewModel() { Role = new List<Role>(), Department = new List<Department>() };
             var users = _wcfService.InvokeService<IUserService, List<User>>((svc) => svc.GetUsers(SessionContext.CurrentUser.OrganizationId.Value));
             var roles = _wcfService.InvokeService<IUserService, List<Role>>((svc) => svc.GetRole(SessionContext.CurrentUser.OrganizationId.Value));
             var departments = _wcfService.InvokeService<IUserService, List<Department>>((svc) => svc.GetDepartmentInOrganization(SessionContext.CurrentUser.OrganizationId.Value));
+
+            if (SessionContext.CurrentUser.IsHomeUrl && SessionContext.CurrentUser.IsHomeSuperAdmin.Value == true)
+            {
+                var organizations = _wcfService.InvokeService<IOrganizationService, List<Organization>>((svc) => svc.GetOrganizations());
+                var organizationsEntity = new List<OrganizationApprovalViewModel>();
+                foreach (var org in organizations)
+                {
+                    var organizationApprovalVM = new OrganizationApprovalViewModel();
+                    var orgSuperAdmin = users.FirstOrDefault(x => x.IsOrgSuperAdmin.Value == true);
+                    var userName = GetUserName(orgSuperAdmin);
+                    organizationApprovalVM.UserName = userName;
+                    organizationApprovalVM.OrganizationName = org.OrganizationName;
+                    organizationApprovalVM.OrganizationId = org.Id;
+                    organizationApprovalVM.IsApproved = org.Approved;
+                    ApprovalViewModel.OrganizationApprovalViewModel.Add(organizationApprovalVM);
+                }
+            }
+
             foreach (var user in users)
             {
                 userApprovedVM = new UserApprovalViewModel();
                 userApprovedVM.UserId = user.Id;
-                var middleName = string.Empty;
-                if (!user.MiddleName.IsNull())
-                    middleName = user.MiddleName;
-                userApprovedVM.UserName = string.Format("{0} {1}.{2}".ToFormat(user.FirstName, middleName, user.LastName));
+                var userName = GetUserName(user);
+                userApprovedVM.UserName = userName;
                 userApprovedVM.IsApproved = (user.AdminApprove.HasValue) ? user.AdminApprove.Value : false;
                 userApprovedVM.Role = roles;
                 userApprovedVM.Department = departments;
                 ApprovalViewModel.UserApprovalViewModel.Add(userApprovedVM);
             }
             return View(ApprovalViewModel);
+        }
+
+        private static string GetUserName(Domain.User user)
+        {
+            var middleName = string.Empty;
+            if (!user.MiddleName.IsNull())
+                middleName = user.MiddleName;
+            var userName = string.Format("{0} {1}.{2}".ToFormat(user.FirstName, middleName, user.LastName));
+            return userName;
         }
 
         [PreScripds.UI.Common.Authorize]
