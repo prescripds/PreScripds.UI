@@ -48,7 +48,7 @@
     @if (Model.DepartmentViewModels.IsCollectionValid())
     {
         <div class="table-responsive">
-            <table class="table table-bordered">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -63,21 +63,21 @@
                         <tr>
                             <td>
                                 <div class="ellipsis-div" title="@Model.DepartmentViewModels[i].Id">
-                                    @Html.TextBoxFor(m => m.DepartmentViewModels[i].Id)
+                                    @Html.TextBoxFor(m => m.DepartmentViewModels[i].Id, new { @disabled = "disabled" })
                                 </div>
                             </td>
                             <td>
                                 <div class="ellipsis-div" title="@Model.DepartmentViewModels[i].DepartmentName">
-                                    @Html.TextBoxFor(m => m.DepartmentViewModels[i].DepartmentName)
+                                    @Html.TextBoxFor(m => m.DepartmentViewModels[i].DepartmentName, new { @disabled = "disabled" })
                                 </div>
                             </td>
                             <td>
                                 <div class="ellipsis-div" title="@Model.DepartmentViewModels[i].DepartmentDescription">
-                                    @Html.TextBoxFor(m => m.DepartmentViewModels[i].DepartmentDescription)
+                                    @Html.TextBoxFor(m => m.DepartmentViewModels[i].DepartmentDescription, new { @disabled = "disabled" })
                                 </div>
                             </td>
                             <td>
-                                @Html.CheckBoxFor(m => m.DepartmentViewModels[i].IsActive, new { data_id = Model.DepartmentViewModels[i].Id })
+                                @Html.CheckBoxFor(m => m.DepartmentViewModels[i].IsActive, new { data_id = Model.DepartmentViewModels[i].Id, @class = "chkActive" })
                             </td>
                         </tr>
                     </tbody>
@@ -91,8 +91,12 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-
+            $('.chkActive').on('click', function () {
+                var res = $(this).is(":checked");
+                //ajaxPost('/Dashboard/UserApprovals', { id: userId, isActive: status }, null);
+            });
             @Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))
+
         });
 
     </script>

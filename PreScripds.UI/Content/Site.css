@@ -195,10 +195,14 @@ input[type="checkbox"].input-validation-error {
     text-align: left !important;
 }
 
-table textbox {
+table input {
     background-color: transparent;
     border: none;
     text-wrap: normal;
     word-wrap: break-word;
     color: white;
+}
+
+li a {
+    color: #EF6060 !important;
 }
