@@ -155,5 +155,14 @@ namespace PreScripds.WebServices
             var orgaizations = _organizationBl.GetOrganizations();
             return orgaizations;
         }
+
+        public void UpdateDepartment(long id, bool status)
+        {
+            _organizationBl.UpdateDepartment(id, status);
+        }
+        public void UpdateModule(long id, bool status)
+        {
+            _organizationBl.UpdateModule(id, status);
+        }
     }
 }

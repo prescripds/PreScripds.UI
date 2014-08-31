@@ -90,6 +90,12 @@ namespace PreScripds.WebServices
         [OperationContract]
         [WebInvoke(UriTemplate = "/GetOrganizations", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
         List<Organization> GetOrganizations();
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/UpdateDepartment", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        void UpdateDepartment(long id, bool status);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/UpdateModule", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        void UpdateModule(long id, bool status);
 
     }
 }

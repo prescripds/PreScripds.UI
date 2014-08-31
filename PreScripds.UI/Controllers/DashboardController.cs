@@ -930,5 +930,18 @@ namespace PreScripds.UI.Controllers
                 var userRoleDept = _wcfService.InvokeService<IOrganizationService, bool>((svc) => svc.AddUserRoleDepartment(id, roleId, departmentId));
             }
         }
+
+        [PreScripds.UI.Common.Authorize]
+        [HttpPost]
+        public void UpdateDepartment(long id, bool status)
+        {
+            _wcfService.InvokeService<IOrganizationService>((svc) => svc.UpdateDepartment(id, status));
+        }
+        [PreScripds.UI.Common.Authorize]
+        [HttpPost]
+        public void UpdateModule(long id, bool status)
+        {
+            _wcfService.InvokeService<IOrganizationService>((svc) => svc.UpdateModule(id, status));
+        }
     }
 }

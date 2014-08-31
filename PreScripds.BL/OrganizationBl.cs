@@ -150,5 +150,14 @@ namespace PreScripds.BL
             return organizations;
         }
 
+        public void UpdateDepartment(long id, bool status)
+        {
+            _organizationRepository.UpdateDepartment(id, status);
+        }
+        public void UpdateModule(long id, bool status)
+        {
+            _organizationRepository.UpdateModule(id, status);
+        }
+
     }
 }

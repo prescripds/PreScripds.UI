@@ -92,9 +92,9 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('.chkActive').on('click', function () {
-                var res = $(this).is(":checked");
+                var status = $(this).is(":checked");
                 var id = $(this).data("id");
-                //ajaxPost('/Dashboard/UserApprovals', { id: userId, isActive: status }, null);
+                ajaxPost('/Dashboard/UpdateDepartment', { id: id, status: status }, null);
             });
             @Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))
 

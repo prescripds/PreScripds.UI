@@ -324,5 +324,30 @@ namespace PreScripds.DAL.Repository
                 return organizations;
             }
         }
+
+        public void UpdateDepartment(long id, bool status)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var departmentFromDb = uow.GetRepository<Department>().Items.FirstOrDefault(x => x.Id == id);
+                if (departmentFromDb.IsNotNull())
+                {
+                    departmentFromDb.IsActive = status;
+                    uow.GetRepository<Department>().Update(departmentFromDb);
+                }
+            }
+        }
+        public void UpdateModule(long id, bool status)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var moduleFromDb = uow.GetRepository<Module>().Items.FirstOrDefault(x => x.Id == id);
+                if (moduleFromDb.IsNotNull())
+                {
+                    moduleFromDb.Active = status;
+                    uow.GetRepository<Module>().Update(moduleFromDb);
+                }
+            }
+        }
     }
 }

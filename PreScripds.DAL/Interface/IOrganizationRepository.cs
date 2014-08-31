@@ -33,5 +33,7 @@ namespace PreScripds.DAL.Interface
         void UpdateUserInRole(long id, long roleId);
         bool AddUserRoleDepartment(long id, long roleId, long departmentId);
         List<Organization> GetOrganizations();
+        void UpdateDepartment(long id, bool status);
+        void UpdateModule(long id, bool status);
     }
 }

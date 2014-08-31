@@ -229,7 +229,7 @@ namespace PreScripds.DAL.Repository
                     .Include(x => x.UserInRoles
                         .Select(y => y.Role.RoleInPermissions.Select(z => z.PermissionSet)))
                         .Where(x => x.Active).ToList();
-                if (users.IsCollectionValid())
+                if (users.IsCollectionValid() && loginName.Trim().IsNotNull() && loginName.Trim().IsNotEmpty())
                 {
 
                     User loginUser;
