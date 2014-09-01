@@ -35,5 +35,6 @@ namespace PreScripds.BL.Interface
         List<Organization> GetOrganizations();
         void UpdateDepartment(long id, bool status);
         void UpdateModule(long id, bool status);
+        void UpdatePermissionSet(long id, bool status);
     }
 }

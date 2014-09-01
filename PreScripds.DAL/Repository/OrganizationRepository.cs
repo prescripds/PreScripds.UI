@@ -349,5 +349,17 @@ namespace PreScripds.DAL.Repository
                 }
             }
         }
+        public void UpdatePermissionSet(long id, bool status)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var permissionSetFromDb = uow.GetRepository<PermissionSet>().Items.FirstOrDefault(x => x.Id == id);
+                if (permissionSetFromDb.IsNotNull())
+                {
+                    permissionSetFromDb.Active = status;
+                    uow.GetRepository<PermissionSet>().Update(permissionSetFromDb);
+                }
+            }
+        }
     }
 }

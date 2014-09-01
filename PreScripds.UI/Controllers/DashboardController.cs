@@ -943,5 +943,12 @@ namespace PreScripds.UI.Controllers
         {
             _wcfService.InvokeService<IOrganizationService>((svc) => svc.UpdateModule(id, status));
         }
+
+        [PreScripds.UI.Common.Authorize]
+        [HttpPost]
+        public void UpdatePermissionSet(long id, bool status)
+        {
+            _wcfService.InvokeService<IOrganizationService>((svc) => svc.UpdatePermissionSet(id, status));
+        }
     }
 }

@@ -32,7 +32,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="form-group">
                     <label class="control-label" for="RoleName">Department</label>
-                    @Html.DropDownListFor(x => Model.DepartmentId, Model.Department.ToSelectListItems(model => model.Id.ToString(), model => model.DepartmentName),"--Select--", new { @class = "form-control" })
+                    @Html.DropDownListFor(x => Model.DepartmentId, Model.Department.ToSelectListItems(model => model.Id.ToString(), model => model.DepartmentName), "--Select--", new { @class = "form-control" })
                 </div>
             </div>
             <div class="col-md-4 col-sm-6">
@@ -118,7 +118,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        @Html.CheckBoxFor(m => m.PermissionSetViewModels[i].IsActive, new { data_id = Model.PermissionSetViewModels[i].PermissionSetId })
+                                        @Html.CheckBoxFor(m => m.PermissionSetViewModels[i].IsActive, new { data_id = Model.PermissionSetViewModels[i].PermissionSetId, @class = "chkActive" })
                                     </td>
                                 </tr>
                             </tbody>
@@ -156,6 +156,11 @@
                     getModules(departmentId);
                 });
             }
+
+            $('.chkActive').on("click", function () {
+                var id = $(this).data("id");
+                var status = $(this).is(":checked");
+            });
 
             @Html.Iff(Model.CreationSuccessful, Html.Raw("$('#success-modal').modal('show');"))
         });

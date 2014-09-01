@@ -96,6 +96,9 @@ namespace PreScripds.WebServices
         [OperationContract]
         [WebInvoke(UriTemplate = "/UpdateModule", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
         void UpdateModule(long id, bool status);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/UpdatePermissionSet", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        void UpdatePermissionSet(long id, bool status);
 
     }
 }
