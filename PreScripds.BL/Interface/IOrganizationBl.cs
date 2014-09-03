@@ -36,5 +36,6 @@ namespace PreScripds.BL.Interface
         void UpdateDepartment(long id, bool status);
         void UpdateModule(long id, bool status);
         void UpdatePermissionSet(long id, bool status);
+        void UpdateRole(long id, bool status);
     }
 }

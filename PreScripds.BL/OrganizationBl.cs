@@ -162,6 +162,10 @@ namespace PreScripds.BL
         {
             _organizationRepository.UpdatePermissionSet(id, status);
         }
+        public void UpdateRole(long id, bool status)
+        {
+            _organizationRepository.UpdateRole(id, status);
+        }
 
     }
 }

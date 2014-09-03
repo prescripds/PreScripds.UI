@@ -40,7 +40,7 @@
                     </div>
                     <div class="meta">
                         <p><strong>Document Name:</strong> @Model.OrganizationDocumentViewModels[i].OrganizationDocumentName</p>
-                        <p><strong>Action:</strong> <a><span class="glyphicon glyphicon-trash"></span></a></p>
+                        <p><strong>Action:</strong> <a href="@Url.Action("DeleteDocs", "Dashboard", new { id = Model.OrganizationDocumentViewModels[i].OrganizationDocumentId })"><span class="glyphicon glyphicon-trash"></span></a></p>
                     </div>
                 </div>
                 <div class="portfolio-image">

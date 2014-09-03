@@ -168,5 +168,9 @@ namespace PreScripds.WebServices
         {
             _organizationBl.UpdatePermissionSet(id, status);
         }
+        public void UpdateRole(long id, bool status)
+        {
+            _organizationBl.UpdateRole(id, status);
+        }
     }
 }

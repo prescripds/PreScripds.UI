@@ -16,6 +16,7 @@ using PreScripds.Infrastructure.UnitOfWork;
 using System.IO;
 using System.Configuration;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 
 namespace PreScripds.DAL.Repository
 {
@@ -225,30 +226,37 @@ namespace PreScripds.DAL.Repository
         {
             using (var uow = new UnitOfWork())
             {
-                var users = uow.GetRepository<User>().Items.Include(x => x.UserLogins.Select(y => y.UserHistories))
-                    .Include(x => x.UserInRoles
-                        .Select(y => y.Role.RoleInPermissions.Select(z => z.PermissionSet)))
-                        .Where(x => x.Active).ToList();
-                if (users.IsCollectionValid() && loginName.Trim().IsNotNull() && loginName.Trim().IsNotEmpty())
-                {
 
+                if (loginName.IsNotNull() && loginName.Trim().IsNotNull() && loginName.Trim().IsNotEmpty())
+                {
+                    long? mobileNumber = null;
+                    if (loginType == LoginType.IsMobile)
+                        mobileNumber = loginName.As<long>();
                     User loginUser;
                     switch (loginType)
                     {
                         case LoginType.IsUserName:
-                            loginUser = users.FirstOrDefault(x => x.UserLogins.First().UserName == loginName);
+                            loginUser = uow.GetRepository<User>().Items.Include(x => x.UserLogins.Select(y => y.UserHistories))
+                                        .Include(x => x.UserInRoles
+                                        .Select(y => y.Role.RoleInPermissions.Select(z => z.PermissionSet)))
+                                        .FirstOrDefault(a => a.UserLogins.FirstOrDefault().UserName == loginName);
                             return loginUser;
                             break;
                         case LoginType.IsMobile:
-                            loginUser = users.FirstOrDefault(x => x.Mobile == loginName.As<long>());
+                            loginUser = uow.GetRepository<User>().Items.Include(x => x.UserLogins.Select(y => y.UserHistories))
+                                        .Include(x => x.UserInRoles
+                                        .Select(y => y.Role.RoleInPermissions.Select(z => z.PermissionSet)))
+                                        .FirstOrDefault(x => x.Active && x.Mobile == mobileNumber);
                             return loginUser;
                             break;
                         case LoginType.IsEmail:
-                            loginUser = users.FirstOrDefault(x => x.Email == loginName);
+                            loginUser = uow.GetRepository<User>().Items.Include(x => x.UserLogins.Select(y => y.UserHistories))
+                                        .Include(x => x.UserInRoles
+                                        .Select(y => y.Role.RoleInPermissions.Select(z => z.PermissionSet)))
+                                        .FirstOrDefault(x => x.Active && x.Email == loginName);
                             return loginUser;
                             break;
                     }
-
                 }
                 return null;
             }

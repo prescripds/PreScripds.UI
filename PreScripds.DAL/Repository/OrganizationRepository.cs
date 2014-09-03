@@ -361,5 +361,17 @@ namespace PreScripds.DAL.Repository
                 }
             }
         }
+        public void UpdateRole(long id, bool status)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var roleFromDb = uow.GetRepository<Role>().Items.FirstOrDefault(x => x.Id == id);
+                if (roleFromDb.IsNotNull())
+                {
+                    roleFromDb.Active = status;
+                    uow.GetRepository<Role>().Update(roleFromDb);
+                }
+            }
+        }
     }
 }

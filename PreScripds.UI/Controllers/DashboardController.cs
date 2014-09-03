@@ -381,17 +381,16 @@ namespace PreScripds.UI.Controllers
             return department;
         }
 
-        [PreScripds.UI.Common.Authorize]
-        [HttpGet]
-        public ActionResult AddOrgDoc()
-        {
-
-            var organizationViewModel = new OrganizationDocumentViewModel()
-            {
-                OrganizationDocumentViewModels = new List<OrganizationDocumentViewModel>()
-            };
-            return View("OrganizationDocs", organizationViewModel);
-        }
+        //[PreScripds.UI.Common.Authorize]
+        //[HttpGet]
+        //public ActionResult AddOrgDoc()
+        //{
+        //    var organizationViewModel = new OrganizationDocumentViewModel()
+        //    {
+        //        OrganizationDocumentViewModels = new List<OrganizationDocumentViewModel>()
+        //    };
+        //    return View("OrganizationDocs", organizationViewModel);
+        //}
 
         [PreScripds.UI.Common.Authorize]
         [HttpPost]
@@ -555,7 +554,24 @@ namespace PreScripds.UI.Controllers
         public ActionResult OrganizationDocs()
         {
             var orgDocViewModel = new OrganizationDocumentViewModel() { OrganizationDocumentViewModels = new List<OrganizationDocumentViewModel>() };
+            GetOrganizationDocsFromDb(orgDocViewModel);
             return View(orgDocViewModel);
+        }
+
+        private void GetOrganizationDocsFromDb(OrganizationDocumentViewModel orgDocViewModel)
+        {
+            var libraryFolder = _wcfService.InvokeService<IOrganizationService, LibraryFolder>((svc) => svc.GetDocLibraryFolder(SessionContext.CurrentUser.OrganizationId.Value));
+            orgDocViewModel.OrganizationDocumentViewModels = new List<OrganizationDocumentViewModel>();
+            var libAssets = libraryFolder.LibraryAssets.ToList();
+            foreach (var libAsset in libAssets)
+            {
+                orgDocViewModel.ImagePath = libAsset.AssetPath;
+                orgDocViewModel.CreatedDate = libAsset.CreatedDate;
+                orgDocViewModel.DocumentDescription = libAsset.AssetDescription;
+                orgDocViewModel.OrganizationDocumentName = libAsset.AssetName;
+                orgDocViewModel.OrganizationDocumentId = libAsset.Id;
+                orgDocViewModel.OrganizationDocumentViewModels.Add(orgDocViewModel);
+            }
         }
 
         private bool CheckOrganizationExists(string orgName)
@@ -950,5 +966,29 @@ namespace PreScripds.UI.Controllers
         {
             _wcfService.InvokeService<IOrganizationService>((svc) => svc.UpdatePermissionSet(id, status));
         }
+        [PreScripds.UI.Common.Authorize]
+        [HttpPost]
+        public void UpdateRole(long id, bool status)
+        {
+            _wcfService.InvokeService<IOrganizationService>((svc) => svc.UpdateRole(id, status));
+        }
+        [PreScripds.UI.Common.Authorize]
+        public void DeleteDocs(long id)
+        {
+            //TODO:Fetch file from Db from libraryAssetFile and LibraryAsset.
+        }
+        [PreScripds.UI.Common.Authorize]
+        [HttpPost]
+        public void UpdateRoleInPermission(long id, bool status)
+        {
+            //TODO:Service to update roleinpermissin status
+        }
+        [PreScripds.UI.Common.Authorize]
+        [HttpPost]
+        public void UpdateUserInRole(long id, bool status)
+        {
+            //TODO:Service to update userinrole status
+        }
+
     }
 }
