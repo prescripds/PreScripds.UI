@@ -373,5 +373,14 @@ namespace PreScripds.DAL.Repository
                 }
             }
         }
+
+        public LibraryAsset GetLibraryAsset(long libAssetId)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var libAsset = uow.GetRepository<LibraryAsset>().Items.Include(x => x.LibraryAssetFiles).FirstOrDefault(x => x.Id == libAssetId);
+                return libAsset;
+            }
+        }
     }
 }

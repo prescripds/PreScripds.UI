@@ -102,5 +102,8 @@ namespace PreScripds.WebServices
         [OperationContract]
         [WebInvoke(UriTemplate = "/UpdateRole", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
         void UpdateRole(long id, bool status);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/GetLibraryAsset", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        LibraryAsset GetLibraryAsset(long libAssetId);
     }
 }

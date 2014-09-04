@@ -40,7 +40,13 @@
                     </div>
                     <div class="meta">
                         <p><strong>Document Name:</strong> @Model.OrganizationDocumentViewModels[i].OrganizationDocumentName</p>
-                        <p><strong>Action:</strong> <a href="@Url.Action("DeleteDocs", "Dashboard", new { id = Model.OrganizationDocumentViewModels[i].OrganizationDocumentId })"><span class="glyphicon glyphicon-trash"></span></a></p>
+                        <p>
+                            <strong>Action:</strong>
+                            <a href="#" class="docDelete" data-id="@Model.OrganizationDocumentViewModels[i].OrganizationDocumentId">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+
+                        </p>
                     </div>
                 </div>
                 <div class="portfolio-image">
@@ -99,5 +105,19 @@
         </div>
     </div>
 </main>
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.docDelete').on("click", function () {
+                var id = $(this).data("id");
+                alert(id);
+                ajaxPost('/Dashboard/DeleteDocs', { id: id }, null);
+            });
+        });
+
+    </script>
+}
 <script src="~/Scripts/app.js"></script>
 <link href="~/Content/Timeline/style.css" rel="stylesheet" />

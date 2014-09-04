@@ -172,5 +172,10 @@ namespace PreScripds.WebServices
         {
             _organizationBl.UpdateRole(id, status);
         }
+        public LibraryAsset GetLibraryAsset(long libAssetId)
+        {
+            var libAsset = _organizationBl.GetLibraryAsset(libAssetId);
+            return libAsset;
+        }
     }
 }

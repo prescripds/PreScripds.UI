@@ -166,6 +166,11 @@ namespace PreScripds.BL
         {
             _organizationRepository.UpdateRole(id, status);
         }
+        public LibraryAsset GetLibraryAsset(long libAssetId)
+        {
+            var libAsset = _organizationRepository.GetLibraryAsset(libAssetId);
+            return libAsset;
+        }
 
     }
 }

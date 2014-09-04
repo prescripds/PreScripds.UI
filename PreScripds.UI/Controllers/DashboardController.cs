@@ -553,25 +553,27 @@ namespace PreScripds.UI.Controllers
         [HttpGet]
         public ActionResult OrganizationDocs()
         {
-            var orgDocViewModel = new OrganizationDocumentViewModel() { OrganizationDocumentViewModels = new List<OrganizationDocumentViewModel>() };
-            GetOrganizationDocsFromDb(orgDocViewModel);
-            return View(orgDocViewModel);
-        }
-
-        private void GetOrganizationDocsFromDb(OrganizationDocumentViewModel orgDocViewModel)
-        {
-            var libraryFolder = _wcfService.InvokeService<IOrganizationService, LibraryFolder>((svc) => svc.GetDocLibraryFolder(SessionContext.CurrentUser.OrganizationId.Value));
-            orgDocViewModel.OrganizationDocumentViewModels = new List<OrganizationDocumentViewModel>();
-            var libAssets = libraryFolder.LibraryAssets.ToList();
+            var orgDocsViewModel = new OrganizationDocumentViewModel() { OrganizationDocumentViewModels = new List<OrganizationDocumentViewModel>() };
+            var libAssets = GetOrganizationDocsFromDb();
             foreach (var libAsset in libAssets)
             {
+                var orgDocViewModel = new OrganizationDocumentViewModel();
                 orgDocViewModel.ImagePath = libAsset.AssetPath;
                 orgDocViewModel.CreatedDate = libAsset.CreatedDate;
                 orgDocViewModel.DocumentDescription = libAsset.AssetDescription;
                 orgDocViewModel.OrganizationDocumentName = libAsset.AssetName;
                 orgDocViewModel.OrganizationDocumentId = libAsset.Id;
-                orgDocViewModel.OrganizationDocumentViewModels.Add(orgDocViewModel);
+                orgDocsViewModel.OrganizationDocumentViewModels.Add(orgDocViewModel);
+                // orgDocsViewModel = orgDocViewModel;
             }
+            return View(orgDocsViewModel);
+        }
+
+        private List<LibraryAsset> GetOrganizationDocsFromDb()
+        {
+            var libraryFolder = _wcfService.InvokeService<IOrganizationService, LibraryFolder>((svc) => svc.GetDocLibraryFolder(SessionContext.CurrentUser.OrganizationId.Value));
+            var libAssets = libraryFolder.LibraryAssets.ToList();
+            return libAssets;
         }
 
         private bool CheckOrganizationExists(string orgName)
@@ -975,7 +977,12 @@ namespace PreScripds.UI.Controllers
         [PreScripds.UI.Common.Authorize]
         public void DeleteDocs(long id)
         {
-            //TODO:Fetch file from Db from libraryAssetFile and LibraryAsset.
+            var libAssets = _wcfService.InvokeService<IOrganizationService, LibraryAsset>((svc) => svc.GetLibraryAsset(id));
+            if (libAssets.IsNotNull())
+            {
+                _wcfService.InvokeService<IOrganizationService>((svc) => svc.DeleteLibraryAsset(libAssets));
+                //TODO:Delete from Disk 
+            }
         }
         [PreScripds.UI.Common.Authorize]
         [HttpPost]

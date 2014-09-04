@@ -37,5 +37,6 @@ namespace PreScripds.DAL.Interface
         void UpdateModule(long id, bool status);
         void UpdatePermissionSet(long id, bool status);
         void UpdateRole(long id, bool status);
+        LibraryAsset GetLibraryAsset(long libAssetId);
     }
 }
