@@ -21,6 +21,8 @@ namespace PreScripds.Domain
         [DataMember]
         public string AssetType { get; set; }
         [DataMember]
+        public string AssetExtension { get; set; }
+        [DataMember]
         public int? AssetSize { get; set; }
         [DataMember]
         public string AssetDescription { get; set; }

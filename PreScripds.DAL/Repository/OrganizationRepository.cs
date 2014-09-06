@@ -382,5 +382,16 @@ namespace PreScripds.DAL.Repository
                 return libAsset;
             }
         }
+
+        public void DeleteLibraryAsset(LibraryAsset libAsset)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var libAssetFile = uow.GetRepository<LibraryAssetFile>().Items.FirstOrDefault(x => x.LibraryAssetId == libAsset.Id);
+                uow.GetRepository<LibraryAssetFile>().Delete(libAssetFile);
+                uow.GetRepository<LibraryAsset>().Delete(libAsset);
+                uow.SaveChanges();
+            }
+        }
     }
 }

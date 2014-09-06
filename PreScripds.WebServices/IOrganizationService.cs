@@ -105,5 +105,8 @@ namespace PreScripds.WebServices
         [OperationContract]
         [WebInvoke(UriTemplate = "/GetLibraryAsset", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
         LibraryAsset GetLibraryAsset(long libAssetId);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/DeleteLibraryAsset", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        void DeleteLibraryAsset(LibraryAsset libAsset);
     }
 }

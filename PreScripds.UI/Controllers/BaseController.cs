@@ -83,6 +83,7 @@ namespace PreScripds.UI.Controllers
                     libraryAsset.AssetSize = contentLength;
                     libraryAsset.AssetType = contentType;
                     libraryAsset.CreatedDate = DateTime.Now;
+                    libraryAsset.AssetExtension = Path.GetExtension(file.FileName);
                     libraryAsset.AssetDescription = userDesc;
                     if (folderId.HasValue)
                         libraryAsset.LibraryFolderId = folderId.Value;

@@ -38,5 +38,6 @@ namespace PreScripds.BL.Interface
         void UpdatePermissionSet(long id, bool status);
         void UpdateRole(long id, bool status);
         LibraryAsset GetLibraryAsset(long libAssetId);
+        void DeleteLibraryAsset(LibraryAsset libAsset);
     }
 }

@@ -40,6 +40,7 @@ namespace PreScripds.DAL.Mapping
             this.Property(t => t.LibraryFolderId).HasColumnName("LibraryFolderId");
             this.Property(t => t.AssetPath).HasColumnName("AssetPath");
             this.Property(t => t.AssetType).HasColumnName("AssetType");
+            this.Property(t => t.AssetExtension).HasColumnName("AssetExtension");
             this.Property(t => t.AssetSize).HasColumnName("AssetSize");
             this.Property(t => t.AssetDescription).HasColumnName("AssetDescription");
             this.Property(t => t.Active).HasColumnName("Active");

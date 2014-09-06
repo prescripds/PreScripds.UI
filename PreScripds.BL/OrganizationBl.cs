@@ -171,6 +171,10 @@ namespace PreScripds.BL
             var libAsset = _organizationRepository.GetLibraryAsset(libAssetId);
             return libAsset;
         }
+        public void DeleteLibraryAsset(LibraryAsset libAsset)
+        {
+            _organizationRepository.DeleteLibraryAsset(libAsset);
+        }
 
     }
 }

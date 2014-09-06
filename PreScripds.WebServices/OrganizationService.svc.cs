@@ -177,5 +177,9 @@ namespace PreScripds.WebServices
             var libAsset = _organizationBl.GetLibraryAsset(libAssetId);
             return libAsset;
         }
+        public void DeleteLibraryAsset(LibraryAsset libAsset)
+        {
+            _organizationBl.DeleteLibraryAsset(libAsset);
+        }
     }
 }

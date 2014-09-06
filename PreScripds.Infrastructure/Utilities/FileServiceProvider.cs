@@ -48,6 +48,13 @@ namespace PreScripds.Infrastructure
                 return filePath;
         }
 
+        public static void DeleteFile(string directoryPath, string fileName)
+        {
+            var filePath = Path.Combine("{0}{1}".ToFormat(directoryPath, fileName));
+            if (filePath.IsEmpty() && !Directory.Exists(directoryPath))
+                throw new Exception("THe Directory does not exist.");
+            File.Delete(filePath);
+        }
         public static FileStream CreateFileStream(string rootFolder, string fileName)
         {
             var filePath = "{0}{1}".ToFormat(rootFolder, fileName);

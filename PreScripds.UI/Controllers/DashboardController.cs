@@ -411,7 +411,7 @@ namespace PreScripds.UI.Controllers
                     orgDocViewModel.CreatedDate = libraryAssetFromDb.CreatedDate;
                     orgDocViewModel.OrganizationDocumentViewModels.Add(orgDocViewModel);
                 }
-                return View("OrganizationDocs", orgDocViewModel);
+                return RedirectToAction("OrganizationDocs");
             }
         }
 
@@ -563,6 +563,7 @@ namespace PreScripds.UI.Controllers
                 orgDocViewModel.DocumentDescription = libAsset.AssetDescription;
                 orgDocViewModel.OrganizationDocumentName = libAsset.AssetName;
                 orgDocViewModel.OrganizationDocumentId = libAsset.Id;
+               // Config
                 orgDocsViewModel.OrganizationDocumentViewModels.Add(orgDocViewModel);
                 // orgDocsViewModel = orgDocViewModel;
             }
@@ -980,9 +981,17 @@ namespace PreScripds.UI.Controllers
             var libAssets = _wcfService.InvokeService<IOrganizationService, LibraryAsset>((svc) => svc.GetLibraryAsset(id));
             if (libAssets.IsNotNull())
             {
-                _wcfService.InvokeService<IOrganizationService>((svc) => svc.DeleteLibraryAsset(libAssets));
+                //  _wcfService.InvokeService<IOrganizationService>((svc) => svc.DeleteLibraryAsset(libAssets));
                 //TODO:Delete from Disk 
+                DeleteLibraryAssetFromDisk(libAssets);
             }
+        }
+
+        private void DeleteLibraryAssetFromDisk(LibraryAsset libAssets)
+        {
+
+            var fileName = "{0}.{1}".ToFormat(libAssets.AssetName, libAssets.AssetExtension);
+            FileServiceProvider.DeleteFile(libAssets.AssetPath, fileName);
         }
         [PreScripds.UI.Common.Authorize]
         [HttpPost]
