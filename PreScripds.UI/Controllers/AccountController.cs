@@ -536,6 +536,14 @@ namespace PreScripds.UI.Controllers
             }
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult ForgotPassword()
+        {
+            var forgotPasswordViewModel = new ForgotPasswordViewModel() { RecoveryModeViewModels = new List<RecoveryModeViewModel>() };
+            return View(forgotPasswordViewModel);
+        }
+
         //private class ChallengeResult : HttpUnauthorizedResult
         //{
         //    public ChallengeResult(string provider, string redirectUri)

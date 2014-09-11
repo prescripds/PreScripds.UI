@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace PreScripds.UI.Models
 {
@@ -45,5 +46,17 @@ namespace PreScripds.UI.Models
         public string CaptchaValid { get; set; }
     }
 
+    public class ForgotPasswordViewModel
+    {
+        public string UserName { get; set; }
+        public List<RecoveryModeViewModel> RecoveryModeViewModels { get; set; }
+        public int RecoveryMode { get; set; }
+    }
+
+    public class RecoveryModeViewModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
 
 }

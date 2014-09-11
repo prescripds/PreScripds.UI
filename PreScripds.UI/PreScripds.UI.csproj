@@ -471,6 +471,7 @@
     <Content Include="Views\Dashboard\UserInRole.cshtml" />
     <Content Include="Views\Dashboard\Partials\_UserApprovals.cshtml" />
     <Content Include="Views\Dashboard\Partials\_OrganizationApprovals.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
