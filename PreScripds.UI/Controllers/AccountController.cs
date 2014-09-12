@@ -540,9 +540,52 @@ namespace PreScripds.UI.Controllers
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
-            var forgotPasswordViewModel = new ForgotPasswordViewModel() { RecoveryModeViewModels = new List<RecoveryModeViewModel>() };
+            var forgotPasswordViewModel = new ForgotPasswordViewModel()
+            {
+                RecoveryModeViewModels = new List<RecoveryModeViewModel>()
+            };
+            PopulateRecoveryModes(forgotPasswordViewModel);
             return View(forgotPasswordViewModel);
         }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ForgotPassword(ForgotPasswordViewModel forgotPaswordVm, string buttonType)
+        {
+            //var val = form[buttonType];
+            var buttonValue = buttonType.Replace(" ", "");
+            if (buttonValue == RecoveryMode.SendViaEmail.ToString())
+            {
+
+            }
+            return View();
+        }
+        private void PopulateRecoveryModes(ForgotPasswordViewModel forgotPasswordViewModel)
+        {
+            if (!forgotPasswordViewModel.RecoveryModeViewModels.IsCollectionValid())
+            {
+                string[] recoveryModes = new string[]
+                {
+                    "Send Via Email",
+                    "Send Via SMS",
+                    "Answer Security Question",
+                    "Send Via Alternate Email",
+                    "Send Via Alternate Mobile SMS"
+                };
+                for (int i = 0; i < 5; i++)
+                {
+                    var recoveryViewModel = new RecoveryModeViewModel()
+                    {
+                        Id = i + 1,
+                        Name = recoveryModes[i]
+                    };
+                    forgotPasswordViewModel.RecoveryModeViewModels.Add(recoveryViewModel);
+                }
+
+            }
+        }
+
+
 
         //private class ChallengeResult : HttpUnauthorizedResult
         //{

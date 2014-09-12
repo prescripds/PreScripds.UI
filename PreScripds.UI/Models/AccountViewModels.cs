@@ -51,12 +51,22 @@ namespace PreScripds.UI.Models
         public string UserName { get; set; }
         public List<RecoveryModeViewModel> RecoveryModeViewModels { get; set; }
         public int RecoveryMode { get; set; }
+        public string UserInput { get; set; }
     }
 
     public class RecoveryModeViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string SelectedName { get; set; }
     }
 
+    public enum RecoveryMode
+    {
+        SendViaEmail,
+        SendViaSMS,
+        AnswerSecurityQuestion,
+        SendViaAlternateEmail,
+        SendViaAlternateMobileSMS
+    }
 }
