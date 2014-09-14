@@ -552,14 +552,21 @@ namespace PreScripds.UI.Controllers
         [AllowAnonymous]
         public ActionResult ForgotPassword(ForgotPasswordViewModel forgotPaswordVm, string buttonType)
         {
-            //var val = form[buttonType];
+            PopulateRecoveryModes(forgotPaswordVm);
             var buttonValue = buttonType.Replace(" ", "");
             if (buttonValue == RecoveryMode.SendViaEmail.ToString())
             {
+                if (forgotPaswordVm.UserInput.IsEmpty() || forgotPaswordVm.UserInput.IsNull())
+                    ModelState.AddModelError("", "Please enter your email address.");
+                else
+                {
 
+                }
             }
             return View();
         }
+
+
         private void PopulateRecoveryModes(ForgotPasswordViewModel forgotPasswordViewModel)
         {
             if (!forgotPasswordViewModel.RecoveryModeViewModels.IsCollectionValid())
@@ -584,9 +591,39 @@ namespace PreScripds.UI.Controllers
 
             }
         }
+        [HttpPost]
+        public bool CheckUserEmailExists(string email)
+        {
+            var userExists = CheckUserEmail(email);
+            return userExists;
+        }
 
+        [HttpPost]
+        public string GetSecurityQuestion(string email)
+        {
+            var user = _wcfService.InvokeService<IUserService, User>((svc) => svc.GetUserByUsername(email, LoginType.IsEmail));
+            var securityQuestions = _wcfService.InvokeService<IMasterService, List<SecurityQuestion>>((svc) => svc.GetSecurityQuestion());
 
+            if (user.IsNotNull())
+            {
+                long securityQuestionId = 0;
+                var userLogin = user.UserLogins.ToList();
+                userLogin.ForEach(x =>
+                {
+                    securityQuestionId = x.SecurityQuestionId.Value;
+                });
+                if (securityQuestionId != 0)
+                {
+                    if (securityQuestions.IsCollectionValid())
+                    {
+                        var secQuestName = securityQuestions.FirstOrDefault(x => x.Id == securityQuestionId).QuestionName;
+                        return secQuestName;
+                    }
+                }
+            }
+            return "";
 
+        }
         //private class ChallengeResult : HttpUnauthorizedResult
         //{
         //    public ChallengeResult(string provider, string redirectUri)

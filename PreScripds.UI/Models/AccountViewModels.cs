@@ -52,13 +52,16 @@ namespace PreScripds.UI.Models
         public List<RecoveryModeViewModel> RecoveryModeViewModels { get; set; }
         public int RecoveryMode { get; set; }
         public string UserInput { get; set; }
+        public string SelectedName { get; set; }
+        public string SecurityQuestion { get; set; }
+        public string SecurityAnswer { get; set; }
     }
 
     public class RecoveryModeViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string SelectedName { get; set; }
+
     }
 
     public enum RecoveryMode
