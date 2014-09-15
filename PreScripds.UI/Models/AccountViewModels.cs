@@ -55,6 +55,11 @@ namespace PreScripds.UI.Models
         public string SelectedName { get; set; }
         public string SecurityQuestion { get; set; }
         public string SecurityAnswer { get; set; }
+        [Display(Name = "Captcha")]
+        public string Captcha { get; set; }
+        public bool? IsCaptchaDisplay { get; set; }
+        public string CaptchaUserInput { get; set; }
+        public string CaptchaValid { get; set; }
     }
 
     public class RecoveryModeViewModel

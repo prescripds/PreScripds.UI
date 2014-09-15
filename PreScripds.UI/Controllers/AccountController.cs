@@ -550,7 +550,8 @@ namespace PreScripds.UI.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult ForgotPassword(ForgotPasswordViewModel forgotPaswordVm, string buttonType)
+        [RecaptchaControlMvc.CaptchaValidator]
+        public ActionResult ForgotPassword(ForgotPasswordViewModel forgotPaswordVm, string buttonType, bool captchaValid, string captchaErrorMessage)
         {
             PopulateRecoveryModes(forgotPaswordVm);
             var buttonValue = buttonType.Replace(" ", "");
@@ -560,10 +561,38 @@ namespace PreScripds.UI.Controllers
                     ModelState.AddModelError("", "Please enter your email address.");
                 else
                 {
-
+                    //TODO:Send mail with new password.
+                    return View("Login", "Account");
                 }
             }
-            return View();
+            if (buttonValue == RecoveryMode.SendViaSMS.ToString())
+            {
+                if (forgotPaswordVm.UserInput.IsEmpty() || forgotPaswordVm.UserInput.IsNull())
+                    ModelState.AddModelError("", "Please enter your mobile number.");
+                else
+                {
+                    //TODO:Send verification code to mobile.
+                    return View("Login", "Account");
+                }
+            }
+            if (buttonValue == RecoveryMode.AnswerSecurityQuestion.ToString())
+            {
+                if (captchaValid)
+                {
+                    if (forgotPaswordVm.UserInput.IsEmpty() || forgotPaswordVm.UserInput.IsNull())
+                        ModelState.AddModelError("", "Please enter your mobile number.");
+                    else
+                    {
+                        //TODO:Send verification code to mobile.
+                        return View("Login", "Account");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Please fill the captcha.");
+                }
+            }
+            return View(forgotPaswordVm);
         }
 
 
