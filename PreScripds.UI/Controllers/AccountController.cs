@@ -598,6 +598,7 @@ namespace PreScripds.UI.Controllers
 
         private void PopulateRecoveryModes(ForgotPasswordViewModel forgotPasswordViewModel)
         {
+            forgotPasswordViewModel.RecoveryModeViewModels = new List<RecoveryModeViewModel>();
             if (!forgotPasswordViewModel.RecoveryModeViewModels.IsCollectionValid())
             {
                 string[] recoveryModes = new string[]
@@ -653,6 +654,21 @@ namespace PreScripds.UI.Controllers
             return "";
 
         }
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult ResetPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword(ManageUserViewModel manageUserViewModel)
+        {
+            return View("Login", "Account");
+        }
+
+
         //private class ChallengeResult : HttpUnauthorizedResult
         //{
         //    public ChallengeResult(string provider, string redirectUri)
