@@ -17,7 +17,7 @@ namespace PreScripds.UI.Models
         [Display(Name = "Current password")]
         public string OldPassword { get; set; }
 
-        [Required(ErrorMessage="The New Password is mandatory.")]
+        [Required(ErrorMessage = "The New Password is mandatory.")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "New password")]
@@ -27,6 +27,7 @@ namespace PreScripds.UI.Models
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        public long UserId { get; set; }
     }
 
     public class LoginViewModel

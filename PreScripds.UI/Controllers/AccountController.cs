@@ -656,18 +656,33 @@ namespace PreScripds.UI.Controllers
         }
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult ResetPassword()
+        public ActionResult ResetPassword(string userId)
         {
-            return View();
+            var id = EncryptionExtensions.Decrypt(userId).As<long>();
+            var manageUserViewModel = new ManageUserViewModel()
+            {
+                UserId = id
+            };
+            return View(manageUserViewModel);
         }
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult ResetPassword(ManageUserViewModel manageUserViewModel)
         {
-            return View("Login", "Account");
+            if (ModelState.IsValid)
+            {
+                return View("Login", "Account");
+            }
+            return View();
         }
 
+        [HttpGet]
+        [PreScripds.UI.Common.Authorize]
+        public ActionResult UserProfile()
+        {
+            return View();
+        }
 
         //private class ChallengeResult : HttpUnauthorizedResult
         //{

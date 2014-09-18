@@ -227,6 +227,7 @@
     <Compile Include="Models\UserHistoryViewModel.cs" />
     <Compile Include="Models\UserInRoleViewModel.cs" />
     <Compile Include="Models\UserLoginViewModel.cs" />
+    <Compile Include="Models\UserProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\MasterServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -473,6 +474,7 @@
     <Content Include="Views\Dashboard\Partials\_OrganizationApprovals.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
