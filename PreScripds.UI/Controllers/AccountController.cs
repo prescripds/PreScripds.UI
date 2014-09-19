@@ -684,6 +684,13 @@ namespace PreScripds.UI.Controllers
             return View();
         }
 
+        [HttpGet]
+        [PreScripds.UI.Common.Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword()
+        {
+            return View("Manage");
+        }
         //private class ChallengeResult : HttpUnauthorizedResult
         //{
         //    public ChallengeResult(string provider, string redirectUri)
