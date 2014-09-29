@@ -59,5 +59,8 @@ namespace PreScripds.WebServices
         [OperationContract]
         [WebInvoke(UriTemplate = "/GetDepartmentInOrganization", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
         List<Department> GetDepartmentInOrganization(long organizationId);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/GetUserById", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        User GetUserById(long Id);
     }
 }

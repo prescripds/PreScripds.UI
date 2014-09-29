@@ -115,5 +115,10 @@ namespace PreScripds.WebServices
             var departments = _userBl.GetDepartmentInOrganization(organizationId);
             return departments;
         }
+        public User GetUserById(long Id)
+        {
+            var user = _userBl.GetUserById(Id);
+            return user;
+        }
     }
 }

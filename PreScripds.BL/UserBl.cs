@@ -102,5 +102,10 @@ namespace PreScripds.BL
             var departments = _userRepository.GetDepartmentInOrganization(organizationId);
             return departments;
         }
+        public User GetUserById(long Id)
+        {
+            var user = _userRepository.GetUserById(Id);
+            return user;
+        }
     }
 }

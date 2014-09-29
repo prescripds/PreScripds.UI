@@ -384,5 +384,14 @@ namespace PreScripds.DAL.Repository
                 uow.SaveChanges();
             }
         }
+
+        public User GetUserById(long Id)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var user = uow.GetRepository<User>().Items.FirstOrDefault(x => x.Id == Id);
+                return user;
+            }
+        }
     }
 }

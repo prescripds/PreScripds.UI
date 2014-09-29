@@ -238,23 +238,30 @@ namespace PreScripds.UI.Controllers
         [AllowAnonymous]
         public ActionResult Register(string ps = null)
         {
+            var registerViewModel = new RegisterViewModel();
 
-            var registerViewModel = new RegisterViewModel()
+            if (SessionContext.CurrentUser.IsNotNull())
             {
-                CountryId = 1,
-                userLoginViewModel = new List<UserLoginViewModel>()
-            };
-            BindDropDowns(registerViewModel);
-            if (ps.IsNotEmpty())
-            {
-                registerViewModel.IsHomeUrl = true;
-                return View(registerViewModel);
+                var userId = SessionContext.CurrentUser.Id;
+                var userProfileFromDb = _wcfService.InvokeService<IUserService, User>((svc) => svc.GetUserById(userId));
+                var mappedProfile = Mapper.Map<User, RegisterViewModel>(userProfileFromDb);
+                return View(mappedProfile);
             }
             else
             {
-                registerViewModel.IsHomeUrl = false;
-                return View(registerViewModel);
+                registerViewModel.CountryId = 1;
+                registerViewModel.userLoginViewModel = new List<UserLoginViewModel>();
+                BindDropDowns(registerViewModel);
+                if (ps.IsNotEmpty())
+                {
+                    registerViewModel.IsHomeUrl = true;
+                }
+                else
+                {
+                    registerViewModel.IsHomeUrl = false;
+                }
             }
+            return View(registerViewModel);
         }
 
         private void BindDropDowns(RegisterViewModel registerViewModel)
@@ -674,13 +681,6 @@ namespace PreScripds.UI.Controllers
             {
                 return View("Login", "Account");
             }
-            return View();
-        }
-
-        [HttpGet]
-        [PreScripds.UI.Common.Authorize]
-        public ActionResult UserProfile()
-        {
             return View();
         }
 
