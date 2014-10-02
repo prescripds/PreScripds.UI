@@ -244,7 +244,10 @@ namespace PreScripds.UI.Controllers
             {
                 var userId = SessionContext.CurrentUser.Id;
                 var userProfileFromDb = _wcfService.InvokeService<IUserService, User>((svc) => svc.GetUserById(userId));
+
                 var mappedProfile = Mapper.Map<User, RegisterViewModel>(userProfileFromDb);
+                BindDropDowns(mappedProfile);
+
                 return View(mappedProfile);
             }
             else
@@ -374,6 +377,15 @@ namespace PreScripds.UI.Controllers
                 return false;
             }
             return true;
+        }
+
+        public ActionResult UserProfile()
+        {
+            if (SessionContext.CurrentUser.IsNotNull())
+            {
+                return RedirectToAction("Register", "Account");
+            }
+            return RedirectToAction("Login", "Account");
         }
 
         ////

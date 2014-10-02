@@ -389,7 +389,9 @@ namespace PreScripds.DAL.Repository
         {
             using (var uow = new UnitOfWork())
             {
-                var user = uow.GetRepository<User>().Items.FirstOrDefault(x => x.Id == Id);
+                var user = uow.GetRepository<User>().Items
+                    .Include(s => s.UserInRoles).Include(s => s.UserLogins).Include(s => s.UserRoleDepartments)
+                    .FirstOrDefault(x => x.Id == Id);
                 return user;
             }
         }

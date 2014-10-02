@@ -37,6 +37,10 @@ namespace PreScripds.UI.Common.Automapper
 
 
             Mapper.CreateMap<User, RegisterViewModel>()
+                .ForMember(d => d.PinCode, s => s.MapFrom(p => p.Zipcode))
+                .ForMember(d => d.TermsCondition, s => s.MapFrom(p => p.TermsCondition))
+                .ForMember(d => d.IsOrganization, s => s.MapFrom(p => ConvertOrganization(p.IsOrganization)))
+
                .IgnoreAllNonExisting();
             Mapper.CreateMap<RoleViewModel, Role>()
                 .ForMember(d => d.Id, s => s.MapFrom(p => p.RoleId))
@@ -52,6 +56,15 @@ namespace PreScripds.UI.Common.Automapper
                 .IgnoreAllNonExisting();
             Mapper.CreateMap<OrganizationViewModel, Organization>()
                 .IgnoreAllNonExisting();
+        }
+
+        private int ConvertOrganization(bool p)
+        {
+            if (p)
+            {
+                return 1;
+            }
+            return 0;
         }
 
         private bool ConvertTermsAndCondition(bool p)
