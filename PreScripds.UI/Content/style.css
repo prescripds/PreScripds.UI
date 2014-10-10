@@ -89,6 +89,8 @@ a {
 .vertical-top {
     vertical-align: top;
 }
+
+
 /* vertical align top */
 .underline {
     padding-bottom: 5px;
@@ -122,6 +124,7 @@ body {
 .wrap {
     width: 73%;
     margin: 0 auto;
+    margin-top: 2%;
     transition: all .2s linear;
     -moz-transition: all .2s linear; /* firefox */
     -webkit-transition: all .2s linear; /* safari and chrome */

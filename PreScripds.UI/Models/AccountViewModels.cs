@@ -12,7 +12,7 @@ namespace PreScripds.UI.Models
 
     public class ManageUserViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "The Current Password is mandatory.")]
         [DataType(DataType.Password)]
         [Display(Name = "Current password")]
         public string OldPassword { get; set; }
@@ -27,7 +27,7 @@ namespace PreScripds.UI.Models
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-        public long UserId { get; set; }
+        public long? UserId { get; set; }
     }
 
     public class LoginViewModel

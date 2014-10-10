@@ -4389,6 +4389,10 @@ textarea.input-group-sm > .input-group-btn > .btn {
     }
 }
 
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+}
+
 .navbar-toggle {
     position: relative;
     float: right;

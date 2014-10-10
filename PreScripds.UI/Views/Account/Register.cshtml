@@ -12,7 +12,7 @@
 <div class="header_top">
     <h2><span>Register</span></h2>
 </div>
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form"}))
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
 
     @Html.AntiForgeryToken()
@@ -128,61 +128,68 @@
                     <label class="control-label" for="LastName">Zip Code</label>
                     @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control" })
                 </div>
-            </div>
+            </div> 
         </div>
         <hr />
         <h4><span>Login Details</span><hr /> </h4>
         @for (int i = 0; i < Model.userLoginViewModel.Count; i++)
-            {
-        <div class="row">
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="FirstName">User Name*</label>
-                    @Html.TextBoxFor(m => m.userLoginViewModel[0].UserName, new { @class = "form-control", autocomplete = "off" })
+        {
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="FirstName">User Name*</label>
+                        @Html.TextBoxFor(m => m.userLoginViewModel[0].UserName, new { @class = "form-control", autocomplete = "off" })
+                    </div>
+                </div>
+                @if (Model.IsUserProfile)
+                {
+                    @Html.ActionLink("Change Password", "ChangePassword", "Account")
+                }
+                else
+                {
+                    <div class="col-md-4 col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label" for="LastName">Password*</label>
+                            @Html.PasswordFor(m => m.userLoginViewModel[0].Password, new { @class = "form-control", autocomplete = "off" })
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label" for="MiddleName">Confirm Password*</label>
+                            @Html.PasswordFor(m => m.userLoginViewModel[0].ConfirmPassword, new { @class = "form-control" })
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="FirstName">Security Question*</label>
+                        @Html.DropDownListFor(m => m.userLoginViewModel[0].SecurityQuestionId, Model.userLoginViewModel[0].SecurityQuestions.ToSelectListItems(model => model.Id.ToString(), model => model.QuestionName), "--Select--", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="LastName">Security Answer*</label>
+                        @Html.PasswordFor(m => m.userLoginViewModel[0].SecurityAnswer, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="LastName">User Type*</label>
+                        @Html.EnumDropDownListFor(m => m.UserType, new { @class = "form-control" }, typeof(PreScripds.Domain.Enums.UserType))
+                        @Html.HiddenFor(x => x.UserType)
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="LastName">Password*</label>
-                    @Html.PasswordFor(m => m.userLoginViewModel[0].Password, new { @class = "form-control", autocomplete = "off" })
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="MiddleName">Confirm Password*</label>
-                    @Html.PasswordFor(m => m.userLoginViewModel[0].ConfirmPassword, new { @class = "form-control" })
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="FirstName">Security Question*</label>
-                    @Html.DropDownListFor(m => m.userLoginViewModel[0].SecurityQuestionId, Model.userLoginViewModel[0].SecurityQuestions.ToSelectListItems(model => model.Id.ToString(), model => model.QuestionName), "--Select--", new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="LastName">Security Answer*</label>
-                    @Html.PasswordFor(m => m.userLoginViewModel[0].SecurityAnswer, new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="form-group">
-                    <label class="control-label" for="LastName">User Type*</label>
-                    @Html.EnumDropDownListFor(m => m.UserType, new { @class = "form-control" }, typeof(PreScripds.Domain.Enums.UserType))
-                    @Html.HiddenFor(x => x.UserType)
-                </div>
-            </div>
-        </div>
         }
         <div class="row">
             @*<div class="col-md-4 col-sm-6" id="displayPic" style="display:none">
-                <div class="form-group">
-                    <label class="control-label" for="MiddleName" id="dispPic"></label>
-                    <input type="file" id="DisplayPicture" name="DisplayPicture" />
-                </div>
-            </div>*@
+                    <div class="form-group">
+                        <label class="control-label" for="MiddleName" id="dispPic"></label>
+                        <input type="file" id="DisplayPicture" name="DisplayPicture" />
+                    </div>
+                </div>*@
             <div class="col-md-4 col-sm-6">
                 <div class="form-group">
                     <label class="control-label" for="LastName">Captcha*</label>

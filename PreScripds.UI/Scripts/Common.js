@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+
 });
 function showProgressBar() {
     var viewportHeight = ($(window).height() / 2) - 50;

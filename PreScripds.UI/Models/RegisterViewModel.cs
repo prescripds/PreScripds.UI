@@ -123,5 +123,6 @@ namespace PreScripds.UI.Models
         public string CaptchaValid { get; set; }
         public int? IsOrganization { get; set; }
         public string IpAddress { get; set; }
+        public bool IsUserProfile { get; set; }
     }
 }

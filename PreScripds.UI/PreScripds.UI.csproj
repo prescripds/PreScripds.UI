@@ -284,6 +284,7 @@
     <Content Include="Images\header.jpg" />
     <Content Include="Images\Home.jpg" />
     <Content Include="Images\home_medical_cloud_stage_rev2_1.jpg" />
+    <Content Include="Images\images.jpg" />
     <Content Include="Images\invites-hover.png" />
     <Content Include="Images\invites.png" />
     <Content Include="Images\likes.png" />

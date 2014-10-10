@@ -244,10 +244,10 @@ namespace PreScripds.UI.Controllers
             {
                 var userId = SessionContext.CurrentUser.Id;
                 var userProfileFromDb = _wcfService.InvokeService<IUserService, User>((svc) => svc.GetUserById(userId));
-
                 var mappedProfile = Mapper.Map<User, RegisterViewModel>(userProfileFromDb);
-                BindDropDowns(mappedProfile);
-
+                BindDropDowns(registerViewModel);
+                mappedProfile.userLoginViewModel.FirstOrDefault().SecurityQuestions = registerViewModel.userLoginViewModel.FirstOrDefault().SecurityQuestions;
+                mappedProfile.IsUserProfile = true;
                 return View(mappedProfile);
             }
             else
@@ -698,10 +698,21 @@ namespace PreScripds.UI.Controllers
 
         [HttpGet]
         [PreScripds.UI.Common.Authorize]
-        [ValidateAntiForgeryToken]
         public ActionResult ChangePassword()
         {
             return View("Manage");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword(ManageUserViewModel manageUserViewModel)
+        {
+            manageUserViewModel.UserId = SessionContext.CurrentUser.Id;
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Register", "Account");
+            }
+            return View();
         }
         //private class ChallengeResult : HttpUnauthorizedResult
         //{

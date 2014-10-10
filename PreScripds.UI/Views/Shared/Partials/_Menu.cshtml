@@ -1,18 +1,43 @@
 ﻿
-<div class="well bs-sidebar affix" id="sidebar" style="background-color:black; border:none">
+<div class="well bs-sidebar affix" id="sidebar" style="background-color:transparent; border:1px solid orange">
     <a class="toggleMenu" href="#"><img src="~/Images/nav.png" alt="" /></a>
     <ul class="nav nav-pills nav-stacked">
-        <li style="background-color:#eb1478;border: 2px solid pink;">
-            <a href="#" style="color:white"><i><img src="~/Images/settings.png" alt="" /></i>Settings</a>
+        <li style="background-color:#eb1478;border: 2px solid pink;" id="accountSettings">
+            <a href="#" style="color:white !important">
+                <i>
+                    <span style="color:white !important" class="glyphicon glyphicon-wrench"></span>
+                </i> &nbsp; Settings
+            </a>
         </li>
-        <li class="active"><a href="#"><i><img src="~/Images/user.png" alt="" /></i>Account</a></li>
-        <li><a href="#"><i><img src="~/Images/mail.png" alt="" /></i>Messages <span class="messages">5</span></a></li>
-        <li><a href="#"><i><img src="~/Images/favourite.png" alt="" /></i>Favorites</a></li>
+        <li style="background-color:#F8DA46;border: 2px solid orange;">
+            <a href="#" style="color:white !important">
+                <i><span style="color:white !important" class="glyphicon glyphicon-user"></span></i> &nbsp; Account
+            </a>
+        </li>
+        <li style="background-color:#eb1478;border: 2px solid pink;">
+            <div class="dropdown">
+                <button class="btn btn-default" style="background-color:#eb1478;border:none" type="button" id="dropdownMenu1" data-hover="dropdown" data-toggle="dropdown">
+                    Dropdown &nbsp;
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                    <li role="presentation" class="divider"></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                </ul>
+            </div>
+        </li>
+        @*<li class="active"><a href="#"><i><img src="~/Images/user.png" alt="" /></i>Account</a></li>
+            <li><a href="#"><i><img src="~/Images/mail.png" alt="" /></i>Messages <span class="messages">5</span></a></li>
+            <li><a href="#"><i><img src="~/Images/favourite.png" alt="" /></i>Favorites</a></li>*@
 
         @*@if (PreScripds.UI.Common.SessionContext.CurrentUser != null && PreScripds.UI.Common.SessionContext.CurrentUser.IsAdmin == 1)
             {
                 <li><a href="#"><i><img src="~/Images/favourite.png" alt="" /></i>Admin</a></li>
             }*@
+
     </ul>
 </div>
 <div class="clear"></div>
