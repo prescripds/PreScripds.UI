@@ -7,12 +7,12 @@
 @{
     ViewBag.Title = "Profile";
     Layout = "~/Views/Shared/_OpenLayout.cshtml";
-
 }
+
 <div class="header_top">
     <h2><span>Profile</span></h2>
 </div>
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Profile", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
 
     @Html.AntiForgeryToken()
@@ -144,7 +144,9 @@
                 @if (Model.IsUserProfile)
                 {
                     <div class="col-md-4 col-sm-6">
-                        @Html.ActionLink("Change Password", "ChangePassword", "Account")
+                        <div class="form-group">
+                            @Html.ActionLink("Change Password", "ChangePassword", "Account")
+                        </div>
                     </div>
                 }
                 else
@@ -173,11 +175,13 @@
                 @if (Model.IsUserProfile)
                 {
                     <div class="col-md-4 col-sm-6">
-                        @Html.ActionLink("Change Securtiy Answer", "ChangeSecurityAnswer", "Account")
+                        <div class="form-group">
+                            @Html.ActionLink("Change Securtiy Answer", "ChangeSecurityAnswer", "Account")
+                        </div>
                     </div>
                     <div class="col-md-4 col-sm-6">
                         <div class="form-group">
-                            <label class="control-label" for="LastName">User Type*</label>
+                            <label class="control-label" for="LastName">User Type</label>
                             @Html.EnumDropDownListFor(m => m.UserType, new { @class = "form-control", disabled = "disabled" }, typeof(PreScripds.Domain.Enums.UserType))
                             @Html.HiddenFor(x => x.UserType)
                         </div>

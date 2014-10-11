@@ -236,7 +236,7 @@ namespace PreScripds.UI.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register(string ps = null)
+        public ActionResult Profile(string ps = null)
         {
             var registerViewModel = new RegisterViewModel();
 
@@ -292,7 +292,7 @@ namespace PreScripds.UI.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [RecaptchaControlMvc.CaptchaValidator]
-        public async Task<ActionResult> Register(RegisterViewModel model, bool captchaValid, string captchaErrorMessage)
+        public async Task<ActionResult> Profile(RegisterViewModel model, bool captchaValid, string captchaErrorMessage)
         {
             VerifyCaptcha(model, captchaValid, captchaErrorMessage);
             if (ModelState.IsValid)
@@ -383,7 +383,7 @@ namespace PreScripds.UI.Controllers
         {
             if (SessionContext.CurrentUser.IsNotNull())
             {
-                return RedirectToAction("Register", "Account");
+                return RedirectToAction("Profile", "Account");
             }
             return RedirectToAction("Login", "Account");
         }
@@ -704,15 +704,36 @@ namespace PreScripds.UI.Controllers
         }
 
         [HttpPost]
+        [PreScripds.UI.Common.Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(ManageUserViewModel manageUserViewModel)
         {
             manageUserViewModel.UserId = SessionContext.CurrentUser.Id;
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Register", "Account");
+                return RedirectToAction("Profile", "Account");
             }
-            return View();
+            return View("Manage");
+        }
+
+        [HttpGet]
+        [PreScripds.UI.Common.Authorize]
+        public ActionResult ChangeSecurityAnswer()
+        {
+            return View("SecurityAnswer");
+        }
+
+        [HttpPost]
+        [PreScripds.UI.Common.Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeSecurityAnswer(ManageUserSecurityViewModel manageUserSecurityViewModel)
+        {
+            manageUserSecurityViewModel.UserId = SessionContext.CurrentUser.Id;
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Profile", "Account");
+            }
+            return View("SecurityAnswer");
         }
         //private class ChallengeResult : HttpUnauthorizedResult
         //{

@@ -42,7 +42,7 @@ else
                     Sign In/Sign Up <span class="glyphicon glyphicon-log-in" title="Login/Register"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                    <li>@Html.ActionLink("New User? Sign Up", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink("New User? Sign Up", "Profile", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
                     <li class="divider"></li>
                     <li>@Html.ActionLink("Already Here? Sign in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
                 </ul>

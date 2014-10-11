@@ -1,0 +1,41 @@
+﻿@using Microsoft.AspNet.Identity
+@model PreScripds.UI.Models.ManageUserSecurityViewModel
+<div class="row">
+    <div class="col-md-8 blackBg">
+        <section id="loginForm">
+            <p>You're logged in as <strong>@User.Identity.GetUserName()</strong>.</p>
+
+            @using (Html.BeginForm("ChangeSecurityAnswer", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @*<h4>Change Password</h4>
+                    <hr />*@
+                @Html.ValidationSummary()
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CurrentSecurityAnswer, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.CurrentSecurityAnswer, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.NewSecurityAnswer, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.NewSecurityAnswer, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ConfirmSecurityAnswer, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.ConfirmSecurityAnswer, new { @class = "form-control" })
+                    </div>
+                </div>
+                @Html.TextBoxFor(m => m.UserId, new { @class = "hidden" })
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Change Security Answer" class="btn btn-warning" />
+                    </div>
+                </div>
+            }
+        </section>
+    </div>
+</div>

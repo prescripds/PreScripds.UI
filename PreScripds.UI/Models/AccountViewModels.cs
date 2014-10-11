@@ -30,6 +30,25 @@ namespace PreScripds.UI.Models
         public long? UserId { get; set; }
     }
 
+    public class ManageUserSecurityViewModel
+    {
+        [Required(ErrorMessage = "The Current Security Answer is mandatory.")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Current Security Answer")]
+        public string CurrentSecurityAnswer { get; set; }
+
+        [Required(ErrorMessage = "The New Security Answer is mandatory.")]
+        [DataType(DataType.Password)]
+        [Display(Name = "New Security Answer")]
+        public string NewSecurityAnswer { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm New Security Answer")]
+        [Compare("NewSecurityAnswer", ErrorMessage = "The New Security Answer and confirmation Security Answer do not match.")]
+        public string ConfirmSecurityAnswer { get; set; }
+        public long? UserId { get; set; }
+    }
+
     public class LoginViewModel
     {
         [Required(ErrorMessage = "User name is required.")]

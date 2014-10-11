@@ -1,0 +1,18 @@
+﻿@using PreScripds.UI.Models;
+@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "SecurityAnswer";
+    Layout = "~/Views/Shared/_OpenLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        @Html.Partial("_ChangeSecurityAnswerPartial")
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+

@@ -432,7 +432,6 @@
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <None Include="Service References\UserServiceReference\UserService.wsdl" />
     <None Include="Service References\UserServiceReference\UserService.xsd">
@@ -474,6 +473,9 @@
     <Content Include="Views\Dashboard\Partials\_OrganizationApprovals.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\_ChangeSecurityAnswerPartial.cshtml" />
+    <Content Include="Views\Account\SecurityAnswer.cshtml" />
+    <Content Include="Views\Account\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
