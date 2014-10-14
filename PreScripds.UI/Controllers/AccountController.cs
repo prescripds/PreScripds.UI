@@ -239,14 +239,17 @@ namespace PreScripds.UI.Controllers
         public ActionResult Profile(string ps = null)
         {
             var registerViewModel = new RegisterViewModel();
-
+            BindDropDowns(registerViewModel);
             if (SessionContext.CurrentUser.IsNotNull())
             {
                 var userId = SessionContext.CurrentUser.Id;
                 var userProfileFromDb = _wcfService.InvokeService<IUserService, User>((svc) => svc.GetUserById(userId));
                 var mappedProfile = Mapper.Map<User, RegisterViewModel>(userProfileFromDb);
-                BindDropDowns(registerViewModel);
+                mappedProfile.Countries = registerViewModel.Countries;
+                mappedProfile.States = registerViewModel.States;
                 mappedProfile.userLoginViewModel.FirstOrDefault().SecurityQuestions = registerViewModel.userLoginViewModel.FirstOrDefault().SecurityQuestions;
+                //mappedProfile.userLoginViewModel.FirstOrDefault().SecurityQuestionId = registerViewModel.userLoginViewModel.FirstOrDefault().SecurityQuestionId;
+                mappedProfile.SecurityQuestionId = mappedProfile.userLoginViewModel.FirstOrDefault().SecurityQuestionId;
                 mappedProfile.IsUserProfile = true;
                 return View(mappedProfile);
             }
@@ -254,7 +257,7 @@ namespace PreScripds.UI.Controllers
             {
                 registerViewModel.CountryId = 1;
                 registerViewModel.userLoginViewModel = new List<UserLoginViewModel>();
-                BindDropDowns(registerViewModel);
+
                 if (ps.IsNotEmpty())
                 {
                     registerViewModel.IsHomeUrl = true;
@@ -294,38 +297,53 @@ namespace PreScripds.UI.Controllers
         [RecaptchaControlMvc.CaptchaValidator]
         public async Task<ActionResult> Profile(RegisterViewModel model, bool captchaValid, string captchaErrorMessage)
         {
-            VerifyCaptcha(model, captchaValid, captchaErrorMessage);
-            if (ModelState.IsValid)
+            if (!model.IsUserProfile)
             {
-                model.Active = true;
-                if (model.TermsCondition)
+                VerifyCaptcha(model, captchaValid, captchaErrorMessage);
+                if (ModelState.IsValid)
                 {
-                    if (model.UserType == (short)UserType.Self)
-                        model.IsOrganization = 0;
-                    if (model.UserType == (short)UserType.Organization)
-                        model.IsOrganization = 1;
-
-                    var mappedUserProfile = Mapper.Map<RegisterViewModel, User>(model);
-                    mappedUserProfile.CreatedDate = DateTime.Now;
-                    mappedUserProfile.CreatedBy = 0;
-                    mappedUserProfile.UpdatedDate = DateTime.Now;
-                    mappedUserProfile.UpdatedBy = 0;
-                    mappedUserProfile.Active = true;
-                    var userFromDb = _wcfService.InvokeService<IUserService, User>(svc => svc.AddUser(mappedUserProfile));
-                    if (userFromDb != null)
+                    model.Active = true;
+                    if (model.TermsCondition)
                     {
-                        model.CreationSuccessful = true;
-                        model.Message = "Dear '{0}'. You have been registered successfully and a welcome email has been sent to '{1}' and a welcome sms is sent to '{2}'.".ToFormat(model.FullName, model.Email, model.Mobile);
+                        if (model.UserType == (short)UserType.Self)
+                            model.IsOrganization = 0;
+                        if (model.UserType == (short)UserType.Organization)
+                            model.IsOrganization = 1;
+
+                        var mappedUserProfile = Mapper.Map<RegisterViewModel, User>(model);
+
+                        mappedUserProfile.UserLogins.FirstOrDefault().SecurityQuestionId = model.SecurityQuestionId;
+                        if (mappedUserProfile.Id == 0)
+                        {
+                            mappedUserProfile.CreatedDate = DateTime.Now;
+                            mappedUserProfile.CreatedBy = 0;
+                            mappedUserProfile.UpdatedDate = DateTime.Now;
+                            mappedUserProfile.UpdatedBy = 0;
+                            mappedUserProfile.Active = true;
+                            var userFromDb = _wcfService.InvokeService<IUserService, User>(svc => svc.AddUser(mappedUserProfile));
+                            if (userFromDb != null)
+                            {
+                                model.CreationSuccessful = true;
+                                model.Message = "Dear '{0}'. You have been registered successfully and a welcome email has been sent to '{1}' and a welcome sms is sent to '{2}'.".ToFormat(model.FullName, model.Email, model.Mobile);
+                            }
+                        }
+
                     }
+                    else
+                    {
+                        ModelState.AddModelError("TermsCondition", "Terms and Conditions is required.");
+                    }
+                    model.userLoginViewModel = new List<UserLoginViewModel>();
+                    model.IsUserProfile = false;
+                    BindDropDowns(model);
                 }
-                else
-                {
-                    ModelState.AddModelError("TermsCondition", "Terms and Conditions is required.");
-                }
+            }
+            else
+            {
 
             }
-            model.userLoginViewModel = new List<UserLoginViewModel>();
-            BindDropDowns(model);
+
+
             return View(model);
         }
 

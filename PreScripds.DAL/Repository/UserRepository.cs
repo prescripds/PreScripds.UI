@@ -68,10 +68,6 @@ namespace PreScripds.DAL.Repository
                     }
                 }
 
-                //user.UserLogins.ToList().Select(x => x.UserHistories.ToList()
-                //    .ForEach((s) => { uow.GetRepository<UserHistory>().Insert(s); }))
-                //    .ForEach((p) => { uow.GetRepository<UserLogin>().Insert(p); });
-
                 if (user.UserLogins.IsCollectionValid())
                 {
                     user.UserLogins.SelectMany(x => x.UserHistories).Each(s => uow.GetRepository<UserHistory>().Items.ToList().Add(s));

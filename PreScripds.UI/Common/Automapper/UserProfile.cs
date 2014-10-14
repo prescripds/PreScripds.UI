@@ -39,8 +39,11 @@ namespace PreScripds.UI.Common.Automapper
 
             Mapper.CreateMap<User, RegisterViewModel>()
                 .ForMember(d => d.PinCode, s => s.MapFrom(p => p.Zipcode))
+                .ForMember(d => d.CountryId, s => s.MapFrom(p => p.CountryId))
                 .ForMember(d => d.TermsCondition, s => s.MapFrom(p => p.TermsCondition))
                 .ForMember(d => d.IsOrganization, s => s.MapFrom(p => ConvertOrganization(p.IsOrganization)))
+                .ForMember(d => d.AltEmail, s => s.MapFrom(p => p.Alt_Email))
+                .ForMember(d => d.AltMobile, s => s.MapFrom(p => p.Alt_Mobile))
                 .AfterMap((s, d) =>
                 {
                     var mappedLoginProfile = Mapper.Map<List<UserLogin>, List<UserLoginViewModel>>(s.UserLogins.ToList());

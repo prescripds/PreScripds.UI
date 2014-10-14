@@ -120,6 +120,7 @@ namespace PreScripds.UI.Models
         public long OrganizationId { get; set; }
         //public int OrganizationType { get; set; }
         public string CaptchaUserInput { get; set; }
+        public int SecurityQuestionId { get; set; }
         public string CaptchaValid { get; set; }
         public int? IsOrganization { get; set; }
         public string IpAddress { get; set; }

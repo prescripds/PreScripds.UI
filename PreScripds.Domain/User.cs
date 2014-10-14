@@ -27,7 +27,7 @@ namespace PreScripds.Domain
         [DataMember]
         public long Mobile { get; set; }
         [DataMember]
-        public long Phone { get; set; }
+        public long? Phone { get; set; }
         [DataMember]
         public int? Age { get; set; }
         [DataMember]
@@ -80,6 +80,6 @@ namespace PreScripds.Domain
         public virtual ICollection<UserLogin> UserLogins { get; set; }
         [DataMember]
         public virtual ICollection<UserRoleDepartment> UserRoleDepartments { get; set; }
-        
+
     }
 }

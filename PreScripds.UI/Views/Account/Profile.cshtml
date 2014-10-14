@@ -169,7 +169,7 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="form-group">
                         <label class="control-label" for="FirstName">Security Question*</label>
-                        @Html.DropDownListFor(m => m.userLoginViewModel[0].SecurityQuestionId, Model.userLoginViewModel[0].SecurityQuestions.ToSelectListItems(model => model.Id.ToString(), model => model.QuestionName), "--Select--", new { @class = "form-control" })
+                        @Html.DropDownListFor(m => m.SecurityQuestionId, Model.userLoginViewModel[0].SecurityQuestions.ToSelectListItems(model => model.Id.ToString(), model => model.QuestionName), "--Select--", new { @class = "form-control" })
                     </div>
                 </div>
                 @if (Model.IsUserProfile)
@@ -252,6 +252,7 @@
         }
     </div>
     @Html.TextBoxFor(m => m.CaptchaUserInput, new { @class = "hidden" })
+    @Html.TextBoxFor(m => m.IsUserProfile, new { @class = "hidden" })
     @Html.MessageDialogRedirect(Model.Message, "Login", "Account", true)
 }
 
