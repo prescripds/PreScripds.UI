@@ -248,15 +248,18 @@ namespace PreScripds.UI.Controllers
                 mappedProfile.Countries = registerViewModel.Countries;
                 mappedProfile.States = registerViewModel.States;
                 mappedProfile.userLoginViewModel.FirstOrDefault().SecurityQuestions = registerViewModel.userLoginViewModel.FirstOrDefault().SecurityQuestions;
-                //mappedProfile.userLoginViewModel.FirstOrDefault().SecurityQuestionId = registerViewModel.userLoginViewModel.FirstOrDefault().SecurityQuestionId;
+                //mappedProfile.userLoginViewModel.FirstOrDefault().Password = registerViewModel.userLoginViewModel.FirstOrDefault().Password;
+                //mappedProfile.userLoginViewModel.FirstOrDefault().ConfirmPassword = registerViewModel.userLoginViewModel.FirstOrDefault().Password;
                 mappedProfile.SecurityQuestionId = mappedProfile.userLoginViewModel.FirstOrDefault().SecurityQuestionId;
+
                 mappedProfile.IsUserProfile = true;
                 return View(mappedProfile);
             }
             else
             {
                 registerViewModel.CountryId = 1;
-                registerViewModel.userLoginViewModel = new List<UserLoginViewModel>();
+                registerViewModel.IsUserProfile = false;
+                //registerViewModel.userLoginViewModel = new List<UserLoginViewModel>();
 
                 if (ps.IsNotEmpty())
                 {
@@ -300,6 +303,7 @@ namespace PreScripds.UI.Controllers
             if (!model.IsUserProfile)
             {
                 VerifyCaptcha(model, captchaValid, captchaErrorMessage);
+                ValidateUserLoginDetails(model.userLoginViewModel);
                 if (ModelState.IsValid)
                 {
                     model.Active = true;
@@ -327,7 +331,6 @@ namespace PreScripds.UI.Controllers
                                 model.Message = "Dear '{0}'. You have been registered successfully and a welcome email has been sent to '{1}' and a welcome sms is sent to '{2}'.".ToFormat(model.FullName, model.Email, model.Mobile);
                             }
                         }
-
                     }
                     else
                     {
@@ -340,11 +343,29 @@ namespace PreScripds.UI.Controllers
             }
             else
             {
+                if (ModelState.IsValid)
+                {
 
+                }
+                //TODO:
             }
 
 
             return View(model);
+        }
+
+        private void ValidateUserLoginDetails(List<UserLoginViewModel> userLoginViewModel)
+        {
+            if (userLoginViewModel.IsCollectionValid())
+            {
+                userLoginViewModel.ForEach(x =>
+                {
+                    if (x.Password.IsNull() || x.Password.IsEmpty())
+                        ModelState.AddModelError("Password", "Password is mandatory.");
+                    if (x.SecurityAnswer.IsNull() || x.SecurityAnswer.IsEmpty())
+                        ModelState.AddModelError("SecurityAnswer", "Security Answer is mandatory.");
+                });
+            }
         }
 
         public void VerifyCaptcha(RegisterViewModel model, bool captchaValid, string captchaErrorMessage)

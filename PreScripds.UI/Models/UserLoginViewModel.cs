@@ -13,7 +13,7 @@ namespace PreScripds.UI.Models
         [Display(Name = "User name")]
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = "Password is required.")]
+
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
@@ -30,7 +30,7 @@ namespace PreScripds.UI.Models
         [Display(Name = "Security Question")]
         public int SecurityQuestionId { get; set; }
 
-        [Required(ErrorMessage = "Security Answer is required.")]
+
         [Display(Name = "Security Answer")]
         public string SecurityAnswer { get; set; }
 

@@ -24,6 +24,7 @@ namespace PreScripds.UI.Common.Automapper
                .IgnoreAllNonExisting();
             Mapper.CreateMap<UserLogin, UserLoginViewModel>()
                 .ForMember(d => d.UserName, s => s.MapFrom(p => p.UserName))
+                
                 .IgnoreAllNonExisting();
             Mapper.CreateMap<UserHistoryViewModel, UserHistory>().IgnoreAllNonExisting();
             Mapper.CreateMap<UserHistory, UserHistoryViewModel>().IgnoreAllNonExisting();
