@@ -345,9 +345,39 @@ namespace PreScripds.UI.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var userFromDb = _wcfService.InvokeService<IUserService, User>((svc) => svc.GetUserById(model.Id));
+                    model.userLoginViewModel.ForEach(x =>
+                    {
+                        x.Password = userFromDb.UserLogins.FirstOrDefault().Password;
+                        x.SecurityAnswer = userFromDb.UserLogins.FirstOrDefault().SecurityAnswer;
+                        x.Captcha = userFromDb.UserLogins.FirstOrDefault().Captcha;
+                        x.UserHistoryViewModel = new List<UserHistoryViewModel>();
+                        var userHstry = userFromDb.UserLogins.Select(z => z.UserHistories);
+                        foreach (var item in userFromDb.UserLogins.FirstOrDefault().UserHistories)
+                        {
+                            UserHistoryViewModel userHistoryViewModel = new UserHistoryViewModel()
+                            {
+                                UserId = item.UserloginId,
+                                UserHistoryId = item.Id,
+                                SaltKey = item.saltkey,
+                                PasswordCap = item.PasswordCap,
+                                IpAddress = item.IpAddress,
+                                CreatedDate = item.CreatedDate,
+                                Captcha = item.Captcha
+                            };
+                            x.UserHistoryViewModel.Add(userHistoryViewModel);
+                        }
+                    });
+
+                    var mappedUserProfile = Mapper.Map<RegisterViewModel, User>(model);
+
+                    mappedUserProfile.UserLogins.FirstOrDefault().SecurityQuestionId = model.SecurityQuestionId;
+                    mappedUserProfile.UserLogins.FirstOrDefault().PasswordCap = userFromDb.UserLogins.FirstOrDefault().PasswordCap;
+                    mappedUserProfile.UserLogins.FirstOrDefault().saltkey = userFromDb.UserLogins.FirstOrDefault().saltkey;
+                        //TODO:Created Date and updated date fill
+                    // _wcfService.InvokeService<IUserService, User>((svc) => svc.UpdateUserProfile(mappedUserProfile));
 
                 }
-                //TODO:
             }
 
 

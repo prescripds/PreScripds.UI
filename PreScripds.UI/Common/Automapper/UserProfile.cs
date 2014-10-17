@@ -16,6 +16,7 @@ namespace PreScripds.UI.Common.Automapper
         protected override void Configure()
         {
             Mapper.CreateMap<UserLoginViewModel, UserLogin>()
+                .ForMember(d => d.Id, s => s.MapFrom(p => p.Id))
                 .AfterMap((s, d) =>
                 {
                     var mappedUserHistory = Mapper.Map<ICollection<UserHistoryViewModel>, ICollection<UserHistory>>(s.UserHistoryViewModel);
@@ -24,13 +25,20 @@ namespace PreScripds.UI.Common.Automapper
                .IgnoreAllNonExisting();
             Mapper.CreateMap<UserLogin, UserLoginViewModel>()
                 .ForMember(d => d.UserName, s => s.MapFrom(p => p.UserName))
-                
+                .ForMember(d => d.Id, s => s.MapFrom(p => p.Id))
                 .IgnoreAllNonExisting();
-            Mapper.CreateMap<UserHistoryViewModel, UserHistory>().IgnoreAllNonExisting();
-            Mapper.CreateMap<UserHistory, UserHistoryViewModel>().IgnoreAllNonExisting();
+            Mapper.CreateMap<UserHistoryViewModel, UserHistory>()
+                .ForMember(d => d.Id, s => s.MapFrom(p => p.UserHistoryId))
+                .ForMember(d => d.UserloginId, s => s.MapFrom(p => p.UserId))
+                .IgnoreAllNonExisting();
+            Mapper.CreateMap<UserHistory, UserHistoryViewModel>()
+                .ForMember(d => d.UserHistoryId, s => s.MapFrom(p => p.Id))
+                .ForMember(d => d.UserId, s => s.MapFrom(p => p.UserloginId))
+                .IgnoreAllNonExisting();
             Mapper.CreateMap<RegisterViewModel, User>()
                 .ForMember(d => d.Zipcode, s => s.MapFrom(p => p.PinCode))
                 .ForMember(d => d.TermsCondition, s => s.MapFrom(p => ConvertTermsAndCondition(p.TermsCondition)))
+
                 .AfterMap((s, d) =>
                 {
                     var mappedLoginProfile = Mapper.Map<List<UserLoginViewModel>, List<UserLogin>>(s.userLoginViewModel);
@@ -45,6 +53,10 @@ namespace PreScripds.UI.Common.Automapper
                 .ForMember(d => d.IsOrganization, s => s.MapFrom(p => ConvertOrganization(p.IsOrganization)))
                 .ForMember(d => d.AltEmail, s => s.MapFrom(p => p.Alt_Email))
                 .ForMember(d => d.AltMobile, s => s.MapFrom(p => p.Alt_Mobile))
+                .ForMember(d => d.CreatedDate, s => s.MapFrom(p => p.CreatedDate))
+                .ForMember(d => d.UpdatedDate, s => s.MapFrom(p => p.UpdatedDate))
+                .ForMember(d => d.UpdatedBy, s => s.MapFrom(p => p.UpdatedBy))
+                .ForMember(d => d.CreatedBy, s => s.MapFrom(p => p.CreatedBy))
                 .AfterMap((s, d) =>
                 {
                     var mappedLoginProfile = Mapper.Map<List<UserLogin>, List<UserLoginViewModel>>(s.UserLogins.ToList());

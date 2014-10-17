@@ -386,10 +386,22 @@ namespace PreScripds.DAL.Repository
             using (var uow = new UnitOfWork())
             {
                 var user = uow.GetRepository<User>().Items
-                    .Include(s => s.UserInRoles).Include(s => s.UserLogins).Include(s => s.UserRoleDepartments)
+                    .Include(s => s.UserInRoles)
+                    .Include(s => s.UserLogins.Select(p => p.UserHistories))
+                    .Include(s => s.UserLogins)
+                    .Include(s => s.UserRoleDepartments)
                     .FirstOrDefault(x => x.Id == Id);
                 return user;
             }
+        }
+
+        public User UpdateUserProfile(User user)
+        {
+            if (user.Id != 0)
+            {
+
+            }
+            return new User();
         }
     }
 }

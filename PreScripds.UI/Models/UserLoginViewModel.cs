@@ -9,6 +9,7 @@ namespace PreScripds.UI.Models
 {
     public class UserLoginViewModel
     {
+        public long Id { get; set; }
         [Required(ErrorMessage = "User name is required.")]
         [Display(Name = "User name")]
         public string UserName { get; set; }

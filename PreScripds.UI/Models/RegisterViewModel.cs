@@ -11,6 +11,7 @@ namespace PreScripds.UI.Models
 {
     public class RegisterViewModel
     {
+        public long Id { get; set; }
         [Required(ErrorMessage = "First name is required.")]
         [Display(Name = "First name")]
         public string FirstName { get; set; }
@@ -125,5 +126,9 @@ namespace PreScripds.UI.Models
         public int? IsOrganization { get; set; }
         public string IpAddress { get; set; }
         public bool IsUserProfile { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; }
+        public long CreatedBy { get; set; }
+        public long UpdatedBy { get; set; }
     }
 }

@@ -166,7 +166,12 @@
                 }
             </div>
             <div class="row">
-
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="FirstName">Security Question*</label>
+                        @Html.DropDownListFor(m => m.SecurityQuestionId, Model.userLoginViewModel[0].SecurityQuestions.ToSelectListItems(model => model.Id.ToString(), model => model.QuestionName), "--Select--", new { @class = "form-control" })
+                    </div>
+                </div>
                 @if (Model.IsUserProfile)
                 {
                     <div class="col-md-4 col-sm-6">
@@ -184,12 +189,7 @@
                 }
                 else
                 {
-                    <div class="col-md-4 col-sm-6">
-                        <div class="form-group">
-                            <label class="control-label" for="FirstName">Security Question*</label>
-                            @Html.DropDownListFor(m => m.SecurityQuestionId, Model.userLoginViewModel[0].SecurityQuestions.ToSelectListItems(model => model.Id.ToString(), model => model.QuestionName), "--Select--", new { @class = "form-control" })
-                        </div>
-                    </div>
+
                     <div class="col-md-4 col-sm-6">
                         <div class="form-group">
                             <label class="control-label" for="LastName">Security Answer*</label>
@@ -254,6 +254,8 @@
     </div>
     @Html.TextBoxFor(m => m.CaptchaUserInput, new { @class = "hidden" })
     @Html.TextBoxFor(m => m.IsUserProfile, new { @class = "hidden" })
+    @Html.TextBoxFor(m => m.Active, new { @class = "hidden" })
+    @Html.TextBoxFor(m => m.Id, new { @class = "hidden" })
     @*if (Model.IsUserProfile)
         {
             @Html.TextBoxFor(m => m.userLoginViewModel[0].Password, new { @class = "hidden" })
