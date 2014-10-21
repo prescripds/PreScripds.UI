@@ -18,6 +18,7 @@ using System.Configuration;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 
+
 namespace PreScripds.DAL.Repository
 {
     public class UserRepository : IUserRepository
@@ -397,11 +398,32 @@ namespace PreScripds.DAL.Repository
 
         public User UpdateUserProfile(User user)
         {
-            if (user.Id != 0)
+            if (user.Id != 0 && user.IsNotNull())
             {
-
+                using (var uow = new UnitOfWork())
+                {
+                    var userLogin = user.UserLogins.FirstOrDefault();
+                    var userLoginFrmDb = uow.GetRepository<UserLogin>().Items.FirstOrDefault(x => x.Id == userLogin.Id);
+                    if (userLoginFrmDb.IsNotNull())
+                    {
+                        userLoginFrmDb.UserName = userLogin.UserName;
+                        uow.GetRepository<UserLogin>().Update(userLoginFrmDb);
+                        var userFromDb = uow.GetRepository<User>().Items.FirstOrDefault(x => x.Id == user.Id);
+                        var assignedUser = AssignUserToDbUser(user, userFromDb);
+                        uow.GetRepository<User>().Update(assignedUser);
+                        uow.SaveChanges();
+                    }
+                }
             }
             return new User();
+        }
+
+        private User AssignUserToDbUser(User user, User userFromDb)
+        {
+            AutoMapper.Mapper.CreateMap<User, User>();
+            var mapedProfile = AutoMapper.Mapper.Map(user, userFromDb);
+            // userFromDb = mapedProfile;
+            return mapedProfile;
         }
     }
 }

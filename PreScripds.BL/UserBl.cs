@@ -107,5 +107,10 @@ namespace PreScripds.BL
             var user = _userRepository.GetUserById(Id);
             return user;
         }
+        public User UpdateUserProfile(User user)
+        {
+            var userPfl = _userRepository.UpdateUserProfile(user);
+            return userPfl;
+        }
     }
 }

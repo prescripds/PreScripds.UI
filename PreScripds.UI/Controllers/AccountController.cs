@@ -374,8 +374,16 @@ namespace PreScripds.UI.Controllers
                     mappedUserProfile.UserLogins.FirstOrDefault().SecurityQuestionId = model.SecurityQuestionId;
                     mappedUserProfile.UserLogins.FirstOrDefault().PasswordCap = userFromDb.UserLogins.FirstOrDefault().PasswordCap;
                     mappedUserProfile.UserLogins.FirstOrDefault().saltkey = userFromDb.UserLogins.FirstOrDefault().saltkey;
-                        //TODO:Created Date and updated date fill
-                    // _wcfService.InvokeService<IUserService, User>((svc) => svc.UpdateUserProfile(mappedUserProfile));
+                    mappedUserProfile.UserLogins.FirstOrDefault().Id = userFromDb.UserLogins.FirstOrDefault().Id;
+                    mappedUserProfile.UpdatedDate = DateTime.Now;
+                    mappedUserProfile.UpdatedBy = SessionContext.CurrentUser.Id;
+                    var userProfile = _wcfService.InvokeService<IUserService, User>((svc) => svc.UpdateUserProfile(mappedUserProfile));
+                    if (userProfile.IsNotNull())
+                    {
+                        var registerMappedProfile = Mapper.Map<User, RegisterViewModel>(userProfile);
+                        registerMappedProfile.Message = "Saved Successfully.";
+                        registerMappedProfile.CreationSuccessful = true;
+                    }
 
                 }
             }

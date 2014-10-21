@@ -26,5 +26,6 @@ namespace PreScripds.DAL.Interface
         void UpdateUserByAdmin(long id, bool isActive);
         List<Department> GetDepartmentInOrganization(long organizationId);
         User GetUserById(long Id);
+        User UpdateUserProfile(User user);
     }
 }

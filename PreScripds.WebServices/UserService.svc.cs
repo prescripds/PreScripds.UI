@@ -120,5 +120,10 @@ namespace PreScripds.WebServices
             var user = _userBl.GetUserById(Id);
             return user;
         }
+        public User UpdateUserProfile(User user)
+        {
+            var userPrfl = _userBl.UpdateUserProfile(user);
+            return userPrfl;
+        }
     }
 }

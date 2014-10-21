@@ -62,5 +62,8 @@ namespace PreScripds.WebServices
         [OperationContract]
         [WebInvoke(UriTemplate = "/GetUserById", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
         User GetUserById(long Id);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/UpdateUserProfile", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
+        User UpdateUserProfile(User user);
     }
 }
