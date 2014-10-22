@@ -788,6 +788,9 @@ namespace PreScripds.UI.Controllers
             manageUserViewModel.UserId = SessionContext.CurrentUser.Id;
             if (ModelState.IsValid)
             {
+                var userLogin = _wcfService.InvokeService<IUserService, UserLogin>((svc) => svc.GetUserLoginById(manageUserViewModel.UserId.Value));
+                userLogin.Password = manageUserViewModel.NewPassword;
+                var passwordChange = _wcfService.InvokeService<IUserService, UserLogin>((svc) => svc.ChangePassword(userLogin));
                 return RedirectToAction("Profile", "Account");
             }
             return View("Manage");
@@ -808,6 +811,9 @@ namespace PreScripds.UI.Controllers
             manageUserSecurityViewModel.UserId = SessionContext.CurrentUser.Id;
             if (ModelState.IsValid)
             {
+                var userLogin = _wcfService.InvokeService<IUserService, UserLogin>((svc) => svc.GetUserLoginById(manageUserSecurityViewModel.UserId.Value));
+                userLogin.SecurityAnswer = manageUserSecurityViewModel.NewSecurityAnswer;
+                var securityAnswerChange = _wcfService.InvokeService<IUserService, UserLogin>((svc) => svc.ChangeSecurityAnswer(userLogin));
                 return RedirectToAction("Profile", "Account");
             }
             return View("SecurityAnswer");

@@ -27,5 +27,8 @@ namespace PreScripds.DAL.Interface
         List<Department> GetDepartmentInOrganization(long organizationId);
         User GetUserById(long Id);
         User UpdateUserProfile(User user);
+        UserLogin GetUserLoginById(long id);
+        UserLogin ChangePassword(UserLogin userlogin);
+        UserLogin ChangeSecurityAnswer(UserLogin userLogin);
     }
 }

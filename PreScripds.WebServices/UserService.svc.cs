@@ -125,5 +125,20 @@ namespace PreScripds.WebServices
             var userPrfl = _userBl.UpdateUserProfile(user);
             return userPrfl;
         }
+        public UserLogin GetUserLoginById(long id)
+        {
+            var userLogin = _userBl.GetUserLoginById(id);
+            return userLogin;
+        }
+        public UserLogin ChangePassword(UserLogin userlogin)
+        {
+            var userLogn = _userBl.ChangePassword(userlogin);
+            return userLogn;
+        }
+        public UserLogin ChangeSecurityAnswer(UserLogin userlogin)
+        {
+            var userLogn = _userBl.ChangeSecurityAnswer(userlogin);
+            return userLogn;
+        }
     }
 }

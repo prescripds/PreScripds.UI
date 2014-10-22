@@ -407,6 +407,7 @@ namespace PreScripds.DAL.Repository
                     if (userLoginFrmDb.IsNotNull())
                     {
                         userLoginFrmDb.UserName = userLogin.UserName;
+                        userLoginFrmDb.SecurityQuestionId = userLogin.SecurityQuestionId;
                         uow.GetRepository<UserLogin>().Update(userLoginFrmDb);
                         var userFromDb = uow.GetRepository<User>().Items.FirstOrDefault(x => x.Id == user.Id);
                         var assignedUser = AssignUserToDbUser(user, userFromDb);
@@ -424,6 +425,48 @@ namespace PreScripds.DAL.Repository
             var mapedProfile = AutoMapper.Mapper.Map(user, userFromDb);
             // userFromDb = mapedProfile;
             return mapedProfile;
+        }
+
+        public UserLogin GetUserLoginById(long id)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var userLogin = uow.GetRepository<UserLogin>().Items.Include(x => x.UserHistories).FirstOrDefault(x => x.UserId == id);
+                return userLogin;
+            }
+        }
+        public UserLogin ChangePassword(UserLogin userLogin)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var userLoginFrmDb = uow.GetRepository<UserLogin>().Items.FirstOrDefault(x => x.Id == userLogin.Id);
+                var encryptedPassword = EncryptionExtensions.CreatePasswordHash(userLogin.Password,
+                                   userLogin.saltkey);
+                userLoginFrmDb.Password = userLogin.Password = encryptedPassword;
+                var userHstryFrmDb = uow.GetRepository<UserHistory>().Items.Where(x => x.UserloginId == userLogin.Id);
+                foreach (var item in userHstryFrmDb)
+                {
+                    var encryptedPasswordCap = EncryptionExtensions.CreatePasswordCapHash(userLogin.Password, item.saltkey, item.Captcha);
+                    item.PasswordCap = encryptedPasswordCap;
+                    uow.GetRepository<UserHistory>().Update(item);
+                }
+                userLoginFrmDb.PasswordCap = userHstryFrmDb.FirstOrDefault().PasswordCap;
+                uow.GetRepository<UserLogin>().Update(userLoginFrmDb);
+                uow.SaveChanges();
+                return userLogin;
+            }
+        }
+
+        public UserLogin ChangeSecurityAnswer(UserLogin userLogin)
+        {
+            using (var uow = new UnitOfWork())
+            {
+                var userLoginFrmDb = uow.GetRepository<UserLogin>().Items.FirstOrDefault(x => x.Id == userLogin.Id);
+                var encryptedSecurityAnswer = EncryptionExtensions.CreatePasswordHash(userLogin.SecurityAnswer, userLoginFrmDb.saltkey);
+                userLoginFrmDb.SecurityAnswer = encryptedSecurityAnswer;
+                uow.GetRepository<UserLogin>().Update(userLoginFrmDb);
+                return userLogin;
+            }
         }
     }
 }

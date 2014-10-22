@@ -112,5 +112,20 @@ namespace PreScripds.BL
             var userPfl = _userRepository.UpdateUserProfile(user);
             return userPfl;
         }
+        public UserLogin GetUserLoginById(long id)
+        {
+            var userLogin = _userRepository.GetUserLoginById(id);
+            return userLogin;
+        }
+        public UserLogin ChangePassword(UserLogin userlogin)
+        {
+            var userLogin = _userRepository.ChangePassword(userlogin);
+            return userLogin;
+        }
+        public UserLogin ChangeSecurityAnswer(UserLogin userlogin)
+        {
+            var userLogin = _userRepository.ChangeSecurityAnswer(userlogin);
+            return userLogin;
+        }
     }
 }
