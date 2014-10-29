@@ -435,13 +435,15 @@ namespace PreScripds.DAL.Repository
                 return userLogin;
             }
         }
-        public UserLogin ChangePassword(UserLogin userLogin)
+        public string ChangePassword(UserLogin userLogin)
         {
             using (var uow = new UnitOfWork())
             {
                 var userLoginFrmDb = uow.GetRepository<UserLogin>().Items.FirstOrDefault(x => x.Id == userLogin.Id);
                 var encryptedPassword = EncryptionExtensions.CreatePasswordHash(userLogin.Password,
                                    userLogin.saltkey);
+                if (userLoginFrmDb.Password.Equals(encryptedPassword))
+                    return "Current Password and New Password should not be the same.";
                 userLoginFrmDb.Password = userLogin.Password = encryptedPassword;
                 var userHstryFrmDb = uow.GetRepository<UserHistory>().Items.Where(x => x.UserloginId == userLogin.Id);
                 foreach (var item in userHstryFrmDb)
@@ -453,19 +455,21 @@ namespace PreScripds.DAL.Repository
                 userLoginFrmDb.PasswordCap = userHstryFrmDb.FirstOrDefault().PasswordCap;
                 uow.GetRepository<UserLogin>().Update(userLoginFrmDb);
                 uow.SaveChanges();
-                return userLogin;
+                return "Successfully Saved.";
             }
         }
 
-        public UserLogin ChangeSecurityAnswer(UserLogin userLogin)
+        public string ChangeSecurityAnswer(UserLogin userLogin)
         {
             using (var uow = new UnitOfWork())
             {
                 var userLoginFrmDb = uow.GetRepository<UserLogin>().Items.FirstOrDefault(x => x.Id == userLogin.Id);
                 var encryptedSecurityAnswer = EncryptionExtensions.CreatePasswordHash(userLogin.SecurityAnswer, userLoginFrmDb.saltkey);
+                if (userLoginFrmDb.SecurityAnswer.Equals(encryptedSecurityAnswer))
+                    return "Current Security Answer and New Security Answer should not be the same.";
                 userLoginFrmDb.SecurityAnswer = encryptedSecurityAnswer;
                 uow.GetRepository<UserLogin>().Update(userLoginFrmDb);
-                return userLogin;
+                return "Successfully saved.";
             }
         }
     }

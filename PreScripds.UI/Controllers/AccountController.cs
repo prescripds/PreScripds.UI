@@ -790,8 +790,13 @@ namespace PreScripds.UI.Controllers
             {
                 var userLogin = _wcfService.InvokeService<IUserService, UserLogin>((svc) => svc.GetUserLoginById(manageUserViewModel.UserId.Value));
                 userLogin.Password = manageUserViewModel.NewPassword;
-                var passwordChange = _wcfService.InvokeService<IUserService, UserLogin>((svc) => svc.ChangePassword(userLogin));
-                return RedirectToAction("Profile", "Account");
+                var passwordChange = _wcfService.InvokeService<IUserService, string>((svc) => svc.ChangePassword(userLogin));
+                if (passwordChange.Contains("Successfully saved."))
+                    return RedirectToAction("Profile", "Account");
+                else
+                {
+                    ModelState.AddModelError("NewPassword", passwordChange);
+                }
             }
             return View("Manage");
         }
@@ -813,11 +818,17 @@ namespace PreScripds.UI.Controllers
             {
                 var userLogin = _wcfService.InvokeService<IUserService, UserLogin>((svc) => svc.GetUserLoginById(manageUserSecurityViewModel.UserId.Value));
                 userLogin.SecurityAnswer = manageUserSecurityViewModel.NewSecurityAnswer;
-                var securityAnswerChange = _wcfService.InvokeService<IUserService, UserLogin>((svc) => svc.ChangeSecurityAnswer(userLogin));
-                return RedirectToAction("Profile", "Account");
+                var securityAnswerChange = _wcfService.InvokeService<IUserService, string>((svc) => svc.ChangeSecurityAnswer(userLogin));
+                if (securityAnswerChange.Contains("Successfully Saved"))
+                    return RedirectToAction("Profile", "Account");
+                else
+                {
+                    ModelState.AddModelError("NewSecurityAnswer", securityAnswerChange);
+                }
             }
             return View("SecurityAnswer");
         }
+
         //private class ChallengeResult : HttpUnauthorizedResult
         //{
         //    public ChallengeResult(string provider, string redirectUri)

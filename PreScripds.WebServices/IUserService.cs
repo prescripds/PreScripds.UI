@@ -70,9 +70,9 @@ namespace PreScripds.WebServices
         UserLogin GetUserLoginById(long id);
         [OperationContract]
         [WebInvoke(UriTemplate = "/ChangePassword", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
-        UserLogin ChangePassword(UserLogin userlogin);
+        string ChangePassword(UserLogin userlogin);
         [OperationContract]
         [WebInvoke(UriTemplate = "/ChangeSecurityAnswer", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Xml)]
-        UserLogin ChangeSecurityAnswer(UserLogin userlogin);
+        string ChangeSecurityAnswer(UserLogin userlogin);
     }
 }

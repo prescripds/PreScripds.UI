@@ -117,12 +117,12 @@ namespace PreScripds.BL
             var userLogin = _userRepository.GetUserLoginById(id);
             return userLogin;
         }
-        public UserLogin ChangePassword(UserLogin userlogin)
+        public string ChangePassword(UserLogin userlogin)
         {
             var userLogin = _userRepository.ChangePassword(userlogin);
             return userLogin;
         }
-        public UserLogin ChangeSecurityAnswer(UserLogin userlogin)
+        public string ChangeSecurityAnswer(UserLogin userlogin)
         {
             var userLogin = _userRepository.ChangeSecurityAnswer(userlogin);
             return userLogin;

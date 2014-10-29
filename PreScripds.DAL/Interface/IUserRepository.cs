@@ -28,7 +28,7 @@ namespace PreScripds.DAL.Interface
         User GetUserById(long Id);
         User UpdateUserProfile(User user);
         UserLogin GetUserLoginById(long id);
-        UserLogin ChangePassword(UserLogin userlogin);
-        UserLogin ChangeSecurityAnswer(UserLogin userLogin);
+        string ChangePassword(UserLogin userlogin);
+        string ChangeSecurityAnswer(UserLogin userLogin);
     }
 }

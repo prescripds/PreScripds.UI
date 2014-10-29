@@ -130,12 +130,12 @@ namespace PreScripds.WebServices
             var userLogin = _userBl.GetUserLoginById(id);
             return userLogin;
         }
-        public UserLogin ChangePassword(UserLogin userlogin)
+        public string ChangePassword(UserLogin userlogin)
         {
             var userLogn = _userBl.ChangePassword(userlogin);
             return userLogn;
         }
-        public UserLogin ChangeSecurityAnswer(UserLogin userlogin)
+        public string ChangeSecurityAnswer(UserLogin userlogin)
         {
             var userLogn = _userBl.ChangeSecurityAnswer(userlogin);
             return userLogn;
